@@ -1,0 +1,55 @@
+{% extends "_base.html" %}
+
+{% block title %}TestimonialListView{% endblock %}
+{% block main %}
+ 
+  <!-- Example Code -->
+    
+  <div class="my-5 py-5">
+    <h5>Testimonial List </h5>
+
+    {% if testimonialList %}
+    <div class="row  row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-6 g-4 my-2">
+        {% for list in  testimonialList %}
+        <a href="{% url 'testimonial:testimonial_detail' pk=list.id %}">
+            <div class="col">
+                <div class="card shadow">
+                <div class="card-body">
+                <div class="ratio ratio-16x9 my-1">
+                    <iframe width="560" height="315" src="{{ list.video_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    </iframe>
+                </div>
+                    <h6 class="card-title">{{list.author}}</h6>
+                    <div class="d-flex d-flex justify-content-between gap-2">
+                    <small class="text-muted">{{list.views_count}} viewrs </small>
+                    <small class="text-muted">{{list.created_at}}</small>
+                </div>
+                </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row row-cols-1 row-cols-md-12">
+        <div class="col">
+            <div class="card shadow">
+              <div class="card-header bg-warning">Opps Sorry for now , the system can't access the data for same reason , we well geat you know soon! try agin.</div>
+              <div class="card-body">
+              <div class="ratio ratio-9x9 my-1">
+              <img scr="" calss="">
+              </div>
+                <h6 class="card-title">About JobDogg </h6>
+                <div class="d-flex d-flex justify-content-between gap-2">
+                <small class="text-muted">viewrs </small>
+                <small class="text-muted">3 mins ago</small>
+              </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    {% endif %}
+</div>
+  <!-- End Code -->
+  
+{% endblock %}
