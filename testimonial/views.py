@@ -10,6 +10,11 @@ class TestimonialListView(ListView):
 class TestimonialDetailView(DetailView):
     model = Testimonial
     context_object_name = 'testimonialDetailView'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['related_entries'] = Testimonial.objects.all()
+        return context
 
 class TestimonialCreateView(LoginRequiredMixin, CreateView):
     model = Testimonial

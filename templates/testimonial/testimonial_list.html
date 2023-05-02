@@ -5,7 +5,7 @@
  
   <!-- Example Code -->
     
-  <div class="my-5 py-5">
+  <div class="my-4 py-4">
     <h5>Testimonial List </h5>
 
     {% if testimonialList %}
@@ -15,8 +15,8 @@
             <div class="col">
                 <div class="card shadow">
                 <div class="card-body">
-                <div class="ratio ratio-16x9 my-1">
-                    <iframe width="560" height="315" src="{{ list.video_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                    <iframe width="250" height="130" src="{{ list.video_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                     </iframe>
                 </div>
                     <h6 class="card-title">{{list.author}}</h6>
