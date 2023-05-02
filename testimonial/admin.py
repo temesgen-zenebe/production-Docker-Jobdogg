@@ -1,12 +1,19 @@
 from django.contrib import admin
 from .models import Testimonial
 
-
-
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
     model = Testimonial
-    list_display = ['author', 'video_url', 'description', 'created_at', 'updated_at', 'views_count']
+    list_display = [
+        'title',
+        'image', 
+        'video_url', 
+        'description',
+        'author',
+        'created_at', 
+        'updated_at', 
+        'view_count',
+    ]
    
 
     def get_readonly_fields(self, request, obj=None):
