@@ -5,7 +5,7 @@
  
   <!-- Example Code -->
     
-  <div class="my-4 py-4" >
+<div class="my-4 py-4" >
 
     <!-- Page Content-->
     <div class="px-2 px-lg-3">
@@ -14,6 +14,7 @@
             <div class="col-lg-7">
                 {% if testimonialDetailView.video_url %}
                 <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                    
                     <iframe width="800" height="400" src="{{ testimonialDetailView.video_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 {% else %}
@@ -21,12 +22,16 @@
                 {% endif %}
              </div>   
             <div class="col-lg-5">
-                <h5 class="font-weight-light py-2">{{testimonialDetailView.author}}</h5>
+                <h6 class="font-weight-light py-2">{{testimonialDetailView.author|capfirst}} - {{testimonialDetailView.title}}</h6>
                 <p>{{testimonialDetailView.description}}</p>
-                <a class="btn btn-sm btn-outline-secondary" href="#!">Call to Action!</a>
-                <div class="d-flex d-flex justify-content-between gap-2 pt-5">
-                    <small class="text-muted">{{testimonialDetailView.views_count}} viewrs </small>
-                    <small class="text-muted">{{testimonialDetailView.created_at}}</small>
+                
+                <div class="d-flex d-flex justify-content-between gap-2 pt-2 px-2">
+                    <small class="text-muted">{{testimonialDetailView.view_count}} viewrs </small>
+                    <small class="text-muted">{{testimonialDetailView.created_at|timesince}}</small>
+                </div>
+                <div class="d-flex d-flex justify-content-end gap-2 pt-5">
+                    <a class="btn btn-sm btn-outline-secondary" href="#!">Apply Now</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'testimonial:testimonial_list'%}">Back</a>
                 </div>
             </div>
         </div>
@@ -36,66 +41,30 @@
         </div>
         <!-- Content Row-->
         {% if related_entries %}
-        
-        
-        <div class="row gx-4 gx-lg-5">
-            {% for testimonial in  related_entries%}
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="ratio" style="--bs-aspect-ratio: 50%;">
-                            <iframe width="600" height="300" src="{{ testimonial.video_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <hr>
+            <div class="row gx-4 gx-lg-5">
+                <h5>Realated Testimonial List</h5>
+                {% for testimonial in  related_entries%}
+                    <div class="col-md-4 mb-5">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                                    <img width="600" height="300" src="{{ testimonial.image.url }}" alt="Logo" class="img-fluid" > 
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <a class="btn btn-outline-warning btn-sm" href="{% url 'testimonial:testimonial_detail' pk=testimonial.id %}">view</a>
+                                <div class="d-flex justify-content-even gap-1">
+                                    <small class="text-muted">{{testimonial.view_count}} viewrs since </small>
+                                    <small class="text-muted">{{testimonial.created_at|timesince}}</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-           
-        </div>
+        {% endif %}
     </div>
-    {% endif %}
-    <!--  
-    <div class="row row-cols-1 row-cols-md-12">
-        <div class="col"> 
-            <div class="row row-cols-1 row-cols-md-1">
-                <div class="col-8">
-                    <div class="card shadow">
-                        <h6 class="card-title mx-4 my-2">{{testimonialDetailView.author}}</h6>
-                        <div class="card-body">
-                            <div class="ratio " >
-                                <iframe width="400" height="200" src="{{ testimonialDetailView.video_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-        
-                                </iframe>
-                            
-                            </div>
-                            <h6 class="card-title">{{testimonialDetailView.description}}</h6>
-                            <div class="d-flex d-flex justify-content-between gap-2">
-                                <small class="text-muted">{{testimonialDetailView.views_count}} viewrs </small>
-                                <small class="text-muted">{{testimonialDetailView.created_at}}</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card ">
-                        <h6 class="card-title mx-4 my-2">{{testimonialDetailView.author}}</h6>
-                        <div class="card-body">
-                            
-                            <h6 class="card-title">{{testimonialDetailView.description}}</h6>
-                            <div class="d-flex d-flex justify-content-between gap-2">
-                                <small class="text-muted">{{testimonialDetailView.views_count}} viewrs </small>
-                                <small class="text-muted">{{testimonialDetailView.created_at}}</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          
-        </div>
-       
-    </div>
-    -->
 </div>
 <!-- End Code -->
   

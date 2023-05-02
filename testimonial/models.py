@@ -1,13 +1,21 @@
+      
 from django.db import models
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Testimonial(models.Model):
-    author = models.CharField(max_length=100)
-    video_url = models.URLField()
-    description = models.TextField()
+    title = models.CharField(max_length=255 ,blank=True, null=True)
+    image = models.ImageField(upload_to="logo_image/%Y/%m/%d" ,blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True)
+    description = models.TextField(max_length=500,blank=True, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    views_count = models.PositiveIntegerField(default=0)
+    view_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.author
-        
+        return self.title
+    
+    def get_absolute_url(self):
+        return reverse("testimonial:testimonial_list", kwargs={"pk": self.pk})
+    

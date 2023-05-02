@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+
+{% block title %}testimonial delete confirm {% endblock %}
+{% block main %}
+<div class="my-4 py-4 mx-auto" style="max-width:80%;">
+    
+        <div class="card h-100 bg-warning text-dark">
+            <div class="card-header"><h4>Delete Testimonial</h4></div>
+            <div class="card-body">
+                <p class="strong">Are you sure you want to delete "{{ testimonial.author }}-{{ testimonial.title }} information" ?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    <a href="{% url 'testimonial:testimonial_list' %}" class="btn btn-sm btn-outline-success">Cancel</a>
+                </form>
+            </div>
+        </div>
+    
+</div>
+
+{% endblock %}

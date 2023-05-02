@@ -6,28 +6,42 @@
   <!-- Example Code -->
     
   <div class="my-4 py-4">
-    <h5>Testimonial List </h5>
-
-    {% if testimonialList %}
+    <div class="d-flex justify-content-between py-1 px-4">
+        <h5>Testimonial List </h5>
+        {% if user.is_authenticated %}
+         <a class="btn btn-sm btn-outline-warning" href="{% url 'testimonial:testimonial_create'%}"><i class="bi bi-plus-square px-1"></i>Add Testimonial</a>
+        {% endif %}
+    </div>
+    {% if testimonials %}
     <div class="row  row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-6 g-4 my-2">
-        {% for list in  testimonialList %}
-        <a href="{% url 'testimonial:testimonial_detail' pk=list.id %}">
+        {% for list in  testimonials %}
+       
             <div class="col">
                 <div class="card shadow">
                 <div class="card-body">
-                <div class="ratio" style="--bs-aspect-ratio: 50%;">
-                    <iframe width="250" height="130" src="{{ list.video_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-                    </iframe>
-                </div>
-                    <h6 class="card-title">{{list.author}}</h6>
-                    <div class="d-flex d-flex justify-content-between gap-2">
-                    <small class="text-muted">{{list.views_count}} viewrs </small>
-                    <small class="text-muted">{{list.created_at}}</small>
-                </div>
+                    <a href="{% url 'testimonial:testimonial_detail' pk=list.id %}">
+                    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                        <img width="" height="" src="{{ list.image.url }}" alt="Logo" class="img-fluid" > 
+                    </div>
+                    
+                    <div class="d-flex justify-content-between py-1">
+                        <small class="card-title text-dark">{{list.author|capfirst}}-{{list.title}}</small>
+                        <div class="px-1" >
+                            <a class="text-warning" href="{% url 'testimonial:testimonial_update' pk=list.id %}"><i class="bi bi-pencil-square"></i></a>
+                            <a class="text-danger" href="{% url 'testimonial:testimonial_delete' pk=list.id %}"><i class="bi bi-trash"></i></a>
+                        </div>
+                        
+                    </div>
+                    </a>
+                    <div class="d-flex justify-content-between gap-1">
+                        <small class="text-muted">{{list.view_count}} viewrs </small>
+                        <small class="text-muted">{{list.created_at|timesince}}</small>
+                    </div>
+                    
                 </div>
                 </div>
             </div>
-        </a>
+       
         {% endfor %}
     </div>
     {% else %}

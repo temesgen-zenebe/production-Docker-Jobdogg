@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+
+{% block title %}Testimonial form{% endblock %}
+{% block main %}
+<div class="my-4 py-4">
+    
+     <h2>A form for {% if is_create %}Create{% else %}Update{% endif %} Testimonial</h2>
+     <form method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+       <div class="form-group">
+         <label for="{{ form.title.id_for_label }}">Title</label>
+         {{ form.title }}
+       </div>
+       <div class="form-group">
+         <label for="{{ form.image.id_for_label }}">Image</label>
+         {{ form.image }}
+       </div>
+       <div class="form-group">
+         <label for="{{ form.video_url.id_for_label }}">Video URL</label>
+         {{ form.video_url }}
+       </div>
+       <div class="form-group">
+         <label for="{{ form.description.id_for_label }}">Description</label>
+         {{ form.description }}
+       </div>
+       <button type="submit" class="btn btn-sm btn-outline-warning">{% if is_create %}Create{% else %}Update{% endif %}</button>
+     </form>
+   
+</div>
+
+{% endblock %}
