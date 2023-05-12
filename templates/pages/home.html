@@ -1,7 +1,11 @@
 {% extends "_base.html" %}
 {% load static %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/stpes.css' %}">
+{% endblock %}
 {% block title %}Home{% endblock %}
 {% block main %}
+
 <div class="my-5 mx-1">
 
         <!-- Masthead-->
@@ -119,7 +123,8 @@
         <!-- Icons Grid-->
         
         <!-- Image Showcases-->
-        <section class="showcase">
+        <hr>
+        <section class="showcase my-3">
             <div class="container-fluid p-0">
                 <div class="row g-0">
                     <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/static/images/banner-new.jpg')"></div>
@@ -142,19 +147,34 @@
                     </div>
                 </div>
                 <div class="row g-0">
-                    <div class="col-lg-6 text-white showcase-img" style="background-image: url('/static/images/banner-new.jpg')"></div>
+                    <div class="col-lg-6 text-white showcase-img" style="background-image: url('/static/images/JobDogg-logos.jpeg')"></div>
                     <div class="col-lg-6 my-auto showcase-text">
-                        <h2>Updated For Bootstrap 5</h2>
-                        <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 5!</p>
+                        <h2>User-friendly Interface</h2>
+                        <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly interface that simplifies the job search and application process. Receive multiple job offers and stay up-to-date with personalized job alerts. Thank Jobdogg.com for your job search success!</p>
                     </div>
                 </div>
                 <div class="row g-0">
                     <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/static/images/banner-new.jpg')"></div>
                     <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                        <h2>Easy to Use & Customize</h2>
-                        <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+                        <h2>Multiple Job Offers</h2>
+                        <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly platform that simplifies job searching and application processes. Get ready to receive multiple job offers and stay updated with personalized job alerts.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+        <!-- Testimonials-->
+        <!-- Image Showcases-->
+        <section class="showcase">
+            <div class="container-fluid my-3 py-5">
+                <h3 class="mb-5 text-center">HIRE IN MINUTES </h3>
+                <hr>
+                <div class="row ">
+                    <div class="col-lg-12 text-white showcase-img">
+                        <img src="{% static 'images/stepsHowItsWork.png' %}" class="mx-auto" width="100%" height="100%" alt="showcase-steps">
+                    </div>
+                    
+                </div>
+            
             </div>
         </section>
         <!-- Testimonials-->
@@ -220,6 +240,37 @@
             </div>
         </section>
         
-        
+        <section id="scroll">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'images/testimonials-1.jpg'%}" alt="..."></div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4">For those about to rock...</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Call to Action-->
+        <section>
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'images/filcon-logo2.png'%}" alt="..."></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <h2 class="display-4">We salute you!</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+         
 </div>
 {% endblock %}
