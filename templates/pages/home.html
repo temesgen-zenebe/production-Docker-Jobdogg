@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 {% block main %}
-<div class="my-5 mx-2">
+<div class="my-5 mx-1">
 
         <!-- Masthead-->
         <header class="masthead">
@@ -42,58 +42,82 @@
                 </div>
             </div>
         </header>
-        <!-- Icons Grid-->
-        <section class="features-icons bg-light text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="fa fa-handshake-o m-auto text-primary"></i></div>
-                            <h3>NO UPFRONT FEES</h3>
-                            <p class="lead mb-0">Pay when the assignment is completed 30 Day Free Trial.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                          <div class="features-icons-icon d-flex"><i class="bi bi-hourglass-top  m-auto text-primary"></i></div>
-                          <h3>HIRE 90% FASTER</h3>
-                          <p class="lead mb-0">360˚ degree view of each candidate to start work in minutes. One Source without the frustration of receiving the same resumes from multiple resources.</p>
-                      </div>
-                  </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi bi-piggy-bank m-auto text-primary"></i></div>
-                            <h3>SAVE MONEY</h3>
-                            <p class="lead mb-0">Job Postings are always Free! Up to 50% lower than Staffing Agency fees. 90% lower than Job Boards.</p>
-                        </div>
-                    </div>
-                    
+        <!--Future.-->
+        <div class="container px-4 py-2" id="featured-3">
+            <h3 class="pb-2 border-bottom">Features</h3>
+            <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
+              <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
+                  <i class="fa fa-handshake-o m-auto fontColor" width="1.7em" height="1.7em"></i>
                 </div>
-                <div class="row">
-                  <div class="col-lg-4">
-                      <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                          <div class="features-icons-icon d-flex"><i class="bi bi-clock  m-auto text-warning"></i></div>
-                          <h3>SAVE TIME</h3>
-                          <p class="lead mb-0">Already vetted candidates with completed backgrounds, skill-set tested, referenced checked, personality tested, and E-Verified.</p>
-                      </div>
-                  </div>
-                  <div class="col-lg-4">
-                      <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                          <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
-                          <h3>TRANSPARENT</h3>
-                          <p class="lead mb-0">Unscripted Video Resumes. Schedule live on-line, on-demand interviews.</p>
-                      </div>
-                  </div>
-                  <div class="col-lg-4">
-                      <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                          <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-                          <h3>Easy to Use</h3>
-                          <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
-                      </div>
-                  </div>
+                <h5 class="fs-5">NO UPFRONT FEES</h5>
+                <p>Complete the assignment and pay afterward. Enjoy a free trial period of 30 days.</p>
+                <a href="#" class="icon-link d-inline-flex align-items-center">
+                  start to action
+                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                </a>
+              </div>
+              <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-1 mb-3">
+                    <i class="bi bi-hourglass-top m-auto fontColor" width="1.7em" height="1.7em"></i>
+                </div>
+                <h5 class="fs-5">HIRE 90% FASTER</h5>
+                <p>Effortlessly obtain a comprehensive overview of each candidate and quickly onboard them with One Source, eliminating the hassle of duplicate resumes from various sources.</p>
+                <a href="#" class="icon-link d-inline-flex align-items-center">
+                  start to action
+                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                </a>
+              </div>
+              <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
+                    <i class="bi bi-piggy-bank m-auto fontColor" width="2em" height="2em"></i>
+                </div>
+                <h5 class="fs-5">SAVE MONEY</h5>
+                <p>Job Postings are always Free! Up to 50% lower than Staffing Agency fees. 90% lower than Job Boards.</p>
+                <a href="#" class="icon-link d-inline-flex align-items-center">
+                  start to action
+                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                </a>
               </div>
             </div>
-        </section>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="feature col">
+                  <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
+                    <i class="bi bi-clock m-auto fontColor" width="1.7em" height="1.7em"></i>
+                  </div>
+                  <h5 class="fs-5">SAVE TIME</h5>
+                  <p>Already vetted candidates with completed backgrounds, skill-set tested, referenced checked, personality tested, and E-Verified.</p>
+                  <a href="#" class="icon-link d-inline-flex align-items-center">
+                    start to action
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                  </a>
+                </div>
+                <div class="feature col">
+                  <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-1 mb-3">
+                      <i class="bi-layers  m-auto fontColor" width="1.7em" height="1.7em"></i>
+                  </div>
+                  <h5 class="fs-5">TRANSPARENT</h5>
+                  <p>Unscripted Video Resumes. Schedule live on-line, on-demand interviews.</p>
+                  <a href="#" class="icon-link d-inline-flex align-items-center">
+                    start to action
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                  </a>
+                </div>
+                <div class="feature col">
+                  <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
+                      <i class="bi bi-piggy-bank m-auto fontColor" width="2em" height="2em"></i>
+                  </div>
+                  <h5 class="fs-5">EASY TO Use</h5>
+                  <p>Ready to use with your own content, or customize the source files!</p>
+                  <a href="#" class="icon-link d-inline-flex align-items-center">
+                    start to action
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                  </a>
+                </div>
+              </div>
+          </div>
+        <!-- Icons Grid-->
+        
         <!-- Image Showcases-->
         <section class="showcase">
             <div class="container-fluid p-0">
