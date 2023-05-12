@@ -3,15 +3,17 @@
 {% block title %}TestimonialListView{% endblock %}
 {% block main %}
  
-  <!-- Example Code -->
+  <!-- Example Code 192 167 66 -->
     
-  <div class="my-4 py-4">
-    <div class="d-flex justify-content-between py-1 px-4">
-        <h5>Testimonial List </h5>
-        {% if user.is_authenticated %}
+  <div class="my-4 py-5">
+    <div class="d-flex justify-content-between gap-1 py-1 px-3">
+        <h6>Discover Our Identity, Now!</h6>
+        {% if user.is_authenticated1 %}
          <a class="btn btn-sm btn-outline-warning" href="{% url 'testimonial:testimonial_create'%}"><i class="bi bi-plus-square px-1"></i>Add Testimonial</a>
         {% endif %}
     </div>
+    <div class="px-3"><small>Discover our true identity through this testimonials.</small></div>
+    <hr>
     {% if testimonials %}
     <div class="row  row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xlg-6 g-4 my-2">
         {% for list in  testimonials %}
@@ -65,26 +67,7 @@
     {% endif %}
 </div>
   <!-- End Code -->
-  <div class="container">
-    <div class="row dogg-forms-main">
 
-        <div class="col-md-12">
-            <div class="secondary-heading">Background check time!</div>
-            <div class="background-check-text" style="height: 350px; overflow: auto;">
-                In the interest of maintaining the safety and security of our customers, employees and property, JobDogg.com (the “Company”) will order a “consumer report” (a background report) or “investigative consumer report" on you in connection with your employment application, and if you are hired, or if you already work for the Company, may order additional background reports on you for employment purposes. The background check company, (To Be Determined) will prepare the background report for the Company. (Company to be determined) is located at (To be determined), and can be reached by phone at (To be determined) or at their Internet Web site address (To be determined). The background report may contain information concerning your character, general reputation, personal characteristics, mode of living, and credit standing. The types of information that may be ordered include but are not limited to: Social Security number verification; criminal, public, educational and, as appropriate, driving records checks; verification of prior employment; reference, licensing and certification checks; credit reports; drug testing results; and, if applicable, worker’s compensation injuries. Workers’ compensation information will only be requested in compliance with federal Americans with Disabilities Act and/or any other applicable federal, state or local laws and only after a conditional job offer is made. Credit history will only be requested when permitted by law and where such information is substantially related to the duties and responsibilities of the position for which you are applying. The information may be obtained from private and public record sources, including personal interviews with your associates, friends, and neighbors. (An “investigative consumer report” is a background report that includes information from such personal interviews, except in California where that term means any background report that is not a credit report.) The nature and scope of the most common form of investigative consumer report is an investigation into your education and/or employment history conducted by (To Be Determined) or another outside organization. You may request more information about the nature and scope of an investigative consumer report, if any, by telephoning the Company at (To Be Determined). A summary of your rights under the Fair Credit Reporting Act is also being provided to you with this form. The Fair Credit Reporting Act gives you specific rights in dealing with consumer reporting agencies. You will find these rights summarized on A Summary of Your Rights Under the Fair Credit Reporting Act and A Summary of Your Rights Under the Provisions of (All States Civil Code) as provided here. STATE LAW NOTICES If you live or work for the Company in the states listed below, please note the following: CALIFORNIA: You may view the file that (To Be Determined) has for you, and order a copy of the file, upon submitting proper identification and paying copying costs, by coming to their offices, during normal business hours and on reasonable notice, or by certified mail or mail. You may also ask for a file-summary by telephone. (To Be Determined) can answer questions about information in your file, including any coded information.
-            </div>
-            <div class="agree-check-pane clearfix pull-right">
-                <div class="chk_wrap_white agree-checkbox">
-                    <input type="checkbox" id="checkbox2" [(ngModel)]="agree" (change)="change();" >
-                    <label for="checkbox2"></label>
-                </div>
-                <div class="agree-checkbox-label">Agree</div>
-            </div>
-        </div>
-        <div class="col-md-12 text-right">
-            <button class="dogg-btn" (click)="Next();"><a>Next</a></button>
-        </div>
-    </div>
 </div>
   
 {% endblock %}

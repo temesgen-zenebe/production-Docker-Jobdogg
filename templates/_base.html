@@ -17,14 +17,15 @@
 <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
 {% block javascript %}{% endblock %}
 {% block stylesheet %}{% endblock %}
-<link rel="shortcut icon" type="image/png" href="{% static 'images/logo.png' %}">
+<link rel="shortcut icon" type="image/png" href="{% static 'images/logologo.png' %}">
 <title>{% block title %}{% endblock %} | jobDoogg</title>
 </head>
 <body>
 <header>
-  <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark text-warning p-2">
-    <a class="navbar-brand" href="{% url 'pages:homepage' %}"> <Span class="strong text-warning">JobDogg</span>
-     <!--<img src="{% static 'images/logo.png' %}" alt="Logo" class="img-fluid"/>-->
+  <nav class="fixed-top navbar navbar-expand-lg navbar-dark navHeader text-warning p-2">
+    <a class="navbar-brand px-3" href="{% url 'pages:homepage' %}">
+     <img src="{% static 'images/logologo17.png' %}" alt="Logo" class="img-fluid" width="150" height="80"/>
+     <!--<span class="strong text-white px-1">JobDogg</span>-->
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
       data-target="#navbarSupportedContent" aria-expanded="false"
@@ -33,7 +34,7 @@
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mx-4 my-2 me-auto mb-2 mb-lg-0">
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'pages:homepage' %}">Home 
             <span class="sr-only">(current)</span>

@@ -15,7 +15,7 @@ class Testimonial(models.Model):
     view_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
     
     def get_absolute_url(self):
         return reverse("testimonial:testimonial_list", kwargs={"pk": self.pk})
