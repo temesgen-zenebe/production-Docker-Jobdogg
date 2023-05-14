@@ -15,10 +15,74 @@ a{
     text-decoration: none;
 }
 .fontColor{
-  color: rgb(241,209,69);
+  color: rgb(253, 253, 250);
 }
 .navHeader{
-  background-color: rgb(0, 0, 0);
+  background-color: #e06a00; /*company color*/
+}
+.navFooter{
+  background-color: #123f8b; /*company color*/
+}
+
+/* button */
+.btn-booster-orang {
+  color: #e06a00;
+  background-color: transparent;
+  border-color: #e06a00;
+  border-width: 2px;
+  border-style: solid;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-booster-orang:hover {
+  color: #fff;
+  background-color: #e06a00;
+  border-color: #e06a00;
+  text-decoration: none;
+}
+
+.btn-booster-blue {
+  color: #123f8b;
+  background-color: transparent;
+  border-color: #123f8b;
+  border-width: 2px;
+  border-style: solid;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-booster-blue:hover {
+  color: #fff;
+  background-color: #123f8b;
+  border-color: #123f8b;
+  text-decoration: none;
+}
+
+.textFooter{
+  color: #fff;
+}
+.textFooter2{
+  color: #d4cddf;
+}
+a.textFooter4{
+  color: #d4cddf;
+  text-decoration: none;
+  font-size: 13px;
+}
+li.textFooter3{
+    color: #cac6c2;
+    font-size: 14px;
+}
+.textFooter5{
+  color: #d4cddf;
+  font-size: 12px;
 }
 .logHeader{
   background-color: rgb(238, 181, 107);
@@ -54,3 +118,4 @@ header.masthead {
       font-size: 3rem;
     }
   }
+
