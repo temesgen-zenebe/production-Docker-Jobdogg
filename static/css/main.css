@@ -101,11 +101,12 @@ li.textFooter3{
 }
 header.masthead {
     position: relative;
-    background-color: #343a40;
-    background: url(/static/images/banner-new.jpg) no-repeat center center;
+    background-color: #242729;
+    background: url(/static/images/bg-masthead.jpg) no-repeat center center;
     background-size: cover;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 40px;
+    padding-bottom: 40px;
+   
 }
 section.signup{
     position: relative;
@@ -118,6 +119,7 @@ section.signup{
 .image-shadow{
   position: relative;
   background-color: #bbb8b6;
+  background: url(../assets/img/bg-masthead.jpg) no-repeat center center;
   background-size: cover;
   margin: 5px auto;
  
@@ -134,7 +136,7 @@ section.signup{
 header.masthead:before {
     content: "";
     position: absolute;
-    background-color: #1c375e;
+    background-color: #123f8b;
     height: 100%;
     width: 100%;
     top: 0;
