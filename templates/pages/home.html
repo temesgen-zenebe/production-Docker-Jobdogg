@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 {% load static %}
 {% block stylesheet %}
+
 <link rel="stylesheet" href="{% static 'css/stpes.css' %}">
 {% endblock %}
 {% block title %}Home{% endblock %}
@@ -9,165 +10,189 @@
 <div class="my-5 mx-1">
 
         <!-- Masthead-->
-        <header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-end">
-                    <div class="col-xl-6">
-                        <div class="text-Start text-white">
-                            <!-- Page heading-->
-                            <h3 class="mb-3">UNVEILING THE</h3>
-                            <h3 class="mb-3"> UNSTAFFING</h1>
-                            <p class="mb-3"> We're redefining how people work and get hired and how employers recruit and hire staff around the world. Contingent workforce made simply, empowering both the employer and job seeker with transparency and visibility to achieve a 90% faster hire armed with all the tools necessary to hire the right fit and get the right job.
-                              Job Assignments not Job Matches, it’s the Future. </p>
-                            
-                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <!-- Email address input-->
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="form-control form-control-sm" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+        <section>
+            <header class="masthead">
+                <div class="container position-relative">
+                    <div class="row justify-content-end">
+                        <div class="col-xl-6">
+                            <div class="text-Start text-white">
+                                <!-- Page heading-->
+                                <h3 class="mb-3">UNVEILING THE</h3>
+                                <h3 class="mb-3"> UNSTAFFING</h1>
+                                <p class="mb-3"> We're redefining how people work and get hired and how employers recruit and hire staff around the world. Contingent workforce made simply, empowering both the employer and job seeker with transparency and visibility to achieve a 90% faster hire armed with all the tools necessary to hire the right fit and get the right job.
+                                Job Assignments not Job Matches, it’s the Future. </p>
+                                
+                                <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                    <!-- Email address input-->
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class="form-control form-control-sm" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
+                                            <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                                            <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+                                        </div>
+                                        <div class="col-auto"><button class="btn btn-sm btn-primary disabled" id="submitButton" type="submit">Submit</button></div>
                                     </div>
-                                    <div class="col-auto"><button class="btn btn-sm btn-primary disabled" id="submitButton" type="submit">Submit</button></div>
-                                </div>
-                               
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Form submission successful!</div>
-                                        <p>To activate this form, sign up at</p>
-                                        <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                
+                                    <div class="d-none" id="submitSuccessMessage">
+                                        <div class="text-center mb-3">
+                                            <div class="fw-bolder">Form submission successful!</div>
+                                            <p>To activate this form, sign up at</p>
+                                            <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                        </div>
                                     </div>
-                                </div>
-                             
-                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            </form>
+                                
+                                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </section>
         <!--Future.-->
-        <div class="container px-4 py-2" id="featured-3">
-            <h3 class="pb-2 border-bottom">Features</h3>
-            <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
-              <div class="feature col">
-                <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
-                  <i class="fa fa-handshake-o m-auto fontColor" width="1.7em" height="1.7em"></i>
+        <section>
+            <div class="container px-3 py-5 my-2" id="featured-3">
+                <h3 class="pb-2 border-bottom">Features</h3>
+                <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
+                <div class="feature col">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
+                    <i class="fas fa-hand-holding-usd m-auto fontColor-orang" width="1.7em" height="1.7em"></i>
+                    </div>
+                    <h5 class="fs-5">NO UPFRONT FEES</h5>
+                    <p>Complete the assignment and pay afterward. Enjoy a free trial period of 30 days.</p>
+                  
                 </div>
-                <h5 class="fs-5">NO UPFRONT FEES</h5>
-                <p>Complete the assignment and pay afterward. Enjoy a free trial period of 30 days.</p>
-                <a href="#" class="icon-link d-inline-flex align-items-center">
-                  start to action
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                </a>
-              </div>
-              <div class="feature col">
-                <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-1 mb-3">
-                    <i class="bi bi-hourglass-top m-auto fontColor" width="1.7em" height="1.7em"></i>
+                <div class="feature col">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-1 mb-3">
+                        <i class="bi bi-hourglass-top m-auto fontColor-orang" width="1.7em" height="1.7em"></i>
+                    </div>
+                    <h5 class="fs-5">HIRE 90% FASTER</h5>
+                    <p>Effortlessly obtain a comprehensive overview of each candidate and quickly onboard them with One Source, eliminating the hassle of duplicate resumes from various sources.</p>
+                  
                 </div>
-                <h5 class="fs-5">HIRE 90% FASTER</h5>
-                <p>Effortlessly obtain a comprehensive overview of each candidate and quickly onboard them with One Source, eliminating the hassle of duplicate resumes from various sources.</p>
-                <a href="#" class="icon-link d-inline-flex align-items-center">
-                  start to action
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                </a>
-              </div>
-              <div class="feature col">
-                <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
-                    <i class="bi bi-piggy-bank m-auto fontColor" width="2em" height="2em"></i>
+                <div class="feature col">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
+                        <i class="fas fa-money-check-alt m-auto fontColor-orang" width="2em" height="2em"></i>
+                    </div>
+                    <h5 class="fs-5">SAVE MONEY</h5>
+                    <p>Job Postings are always Free! Up to 50% lower than Staffing Agency fees. 90% lower than Job Boards.</p>
+                   
                 </div>
-                <h5 class="fs-5">SAVE MONEY</h5>
-                <p>Job Postings are always Free! Up to 50% lower than Staffing Agency fees. 90% lower than Job Boards.</p>
-                <a href="#" class="icon-link d-inline-flex align-items-center">
-                  start to action
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                </a>
-              </div>
+                </div>
+                <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                    <div class="feature col">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
+                        <i class="bi bi-clock m-auto fontColor-orang" width="2em" height="2em"></i>
+                        
+                    </div>
+                    <h5 class="fs-5">SAVE TIME</h5>
+                    <p>Already vetted candidates with completed backgrounds, skill-set tested, referenced checked, personality tested, and E-Verified.</p>
+                   
+                    </div>
+                    <div class="feature col">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-1 mb-3">
+                        <i class="bi bi-person-video3  m-auto fontColor-orang" width="2em" height="2em"></i>
+                        
+                    </div>
+                    <h5 class="fs-5">TRANSPARENT</h5>
+                    <p>Unscripted Video Resumes. Schedule live on-line, on-demand interviews.</p>
+                   
+                    </div>
+                    <div class="feature col">
+                        <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-1 mb-3">
+                            <i class="bi bi-pie-chart-fill  m-auto fontColor-orang" width="2em" height="2em"></i>
+                        </div>
+                        <h5 class="fs-5">BUSINESS ANALYTICS</h5>
+                        <p>Monitor staffing levels, track staffing trends, built in timecard, HR and legal compliance.</p>
+                    </div>
+                </div>
+                <div class="row  py-3 row-cols-1 row-cols-lg-12 ">
+                    <div class="feature col">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
+                        <i class="fas fa-users m-auto fontColor-orang" width="1.5em" height="1.5em"></i>
+                        <i class="fas fa-wheelchair fontColor-orang"></i>
+                    </div>
+                    <h5 class="fs-5">DIVERSITY & INCLUSION</h5>
+                    <p>Our #1 passion is delivering a diverse pool of candidates with every skill-set, 
+                        from every industry and every environment, from all gender, age,
+                         religion personal identity and social make-up to the Handi-Capable, 
+                         Veterans and the Un-Incarcerated.
+                    </p>
+                    </div>
+                </div>
             </div>
-            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-                <div class="feature col">
-                  <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
-                    <i class="bi bi-clock m-auto fontColor" width="1.7em" height="1.7em"></i>
-                  </div>
-                  <h5 class="fs-5">SAVE TIME</h5>
-                  <p>Already vetted candidates with completed backgrounds, skill-set tested, referenced checked, personality tested, and E-Verified.</p>
-                  <a href="#" class="icon-link d-inline-flex align-items-center">
-                    start to action
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                  </a>
-                </div>
-                <div class="feature col">
-                  <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-1 mb-3">
-                      <i class="bi-layers  m-auto fontColor" width="1.7em" height="1.7em"></i>
-                  </div>
-                  <h5 class="fs-5">TRANSPARENT</h5>
-                  <p>Unscripted Video Resumes. Schedule live on-line, on-demand interviews.</p>
-                  <a href="#" class="icon-link d-inline-flex align-items-center">
-                    start to action
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                  </a>
-                </div>
-                <div class="feature col">
-                  <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-1 mb-3">
-                      <i class="bi bi-piggy-bank m-auto fontColor" width="2em" height="2em"></i>
-                  </div>
-                  <h5 class="fs-5">EASY TO Use</h5>
-                  <p>Ready to use with your own content, or customize the source files!</p>
-                  <a href="#" class="icon-link d-inline-flex align-items-center">
-                    start to action
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                  </a>
-                </div>
-              </div>
-          </div>
+        </section>
         <!-- Icons Grid-->
         
         <!-- Image Showcases-->
         <hr>
         <section class="showcase my-3">
             <div class="container-fluid p-0">
-                <div class="row g-0">
-                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/static/images/banner-new.jpg')"></div>
-                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                     
-                        <h2 class="text-warning"> HIRE ON DEMAND</h2>
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning" ></i>90% Faster hires with a 360˚ degree view of each candidate.</li>
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning"></i>Diverse Pool of Already Vetted Candidates.</li>
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning"></i>Candidates already skill-set tested with over 3000 skill-set tests offered.</li>
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning"></i> Unscripted Video Resumes.</li>
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning"></i>Schedule On-line On-Demand Live Interviews.</li>
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning"></i>Track Staffing Levels, Monitor Staffing Trends with built-in Business Analytics Tool</li>
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning"></i>Hire How, When & Where you need Candidates.</li>
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning"></i>Everywhere Candidates Mobile Application.</li>
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning"></i>Job Postings Are Always FREE.</li>
-                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 text-warning"></i>And a fifth one.</li>
+                <div class="row g-0 mb-2">
+                    <h3 class="fontColor-blue text-center py-4">HIRE ON DEMAND</h3>
+                    <div class="col-lg-6 order-lg-1 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('/static/images/emplyeerLogo.jpg')"></div>
+                    <div class="col-lg-6 order-lg-2 px-1 py-1">
+                        <ul class="list-group list-group-flush shadow">
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font" ></i>90% Faster hires with a 360˚ degree view of each candidate</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Diverse Pool of Already Vetted Candidates.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Candidates' skill-set evaluated by reliable partners.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Unscripted Video Resumes.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Schedule On-line On-Demand Live Interviews.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Track Staffing Levels built-in Analytics Tool.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Monitor Staffing Trends with built-in Business Analytics Tool.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Hire How, When & Where you need Candidates.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Candidates' Mobile App Available Anywhere.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Job Postings Are Always FREE.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>The "Right Fit". with Lower Cost.</li>
+                          
                         </ul>
-                        <p class="lead mb-0"></p>
+                        
+                    </div>
+                </div>
+                <div class="row g-0 my-5">
+                    <h3 class="fontColor-orang text-center pb-3">JOBS ON DEMAND</h3>
+                    <div class="col-lg-6 order-lg-2 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('/static/images/pngwing.com (9).png')"></div>
+                    <div class="col-lg-6 order-lg-1 px-1 py-1">
+                        <ul class="list-group list-group-flush shadow">
+                          <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Real Identity & Visibility.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Job Assignments not just Job Matches.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Work Anytime, Anywhere, Anyplace.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Everywhere Jobs – Mobile Application.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Work How, When & Where you want to Work.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Diversity & Inclusion.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Endless Opportunities – All Skill-Sets,Every Industry,Every Environment.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Temporary,Temp-Perm,Permanent,Internships,Disabled & 2nd Chance.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Convenient - Fast and Easy Pay Options.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Ride Sharing.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Always FREE.</li>
+                          <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>The ”Right Job”.</li>
+                        </ul>
+                        
                     </div>
                 </div>
                 <div class="row g-0">
-                    <div class="col-lg-6 text-white showcase-img" style="background-image: url('/static/images/JobDogg-logos.jpeg')"></div>
-                    <div class="col-lg-6 my-auto showcase-text">
-                        <h2>User-friendly Interface</h2>
+                    <div class="col-lg-6 text-white showcase-img image-shadow" style="background-image: url('/static/images/pngwing.com66.png')"></div>
+                    <div class="col-lg-6 my-auto showcase-text shadow">
+                        <h3 class="fontColor-orang">User-friendly Interface</h3>
                         <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly interface that simplifies the job search and application process. Receive multiple job offers and stay up-to-date with personalized job alerts. Thank Jobdogg.com for your job search success!</p>
                     </div>
                 </div>
                 <div class="row g-0">
-                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/static/images/banner-new.jpg')"></div>
-                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                        <h2>Multiple Job Offers</h2>
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img image-shadow" style="background-image: url('/static/images/pngwing.com (55).png')"></div>
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text shadow">
+                        <h3 class="fontColor-orang">Multiple Job Offers</h3>
                         <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly platform that simplifies job searching and application processes. Get ready to receive multiple job offers and stay updated with personalized job alerts.</p>
                     </div>
                 </div>
             </div>
         </section>
         <!-- Testimonials-->
+        <hr>
         <!-- Image Showcases-->
         <section class="showcase">
             <div class="container-fluid my-3 py-5">
                 <h3 class="mb-5 text-center">HIRE IN MINUTES </h3>
-                <hr>
+                
                 <div class="row ">
                     <div class="col-lg-12 text-white showcase-img">
                         <img src="{% static 'images/stepsHowItsWork.png' %}" class="mx-auto" width="100%" height="100%" alt="showcase-steps">
@@ -207,13 +232,69 @@
                 
             </div>
         </section>
+        <hr>
+        <section>
+            <div class="container my-5">
+                <div class="p-3 text-center bg-body-tertiary rounded-3">
+                <h1 class="text-body-emphasis">Basic jumbotron</h1>
+                <p class="lead">
+                    This is a simple Bootstrap jumbotron that sits within a <code>.container</code>, recreated with built-in utility classes.
+                </p>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section id="scroll">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5"><img class="img-fluid rounded-circle" width="70%" height="70%" src="{% static 'images/newLookLogo101.png'%}" alt="..."></div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h6 class="display-6">Need Work Now?</h6>
+                            <p>Get connected to our Sales Team for hourly, daily and salaried assignments.</p>
+                            <a href="mailto:employeractivation@jobdogg.com" class="btn-booster-orang text-decoration-none">Start</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <div class="container py-3 px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class=" py-3 px-5"><img class="img-fluid rounded-circle" width="70%" height="70%" src="{% static 'images/newLookLogo102.png'%}" alt="..."></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <h6 class="display-6">Need Staff Now?</h6>
+                            <p>Get connected to our Sales Team for hourly, daily and salaried workers.</p>
+                            <a class="btn-booster-blue text-decoration-none" href="mailto:employeractivation@jobdogg.com">Start</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
         <!-- Call to Action-->
-        <section class="call-to-action text-white text-center" id="signup">
+        <section class="call-to-action text-white text-start my-2 signup" id="signup">
             <div class="container position-relative">
-                <div class="row justify-content-center">
+                <div class="row justify-content-between">
                     <div class="col-xl-6">
-                        <h3 class="mb-4">Ready to get started? Sign up now!</h3>
-                        
+                        <h5 class="mb-3">Social Networks </h5>
+                        <div class="fontColor-blue mr-2">
+                            <span class="small">You should connect social area for Any update</span>
+                            <ul class="nav justify-content- gap-4 my-4">
+                              <li class="nav-item "><a class=" fontColor-blue" href="#"><i class="bi bi-twitter fontColor-blue" width="40" height="40"></i></a></li>
+                              <li class="nav-item "><a class="link-dark fontColor-blue" href="#"><i class="bi bi-instagram fontColor-blue" width="40" height="40"></i></a></li>
+                              <li class="nav-item "><a class="link-dark fontColor-blue" href="#"><i class="bi bi-facebook fontColor-blue" width="40" height="40"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 ">
+                        <h5 class="mb-4">Ready to get started? Sign up now!</h5>
                         <form class="form-subscribe" id="contactFormFooter" data-sb-form-api-token="API_TOKEN">
                             <!-- Email address input-->
                             <div class="row">
@@ -222,7 +303,7 @@
                                     <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:required">Email Address is required.</div>
                                     <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:email">Email Address Email is not valid.</div>
                                 </div>
-                                <div class="col-auto"><button class="btn btn-primary btn-sm disabled" id="submitButton" type="submit">Submit</button></div>
+                                <div class="col-auto"><button class="btn btn-primary btn-sm " id="submitButton" type="submit">Submit</button></div>
                             </div>
                             
                             <div class="d-none" id="submitSuccessMessage">
@@ -235,44 +316,19 @@
                             
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                         </form>
-                    </div>
+                    </div>                 
+                </div>
+            </div>
+        </section>
+        <section class="call-to-action-this text-white text-start my-2 " >
+            <div class="container position-relative">
+                <div class="row justify-content-between">
+                    <div class="col-lg-12">
+                        
+                    </div>               
                 </div>
             </div>
         </section>
         
-        <section id="scroll">
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'images/newLookLogo101.png'%}" alt="..."></div>
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                            <h6 class="display-6">Need Work Now?</h6>
-                            <p>Get connected to our Sales Team for hourly, daily and salaried assignments.</p>
-                            <a href="mailto:employeractivation@jobdogg.com" class="btn-booster-orang text-decoration-none">Start</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6">
-                        <div class=" py-3 px-5"><img class="img-fluid rounded-circle" src="{% static 'images/newLookLogo102.png'%}" alt="..."></div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <h6 class="display-6">Need Staff Now?</h6>
-                            <p>Get connected to our Sales Team for hourly, daily and salaried workers.</p>
-                            <a class="btn-booster-blue text-decoration-none" href="mailto:employeractivation@jobdogg.com">Start</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Call to Action-->
-     
 </div>
 {% endblock %}

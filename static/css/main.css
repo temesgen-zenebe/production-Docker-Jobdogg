@@ -84,6 +84,18 @@ li.textFooter3{
   color: #d4cddf;
   font-size: 12px;
 }
+.fontColor{
+  color: #faf8f7;
+}
+.fontColor-orang{
+  color: #e06a00;
+}
+.fontColor-blue{
+  color: #123f8b;
+}
+.icon-font{
+  font-size: 20px;
+}
 .logHeader{
   background-color: rgb(238, 181, 107);
 }
@@ -95,8 +107,31 @@ header.masthead {
     padding-top: 3rem;
     padding-bottom: 3rem;
 }
+section.signup{
+    position: relative;
+    background-color: #303031;
+    background: url(../assets/img/bg-masthead.jpg) no-repeat center center;
+    background-size: cover;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+}
+.image-shadow{
+  position: relative;
+  background-color: #bbb8b6;
+  background-size: cover;
+  margin: 5px auto;
+ 
+}
+.call-to-action-this {
+  position: relative;
+  background-color: #e3e7eb;
+  background: url(/static/images/map1.png) no-repeat center center;
+  background-size: cover;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
 
-  header.masthead:before {
+header.masthead:before {
     content: "";
     position: absolute;
     background-color: #1c375e;
@@ -106,7 +141,7 @@ header.masthead {
     left: 0;
     opacity: 0.5;
   }
-  header.masthead h1, header.masthead .h1 {
+header.masthead h1, header.masthead .h1 {
     font-size: 2rem;
   }
   @media (min-width: 768px) {
