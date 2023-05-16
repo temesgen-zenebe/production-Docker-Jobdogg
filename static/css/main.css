@@ -144,6 +144,26 @@ section.signup{
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
+.signup {
+  position: relative;
+  height: 40vh;
+  width: 100%;
+  border-radius: 2px;
+  background-color: #061e36;
+  background: linear-gradient(#e06a00, #123f8b), url(/static/images/pngwing78.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.signup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-10%, -10%);
+  color: #e77a15;
+  text-align: center;
+}
+
 
 .masthead {
     position: relative;
