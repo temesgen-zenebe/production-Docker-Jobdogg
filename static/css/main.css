@@ -19,9 +19,13 @@ a{
 }
 .navHeader{
   background-color: #e06a00; /*company color*/
+
+  color: #fff;
 }
 .navFooter{
-  background-color: #123f8b; /*company color*/
+  /*background-color: #123f8b; /*company color*/
+  background: linear-gradient(#123f8b,#e06a00), url(/static/images/pngwing78.png);
+  color: #fff;
 }
 
 /* button */
@@ -93,19 +97,27 @@ li.textFooter3{
 .fontColor-blue{
   color: #123f8b;
 }
+.border-color-orang{
+  border: #e06a00 1px;
+}
+.border-color-blue{
+  border: #123f8b;
+}
 .icon-font{
   font-size: 20px;
 }
 .logHeader{
   background-color: rgb(238, 181, 107);
 }
-header.masthead {
-    position: relative;
-    background-color: #242729;
-    background: url(/static/images/bg-masthead.jpg) no-repeat center center;
+header.masthead1 {
+    position: absolute;
+    background-color: #123f8b;
+    background: url(/static/images/pngwing78.png) no-repeat center center;
     background-size: cover;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 60%;
+    width: 100%;
    
 }
 section.signup{
@@ -121,7 +133,7 @@ section.signup{
   background-color: #bbb8b6;
   background: url(../assets/img/bg-masthead.jpg) no-repeat center center;
   background-size: cover;
-  margin: 5px auto;
+  margin: 10px auto;
  
 }
 .call-to-action-this {
@@ -133,20 +145,37 @@ section.signup{
   padding-bottom: 3rem;
 }
 
-header.masthead:before {
-    content: "";
-    position: absolute;
-    background-color: #123f8b;
-    height: 100%;
+.masthead {
+    position: relative;
+    height: 60vh;
     width: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.5;
+    border-radius: 2px;
+    background-color: #f8f9fa;
+    background: linear-gradient(#e06a00, #123f8b), url(/static/images/pngwing78.png);
+    background-size: cover;
+    background-position: center;
   }
-header.masthead h1, header.masthead .h1 {
+
+.masthead-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+  }
+
+.masthead-content h1 {
     font-size: 2rem;
+    margin-bottom: 1.5rem;
   }
-  @media (min-width: 768px) {
+
+.masthead-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+@media (min-width: 768px) {
     header.masthead {
       padding-top: 12rem;
       padding-bottom: 12rem;
@@ -154,5 +183,4 @@ header.masthead h1, header.masthead .h1 {
     header.masthead h1, header.masthead .h1 {
       font-size: 3rem;
     }
-  }
-
+}
