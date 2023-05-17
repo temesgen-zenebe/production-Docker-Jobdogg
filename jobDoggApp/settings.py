@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     
     #local apps
+    'common.apps.CommonConfig',
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig', 
     'testimonial.apps.TestimonialConfig', 
@@ -100,7 +101,14 @@ DATABASES = {
 
 DATABASES = {'default': dj_database_url.config()}
 
-
+# EMAIL
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+DEFAULT_FROM_EMAIL = 'temf2006@gmail.com'
 
 AUTHENTICATION_BACKENDS = (
 # Needed to login by username in Django admin, even w/o `allauth`
@@ -172,3 +180,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if os.environ.get('ENVIRONMENT') != 'production':
     from .local_settings import *
+# DON'T PUT ANYTHING BELOW THIS
