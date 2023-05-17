@@ -14,12 +14,11 @@ body
 a{ 
     text-decoration: none;
 }
-.fontColor{
-  color: rgb(253, 253, 250);
+.bg-jobdogg{
+  background-color: rgb(247,247,247); /*company color*/ 
 }
 .navHeader{
   background-color: #e06a00; /*company color*/
-
   color: #fff;
 }
 .navFooter{
@@ -88,6 +87,7 @@ li.textFooter3{
   color: #d4cddf;
   font-size: 12px;
 }
+
 .fontColor{
   color: #faf8f7;
 }
@@ -203,4 +203,14 @@ section.signup{
     header.masthead h1, header.masthead .h1 {
       font-size: 3rem;
     }
+}
+
+section.on-demand{
+    background-color: #e06a00;
+    background-image: url(/static/images/pngwing.com44.png);
+    min-height: 150px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
