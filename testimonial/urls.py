@@ -4,7 +4,7 @@ from .views import TestimonialListView, TestimonialDetailView, TestimonialCreate
 app_name = 'testimonial'
 
 urlpatterns = [
-    path('testimonial-list', TestimonialListView.as_view(), name='testimonial_list'),
+    path('testimonialList', TestimonialListView.as_view(), name='testimonial_list'),
     path('<int:pk>/', TestimonialDetailView.as_view(), name='testimonial_detail'),
     path('create/', TestimonialCreateView.as_view(), name='testimonial_create'),
     path('<int:pk>/update/', TestimonialUpdateView.as_view(), name='testimonial_update'),
