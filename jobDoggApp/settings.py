@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    
 
     
     #local apps
@@ -136,8 +137,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # AUTHENTICATION SETTINGS
 AUTH_USER_MODEL = 'users.CustomUser'
+LOGIN_URL = 'account_login'
+LOGIN_REDIRECT_URL = 'pages:homepage'
+
+## django-allauth settings
+ACCOUNT_AUTHENTICATION_METHOD = 'email' # Default: 'username'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1 # Default: 3
+ACCOUNT_EMAIL_REQUIRED = True # Default: False
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory' # Default: 'optional'
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5 # Default: 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300 # Default 300
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login' # Default: '/'
+ACCOUNT_USERNAME_REQUIRED = False # Default: True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
