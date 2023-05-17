@@ -45,7 +45,6 @@ class TestimonialUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('testimonial:testimonial_list')
     extra_context = {'is_create': False}
 
-
 class TestimonialDeleteView(LoginRequiredMixin, DeleteView):
     model = Testimonial
     template_name = 'testimonial/testimonial_confirm_delete.html'
