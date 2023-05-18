@@ -117,7 +117,7 @@ AUTHENTICATION_BACKENDS = (
 # `allauth`-specific auth methods, such as login by e-mail
 'allauth.account.auth_backends.AuthenticationBackend',
 )
-
+ACCOUNT_SIGNUP_FORM_CLASS = 'users.forms.SignupForm'
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

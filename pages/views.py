@@ -15,3 +15,8 @@ class AboutUsView(TemplateView):
         messages.warning(request, 'Warning message.')
         messages.error(request, 'Error message.')
         return super().get(request, args, kwargs)
+    
+class ContactUsView(TemplateView):
+    template_name = 'pages/contact_us.html'
+
+    
