@@ -6,12 +6,15 @@
 {% block main %}
 <div class="my-5 py-3 mx-1">
   <div class="card border-warning1 m-auto my-5 mb-3 shadow" style="max-width: 30rem;">
-    <div class="card-header text-center ">Log in</div>
-    <div class="card-body">
+    <div class="card-header text-center "><h6 class="fontColor-orang">Log in</h6></div>
+    <div class="card-body ">
       <form method="post" class="m-auto">
         {% csrf_token %}
         {{form|crispy}}
-        <button class="form-control btn btn-sm btn-outline-primary">LOG IN</button>
+        
+        <div class="d-grid gap-2 py-2 text-center">
+          <button class="btn-booster-orang text-decoration-none">LOG IN</button>
+        </div>
       </form>
     </div>
     <div class="card-footer">

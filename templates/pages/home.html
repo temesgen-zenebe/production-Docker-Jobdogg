@@ -12,19 +12,19 @@
 
         <!-- Masthead-->
         <header>
-        <section class="masthead">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                  <div class="masthead-content">
-                    <h3>Job Assignments not Job Matches, it’s the Future</h3>
-                    <p>Revolutionizing work and recruitment globally, our platform empowers employers 
-                        and job seekers, enabling faster, transparent hiring and job assignments. The future is here.</p>
-                  </div>
+            <section class="masthead">
+                <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                    <div class="masthead-content">
+                        <h3>Job Assignments not Job Matches, it’s the Future</h3>
+                        <p>Revolutionizing work and recruitment globally, our platform empowers employers 
+                            and job seekers, enabling faster, transparent hiring and job assignments. The future is here.</p>
+                    </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </section>
+                </div>
+            </section>
         </header>
           <!-- Page heading-->
         <!--<section>
@@ -45,6 +45,24 @@
                 </div>
             </header>
         </section>-->
+            
+        <section>
+            
+            <div class="card border-0">
+            <img class="d-block mx-auto m-2" src="{% static 'images/pngwing.com.png' %}" alt="" width="100" height="100">
+            <div class="card-body text-center">
+                <h4 class="card-title fontColor-orang">STAFFING MADE SIMPLY</h4>
+                <p class="lead card-text">Redefining how people work and get hired.</p>
+                <small>Business focus Technology-fueled innovation Delivery excellence</small>
+                {% if not user.is_authenticated %}
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center py-2">
+                    <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
+                </div>
+                {% endif %}
+            </div>
+            </div>
+        </section>
+       
         <!--Future.-->
         <section>
             <div class="container px-3 py-5 my-2" id="featured-3">
@@ -126,7 +144,13 @@
             <div class="container-fluid p-0">
                 <div class="row g-0 mb-2">
                     <h3 class="fontColor-blue text-center py-4">HIRE ON DEMAND</h3>
-                    <div class="col-lg-6 order-lg-1 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('/static/images/emplyeerLogo.jpg')"></div>
+                    <div class="col-lg-6 order-lg-1 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('/static/images/emplyeerLogo.jpg')">
+                        {% if not user.is_authenticated %}
+                            <div class="d-grid gap-2 d-md-flex justify-content-sm-center py-2 text-center">
+                                <a href="{% url 'account_login' %}" class="btn-booster-white text-decoration-none">Go Start</a>
+                            </div>
+                        {% endif %}
+                    </div>
                     <div class="col-lg-6 order-lg-2 px-1 py-1">
                         <ul class="list-group list-group-flush shadow">
                           <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font" ></i>90% Faster hires with a 360˚ degree view of each candidate</li>
@@ -147,7 +171,13 @@
                 </div>
                 <div class="row g-0 my-5">
                     <h3 class="fontColor-orang text-center pb-3">JOBS ON DEMAND</h3>
-                    <div class="col-lg-6 order-lg-2 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('/static/images/pngwing.com (9).png')"></div>
+                    <div class="col-lg-6 order-lg-2 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('/static/images/pngwing.com (9).png')">
+                        {% if not user.is_authenticated %}
+                            <div class="d-grid gap-2 d-md-flex justify-content-sm-center py-3 text-center">
+                                <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
+                            </div>
+                        {% endif %}
+                    </div>
                     <div class="col-lg-6 order-lg-1 px-1 py-1">
                         <ul class="list-group list-group-flush shadow">
                           <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Real Identity & Visibility.</li>
@@ -172,6 +202,11 @@
                     <div class="col-lg-6 my-auto showcase-text shadow">
                         <h3 class="fontColor-orang">User-friendly Interface</h3>
                         <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly interface that simplifies the job search and application process. Receive multiple job offers and stay up-to-date with personalized job alerts. Thank Jobdogg.com for your job search success!</p>
+                        {% if not user.is_authenticated %}
+                            <div class="d-grid gap-2 d-md-flex justify-content-sm-center py-3 text-center">
+                                <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row g-0">
@@ -179,6 +214,11 @@
                     <div class="col-lg-6 order-lg-1 my-auto showcase-text shadow">
                         <h3 class="fontColor-orang">Multiple Job Offers</h3>
                         <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly platform that simplifies job searching and application processes. Get ready to receive multiple job offers and stay updated with personalized job alerts.</p>
+                        {% if not user.is_authenticated %}
+                            <div class="d-grid gap-2 d-md-flex justify-content-sm-center py-3 text-center">
+                                <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
