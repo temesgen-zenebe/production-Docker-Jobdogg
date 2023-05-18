@@ -41,22 +41,11 @@
         <img src="{% static 'images/newLookLogo11.png' %}" alt="Logo" class="img-fluid" width="130" height="40"/>
       </a>
    
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasNavbarDark"
-        aria-controls="offcanvasNavbarDark"
-      >
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark"aria-controls="offcanvasNavbarDark">
         <span class="navbar-toggler-icon"></span>
       </button>
    
-      <div
-        class="offcanvas offcanvas-end text-bg-dark1"
-        tabindex="-1"
-        id="offcanvasNavbarDark"
-        aria-labelledby="offcanvasNavbarDarkLabel"
-      >
+      <div class="offcanvas offcanvas-end text-bg-dark1" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel">
             Offcanvas
@@ -71,7 +60,7 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-5">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'pages:homepage' %}">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Get Staff</a>
@@ -79,12 +68,14 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Get Work</a>
             </li>
+            {% if not user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link" href="{% url 'account_login' %}">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Signup</a>
+              <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
             </li>
+            {% else %}
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -101,6 +92,7 @@
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
                 <li><a class="dropdown-item" href="#">Viewed</a></li>
+                
                 <!--employer-->
                 <li><a class="dropdown-item" href="#">Calculate</a></li>
                 <li><a class="dropdown-item" href="#">Payment</a></li>
@@ -113,10 +105,14 @@
                   <hr class="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    <button class="btn dropdown-item">Log out</button>
+                  </form>
                 </li>
               </ul>
             </li>
+            {% endif %}
           </ul>
         </div>
         
