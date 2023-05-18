@@ -169,7 +169,7 @@ section.signup{
     position: relative;
     height: 60vh;
     width: 100%;
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: #f8f9fa;
     background: linear-gradient(#e06a00, #123f8b), url(/static/images/pngwing78.png);
     background-size: cover;
@@ -213,4 +213,12 @@ section.on-demand{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+
+/*side menu*/
+.text-bg-dark1 {
+  color: #fff !important;
+  background-color: #061e36 !important;
+  opacity: 1;
 }
