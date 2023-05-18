@@ -84,7 +84,7 @@
             <li class="nav-item dropdown">
               
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ user.username }}|
+                {{ user.username }} |
                 {% if user.avatar and not form.avatar.errors %}
                   <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded-circle"/>
                 {% else %}
