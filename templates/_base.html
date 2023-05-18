@@ -47,9 +47,11 @@
    
       <div class="offcanvas offcanvas-end text-bg-dark1" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel">
-            Offcanvas
-          </h5>
+          <h6 class="offcanvas-title" id="offcanvasNavbarDarkLabel">
+            <a class="nav-link " href="#" >
+              JobDogg
+            </a>
+          </h6>
           <button
             type="button"
             class="btn-close btn-close-white"
@@ -79,7 +81,7 @@
             <li class="nav-item dropdown">
               
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dashboard |
+                {{ user.username }}|
                 {% if user.avatar and not form.avatar.errors %}
                   <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded-circle"/>
                 {% else %}
@@ -88,12 +90,11 @@
                  
               </a>
               <ul class="dropdown-menu dropdown-menu-lg-end">
-                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                <li><a class="dropdown-item" href="{% url 'pages:dashboard' %}">Dashboard</a></li>
                 <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
                 <li><a class="dropdown-item" href="#">Viewed</a></li>
-                
                 <!--employer-->
                 <li><a class="dropdown-item" href="#">Calculate</a></li>
                 <li><a class="dropdown-item" href="#">Payment</a></li>

@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 from django.contrib import messages
+from django.shortcuts import render,redirect
 
 
 class HomePageView(TemplateView):
@@ -18,5 +19,15 @@ class AboutUsView(TemplateView):
     
 class ContactUsView(TemplateView):
     template_name = 'pages/contact_us.html'
+
+
+def dashboard(request):
+    if request.user.is_authenticated:
+        return render(request, 'pages/dashboard.html')
+    else:
+        return redirect('login')
+
+
+
 
     
