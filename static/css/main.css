@@ -181,16 +181,16 @@ section.signup{
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
-    text-align: center;
+    text-align: left;
   }
 
-.masthead-content h1 {
-    font-size: 2rem;
+.masthead-content h3 {
+    font-size: 1.2rem;
     margin-bottom: 1.5rem;
   }
 
 .masthead-content p {
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-bottom: 2rem;
   }
 
@@ -199,8 +199,8 @@ section.signup{
       padding-top: 12rem;
       padding-bottom: 12rem;
     }
-    header.masthead h1, header.masthead .h1 {
-      font-size: 3rem;
+    header.masthead h3, header.masthead .h3 {
+      font-size: 1.5rem;
     }
 }
 
