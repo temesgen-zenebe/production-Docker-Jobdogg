@@ -35,69 +35,156 @@
 </head>
 <body>
 <header>
-  <nav class="fixed-top navbar navbar-expand-lg navbar-dark navHeader text-warning p-2">
-    <a class="navbar-brand px-3" href="{% url 'pages:homepage' %}">
-     <img src="{% static 'images/newLookLogo11.png' %}" alt="Logo" class="img-fluid" width="130" height="40"/>
-     <!--<span class="strong text-white px-1">JobDogg</span>-->
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-      data-target="#navbarSupportedContent" aria-expanded="false"
-      aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-4 my-2 me-auto mb-2 mb-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'pages:homepage' %}">Home 
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="#">Get Staff</a>
-       </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="#">Get Work</a>
-        </li>
-        <li class="nav-item ">
-            <a class="nav-link" href="{% url 'testimonial:testimonial_list' %}">Testimonial</a>
-        </li>
-       
-       {% if not user.is_authenticated %}
-          <li class="nav-item">
-             <a class="nav-link" href="">Log in</a>
-          </li>
-          <li class="nav-item">
-             <a class="nav-link" href="">Sign up</a>
-          </li>
-        {% else %}
-          <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
-                role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                {{ user.username }}
-             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">
-                My Account
+  <nav class="fixed-top navbar  navbar-expand-lg  navbar-dark navHeader" aria-label="Dark offcanvas navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand px-3" href="{% url 'pages:homepage' %}">
+        <img src="{% static 'images/newLookLogo11.png' %}" alt="Logo" class="img-fluid" width="130" height="40"/>
+      </a>
+   
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbarDark"
+        aria-controls="offcanvasNavbarDark"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+   
+      <div
+        class="offcanvas offcanvas-end text-bg-dark1"
+        tabindex="-1"
+        id="offcanvasNavbarDark"
+        aria-labelledby="offcanvasNavbarDarkLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarDarkLabel">
+            Offcanvas
+          </h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-5">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Get Staff</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Get Work</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Signup</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dashboard 
               </a>
-              
-              <a class="dropdown-item"
-                href="#">
-                applied list
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item"
-                href="{% url 'pages:homepage' %}">
-                Log out
-              </a>
-            </div>
-          </li>
-        {% endif %}
-      </ul>
-     
+              <ul class="dropdown-menu dropdown-menu-lg-end">
+
+                <li><a class="dropdown-item" href="#">Account</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Messages</a></li>
+                <li><a class="dropdown-item" href="#">Viewed</a></li>
+                <!--employer-->
+                <li><a class="dropdown-item" href="#">Calculate</a></li>
+                <li><a class="dropdown-item" href="#">Payment</a></li>
+                <li><a class="dropdown-item" href="#">Timecard</a></li>
+                <li><a class="dropdown-item" href="#">InCartCandidate</a></li>
+                <li><a class="dropdown-item" href="#">Search emplyee</a></li>
+                <li><a class="dropdown-item" href="#">PostJob</a></li>
+                <li><a class="dropdown-item" href="#">Messages</a></li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
     </div>
   </nav>
+  <!--<nav class="fixed-top navbar navbar-expand-lg navbar-dark navHeader text-warning p-2">
+      <a class="navbar-brand px-3" href="{% url 'pages:homepage' %}">
+      <img src="{% static 'images/newLookLogo11.png' %}" alt="Logo" class="img-fluid" width="130" height="40"/>
+      <!--<span class="strong text-white px-1">JobDogg</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarSupportedContent" aria-expanded="false"
+        aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-4 my-2 me-auto mb-2 mb-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'pages:homepage' %}">Home 
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="#">Get Staff</a>
+        </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="#">Get Work</a>
+          </li>
+          <li class="nav-item ">
+              <a class="nav-link" href="{% url 'testimonial:testimonial_list' %}">Testimonial</a>
+          </li>
+        
+        {% if not user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="">Log in</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Sign up</a>
+            </li>
+          {% else %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
+                  role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  {{ user.username }}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">
+                  My Account
+                </a>
+                
+                <a class="dropdown-item"
+                  href="#">
+                  applied list
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                  href="{% url 'pages:homepage' %}">
+                  Log out
+                </a>
+              </div>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+  </nav>-->
 </header>
 <main class="mx-2 my-4 px-2 bg-jobdogg py-2">
     <!--
