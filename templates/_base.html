@@ -77,18 +77,19 @@
             </li>
             {% else %}
             <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dashboard 
+              
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dashboard |
+                {% if user.avatar and not form.avatar.errors %}
+                  <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded-circle"/>
+                {% else %}
+                  <i class="bi bi-person-circle"  width="30" height="30" class="rounded-circle"></i>
+                {% endif %} 
+                 
               </a>
               <ul class="dropdown-menu dropdown-menu-lg-end">
-
-                <li><a class="dropdown-item" href="#">Account</a></li>
+                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
                 <li><a class="dropdown-item" href="#">Viewed</a></li>
@@ -119,68 +120,7 @@
       </div>
     </div>
   </nav>
-  <!--<nav class="fixed-top navbar navbar-expand-lg navbar-dark navHeader text-warning p-2">
-      <a class="navbar-brand px-3" href="{% url 'pages:homepage' %}">
-      <img src="{% static 'images/newLookLogo11.png' %}" alt="Logo" class="img-fluid" width="130" height="40"/>
-      <!--<span class="strong text-white px-1">JobDogg</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent" aria-expanded="false"
-        aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mx-4 my-2 me-auto mb-2 mb-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'pages:homepage' %}">Home 
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#">Get Staff</a>
-        </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#">Get Work</a>
-          </li>
-          <li class="nav-item ">
-              <a class="nav-link" href="{% url 'testimonial:testimonial_list' %}">Testimonial</a>
-          </li>
-        
-        {% if not user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="">Log in</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">Sign up</a>
-            </li>
-          {% else %}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
-                  role="button" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="false">
-                  {{ user.username }}
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">
-                  My Account
-                </a>
-                
-                <a class="dropdown-item"
-                  href="#">
-                  applied list
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item"
-                  href="{% url 'pages:homepage' %}">
-                  Log out
-                </a>
-              </div>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-  </nav>-->
+ 
 </header>
 <main class="mx-2 my-4 px-2 bg-jobdogg py-2">
     <!--
@@ -218,51 +158,45 @@
         </ul>
       </div>
       <div class="col-6 col-lg-2 offset-lg-1 mb-3">
-        <h6 class="textFooter2">Need Staff</h6>
+        <h6 class="textFooter2">JobDogg</h6>
         <ul class="list-unstyled">
-          <li class="mb-2"><a class="textFooter4" href="/">Home</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/docs/5.2/">Docs</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/docs/5.2/examples/">Examples</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://icons.getbootstrap.com/">Icons</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://themes.getbootstrap.com/">Themes</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://blog.getbootstrap.com/">Blog</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://cottonbureau.com/people/bootstrap">Swag Store</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:homepage' %}">Home</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:contact-us' %}">ContactUs</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:about-us' %}">About</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">Partners</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">News & Events</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">Executive Team</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-2  mb-3">
-        <h6 class="textFooter2">Need Staff</h6>
+        <h6 class="textFooter2">Dog Pound</h6>
         <ul class="list-unstyled">
-          <li class="mb-2"><a class="textFooter4" href="/">Home</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/docs/5.2/">Docs</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/docs/5.2/examples/">Examples</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://icons.getbootstrap.com/">Icons</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://themes.getbootstrap.com/">Themes</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://blog.getbootstrap.com/">Blog</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://cottonbureau.com/people/bootstrap">Swag Store</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">Find Bones</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">Find Doggs</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">Our Doggs</a></li>
+          
         </ul>
       </div>
       <div class="col-6 col-lg-2  mb-3">
-        <h6 class="textFooter2">Need Staff</h6>
+        <h6 class="textFooter2">For Employee</h6>
         <ul class="list-unstyled">
-          <li class="mb-2"><a class="textFooter4" href="/">Home</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/docs/5.2/">Docs</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/docs/5.2/examples/">Examples</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://icons.getbootstrap.com/">Icons</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://themes.getbootstrap.com/">Themes</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://blog.getbootstrap.com/">Blog</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://cottonbureau.com/people/bootstrap">Swag Store</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">Signup</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">How it woks</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">Search Job</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">employers</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">testimonial</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">Terms & Conditions</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">FAQ</a></li>
         </ul>
       </div>
       <div class="col-6 col-lg-2  mb-3">
-        <h6 class="textFooter2">Need Staff</h6>
+        <h6 class="textFooter2">For Employer</h6>
         <ul class="list-unstyled">
-          <li class="mb-2"><a class="textFooter4" href="/">Home</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/docs/5.2/">Docs</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/docs/5.2/examples/">Examples</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://icons.getbootstrap.com/">Icons</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://themes.getbootstrap.com/">Themes</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://blog.getbootstrap.com/">Blog</a></li>
-          <li class="mb-2"><a class="textFooter4" href="https://cottonbureau.com/people/bootstrap">Swag Store</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">How it woks</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">pricing</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">Testimonial</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">Terms & Policy</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">FAQ</a></li>
         </ul>
       </div>
     </div>
