@@ -189,22 +189,23 @@ section.signup{
     width: 100%;
     border-radius: 5px;
     background-color: #f8f9fa;
-    background: linear-gradient(#e06a00, #123f8b), url(/static/images/pngwing78.png);
+    background: linear-gradient(#e06a00, rgba(0, 0, 0, 0.5)), url(/static/images/pngwing.com44.png);
     background-size: cover;
     background-position: center;
+    margin: 10 auto;
   }
 
 .masthead-content {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 40%;
     transform: translate(-50%, -50%);
     color: #fff;
     text-align: left;
   }
 
 .masthead-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-bottom: 1.5rem;
   }
 

@@ -5,20 +5,11 @@
     <!-- Core plugin JavaScript-->
     <script src="{% static 'js/vendor/jquery-easing/jquery.easing.min.js' %}" async></script>
     <script src="{% static 'js/vendor/jquery/jquery.min.js' %}" async></script>
-
-    <!-- Page level plugins -->
-    <script src="{% static 'js/vendor/chart.js/Chart.min.js' %}" async></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{% static 'js/demo/chart-area-demo.js' %}" async></script>
-    <script src="{% static 'js/demo/chart-pie-demo.js' %}" async></script>
-
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'js/vendor/bootstrap/js/bootstrap.bundle.min.js' %}" async></script>
 
     <!-- Custom scripts for all pages-->
     <script src="{% static 'js/sb-admin-2.min.js' %}" async></script>
-
 
 {% endblock %}
 
@@ -31,8 +22,7 @@
 {% endblock %}
 
 {% block main %}
-<div class="my-4 py-4" >
-
+<div class="mt-4 py-4" >
     <div id="page-top">
     
         <!-- Page Wrapper -->
@@ -44,7 +34,7 @@
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                     <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <i class="bi bi-speedometer"></i>
                     </div>
                     
                 </a>
@@ -55,7 +45,7 @@
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
                     <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <i class="bi bi-speedometer2"></i>
                         <span>Dashboard</span></a>
                 </li>
     
@@ -155,9 +145,9 @@
     
                 <!-- Sidebar Message -->
                 <div class="sidebar-card d-none d-lg-flex">
-                    <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                    <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+                    
+                    <p class="text-center mb-2"><strong>Jobdogg</strong> is packed with premium features, components, and more!</p>
+                    <a class="btn btn-outline-light btn-sm" href="#">Upgrade to Pro!</a>
                 </div>
     
             </ul>
@@ -341,10 +331,14 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                    <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.username }}</span>
+                                    {% if user.avatar and not form.avatar.errors %}
+                                    <img class="img-profile rounded-circle" src="{{ user.avatar.url }}">
+                                    {% else %}
+                                      <i class="bi bi-person-circle"  width="30" height="30" class="rounded-circle"></i>
+                                    {% endif %} 
                                 </a>
+                                
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
@@ -372,8 +366,8 @@
     
                     </nav>
                     <!-- End of Topbar -->
-    
-                    <!-- Begin Page Content -->
+                    {% block dashboard %}<h2></h2>{% endblock %}
+                    <!-- Begin Page Content Components -->
                     <div class="container-fluid">
     
                         <!-- Page Heading -->
@@ -707,15 +701,6 @@
                 </div>
                 <!-- End of Main Content -->
     
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
     
             </div>
             <!-- End of Content Wrapper -->
@@ -751,32 +736,6 @@
                 </div>
             </div>
         </div>
-    
-        
-    
     </div>
-<!--   
-<div class="container">
-    <div class="row">
-        <div class="col-md-2">
-            
-            <div class="card">
-                <div class="card-header">Chat</div>
-                <div class="card-body">
-                    
-                </div>
-            </div>
-        </div>
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">Chat</div>
-                <div class="card-body">
-                   
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
 </div>
 {% endblock %}
