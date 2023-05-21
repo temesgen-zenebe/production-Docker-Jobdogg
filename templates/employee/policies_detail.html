@@ -1,0 +1,26 @@
+{% extends 'pages/dashboard.html' %}
+{% load user_tags %}
+{% load static %}
+
+
+{% block dashboard %}
+
+<h1>{{ object.title }}</h1>
+  <p>{{ object.description }}</p>
+  
+    {% if user.is_authenticated and user|is_employee %}
+        {% if not user_accepted_policy %}
+        <a href="{% url 'employee:policies_accept' object.slug %}" class="btn btn-primary">Accept</a>
+        {% else %}
+        <p>You have accepted this policy.</p>
+        {% endif %}
+    {% endif %}
+    {% if user.is_authenticated and user|is_admin %}
+    <a href="{% url 'employee:policies_update' object.slug %}" class="btn btn-primary">Update</a>
+    <a href="{% url 'employee:policies_delete' object.slug %}" class="btn btn-danger">Delete</a>
+    {% endif %}
+
+{% endblock %}
+
+ 
+

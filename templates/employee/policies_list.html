@@ -1,0 +1,14 @@
+{% extends 'pages/dashboard.html' %}
+{% load static %}
+{% block dashboard %}
+  <h1>Policies List</h1>
+  <ul>
+    {% for policy in object_list %}
+    <li>
+        <a href="{% url 'employee:policies_detail' policy.slug %}">
+            {{ policy.title }}
+        </a>
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
