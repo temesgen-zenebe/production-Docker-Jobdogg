@@ -45,14 +45,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'corsheaders',
     
-
-    
     #local apps
     'common.apps.CommonConfig',
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig', 
     'testimonial.apps.TestimonialConfig', 
-   
+    'employee.apps.EmployeeConfig', 
 ]
 SITE_ID = 1
 

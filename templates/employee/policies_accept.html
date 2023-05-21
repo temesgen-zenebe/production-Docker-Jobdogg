@@ -1,0 +1,12 @@
+{% extends 'pages/dashboard.html' %}
+{% load static %}
+{% block dashboard %}
+ <h1>Accept Policy</h1>
+  <p>By clicking the button below, you are accepting the policy:</p>
+  <h2>{{ object.title }}</h2>
+  <p>{{ object.description }}</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Accept</button>
+  </form>
+{% endblock %}
