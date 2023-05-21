@@ -18,7 +18,7 @@ class UserAcceptedPolicies(models.Model):
     accepted = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(max_length=50, unique=True, null=False, editable=False)
+    slug = models.SlugField(max_length=50, unique=True, null=True, editable=False)
 
     def __str__(self):
         return str(f'{self.policies}-{self.accepted}')
