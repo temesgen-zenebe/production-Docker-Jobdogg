@@ -1,4 +1,5 @@
 {% load static %}
+{% load user_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,24 +95,37 @@
                 {% endif %} 
               </a>
               <ul class="dropdown-menu dropdown-menu-lg-end">
+                {% if user.is_authenticated and user|is_employee %}
                 <li><a class="dropdown-item" href="{% url 'employee:dashboard_information_employee' %}">Dashboard</a></li>
                 <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
                 <li><a class="dropdown-item" href="#">Viewed</a></li>
+                {% endif %}
                 <!--employer-->
+                {% if user.is_authenticated and user|is_employer %}
                 <li><a class="dropdown-item" href="{% url 'employer:dashboard_information_employer' %}">Dashboard</a></li>
+                <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Calculate</a></li>
                 <li><a class="dropdown-item" href="#">Payment</a></li>
                 <li><a class="dropdown-item" href="#">Timecard</a></li>
                 <li><a class="dropdown-item" href="#">InCartCandidate</a></li>
                 <li><a class="dropdown-item" href="#">Search emplyee</a></li>
                 <li><a class="dropdown-item" href="#">PostJob</a></li>
+                <li><a class="dropdown-item" href="#">Viewed</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
+                {% endif %}
+               
+                {% if user.is_authenticated and user|is_admin %}
+                <li><a class="dropdown-item" href="{% url 'supperAdmin:dashboard_information_supperAdmin' %}">Admin Dashboard</a></li>
+                <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
+                <li><a class="dropdown-item" href="">Manage Policy</a></li>
+                <li><a class="dropdown-item" href="/admin/">Manage Database </a></li>
+                {% endif %}
                 <li>
                   <hr class="dropdown-divider" />
                 </li>
-                <li><a class="dropdown-item" href="{% url 'supperAdmin:dashboard_information_supperAdmin' %}">Admin Dashboard</a></li>
                 <li>
                   <form method="post" action="{% url 'account_logout' %}">
                     {% csrf_token %}
