@@ -38,10 +38,17 @@
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Read and accepted for next steps</h6>
                     <div class="dropdown no-arrow">
-                        <a class="btn btn-sm btn-outline-primary text-decoration-none" data-bs-toggle="collapse" 
-                            href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">
-                            <i class="bi bi-arrows-fullscreen text-white-600"></i> Start
-                        </a>
+                        {% if all_policies_accepted %}               
+                            <a class="btn btn-sm btn-outline-primary text-decoration-none" data-bs-toggle="collapse" 
+                                href="#multiCollapseExample2" role="button" aria-expanded="true" aria-controls="multiCollapseExample2">
+                                <i class="bi bi-arrows-fullscreen text-white-600"></i> Read
+                            </a>
+                        {% else %}
+                            <a class="btn btn-sm btn-outline-primary text-decoration-none" data-bs-toggle="collapse" 
+                                href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">
+                                <i class="bi bi-arrows-fullscreen text-white-600"></i> Start
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
                 <!-- Card Body -->
@@ -50,13 +57,74 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="multi-collapse collapsing show" id="multiCollapseExample1" style="">
+                                    {% if all_policies_accepted %}
+                                    <p>All policies have been accepted.</p>
+                                    {% else %}
+                                    <form id="policy-form"  method="POST" action="{% url 'employee:policies_list' %}">
+                                        {% csrf_token %}
+                                        <div class="card card-body">
+                                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            
+                                                    {% for policy in policies %}
+                                                        <div class="accordion-item ">
+                                                            <h2 class="accordion-header" id="flush-heading{{policy.id}}">
+                                                                <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
+                                                                    {{ policy.title }}
+                                                                </button>
+                                                            </h2>
+                                                            <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
+                                                                <div class="accordion-body " style="overflow: auto; height: 300px;">
+                                                                    <div>
+                                                                        <h5 class="card-title">Special title treatment</h5>
+                                                                        <p class="card-text">
+                                                                            {{ policy.description }}
+                                                                        </p>
+                                                                        {% if user.is_authenticated %}
+                                                                            {% if policy.id not in accepted_policies_ids %}
+                                                                            <input type="radio" name="policy_{{ policy.id }}">
+                                                                            {% endif %}
+                                                                                
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="row row-cols-lg-auto g-1 align-items-center border-0 ">
+                                                <div class="col-8 text-start px-1 py-1 border-0">
+                                                    <div class="form-check ">
+                                                        <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                                                        <label class="form-check-label" for="inlineFormCheck">
+                                                        I Read and Accept all.
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="col-4 text-end  px-1 py-1 border-none">
+                                                    <button class=" btn btn-sm btn-outline-primary" type="submit">I Accept</button>
+                                                </div>
+                                        </div>
+                                        
+                                    </form>
+                                    {% endif %}
+                                    {% if all_policies_accepted %}
+                                    <script>
+                                    document.getElementById("policy-form").style.display = "none";
+                                    </script>
+                                    {% endif %}
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="multi-collapse collapsing show" id="multiCollapseExample2" style="">
                                     <div class="card card-body">
                                         <div class="accordion accordion-flush" id="accordionFlushExample">
                                             {% if all_policies_accepted %}
                                                 <p>All policies have been accepted.</p>
-                                            {% else %}
-                                            <form id="policy-form"  method="POST" action="{% url 'employee:policies_list' %}">
-                                                {% csrf_token %}
                                                 {% for policy in policies %}
                                                     <div class="accordion-item ">
                                                         <h2 class="accordion-header" id="flush-heading{{policy.id}}">
@@ -71,53 +139,22 @@
                                                                     <p class="card-text">
                                                                         {{ policy.description }}
                                                                     </p>
-                                                                    {% if user.is_authenticated %}
-                                                                        {% if policy.id not in accepted_policies_ids %}
-                                                                          <input type="radio" name="policy_{{ policy.id }}">
-                                                                        {% endif %}
-                                                                            
-                                                                    {% endif %}
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 {% endfor %}
-                                            <button class="btn btn-sm btn-outline-Primary text-left" type="submit">Accept Policies</button>
-                                            {% endif %}
-                                            {% if all_policies_accepted %}
-                                            <script>
-                                              document.getElementById("policy-form").style.display = "none";
-                                            </script>
+                                            
                                             {% endif %}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <p>we are hoping you red the all deatile Good Lock</P>
-                            </div>
                         </div>
                     </div>
-                
                 </div>
-                <div class="card-footer">
-                    <form class="mx-2">
-                        <div class="row row-cols-lg-auto g-1 align-items-center border-0 ">
-                            <div class="col-8 text-start px-1 py-1 border-0">
-                                <div class="form-check ">
-                                    <input class="form-check-input" type="checkbox" id="inlineFormCheck">
-                                    <label class="form-check-label" for="inlineFormCheck">
-                                    I Read and Accept all.
-                                    </label>
-                                </div>
-                            </div>
-                        
-                            <div class="col-4 text-end  px-1 py-1 border-none">
-                                <button class=" btn btn-sm btn-outline-primary" type="submit">I Accept</button>
-                            </div>
-                    </div>
-                    </form>
-                </div>
+               
             </div>
         </div>
     <!-- End Example Code -->
