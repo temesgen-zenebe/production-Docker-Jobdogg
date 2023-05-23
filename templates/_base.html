@@ -94,12 +94,13 @@
                 {% endif %} 
               </a>
               <ul class="dropdown-menu dropdown-menu-lg-end">
-                <li><a class="dropdown-item" href="{% url 'employee:dashboard_information' %}">Dashboard</a></li>
+                <li><a class="dropdown-item" href="{% url 'employee:dashboard_information_employee' %}">Dashboard</a></li>
                 <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
                 <li><a class="dropdown-item" href="#">Viewed</a></li>
                 <!--employer-->
+                <li><a class="dropdown-item" href="{% url 'employer:dashboard_information_employer' %}">Dashboard</a></li>
                 <li><a class="dropdown-item" href="#">Calculate</a></li>
                 <li><a class="dropdown-item" href="#">Payment</a></li>
                 <li><a class="dropdown-item" href="#">Timecard</a></li>
@@ -110,6 +111,7 @@
                 <li>
                   <hr class="dropdown-divider" />
                 </li>
+                <li><a class="dropdown-item" href="{% url 'supperAdmin:dashboard_information_supperAdmin' %}">Admin Dashboard</a></li>
                 <li>
                   <form method="post" action="{% url 'account_logout' %}">
                     {% csrf_token %}

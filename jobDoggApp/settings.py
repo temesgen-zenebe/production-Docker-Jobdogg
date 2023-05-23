@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig', 
     'testimonial.apps.TestimonialConfig', 
     'employee.apps.EmployeeConfig', 
+    'employer.apps.EmployerConfig', 
+    'supperAdmin.apps.SupperadminConfig', 
+    
 ]
 SITE_ID = 1
 

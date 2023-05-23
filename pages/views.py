@@ -23,7 +23,7 @@ class ContactUsView(TemplateView):
 
 def dashboard(request):
     if request.user.is_authenticated and is_admin(request.user):
-        return render(request, 'pages/admin_dashboard.html')
+        return render(request, 'pages/supperAdmin_dashboard.html')
     elif request.user.is_authenticated and is_employee(request.user):
         return render(request, 'pages/employee_dashboard.html')
     elif request.user.is_authenticated and is_employer(request.user):
