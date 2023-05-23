@@ -8,6 +8,12 @@ from django import forms
 from django.shortcuts import render, redirect
 from django.views import View
 
+class DashboardInformation(LoginRequiredMixin, View):
+    template_name = 'employee/dashboardInfo.html'
+    def get(self, request):
+        context = {}
+        return render(request, self.template_name, context)
+         
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'
     context_object_name = 'policies'

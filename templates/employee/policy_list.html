@@ -2,46 +2,21 @@
 {% load static %}
 
 {% block dashboard_employee %}
-
-{% if all_policies_accepted %}
-  <p>All policies have been accepted.</p>
-{% else %}
-  <form id="policy-form"  method="POST" action="{% url 'employee:policies_list' %}">
-    {% csrf_token %}
-    {% for policy in policies %}
-      <div>
-        <h3>{{ policy.title }}</h3>
-        <p>{{ policy.description }}</p>
-        {% if policy.id not in accepted_policies_ids %}
-          <input type="radio" name="policy_{{ policy.id }}">
-        {% endif %}
-      </div>
-    {% endfor %}
-    <button type="submit">Accept Policies</button>
-  </form>
-{% endif %}
-{% if all_policies_accepted %}
-    <script>
-      document.getElementById("policy-form").style.display = "none";
-    </script>
-  {% endif %}
-  
-
-
-
-
     <!-- Example Code -->
         <div class="col-xl-12 col-lg-10">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Read and accepted for next steps</h6>
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    {% if all_policies_accepted %}
+                     <h6 class="m-0 font-weight-bold text-success">To Review all policies Click Read </h6>
+                    {% else %}
+                     <h6 class="m-0 font-weight-bold text-primary">Read and accepted for next steps</h6>
+                    {% endif %}
                     <div class="dropdown no-arrow">
                         {% if all_policies_accepted %}               
-                            <a class="btn btn-sm btn-outline-primary text-decoration-none" data-bs-toggle="collapse" 
+                            <a class="btn btn-sm btn-outline-success text-decoration-none" data-bs-toggle="collapse" 
                                 href="#multiCollapseExample2" role="button" aria-expanded="true" aria-controls="multiCollapseExample2">
-                                <i class="bi bi-arrows-fullscreen text-white-600"></i> Read
+                                <i class="bi bi-arrows-fullscreen text-white-600 px-2"></i> Read
                             </a>
                         {% else %}
                             <a class="btn btn-sm btn-outline-primary text-decoration-none" data-bs-toggle="collapse" 
@@ -60,7 +35,7 @@
                                     {% if all_policies_accepted %}
                                     <p>All policies have been accepted.</p>
                                     {% else %}
-                                    <form id="policy-form"  method="POST" action="{% url 'employee:policies_list' %}">
+                                    <form id="policy-form"  method="POST" action="{% url 'employee:policies_list' %}" class="needs-validation was-validated" novalidate="">
                                         {% csrf_token %}
                                         <div class="card card-body">
                                             <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -69,7 +44,7 @@
                                                         <div class="accordion-item ">
                                                             <h2 class="accordion-header" id="flush-heading{{policy.id}}">
                                                                 <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
-                                                                    {{ policy.title }}
+                                                                    {{ policy.title }} *
                                                                 </button>
                                                             </h2>
                                                             <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
@@ -81,7 +56,18 @@
                                                                         </p>
                                                                         {% if user.is_authenticated %}
                                                                             {% if policy.id not in accepted_policies_ids %}
-                                                                            <input type="radio" name="policy_{{ policy.id }}">
+                                                                            <!--<input type="radio" name="policy_{{ policy.id }}">-->
+                                                                            <div class="col-12">
+                                                                                <div class="form-check">
+                                                                                  <input class="form-check-input" name="policy_{{ policy.id }}" type="checkbox" id="invalidCheck{{ policy.id }}" required="">
+                                                                                  <label class="form-check-label" for="invalidCheck">
+                                                                                    Agree to terms and conditions
+                                                                                  </label>
+                                                                                  <div class="invalid-feedback">
+                                                                                    You must agree before submitting.
+                                                                                  </div>
+                                                                                </div>
+                                                                              </div>
                                                                             {% endif %}
                                                                                 
                                                                         {% endif %}
@@ -97,8 +83,8 @@
                                             <div class="row row-cols-lg-auto g-1 align-items-center border-0 ">
                                                 <div class="col-8 text-start px-1 py-1 border-0">
                                                     <div class="form-check ">
-                                                        <input class="form-check-input" type="checkbox" id="inlineFormCheck">
-                                                        <label class="form-check-label" for="inlineFormCheck">
+                                                        <input class="form-check-input" type="checkbox" id="inlineFormCheckMane">
+                                                        <label class="form-check-label" for="inlineFormCheckMane">
                                                         I Read and Accept all.
                                                         </label>
                                                     </div>
@@ -117,8 +103,8 @@
                                     </script>
                                     {% endif %}
                                 </div>
-                                </div>
                             </div>
+                            
                             <div class="col-12">
                                 <div class="multi-collapse collapsing show" id="multiCollapseExample2" style="">
                                     <div class="card card-body">
@@ -153,6 +139,14 @@
                             </div>
                         </div>
                     </div>
+                    {% if all_policies_accepted %}
+                    <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                        <p>All policies have been accepted successfuly, You Can read it whenever you want it, just click read button.</p>
+                        <a class="btn btn-sm btn-outline-success text-decoration-none" href="{% url 'employee:dashboard_information' %}" role="button" >
+                            Back
+                        </a>
+                    </div>
+                    {% endif %}
                 </div>
                
             </div>
