@@ -3,7 +3,6 @@
 {% load static %}
 {% block employee %}
     <div id="page-top">
-        <h2>i am employee</h2>
         <!-- Page Wrapper -->
         <div id="wrapper">
 
@@ -23,9 +22,10 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{% url 'pages:dashboard' %}">
                         <i class="bi bi-speedometer2"></i>
-                        <span>Dashboard</span></a>
+                        <span>Dashboard</span>
+                    </a>
                 </li>
 
                 <!-- Divider -->
@@ -33,7 +33,7 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Interface
+                    Builte Profile
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -41,13 +41,23 @@
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-fw fa-cog"></i>
-                        <span>Components</span>
+                        <span>Profile</span>
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Components:</h6>
-                            <a class="collapse-item" href="buttons.html">Buttons</a>
-                            <a class="collapse-item" href="cards.html">Cards</a>
+                            <h6 class="collapse-header">Profile Components:</h6>
+                            <a class="collapse-item" href="buttons.html">BasicInformation</a>
+                            <a class="collapse-item" href="">personal</a>
+                            <a class="collapse-item" href="">Military</a>
+                            <a class="collapse-item" href="">Education</a>
+                            <a class="collapse-item" href="">Experience</a>
+                            <a class="collapse-item" href="">Preferences</a>
+                            <a class="collapse-item" href="">Skillset Test</a>
+                            <a class="collapse-item" href="">Safety Video Test</a>
+                            <a class="collapse-item" href="">Tell US All</a>
+                            <a class="collapse-item" href="">Background Check</a>
+                            <a class="collapse-item" href="">Select Ride</a>
+
                         </div>
                     </div>
                 </li>
@@ -57,16 +67,15 @@
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                         aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fas fa-fw fa-wrench"></i>
-                        <span>Utilities</span>
+                        <span>Company Policy</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Utilities:</h6>
-                            <a class="collapse-item" href="utilities-color.html">Colors</a>
-                            <a class="collapse-item" href="utilities-border.html">Borders</a>
-                            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                            <a class="collapse-item" href="utilities-other.html">Other</a>
+                            <h6 class="collapse-header">Policy</h6>
+                            <a class="collapse-item" href="utilities-color.html">Read</a>
+                            <a class="collapse-item" href="utilities-border.html">Accept</a>
+                            
                         </div>
                     </div>
                 </li>
@@ -345,7 +354,7 @@
 
                     </nav>
                     <!-- End of Topbar -->
-                    {% block dashboard %}<h2></h2>{% endblock %}
+                    {% block dashboard_employee %}<h2></h2>{% endblock %}
                     <!-- Begin Page Content Components -->
                     <div class="container-fluid">
 
