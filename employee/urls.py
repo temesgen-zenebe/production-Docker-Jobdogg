@@ -8,6 +8,7 @@ from .views import (
     PoliciesDeleteView,
     PolicyListView,
     AcceptPoliciesView,
+    DashboardInformation,
 )
 app_name = 'employee' 
 
@@ -19,6 +20,7 @@ urlpatterns = [
     path('policies/create/', PoliciesCreateView.as_view(), name='policies_create'),
     path('policies/update/<slug:slug>/', PoliciesUpdateView.as_view(), name='policies_update'),
     path('policies/delete/<slug:slug>/', PoliciesDeleteView.as_view(), name='policies_delete'),
+    path('dashboardInformation/', DashboardInformation.as_view(), name='dashboard_information'),
 ]
 
 
