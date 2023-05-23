@@ -1,5 +1,5 @@
 from django.db import models
-from django.conf import settings
+from django.conf import settings 
 from common.utils.text import unique_slug
 
 class Policies(models.Model):
