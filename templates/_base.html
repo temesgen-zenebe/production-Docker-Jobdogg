@@ -83,6 +83,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
             </li>
+           
             {% else %}
             <li class="nav-item dropdown">
               
@@ -115,6 +116,8 @@
                 <li><a class="dropdown-item" href="#">PostJob</a></li>
                 <li><a class="dropdown-item" href="#">Viewed</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'employer:be_employer_request' %}">BeEmployer</a></li>
                 {% endif %}
                
                 {% if user.is_authenticated and user|is_admin %}

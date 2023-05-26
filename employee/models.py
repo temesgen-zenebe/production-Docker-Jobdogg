@@ -28,3 +28,38 @@ class UserAcceptedPolicies(models.Model):
             value = str(self)
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
+        
+class BasicInformation(models.Model):
+    # Define your fields here
+    name = models.CharField(max_length=100)
+    # Add more fields as needed
+
+    def __str__(self):
+        return self.name
+    
+    
+class BasicInformation(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    address = models.CharField(max_length=200)
+    apartment = models.CharField(max_length=50)
+    state = models.CharField(max_length=50)
+    zip_code = models.CharField(max_length=10)
+    cell_phone = models.CharField(max_length=20)
+    home_phone = models.CharField(max_length=20)
+    work_phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    city = models.CharField(max_length=100)
+    emergency_contact_number = models.CharField(max_length=20)
+    emergency_contact_name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=200, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.email} {self.zip_code}"
