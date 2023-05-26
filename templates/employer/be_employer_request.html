@@ -1,0 +1,10 @@
+
+  <h1>be Employer Request</h1>
+  <p>Click the button below to send a be Employer email request:</p>
+  <form method="post" action="{% url 'employer:be_employer_request' %}">
+    {% csrf_token %}
+    <button type="submit">Send be Employer Request</button>
+  </form>
+
+
+<!-- /.container-fluid -->

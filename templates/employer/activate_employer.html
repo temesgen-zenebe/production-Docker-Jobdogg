@@ -1,0 +1,27 @@
+{% extends 'pages/employer_dashboard.html' %}
+{% load static %}
+{% block dashboard_employer %}
+ <!-- Begin Page Content Components -->
+ <div class="container-fluid">
+    <h2>Activate Your beEmployer Account</h2>
+  <p>Choose your subscription plan and provide the required information:</p>
+  <form method="post" action="{% url 'employer:start_trial' %}">
+            {% csrf_token %}
+            <!-- Subscription plan selection -->
+            <select name="subscription_plan">
+                <option value="plan_1">Plan 1</option>
+                <option value="plan_2">Plan 2</option>
+                <!-- Add more options as needed -->
+            </select>
+            <!-- Form fields for additional information
+        <!-- Form fields for additional information -->
+        <input type="text" name="name" placeholder="Your Name">
+        <input type="email" name="email" placeholder="Your Email">
+        <!-- Add more form fields as needed -->
+
+        <!-- Submit button -->
+        <button type="submit">Start Trial</button>
+    </form>
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

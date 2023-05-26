@@ -2,7 +2,7 @@ from django.urls import path
 from .views import AboutUsView, HomePageView ,ContactUsView
 from . import views
 
-app_name = 'pages'
+app_name = 'pages' 
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),

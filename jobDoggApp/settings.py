@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url  
+import paypalrestsdk
+import stripe
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -116,6 +118,17 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 DEFAULT_FROM_EMAIL = 'temf2006@gmail.com'
+
+
+# Stripe Configuration
+stripe.api_key = os.environ.get('STRIPE_API_KEY')
+
+# PayPal Configuration
+paypalrestsdk.configure({
+    'mode': os.environ.get('PAYPAL_MODE', 'sandbox'),  # Set to 'live' for production environment
+    'client_id': os.environ.get('PAYPAL_CLIENT_ID'),
+    'client_secret': os.environ.get('PAYPAL_CLIENT_SECRET'),
+})
 
 AUTHENTICATION_BACKENDS = (
 # Needed to login by username in Django admin, even w/o `allauth`
