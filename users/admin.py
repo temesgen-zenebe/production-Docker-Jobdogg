@@ -24,7 +24,7 @@ class CustomUserAdmin(DjangoJokesAdmin, UserAdmin):
     readonly_fields = ['password_form']
  
     # Fields for editing existing user.
-    new_fields = ('dob', 'avatar')
+    new_fields = ('dob', 'avatar' ,'user_type')
     # Add new fields to 'Personal info' fieldset.
     append_fields(UserAdmin.fieldsets, 'Personal info', new_fields)
 
@@ -36,7 +36,7 @@ class CustomUserAdmin(DjangoJokesAdmin, UserAdmin):
     append_fields(UserAdmin.fieldsets, None, ('password_form',))
 
     # Fields for adding new user.
-    new_fields = ('email', )
+    new_fields = ('email','user_type')
     # Add new fields to unlabelled fieldset.
     add_fieldsets = append_fields(UserAdmin.add_fieldsets, None, new_fields)
 
@@ -45,8 +45,8 @@ class CustomUserAdmin(DjangoJokesAdmin, UserAdmin):
     add_fieldsets = append_fields(UserAdmin.add_fieldsets, 'Optional Fields', optional_fields)
     
     # List Attributes
-    list_display = UserAdmin.list_display + ('is_superuser',)
-    list_display_links = ('username', 'email', 'first_name', 'last_name')
+    list_display = UserAdmin.list_display + ('is_superuser','user_type')
+    list_display_links = ('username', 'email', 'first_name', 'last_name','user_type')
    
 
     def password_form(self, obj):

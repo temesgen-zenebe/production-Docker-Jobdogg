@@ -3,9 +3,20 @@ from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
 @receiver(post_save, sender=get_user_model())
-def assign_user_to_group(sender, instance, created, **kwargs):
+def update_user_type(sender, instance, created, **kwargs):
     if created:
-        group = Group.objects.get(name='employee')
-        instance.groups.add(group)
+        
+        user_type = instance.user_type
+        print(user_type)
+        
+        if user_type == 'employee':
+            employee_group, _ = Group.objects.get_or_create(name='employee')
+            employee_group.user_set.add(instance)
+            
+        elif user_type == 'employer':
+            employer_group, _ = Group.objects.get_or_create(name='employer')
+            employer_group.user_set.add(instance)
+
+        instance.save()
+ 

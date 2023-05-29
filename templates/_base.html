@@ -41,7 +41,7 @@
   <nav class="fixed-top navbar  navbar-expand-lg  navbar-dark navHeader" aria-label="Dark offcanvas navbar">
     <div class="container-fluid">
       <a class="navbar-brand px-3" href="{% url 'pages:homepage' %}">
-        <img src="{% static 'images/newLookLogo11.png' %}" alt="Logo" class="img-fluid" width="130" height="40"/>
+        <img src="{% static 'images/12-jobdogg.png' %}" alt="Logo" class="img-fluid" width="130" height="40"/>
       </a>
    
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark"aria-controls="offcanvasNavbarDark">
@@ -52,7 +52,7 @@
         <div class="offcanvas-header">
           <h6 class="offcanvas-title" id="offcanvasNavbarDarkLabel">
             <a class="nav-link " href="#" >
-              JobDogg
+              Jobdogg
             </a>
           </h6>
           <button
@@ -83,7 +83,14 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
             </li>
-           
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_signup' %}?user_type=employee" >Signup as Employee</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_signup' %}?user_type=employer" >Signup as Employer</a>
+            </li>
+            
+            
             {% else %}
             <li class="nav-item dropdown">
               
@@ -293,6 +300,5 @@
     })()
 
 </script>
-
 </body>
 </html>
