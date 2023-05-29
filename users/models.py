@@ -12,6 +12,7 @@ def validate_avatar(value):
 
 # Create your models here.
 class CustomUser(AbstractUser):
+    USER_TYPE_CHOICES = [('employee', 'employee'),('employer', 'employer'),]
     
     dob = models.DateField(
         verbose_name= "Date of Birth", null=True , blank=True
@@ -22,6 +23,8 @@ class CustomUser(AbstractUser):
         help_text='Image must be 200px by 200px.',
         validators=[validate_avatar],
     )
+    user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES)
+    
     
     def get_absolute_url(self):
         return reverse('my-account')
