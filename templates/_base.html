@@ -83,12 +83,12 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'account_signup' %}?user_type=employee" >Signup as Employee</a>
+            <!--<li class="nav-item">
+              <a class="nav-link" href="{% url 'account_signup' %}" value="employee" id="employee">Signup as Employee</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'account_signup' %}?user_type=employer" >Signup as Employer</a>
-            </li>
+              <a class="nav-link" href="{% url 'account_signup' %}" value="employer" id="employer" >Signup as Employer</a>
+            </li>-->
             
             
             {% else %}
@@ -263,6 +263,7 @@
 <script type="text/javascript" src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/sb-admin-2.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/signupBtn.js' %}"></script>
 <script>
       // Get the last checkbox element
     var lastCheckbox = document.getElementById('inlineFormCheckMane');
@@ -300,5 +301,6 @@
     })()
 
 </script>
+
 </body>
 </html>
