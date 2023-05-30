@@ -53,11 +53,11 @@ a{
   border-color: #e06a00;
   border-width: 2px;
   border-style: solid;
-  padding: 6px 12px;
+  padding: 6px 8px;
   font-size: 14px;
   line-height: 1;
   border-radius: 0.25rem;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .btn-booster-orang:hover {

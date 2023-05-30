@@ -2,13 +2,9 @@ from datetime import datetime
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm
-from django.dispatch import receiver
-from django.forms import widgets
-from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.forms.widgets import DateInput
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 from django.contrib.auth.models import Group
 
