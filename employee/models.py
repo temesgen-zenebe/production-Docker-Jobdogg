@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings 
 from common.utils.text import unique_slug
 
+
 class Policies(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -29,14 +30,7 @@ class UserAcceptedPolicies(models.Model):
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
         
-class BasicInformation(models.Model):
-    # Define your fields here
-    name = models.CharField(max_length=100)
-    # Add more fields as needed
 
-    def __str__(self):
-        return self.name
-    
     
 class BasicInformation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -63,3 +57,7 @@ class BasicInformation(models.Model):
 
     def __str__(self):
         return f"{self.email} {self.zip_code}"
+    
+
+
+    
