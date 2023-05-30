@@ -128,12 +128,12 @@ class PoliciesDeleteView(PoliciesAdminRequiredMixin, DeleteView):
     success_url = reverse_lazy('employee:policies_list')
 
 # ----end-------
+
+#-----BasicInformation-----------------------------
 class BasicInformationListView(LoginRequiredMixin, ListView):
     model = BasicInformation
     template_name = 'employee/basic_information_list.html'
     context_object_name = 'basic_information'
-
-
 
 class BasicInformationCreateView(LoginRequiredMixin, CreateView):
     model = BasicInformation
