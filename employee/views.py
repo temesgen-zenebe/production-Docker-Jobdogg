@@ -1,13 +1,15 @@
-
 from django.views.generic import ListView, DetailView, FormView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
-from .models import Policies, UserAcceptedPolicies
+from .models import Policies, UserAcceptedPolicies,BasicInformation
 from django.contrib import messages
 from django import forms
 from django.shortcuts import render, redirect
 from django.views import View
+from django.shortcuts import get_object_or_404
 
+
+#----Policies Models ------
 class DashboardInformation(LoginRequiredMixin, View):
     template_name = 'employee/dashboardInfo.html'
     def get(self, request):
@@ -53,7 +55,6 @@ class PolicyListView(LoginRequiredMixin, View):
         messages.success(request, 'Policies accepted successfully.')
         return redirect('employee:policies_list')
         
-
 class AcceptPoliciesView(LoginRequiredMixin, View):
     def post(self, request):
         user = request.user
@@ -73,8 +74,6 @@ class AcceptPoliciesView(LoginRequiredMixin, View):
 
         # Redirect to some error page if no policies found
         return redirect('employee:policies_list')
-
-
 
 class PoliciesAcceptForm(forms.Form):
     # Define form fields if needed
@@ -99,9 +98,6 @@ class PoliciesAcceptView(LoginRequiredMixin, FormView):
 
         return redirect(self.success_url)
 
-
-
-
 class PoliciesListView(ListView):
     model = Policies
     template_name = 'employee/policies_list.html'
@@ -110,7 +106,6 @@ class PoliciesDetailView(DetailView):
     model = Policies
     template_name = 'employee/policies_detail.html'
     
-
 class PoliciesAdminRequiredMixin(UserPassesTestMixin):
     def test_func(self):
         return self.request.user.groups.filter(name='admin').exists()
@@ -131,3 +126,48 @@ class PoliciesDeleteView(PoliciesAdminRequiredMixin, DeleteView):
     model = Policies
     template_name = 'employee/policies_delete.html'
     success_url = reverse_lazy('employee:policies_list')
+
+# ----end-------
+class BasicInformationListView(LoginRequiredMixin, ListView):
+    model = BasicInformation
+    template_name = 'employee/basic_information_list.html'
+    context_object_name = 'basic_information'
+
+
+
+class BasicInformationCreateView(LoginRequiredMixin, CreateView):
+    model = BasicInformation
+    template_name = 'employee/basic_information_create.html'
+    fields = ['address', 'apartment', 'state', 'zip_code', 'cell_phone', 
+              'home_phone', 'work_phone', 'email', 'city', 'emergency_contact_number',
+              'emergency_contact_name']
+    success_url = reverse_lazy('employee:basic_information_list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    
+class BasicInformationDetailView(LoginRequiredMixin, DetailView):
+    model = BasicInformation
+    template_name = 'employee/basic_information_detail.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    
+class BasicInformationUpdateView(LoginRequiredMixin, UpdateView):
+    model = BasicInformation
+    template_name = 'employee/basic_information_update.html'
+    fields = ['address', 'apartment', 'state', 'zip_code', 
+              'cell_phone', 'home_phone', 'work_phone', 'email', 
+              'city', 'emergency_contact_number', 'emergency_contact_name'
+              ]
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    success_url = reverse_lazy('employee:basic_information_list')
+
+class BasicInformationDeleteView(LoginRequiredMixin, DeleteView):
+    model = BasicInformation
+    template_name = 'employee/basic_information_confirm_delete.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    success_url = reverse_lazy('employee:basic_information_list')
