@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import (
+    #-------Policies------
     PoliciesListView,
     PoliciesDetailView,
     PoliciesAcceptView,
@@ -10,13 +11,19 @@ from .views import (
     AcceptPoliciesView,
     DashboardInformation,
     
-    #----------------
+    #----BasicInformation----
     BasicInformationListView,
     BasicInformationCreateView,
     BasicInformationDetailView,
     BasicInformationUpdateView,
     BasicInformationDeleteView,
     
+    #----PERSONAL-------
+    PersonalCreateView,
+    PersonalDeleteView,
+    PersonalDetailView,
+    PersonalListView,
+    PersonalUpdateView,
     
 )
 app_name = 'employee' 
@@ -38,6 +45,13 @@ urlpatterns = [
     path('basic_information/update/<slug:slug>/', BasicInformationUpdateView.as_view(), name='basic_information_update'),
     path('basic_information/detail/<slug:slug>/', BasicInformationDetailView.as_view(), name='basic_information_detail'),
     path('basic_information/delete/<slug:slug>/', BasicInformationDeleteView.as_view(), name='basic_information_delete'),
+
+    # personal
+    path('personal/list/', PersonalListView.as_view(), name='personal_list'),
+    path('personal/detail/<slug:slug>/', PersonalDetailView.as_view(), name='personal_detail'),
+    path('personal/create/', PersonalCreateView.as_view(), name='personal_create'),
+    path('personal/update/<slug:slug>/', PersonalUpdateView.as_view(), name='personal_update'),
+    path('personal/delete/<slug:slug>/', PersonalDeleteView.as_view(), name='personal_delete'),
 ]
 
 

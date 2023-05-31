@@ -1,0 +1,47 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% block title %}Basic Personal Detail{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-8 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h5>Personal Profile</h5>
+                    <div>
+                    <a class="btn btn-sm btn-outline-success" href="{% url 'employee:personal_update' slug=object.slug %}">Edit</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:personal_list' %}">Back</a>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <ul>
+                        <li>Nickname: {{ object.nickname }}</li>
+                        <li>Social Security Number: {{ object.social_security_number }}</li>
+                        <li>Driver's License Number: {{ object.drivers_license_number }}</li>
+                        <li>Driver's License State: {{ object.get_drivers_license_state_display }}</li>
+                        <li>Date of Birth: {{ object.date_of_birth }}</li>
+                        <li>Gender: {{ object.get_gender_display }}</li>
+                        <li>Languages:
+                          <ul>
+                            {% for language in object.languages.all %}
+                              <li>{{ language.name }}</li>
+                            {% empty %}
+                              <li>No languages specified.</li>
+                            {% endfor %}
+                          </ul>
+                        </li>
+                        <li>E-Verify: {{ object.e_verify }}</li>
+                      </ul>
+                </div>
+                   
+            </div>
+        </div>
+    <!-- End Example Code -->
+{% endblock %}
+
+
+
+
+
+
