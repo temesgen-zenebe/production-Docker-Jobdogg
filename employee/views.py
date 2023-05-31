@@ -1,12 +1,15 @@
 from django.views.generic import ListView, DetailView, FormView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
-from .models import Policies, UserAcceptedPolicies,BasicInformation
+from .models import Policies, Profile, UserAcceptedPolicies,BasicInformation
 from django.contrib import messages
 from django import forms
 from django.shortcuts import render, redirect
 from django.views import View
-from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from .models import Personal, Language
+from .forms import PersonalForm
+
 
 
 #----Policies Models ------
@@ -146,7 +149,13 @@ class BasicInformationCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-
+    
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.get(user=request.user)
+        if not profile.basic_information_completed:
+            # Redirect to Basic Information step if it is not completed
+            return redirect('employee:basic_information_create')
+        return super().dispatch(request, *args, **kwargs)
     
 class BasicInformationDetailView(LoginRequiredMixin, DetailView):
     model = BasicInformation
@@ -171,3 +180,72 @@ class BasicInformationDeleteView(LoginRequiredMixin, DeleteView):
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
     success_url = reverse_lazy('employee:basic_information_list')
+
+
+# Personal Create View
+class PersonalCreateView(LoginRequiredMixin, CreateView):
+    model = Personal
+    form_class = PersonalForm
+    template_name = 'employee/personal_create.html'
+
+    def get_success_url(self):
+        return reverse('employee:personal_list', kwargs={'slug': self.object.slug})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.get(user=request.user)
+        if not profile.basic_information_completed:
+            # Redirect to Basic Information step if it is not completed
+            return redirect('employee:basic_information_create')
+        return super().dispatch(request, *args, **kwargs)
+
+# Personal Update View
+class PersonalUpdateView(LoginRequiredMixin, UpdateView):
+    model = Personal
+    form_class = PersonalForm
+    template_name = 'employee/personal_update.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_success_url(self):
+        return reverse('employee:personal_list', kwargs={'slug': self.object.slug})
+
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.get(user=request.user)
+        if not profile.basic_information_completed:
+            # Redirect to Basic Information step if it is not completed
+            return redirect('employee:basic_information_create')
+        return super().dispatch(request, *args, **kwargs)
+    
+# Personal Detail View
+class PersonalDetailView(LoginRequiredMixin, DetailView):
+    model = Personal
+    template_name = 'employee/personal_detail.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+
+# Personal List View
+class PersonalListView(LoginRequiredMixin, ListView):
+    model = Personal
+    template_name = 'employee/personal_list.html'
+    context_object_name = 'personal_list'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Personal.objects.filter(user=self.request.user)
+
+
+# Personal Delete View
+class PersonalDeleteView(LoginRequiredMixin, DeleteView):
+    model = Personal
+    template_name = 'employee/personal_confirm_delete.html'
+    success_url = reverse_lazy('employee:personal_list')
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+
