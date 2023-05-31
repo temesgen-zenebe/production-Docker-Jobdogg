@@ -10,7 +10,6 @@ class Profile(models.Model):
     companyPolices_completed = models.BooleanField(default=False)
     basic_information_completed = models.BooleanField(default=False)
     personal_information_completed = models.BooleanField(default=False)
-    basic_information_completed = models.BooleanField(default=False)
     Military_completed = models.BooleanField(default=False)
     Education_completed = models.BooleanField(default=False)
     Experience_completed = models.BooleanField(default=False)

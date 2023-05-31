@@ -22,7 +22,7 @@ class DashboardInformation(LoginRequiredMixin, View):
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'
     context_object_name = 'policies'
-
+    acceptedAll = False
     def get(self, request):
         policies = Policies.objects.all()
         accepted_policies = UserAcceptedPolicies.objects.filter(user=request.user)
@@ -51,8 +51,25 @@ class PolicyListView(LoginRequiredMixin, View):
                 accepted_policies.append(UserAcceptedPolicies(user=request.user, policies=policy, accepted=True))
 
         UserAcceptedPolicies.objects.bulk_create(accepted_policies)
-
-        # Update is_accepted context states to True
+        
+        # Retrieve the user's profile
+        
+        accepted_policies = UserAcceptedPolicies.objects.filter(user=request.user)
+        accepted_policies_ids = [policy.policies_id for policy in accepted_policies]
+        total_policies_count = policies.count()
+        accepted_policies_count = len(accepted_policies_ids)
+        all_policies_accepted = accepted_policies_count == total_policies_count
+        
+        if all_policies_accepted == True:
+            # Retrieve the user's profile
+            profile, created = Profile.objects.get_or_create(user=request.user)
+            #profile = Profile.objects.get(user=request.user)
+            
+            # Update the  companyPolices_completed field to True
+            profile.companyPolices_completed = True
+            profile.save()
+            
+        # Update is_accepted context states to True    
         request.session['is_accepted'] = True
 
         messages.success(request, 'Policies accepted successfully.')
@@ -145,17 +162,22 @@ class BasicInformationCreateView(LoginRequiredMixin, CreateView):
               'home_phone', 'work_phone', 'email', 'city', 'emergency_contact_number',
               'emergency_contact_name']
     success_url = reverse_lazy('employee:basic_information_list')
-
+    
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
     def dispatch(self, request, *args, **kwargs):
-        profile = Profile.objects.get(user=request.user)
-        if not profile.basic_information_completed:
+        #profile = Profile.objects.get(user=request.user)
+        profile, created = Profile.objects.get_or_create(user=request.user)
+        if not profile.companyPolices_completed:
             # Redirect to Basic Information step if it is not completed
-            return redirect('employee:basic_information_create')
+            return redirect('employee:policies_list')
+        # Update the  companyPolices_completed field to True
+        profile.basic_information_completed = True
+        profile.save()
         return super().dispatch(request, *args, **kwargs)
+    
     
 class BasicInformationDetailView(LoginRequiredMixin, DetailView):
     model = BasicInformation
@@ -173,6 +195,14 @@ class BasicInformationUpdateView(LoginRequiredMixin, UpdateView):
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
     success_url = reverse_lazy('employee:basic_information_list')
+    
+    def dispatch(self, request, *args, **kwargs):
+        #profile = Profile.objects.get(user=request.user)
+        profile, created = Profile.objects.get_or_create(user=request.user)
+        if not profile.companyPolices_completed:
+            # Redirect to Basic Information step if it is not completed
+            return redirect('employee:policies_list')
+        return super().dispatch(request, *args, **kwargs)
 
 class BasicInformationDeleteView(LoginRequiredMixin, DeleteView):
     model = BasicInformation
@@ -188,8 +218,12 @@ class PersonalCreateView(LoginRequiredMixin, CreateView):
     form_class = PersonalForm
     template_name = 'employee/personal_create.html'
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
     def get_success_url(self):
-        return reverse('employee:personal_list', kwargs={'slug': self.object.slug})
+        return reverse('employee:personal_list')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -197,10 +231,20 @@ class PersonalCreateView(LoginRequiredMixin, CreateView):
         return kwargs
 
     def dispatch(self, request, *args, **kwargs):
-        profile = Profile.objects.get(user=request.user)
+        #profile = Profile.objects.get(user=request.user)
+        try:
+            # Retrieve the user's profile
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            # If the profile doesn't exist, create a new one
+            profile = Profile(user=request.user)
+            
         if not profile.basic_information_completed:
             # Redirect to Basic Information step if it is not completed
             return redirect('employee:basic_information_create')
+        profile.personal_information_completed = True
+        profile.save()
+        
         return super().dispatch(request, *args, **kwargs)
 
 # Personal Update View
@@ -215,7 +259,8 @@ class PersonalUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('employee:personal_list', kwargs={'slug': self.object.slug})
 
     def dispatch(self, request, *args, **kwargs):
-        profile = Profile.objects.get(user=request.user)
+        #profile = Profile.objects.get(user=request.user)
+        profile, created = Profile.objects.get_or_create(user=request.user)
         if not profile.basic_information_completed:
             # Redirect to Basic Information step if it is not completed
             return redirect('employee:basic_information_create')

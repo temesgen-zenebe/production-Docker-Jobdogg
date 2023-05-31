@@ -11,7 +11,6 @@ class ProfileAdmin(admin.ModelAdmin):
                 'companyPolices_completed',
                 'basic_information_completed', 
                 'personal_information_completed',
-                'basic_information_completed',
                 'Military_completed',
                 'Education_completed',
                 'Experience_completed', 
