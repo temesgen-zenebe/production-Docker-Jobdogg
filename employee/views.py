@@ -1,15 +1,16 @@
 from django.views.generic import ListView, DetailView, FormView,CreateView,UpdateView,DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin,PermissionRequiredMixin
 from django.urls import reverse_lazy
 from .models import Policies, Profile, UserAcceptedPolicies,BasicInformation
 from django.contrib import messages
+from django.template import Library
 from django import forms
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
 from .models import Personal, Language
 from .forms import PersonalForm,BasicInformationForm
-
+from employee.templatetags.mask_ssn import mask_ssn
 
 
 #----Policies Models ------
@@ -271,14 +272,35 @@ class PersonalUpdateView(LoginRequiredMixin, UpdateView):
         
         return super().dispatch(request, *args, **kwargs)
     
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        obj.social_security_number = mask_ssn(obj.social_security_number)  # Mask the social security number
+        return obj
+    
 # Personal Detail View
 class PersonalDetailView(LoginRequiredMixin, DetailView):
     model = Personal
     template_name = 'employee/personal_detail.html'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
+    permission_required = 'employee.can_view_sensitive_data'  # Custom permission required to view sensitive data
 
-
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        personal_instance = self.get_object()
+        social_security_number = personal_instance.social_security_number
+        masked_ssn = mask_ssn(social_security_number)  # Apply custom template filter
+        context['masked_ssn'] = masked_ssn
+        return context
+    
+    
+    def get_queryset(self):
+        # Only allow the user who owns the profile to view it
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+    
 # Personal List View
 class PersonalListView(LoginRequiredMixin, ListView):
     model = Personal
