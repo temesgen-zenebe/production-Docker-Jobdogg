@@ -4,7 +4,7 @@
 {% block title %}Basic Information Create{% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
-        <div class="col-xl-8 col-lg-6">
+        <div class="col-xl-12 col-lg-10 col-md-8">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
@@ -12,6 +12,180 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
+                   <!--   <form class="row g-3" method="post">
+                        {% csrf_token %}
+                        <div id="div_id_address" class="mb-2 col-md-8">
+                          <label for="id_address" class="form-label requiredField">
+                            Address<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="address"
+                            maxlength="200"
+                            class="textinput form-control form-control-sm"
+                            required=""
+                            id="id_address"
+                            placeholder="1234 Main St"
+                          />
+                        </div>
+                        <div id="div_id_apartment" class="mb-2 col-md-4">
+                          <label for="id_apartment" class="form-label requiredField">
+                            Apartment<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="apartment"
+                            maxlength="50"
+                            class="textinput form-control form-control-sm"
+                            required=""
+                            id="id_apartment"
+                            placeholder="#100"
+                          />
+                        </div>
+                        <div id="div_id_city" class="mb-2 col-md-4">
+                          <label for="id_city" class="form-label requiredField">
+                            City<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="city"
+                            maxlength="100"
+                            class="textinput form-control-sm form-control"
+                            required=""
+                            id="id_city"
+                          />
+                        </div>
+                        <div id="div_id_state" class="mb-2 col-md-4">
+                          <label for="id_state" class="form-label requiredField">
+                            State<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="state"
+                            maxlength="50"
+                            class="textinput form-control form-control-sm"
+                            required=""
+                            id="id_state"
+                          />
+                        </div>
+                        <div id="div_id_zip_code" class="mb-2 col-md-4">
+                          <label for="id_zip_code" class="form-label requiredField">
+                            Zip code<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="zip_code"
+                            maxlength="10"
+                            class="textinput form-control form-control-sm"
+                            required=""
+                            id="id_zip_code"
+                          />
+                        </div>
+                        <div id="div_id_cell_phone" class="mb-2 col-md-4">
+                          <label for="id_cell_phone" class="form-label requiredField">
+                            Cell phone<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="cell_phone"
+                            maxlength="20"
+                            class="textinput form-control form-control-sm"
+                            required=""
+                            id="id_cell_phone"
+                          />
+                        </div>
+                        <div id="div_id_home_phone" class="mb-2 col-md-4">
+                          <label for="id_home_phone" class="form-label requiredField">
+                            Home phone<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="home_phone"
+                            maxlength="20"
+                            class="textinput form-control form-control-sm"
+                            required=""
+                            id="id_home_phone"
+                          />
+                        </div>
+                        <div id="div_id_work_phone" class="mb-2 col-md-4">
+                          <label for="id_work_phone" class="form-label requiredField">
+                            Work phone<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="work_phone"
+                            maxlength="20"
+                            class="textinput form-control form-control-sm"
+                            required=""
+                            id="id_work_phone"
+                          />
+                        </div>
+                        <div id="div_id_email" class="mb-2 col-md-4">
+                          <label for="id_email" class="form-label requiredField">
+                            Email<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="email"
+                            name="email"
+                            maxlength="254"
+                            class="emailinput form-control form-control-sm"
+                            required=""
+                            id="id_email"
+                          />
+                        </div>
+                        <div id="div_id_emergency_contact_number" class="mb-2 col-md-4">
+                          <label
+                            for="id_emergency_contact_number"
+                            class="form-label requiredField"
+                          >
+                            Emergency contact number<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="emergency_contact_number"
+                            maxlength="20"
+                            class="textinput form-control form-control-sm"
+                            required=""
+                            id="id_emergency_contact_number"
+                          />
+                        </div>
+                        <div id="div_id_emergency_contact_name" class="mb-2 col-md-4">
+                          <label for="id_emergency_contact_name" class="form-label requiredField">
+                            Emergency contact name<span class="asteriskField">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            name="emergency_contact_name"
+                            maxlength="100"
+                            class="textinput form-control form-control-sm"
+                            required=""
+                            id="id_emergency_contact_name"
+                          />
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <button class="btn btn-sm btn-outline-primary me-md-2" type="submit">
+                            submit
+                          </button>
+                        </div>
+                      </form>
+                  <form method="post">
+                        {% csrf_token %}
+                        <div id="div_id_address" class="mb-3"> <label for="id_address" class="form-label requiredField">
+                        Address<span class="asteriskField">*</span> </label> <input type="text" name="address" maxlength="200" class="textinput form-control" required="" id="id_address"> </div> <div id="div_id_apartment" class="mb-3"> <label for="id_apartment" class="form-label requiredField">
+                        Apartment<span class="asteriskField">*</span> </label> <input type="text" name="apartment" maxlength="50" class="textinput form-control" required="" id="id_apartment"> </div> <div id="div_id_state" class="mb-3"> <label for="id_state" class="form-label requiredField">
+                        State<span class="asteriskField">*</span> </label> <input type="text" name="state" maxlength="50" class="textinput form-control" required="" id="id_state"> </div> <div id="div_id_zip_code" class="mb-3"> <label for="id_zip_code" class="form-label requiredField">
+                        Zip code<span class="asteriskField">*</span> </label> <input type="text" name="zip_code" maxlength="10" class="textinput form-control" required="" id="id_zip_code"> </div> <div id="div_id_cell_phone" class="mb-3"> <label for="id_cell_phone" class="form-label requiredField">
+                        Cell phone<span class="asteriskField">*</span> </label> <input type="text" name="cell_phone" maxlength="20" class="textinput form-control" required="" id="id_cell_phone"> </div> <div id="div_id_home_phone" class="mb-3"> <label for="id_home_phone" class="form-label requiredField">
+                        Home phone<span class="asteriskField">*</span> </label> <input type="text" name="home_phone" maxlength="20" class="textinput form-control" required="" id="id_home_phone"> </div> <div id="div_id_work_phone" class="mb-3"> <label for="id_work_phone" class="form-label requiredField">
+                        Work phone<span class="asteriskField">*</span> </label> <input type="text" name="work_phone" maxlength="20" class="textinput form-control" required="" id="id_work_phone"> </div> <div id="div_id_email" class="mb-3"> <label for="id_email" class="form-label requiredField">
+                        Email<span class="asteriskField">*</span> </label> <input type="email" name="email" maxlength="254" class="emailinput form-control" required="" id="id_email"> </div> <div id="div_id_city" class="mb-3"> <label for="id_city" class="form-label requiredField">
+                        City<span class="asteriskField">*</span> </label> <input type="text" name="city" maxlength="100" class="textinput form-control" required="" id="id_city"> </div> <div id="div_id_emergency_contact_number" class="mb-3"> <label for="id_emergency_contact_number" class="form-label requiredField">
+                        Emergency contact number<span class="asteriskField">*</span> </label> <input type="text" name="emergency_contact_number" maxlength="20" class="textinput form-control" required="" id="id_emergency_contact_number"> </div> <div id="div_id_emergency_contact_name" class="mb-3"> <label for="id_emergency_contact_name" class="form-label requiredField">
+                        Emergency contact name<span class="asteriskField">*</span> </label> <input type="text" name="emergency_contact_name" maxlength="100" class="textinput form-control" required="" id="id_emergency_contact_name"> 
+                        </div>
+
+                        <button class="btn btn-sm btn-outline-primary" type="submit">Save</button>
+                    </form>-->
                     <form method="post">
                         {% csrf_token %}
                         {{ form|crispy }}
