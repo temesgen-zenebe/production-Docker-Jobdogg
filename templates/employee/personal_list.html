@@ -1,5 +1,6 @@
 {% extends 'pages/employee_dashboard.html' %}
 {% load static %}
+{% load user_tags %}
 {% block title %}Personal Information List{% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
@@ -26,9 +27,11 @@
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">
                                     <a class="btn btn-sm btn-outline-warning"
                                      href="{% url 'employee:personal_update' slug=personal.slug %}">Update</a>
-                                    <a class="btn btn-sm btn-outline-danger" 
+                                     {% if user.is_authenticated and user|is_admin %}
+                                     <a class="btn btn-sm btn-outline-danger" 
                                         href="{% url 'employee:personal_delete' slug=personal.slug %}">Delete</a>
-                                </div>
+                                    {% endif %}
+                                    </div>
                             </div>
                         </li>
                         {% empty %}

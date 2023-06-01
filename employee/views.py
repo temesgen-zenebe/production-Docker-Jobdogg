@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
 from .models import Personal, Language
-from .forms import PersonalForm
+from .forms import PersonalForm,BasicInformationForm
 
 
 
@@ -157,10 +157,8 @@ class BasicInformationListView(LoginRequiredMixin, ListView):
 
 class BasicInformationCreateView(LoginRequiredMixin, CreateView):
     model = BasicInformation
+    form_class = BasicInformationForm
     template_name = 'employee/basic_information_create.html'
-    fields = ['address', 'apartment', 'state', 'zip_code', 'cell_phone', 
-              'home_phone', 'work_phone', 'email', 'city', 'emergency_contact_number',
-              'emergency_contact_name']
     success_url = reverse_lazy('employee:basic_information_list')
     
     def form_valid(self, form):
@@ -187,11 +185,9 @@ class BasicInformationDetailView(LoginRequiredMixin, DetailView):
     
 class BasicInformationUpdateView(LoginRequiredMixin, UpdateView):
     model = BasicInformation
+    form_class = BasicInformationForm
     template_name = 'employee/basic_information_update.html'
-    fields = ['address', 'apartment', 'state', 'zip_code', 
-              'cell_phone', 'home_phone', 'work_phone', 'email', 
-              'city', 'emergency_contact_number', 'emergency_contact_name'
-              ]
+    
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
     success_url = reverse_lazy('employee:basic_information_list')
@@ -215,7 +211,7 @@ class BasicInformationDeleteView(LoginRequiredMixin, DeleteView):
 # Personal Create View
 class PersonalCreateView(LoginRequiredMixin, CreateView):
     model = Personal
-    form_class = PersonalForm
+    form_class = PersonalForm 
     template_name = 'employee/personal_create.html'
 
     def form_valid(self, form):
@@ -256,14 +252,23 @@ class PersonalUpdateView(LoginRequiredMixin, UpdateView):
     slug_url_kwarg = 'slug'
 
     def get_success_url(self):
-        return reverse('employee:personal_list', kwargs={'slug': self.object.slug})
+        return reverse('employee:personal_list')
 
     def dispatch(self, request, *args, **kwargs):
         #profile = Profile.objects.get(user=request.user)
-        profile, created = Profile.objects.get_or_create(user=request.user)
+        try:
+            # Retrieve the user's profile
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            # If the profile doesn't exist, create a new one
+            profile = Profile(user=request.user)
+            
         if not profile.basic_information_completed:
             # Redirect to Basic Information step if it is not completed
             return redirect('employee:basic_information_create')
+        profile.personal_information_completed = True
+        profile.save()
+        
         return super().dispatch(request, *args, **kwargs)
     
 # Personal Detail View
