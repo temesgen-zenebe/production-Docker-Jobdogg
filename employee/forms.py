@@ -4,10 +4,18 @@ from .models import Personal, Language, BasicInformation
 from django.utils.safestring import mark_safe
 
 
+class MultiSelectDropdown(forms.SelectMultiple):
+    def value_from_datadict(self, data, files, name):
+        if isinstance(data, (list, tuple)):
+            return [int(value) for value in data]
+        return [int(value) for value in data.getlist(name, [])]
+
+
 class PersonalForm(forms.ModelForm):
     languages = forms.ModelMultipleChoiceField(
         queryset=Language.objects.all(),
-        widget=forms.SelectMultiple,
+        widget=MultiSelectDropdown(attrs={'class': 'multiselect'}),
+        help_text="Select multiple options by holding down the Ctrl key (or Command key on Mac)."
     )
     
     def __init__(self, *args, **kwargs):

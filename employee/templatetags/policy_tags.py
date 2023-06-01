@@ -10,3 +10,4 @@ def check_accepted_policy(user_accepted_policies, policy):
         return user_accepted_policy.accepted
     except UserAcceptedPolicies.DoesNotExist:
         return False
+    

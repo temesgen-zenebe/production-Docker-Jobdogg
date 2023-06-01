@@ -1,3 +1,5 @@
+import re
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings 
 from common.utils.text import unique_slug
@@ -52,6 +54,8 @@ class UserAcceptedPolicies(models.Model):
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
         
+        
+        
 
 #BASIC INFORMATION MODELS   
 class BasicInformation(models.Model):
@@ -88,13 +92,43 @@ class Language(models.Model):
     def __str__(self):
         return self.name
 
+#SocialSecurityNumberField
+
+class SocialSecurityNumberField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('max_length', 11)  # Assuming no dashes or separators
+        super().__init__(*args, **kwargs)
+
+    def validate(self, value, model_instance):
+        if not validate_social_security_number(value):
+            raise ValidationError('Invalid social security number.')
+
+def validate_social_security_number(ssn):
+    
+    # Check for the valid format: XXX-XX-XXXX 
+    ssn_validate_pattern = "^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$"
+    
+    p = re.compile(ssn_validate_pattern) 
+    if (ssn == None):
+      
+        return False
+    else:
+        if(re.search(p, ssn)):
+            return True
+        else:
+            return False
+
+    # Additional validation rules can be added here based on specific requirements
+
+    return True
+
 #PERSONAL INFORMATION MODELS 
 class Personal(models.Model):
     GENDER_CHOICES = (('M', 'Male'),('F', 'Female'),('O', 'Other'),)
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=50)
-    social_security_number = models.CharField(max_length=20)
+    social_security_number = SocialSecurityNumberField()
     drivers_license_number = models.CharField(max_length=20)
     drivers_license_state = USStateField()
     date_of_birth = models.DateField(verbose_name= "Date of Birth", null=True , blank=True)

@@ -1,5 +1,6 @@
 {% extends 'pages/employee_dashboard.html' %}
 {% load static %}
+{% load mask_ssn %}
 {% block title %}Basic Personal Detail{% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
@@ -15,9 +16,10 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <ul>
+                    <ul class="list-unstyled">
+
                         <li>Nickname: {{ object.nickname }}</li>
-                        <li>Social Security Number: {{ object.social_security_number }}</li>
+                        <li>Social Security Number: {{ object.social_security_number|mask_ssn }}</li>
                         <li>Driver's License Number: {{ object.drivers_license_number }}</li>
                         <li>Driver's License State: {{ object.get_drivers_license_state_display }}</li>
                         <li>Date of Birth: {{ object.date_of_birth }}</li>
