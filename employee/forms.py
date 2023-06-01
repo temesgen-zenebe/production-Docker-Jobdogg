@@ -3,20 +3,17 @@ from datetime import datetime
 from .models import Personal, Language, BasicInformation
 from django.utils.safestring import mark_safe
 
-LANGUAGES = [
-    ('en', 'English'),
-    ('fr', 'French'),
-    ('es', 'Spanish'),
-    # ...
-]
+
 class PersonalForm(forms.ModelForm):
-  
-    languages = forms.MultipleChoiceField(choices=LANGUAGES, widget=forms.CheckboxSelectMultiple)
+    languages = forms.ModelMultipleChoiceField(
+        queryset=Language.objects.all(),
+        widget=forms.SelectMultiple,
+    )
     
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
-       
+        self.fields['languages'].widget.choices = self.fields['languages'].choices # Update the queryset for the 'languages' field
         self.user = user
             
     class Meta:
