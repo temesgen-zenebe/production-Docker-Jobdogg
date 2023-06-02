@@ -106,7 +106,7 @@
                 {% if user.is_authenticated and user|is_employee %}
                 <li><a class="dropdown-item" href="{% url 'employee:dashboard_information_employee' %}">Dashboard</a></li>
                 <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'employee:profile_building_progress' %}">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
                 <li><a class="dropdown-item" href="#">Viewed</a></li>
                 {% endif %}
