@@ -19,6 +19,14 @@ class DashboardInformation(LoginRequiredMixin, View):
     def get(self, request):
         context = {}
         return render(request, self.template_name, context)
+    
+#----Policies Models ------
+class ProfileBuildingProgress(LoginRequiredMixin, View):
+    template_name = 'employee/profileBuildingProgress.html'
+    def get(self, request):
+        context = {}
+        return render(request, self.template_name, context)   
+    
          
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'

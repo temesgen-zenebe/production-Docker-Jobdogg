@@ -1,10 +1,11 @@
 {% extends 'pages/employee_dashboard.html' %}
 {% load static %}
+{% load humanize %}
 {% load mask_ssn %}
 {% block title %}Basic Personal Detail{% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
-        <div class="col-xl-8 col-lg-6">
+        <div class="col-xl-6 col-lg-6">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
@@ -16,25 +17,52 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <ul class="list-unstyled">
-
-                        <li>Nickname: {{ object.nickname }}</li>
-                        <li>Social Security Number: {{ object.social_security_number|mask_ssn }}</li>
-                        <li>Driver's License Number: {{ object.drivers_license_number }}</li>
-                        <li>Driver's License State: {{ object.get_drivers_license_state_display }}</li>
-                        <li>Date of Birth: {{ object.date_of_birth }}</li>
-                        <li>Gender: {{ object.get_gender_display }}</li>
-                        <li>Languages:
+                    <ul class="list-unstyled list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Nickname: 
+                          <span class="">{{ object.nickname|capfirst }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Social Security: 
+                          <span class="">{{ object.social_security_number|mask_ssn }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Driver's License No.
+                          <span class="">{{ object.drivers_license_number }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Driver's License State :
+                            <span class="">{{ object.get_drivers_license_state_display }}</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Date of Birth :
+                            <span class="">{{ object.date_of_birth }}</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Gender: 
+                            <span class="">{{ object.get_gender_display|capfirst }}</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Languages:
                           <ul>
                             {% for language in object.languages.all %}
-                              <li>{{ language.name }}</li>
+                              <span class="px-2">{{ language.name|capfirst}}</span>
                             {% empty %}
                               <li>No languages specified.</li>
                             {% endfor %}
                           </ul>
-                        </li>
-                        <li>E-Verify: {{ object.e_verify }}</li>
+                            
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            E-Verify: 
+                            <span class="">{{ object.e_verify }}</span>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                           
+                          </li>
                       </ul>
+                      
+                    
                 </div>
                    
             </div>
