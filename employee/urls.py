@@ -9,7 +9,10 @@ from .views import (
     PoliciesDeleteView,
     PolicyListView,
     AcceptPoliciesView,
+    
+    #
     DashboardInformation,
+    ProfileBuildingProgress,
     
     #----BasicInformation----
     BasicInformationListView,
@@ -32,7 +35,8 @@ urlpatterns = [
     
     # DashboardInformation Employee
     path('dashboardInformation/employee', DashboardInformation.as_view(), name='dashboard_information_employee'),
-    
+    path('profileBuildingProgress', ProfileBuildingProgress.as_view(), name='profile_building_progress'),
+
     #-----policies-----------
     path('policies/list/', PolicyListView.as_view(), name='policies_list'),
     path('policies/accept/', AcceptPoliciesView.as_view(), name='accept_policies'),

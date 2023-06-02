@@ -10,7 +10,6 @@ class MultiSelectDropdown(forms.SelectMultiple):
             return [int(value) for value in data]
         return [int(value) for value in data.getlist(name, [])]
 
-
 class PersonalForm(forms.ModelForm):
     languages = forms.ModelMultipleChoiceField(
         queryset=Language.objects.all(),
@@ -42,8 +41,6 @@ class PersonalForm(forms.ModelForm):
             'date_of_birth': forms.DateInput(attrs={'type': 'date','style': 'width: 100%; font-size:13px;'}), 
         }
         
-
-
 class BasicInformationForm(forms.ModelForm):
     class Meta:
         model = BasicInformation
