@@ -15,14 +15,15 @@
     </div>
    <!-- progress bar -->
     <div class="container mt-5">
-      <div class="progress ">
-        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-      <div class="progress ">
-        <div class="progress-bar bg-success" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-      
+
+        <div class="progress">
+            <div class="progress-bar {% if progress_percentage < 25 %}bg-danger{% elif progress_percentage < 50 %}bg-warning{% elif progress_percentage < 75 %}bg-info{% else %}bg-success{% endif %}" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
+              {{ progress_percentage }}%
+            </div>
+        </div>
+          
       <div class="album py-3 bg-light">
+        {% if progress %}
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
             {% for progres in progress %}
             <div class="col step-item ">
@@ -37,9 +38,9 @@
                   <div class="d-flex justify-content-between align-items-center">
                   
                         {% if  progres.companyPolices_completed %}
-                        <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-success"><small>Completed</small>
-                                <i class="bi bi-check2-circle text-light "></i>
+                        <div class="btn-group gap-1">
+                            <button type="button" class="prev-btn  btn btn-sm btn-success">
+                                <i class="bi bi-check2-circle text-light px-1"></i><small>Completed</small>
                             </button>
                             <a href="{% url 'employee:policies_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-box-arrow-left"></i></a>
                             <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next </button>
@@ -320,6 +321,19 @@
             {% endif %}
             {% endfor %}
           </div>
+        {% else %}
+        <div class="row row-cols-1 row-cols-sm-8 row-cols-md-10">
+            <div class="card mb-4 bg-warning">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">you must stere built your profile</h6>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0"> oops its semes like you need start built you profile !!
+                        by accepting the policys </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         </div>
       </div>
       
@@ -331,39 +345,51 @@
         
         <!-- Basic Information Modal -->
         <div class="modal fade" id="basicInformationModal" tabindex="-1" aria-labelledby="basicInformationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md modal-dialog-scrollable">
-            <div class="modal-content mx-4">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Basic Information</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-dialog modal-md modal-dialog-scrollable">
+                <div class="modal-content mx-4">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Basic Information</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--Modal content for Basic Information -->
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ basic_information_form|crispy }}
+                            <div class="modal-footer">
+                                <button type="submit" name="basic_information" class="btn btn-sm btn-outline-primary">Save</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Back</button>
+                            </div>
+                        </form>
+                    
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <!--Modal content for Basic Information -->
-                    <form method="post" action="{% url 'employee:profile_building_progress' %}">
-                        {% csrf_token %}
-                        {{ basic_information_form|crispy }}
-                        
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-sm btn-outline-primary">Submit</button>
-                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Back</button>
-                        </div>
-                    </form>
-                   
-                </div>
-               
-             
             </div>
-        </div>
         </div>
 
         <!-- Personal Modal -->
         <div class="modal fade" id="personalModal" tabindex="-1" aria-labelledby="personalModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-            <!-- Modal content for Personal -->
-            <!-- ... -->
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                <!-- Modal content for Personal -->
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Personal Information</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--Modal content for Basic Information -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ personal_form|crispy }}
+                        <div class="modal-footer">
+                            <button type="submit"  name="personal"  class="btn btn-sm btn-outline-primary">Save</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Back</button>
+                        </div>
+                    </form>
+                
+                </div>
+                </div>
             </div>
-        </div>
         </div>
     </div>     
 
@@ -384,7 +410,7 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const progress = document.querySelector(".progress-bar");
+            const progress = document.querySelector(".progress-bar1");
             const steps = Array.from(document.querySelectorAll(".step-item"));
             const stepCount = steps.length;
             let currentStep = 1;

@@ -10,14 +10,64 @@
                     <h5>Basic Information Detail</h5>
                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:basic_information_list' %}">Back</a>
                 </div>
-                <!-- Card Body -->
+                 <!-- Card Body -->
                 <div class="card-body">
+                    <ul class="list-unstyled list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            User : 
+                          <span class="">{{ object.user|capfirst }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Email : 
+                          <span class="">{{ object.email }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Address : 
+                          <span class="">{{ object.address }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Apartment :
+                          <span class="">{{ object.apartment}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            City :
+                            <span class="">{{ object.city }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            State :
+                            <span class="">{{ object.state }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Zip_code : 
+                            <span class="">{{ object.zip_code }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Cell_phone :
+                            <span class="">{{ object.cell_phone }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Home_phone :
+                            <span class="">{{ object.home_phone }}</span>
+                        </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Work_phone :
+                            <span class="">{{ object.work_phone }}</span>
+                        </li>
+                         
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            emergency contact number :                           
+                             <span class="">{{ object.emergency_contact_number}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            emergency contact name :                           
+                             <span class="">{{ object.emergency_contact_name}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                           
+                        </li>
+                    </ul> 
                     
-                    <p>Email: {{ object.email }}</p>
-                    <p>Address: {{ object.address }}</p>
-                    <!-- Include other fields as needed --> 
-                </div>
-                   
+                </div>  
             </div>
         </div>
     <!-- End Example Code -->
