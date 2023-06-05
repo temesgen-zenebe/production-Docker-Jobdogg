@@ -8,10 +8,9 @@ from django import forms
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
-from .models import Personal, Language
+from .models import Personal, Language,Profile
 from .forms import PersonalForm,BasicInformationForm
 from employee.templatetags.mask_ssn import mask_ssn
-
 
 #----Policies Models ------
 class DashboardInformation(LoginRequiredMixin, View):
@@ -23,11 +22,66 @@ class DashboardInformation(LoginRequiredMixin, View):
 #----Policies Models ------
 class ProfileBuildingProgress(LoginRequiredMixin, View):
     template_name = 'employee/profileBuildingProgress.html'
-    def get(self, request):
-        context = {}
-        return render(request, self.template_name, context)   
     
-         
+    def get_progress_percentage(self, profile):
+        total_steps = 9  # Total number of steps in the profile
+        completed_steps = sum(
+            [
+                profile.companyPolices_completed,
+                profile.basic_information_completed,
+                profile.personal_information_completed,
+                profile.Military_completed,
+                profile.Education_completed,
+                profile.Experience_completed,
+                profile.Preferences_completed,
+                profile.SkillSetTest_completed,
+                profile.VideoResume_completed,
+                profile.ResumeUploading_completed,
+            ]
+        )
+        progress_percentage = (completed_steps / total_steps) * 100
+        return int(progress_percentage)
+    
+    def get(self, request):
+        basic_information_form = BasicInformationForm()
+        personal_form = PersonalForm()
+        progress = Profile.objects.filter(user=request.user)
+        profile = Profile.objects.get(user=request.user)
+        progress_percentage = self.get_progress_percentage(profile)
+        context = {
+            'basic_information_form': basic_information_form,
+            'personal_form': personal_form,
+            'progress':progress,
+            'progress_percentage': progress_percentage,
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        if 'basic_information' in request.POST:
+            basic_information_form = BasicInformationForm(request.POST)
+            if basic_information_form.is_valid():
+                basic_information = basic_information_form.save(commit=False)
+                basic_information.user = request.user
+                basic_information.save()
+                return redirect('employee:profile_building_progress')
+
+        elif 'personal' in request.POST:
+            personal_form = PersonalForm(request.POST)
+            if personal_form.is_valid():
+                personal = personal_form.save(commit=False)
+                personal.user = request.user
+                personal.save()
+                return redirect('employee:profile_building_progress')
+
+        # If neither form was submitted or form validation failed, render the template again with the forms
+        basic_information_form = BasicInformationForm()
+        personal_form = PersonalForm()
+        context = {
+            'basic_information_form': basic_information_form,
+            'personal_form': personal_form,
+        }
+        return render(request, self.template_name, context)
+          
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'
     context_object_name = 'policies'

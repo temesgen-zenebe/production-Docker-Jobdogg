@@ -3,5 +3,33 @@
 {% block main %}
 <div class="my-4 py-4" >
   <h2>About Us</h2>
+   <!-- About Section -->
+   <section id="about" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>About Us</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec elementum justo. Nullam ultricies convallis risus, sed ullamcorper ligula tincidunt at. Sed feugiat est et vulputate lacinia. Etiam posuere lacinia velit, sit amet sodales tellus mollis vel. Integer sed est vel nisi gravida porttitor. Mauris eu elit odio. Fusce condimentum lacinia mi, a gravida neque ullamcorper ac. Nullam eleifend, sem vitae varius sollicitudin, elit lacus tempus orci, at posuere lacus ipsum at felis.</p>
+        </div>
+        <div class="col-md-6">
+          <h2>Contact Us</h2>
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter your name">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
 </div>
 {% endblock %}
