@@ -1,7 +1,7 @@
 {% extends 'pages/employee_dashboard.html' %}
 {% load static %}
 {% load user_tags %}
-{% block title %}Basic Information List{% endblock %}
+{% block title %}Basic Information {% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
         <div class="col-xl-8 col-lg-6">
@@ -23,8 +23,8 @@
                                 <div>
                                     <!--<img class="rounded-circle border mr-n2" src="https://www.gravatar.com/avatar?d=mp&s=40" />-->
                                     <img class="rounded mr-3 align-self-center" src="https://www.gravatar.com/avatar?d=mp&s=50" />
-                                    <a href="{% url 'employee:basic_information_detail' slug=basic_information.slug %}">
-                                        {{ basic_information.email|upper }}
+                                    <a href="{% url 'employee:basic_information_detail' slug=basic_information.slug %}" class="text-dark">
+                                        {{ basic_information.email}}
                                     </a>
                                 </div>
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">

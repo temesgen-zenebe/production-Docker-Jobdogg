@@ -54,9 +54,6 @@ class UserAcceptedPolicies(models.Model):
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
         
-        
-        
-
 #BASIC INFORMATION MODELS   
 class BasicInformation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -84,7 +81,6 @@ class BasicInformation(models.Model):
     def __str__(self):
         return f"{self.email} {self.zip_code}"
     
-
 #Language models 
 class Language(models.Model):
     name = models.CharField(max_length=50)
@@ -93,7 +89,6 @@ class Language(models.Model):
         return self.name
 
 #SocialSecurityNumberField
-
 class SocialSecurityNumberField(models.CharField):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('max_length', 11)  # Assuming no dashes or separators
