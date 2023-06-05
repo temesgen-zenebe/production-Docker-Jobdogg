@@ -5,7 +5,7 @@ from .models import Policies, Profile, UserAcceptedPolicies,BasicInformation
 from django.contrib import messages
 from django.template import Library
 from django import forms
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 from django.urls import reverse
 from .models import Personal, Language,Profile
@@ -46,7 +46,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         basic_information_form = BasicInformationForm()
         personal_form = PersonalForm()
         progress = Profile.objects.filter(user=request.user)
-        profile = Profile.objects.get(user=request.user)
+        profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
         context = {
             'basic_information_form': basic_information_form,
@@ -55,14 +55,18 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'progress_percentage': progress_percentage,
         }
         return render(request, self.template_name, context)
-
+    
     def post(self, request):
+        profile = get_object_or_404(Profile, user=request.user)  # Retrieve the Profile object
+    
         if 'basic_information' in request.POST:
             basic_information_form = BasicInformationForm(request.POST)
             if basic_information_form.is_valid():
                 basic_information = basic_information_form.save(commit=False)
                 basic_information.user = request.user
                 basic_information.save()
+                profile.basic_information_completed = True  # Mark the step as completed in the profile
+                profile.save()
                 return redirect('employee:profile_building_progress')
 
         elif 'personal' in request.POST:
@@ -71,6 +75,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 personal = personal_form.save(commit=False)
                 personal.user = request.user
                 personal.save()
+                profile.personal_information_completed = True  # Mark the step as completed in the profile
+                profile.save()
                 return redirect('employee:profile_building_progress')
 
         # If neither form was submitted or form validation failed, render the template again with the forms
@@ -81,6 +87,29 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'personal_form': personal_form,
         }
         return render(request, self.template_name, context)
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            # Retrieve the user's profile
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            # If the profile doesn't exist, create a new one
+            profile = Profile(user=request.user)
+
+        if not profile.companyPolices_completed:
+            # Redirect to companyPolices_completed step if it is not completed
+            return redirect('employee:policies_list')
+
+        if not profile.basic_information_completed:
+            # Redirect to Basic Information step if it is not completed
+            return redirect('employee:basic_information_create')
+
+        profile.personal_information_completed = True
+        profile.save()
+
+        return super().dispatch(request, *args, **kwargs)
+
+    
           
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'
