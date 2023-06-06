@@ -1,7 +1,8 @@
 from django import forms
 from datetime import datetime
-from .models import Personal, Language, BasicInformation
+from .models import Military, Personal, Language, BasicInformation
 from django.utils.safestring import mark_safe
+from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
 
 
 class MultiSelectDropdown(forms.SelectMultiple):
@@ -71,3 +72,16 @@ class BasicInformationForm(forms.ModelForm):
             'emergency_contact_name': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm'}),
         }
        
+       
+class MilitaryForm(forms.ModelForm):
+    certification_license = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+
+    class Meta:
+        model = Military
+        fields = ['branch', 'rank', 'discharge_year', 'duty_flag', 'certification_license']
+        widgets = {
+            
+            
+           # 'certification_license': forms.ClearableFileInput(attrs={'multiple': True}),
+        
+        }

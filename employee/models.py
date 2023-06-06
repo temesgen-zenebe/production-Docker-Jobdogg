@@ -5,6 +5,8 @@ from django.conf import settings
 from common.utils.text import unique_slug
 from localflavor.us.models import USStateField 
 from localflavor.us.us_states import STATE_CHOICES
+from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES, DUTY_FLAG_CHOICES, BRANCH, RANK_CHOICES
+from multiupload.fields import MultiFileField 
 
 #Profile
 class Profile(models.Model):
@@ -143,7 +145,25 @@ class Personal(models.Model):
     def __str__(self):
         return f"{self.nickname} ({self.user.username})"
     
+#Military
+class Military(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    branch = models.CharField(max_length=50, choices=BRANCH)
+    rank = models.CharField(max_length=100, choices=RANK_CHOICES)
+    discharge_year = models.DateField(verbose_name="discharge year" )
+    duty_flag = models.CharField(max_length=50, choices=DUTY_FLAG_CHOICES) 
+    certification_license = models.FileField(upload_to='certificationsMilitary/')
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
-
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.branch} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+        
+    def __str__(self):
+        return f"{self.user.username}'s Military Information"
 
     
