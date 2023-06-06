@@ -15,334 +15,342 @@
     </div>
    <!-- progress bar -->
     <div class="container mt-5">
-
-        <div class="progress">
-            <div class="progress-bar {% if progress_percentage < 25 %}bg-danger{% elif progress_percentage < 50 %}bg-warning{% elif progress_percentage < 75 %}bg-info{% else %}bg-success{% endif %}" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
-              {{ progress_percentage }}%
+        <div class="progress my-3" style="height: 25px;">
+            <div class="text-dark progress-bar {% if progress_percentage < 25 %}bg-danger{% elif progress_percentage < 50 %}bg-warning{% elif progress_percentage < 75 %}bg-info{% else %}bg-success{% endif %}" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
+              <span class="py-5 fs-6">{{ progress_percentage }}%</span>
             </div>
-        </div>
-          
-      <div class="album py-3 bg-light">
-        {% if progress %}
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-            {% for progres in progress %}
-            <div class="col step-item ">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    
-                  <p class="card-text font-weight-bold">
-                    <i class="fas fa-shield fa-1x text-gray-300" aria-hidden="true"></i>
-                    Policies 
-                  </p>
-                  
-                  <div class="d-flex justify-content-between align-items-center">
-                  
-                        {% if  progres.companyPolices_completed %}
-                        <div class="btn-group gap-1">
-                            <button type="button" class="prev-btn  btn btn-sm btn-success">
-                                <i class="bi bi-check2-circle text-light px-1"></i><small>Completed</small>
-                            </button>
-                            <a href="{% url 'employee:policies_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-box-arrow-left"></i></a>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next </button>
-                        </div>
-                        {% else %}
-                        <a type="button" href="" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Accept</a>
-                        {% endif %}
-                    
-
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% if  progres.companyPolices_completed %}
-            <div class="col step-item ">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <p class="card-text ">
-                    <i class="bi bi-info-circle"></i>
-                    Basic Information
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    
-                        {% if progres.basic_information_completed %}
-                            <div class="btn-group ">
-                                <button type="button" class="prev-btn  btn btn-sm btn-success"><small>Completed</small>
-                                    <i class="bi bi-check2-circle text-light"></i>
-                                </button>
-                                <a href="{% url 'employee:basic_information_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
-                                <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                            </div>
-                        {% else %} 
-                            <!-- Basic Information Step -->
-                            <button type="button" class="btn btn-sm btn-outline-secondary" id="basicInformationModalButton" data-bs-toggle="modal" data-bs-target="#basicInformationModal">
-                            Create
-                            </button>
-                        {% endif %}
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if progres.basic_information_completed %}
-            <div class="col step-item ">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <p class="card-text">Personal</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    {% if progres.personal_information_completed %}
-                        <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-success shadow"><small>Completed!</small>
-                                <i class="bi bi-check2-circle text-light"></i>
-                            </button>
-                            <a href="{% url 'employee:personal_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pencil-square"></i></a>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                        </div>
-                    {% else %}
-                        <!-- Personal Step -->
-                        <button type="button" class="btn btn btn-sm btn-outline-secondary" id="personalModalButton" data-bs-toggle="modal" data-bs-target="#personalModal">
-                            Create
-                        </button>
-                        
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if progres.personal_information_completed %} 
-            <div class="col step-item ">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <p class="card-text">Military</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    {% if progres.Military_completed  %}
-                    <div class="btn-group">
-                      <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                      <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                      <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Skip</button>
-                    </div>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if progres.Military_completed  %}
-            <div class="col step-item ">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <p class="card-text">Education</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    {% if progres.Education_completed  %}
-                    <div class="btn-group">
-                      <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                      <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                    </div>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if progres.Education_completed   %}
-            <div class="col step-item ">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <p class="card-text">Experience</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    {% if progres.Experience_completed %}
-                    <div class="btn-group">
-                      <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                      <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                    </div>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if progres.Experience_completed %}
-            <div class="col step-item ">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <p class="card-text">Experience</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    {% if progres.Preferences_completed %}
-                    <div class="btn-group">
-                      <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                      <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                    </div>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if progres.Preferences_completed %}
-            <div class="col step-item ">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <p class="card-text">Preferences</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    {% if progres.SkillSetTest_completed %}
-                    <div class="btn-group">
-                      <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                      <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                    </div>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if progres.SkillSetTest_completed %}
-            <div class="col step-item ">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <p class="card-text">Skillset Test</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    {% if progres.VideoResume_completed %}
-                    <div class="btn-group">
-                      <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                      <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                    </div>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if progres.VideoResume_completed %}
-            <div class="col step-item ">
+        </div>  
+        <div class="album py-3 bg-light">
+            {% if progress %}
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                {% for progres in progress %}
+                <div class="col step-item ">
                 <div class="card border-left-primary shadow h-100 py-2">
-                  <div class="card-body">
+                    <div class="card-body">
+                        
+                    <p class="card-text font-weight-bold">
+                        <i class="fas fa-shield fa-1x text-gray-300" aria-hidden="true"></i>
+                        Policies 
+                    </p>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        {% if  progres.companyPolices_completed %}
+                            <div class="btn-group gap-1">
+                                <button type="button" class="prev-btn  btn btn-sm btn-success">
+                                    <i class="bi bi-check2-circle text-light px-1"></i><small>Completed</small>
+                                </button>
+                                <a href="{% url 'employee:policies_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-box-arrow-left"></i></a>
+                                {% if not progres.basic_information_completed %}
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" id="basicInformationModalButton" data-bs-toggle="modal" data-bs-target="#basicInformationModal">Next</button>   
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <a type="button" href="" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Accept</a>
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                </div>
+                {% if  progres.companyPolices_completed %}
+                <div class="col step-item ">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                    <p class="card-text ">
+                        <i class="bi bi-info-circle"></i>
+                        Basic Information
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        
+                            {% if progres.basic_information_completed %}
+                                <div class="btn-group gap-1">
+                                    <button type="button" class="prev-btn  btn btn-sm btn-success">
+                                        <i class="bi bi-check2-circle text-light px-1"></i>
+                                        <small>Completed</small>
+                                    </button>
+                                    <a href="{% url 'employee:basic_information_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                                    {% if not progres.personal_information_completed %}
+                                    <button type="button" class="btn btn btn-sm btn-outline-secondary" id="personalModalButton" data-bs-toggle="modal" data-bs-target="#personalModal">Next</button>   
+                                    {% endif %}
+                                </div>
+                            {% else %} 
+                                <!-- Basic Information Step -->
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="basicInformationModalButton" data-bs-toggle="modal" data-bs-target="#basicInformationModal">
+                                Create
+                                </button>
+                            {% endif %}
+                        
+                    </div>
+                    </div>
+                </div>
+                </div>
+                {% endif %}
+                {% if progres.basic_information_completed %}
+                <div class="col step-item ">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        
+                    <p class="card-text">
+                        <i class="bi bi-person-circle px-1"></i>
+                        Personal
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        {% if progres.personal_information_completed %}
+                            <div class="btn-group gap-1">
+                                <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                    <i class="bi bi-check2-circle "></i><small>Completed!</small>
+                                </button>
+                                <a href="{% url 'employee:personal_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                                
+                                 <!-- Modal Trigger Button -->
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#militaryModal">
+                                    Next
+                                </button>
+                            </div>
+                        {% else %}
+                            <!-- Personal Step -->
+                            <button type="button" class="btn btn btn-sm btn-outline-secondary" id="personalModalButton" data-bs-toggle="modal" data-bs-target="#personalModal">
+                                Create
+                            </button>
+                            
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                </div>
+                {% endif %}
+                {% if progres.personal_information_completed %} 
+                <div class="col step-item ">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                        <p class="card-text">
+                            <i class="bi bi-airplane-fill px-1"></i>
+                            Military</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if progres.Military_completed  %}
+                            <div class="btn-group">
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Skip</button>
+                            </div>
+                            {% endif %}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if progres.Military_completed  %}
+                <div class="col step-item ">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                    <p class="card-text">Education</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        {% if progres.Education_completed  %}
+                        <div class="btn-group">
+                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                </div>
+                {% endif %}
+                {% if progres.Education_completed   %}
+                <div class="col step-item ">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                    <p class="card-text">Experience</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        {% if progres.Experience_completed %}
+                        <div class="btn-group">
+                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                </div>
+                {% endif %}
+                {% if progres.Experience_completed %}
+                <div class="col step-item ">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                    <p class="card-text">Experience</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        {% if progres.Preferences_completed %}
+                        <div class="btn-group">
+                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                </div>
+                {% endif %}
+                {% if progres.Preferences_completed %}
+                <div class="col step-item ">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                    <p class="card-text">Preferences</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        {% if progres.SkillSetTest_completed %}
+                        <div class="btn-group">
+                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                </div>
+                {% endif %}
+                {% if progres.SkillSetTest_completed %}
+                <div class="col step-item ">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
                     <p class="card-text">Skillset Test</p>
                     <div class="d-flex justify-content-between align-items-center">
-                     {% if progres.ResumeUploading_completed %}
-                      <div class="btn-group">
+                        {% if progres.VideoResume_completed %}
+                        <div class="btn-group">
                         <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
                         <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
                         <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                      </div>
-                      {% endif %}
+                        </div>
+                        {% endif %}
                     </div>
-                  </div>
+                    </div>
+                </div>
+                </div>
+                {% endif %}
+                {% if progres.VideoResume_completed %}
+                <div class="col step-item ">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <p class="card-text">Skillset Test</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        {% if progres.ResumeUploading_completed %}
+                        <div class="btn-group">
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        {% endif %}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if progres.ResumeUploading_completed %}
+                <div class="col step-item ">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <p class="card-text">Video resume</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        {% if progres.ResumeUploading_completed %}
+                        <div class="btn-group">
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        {% endif %}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if progres.ResumeUploading_completed %}
+                <div class="col step-item ">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <p class="card-text">Resume uploading</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if progres.ResumeUploading_completed %}
+                <div class="col step-item ">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <p class="card-text">Background Check</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if progres.ResumeUploading_completed %}
+                <div class="col step-item ">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <p class="card-text">Resume uploading</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if progres.ResumeUploading_completed %}
+                <div class="col step-item ">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <p class="card-text">Resume uploading</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="row row-cols-1 row-cols-sm-8 row-cols-md-10">
+                <div class="card mb-4 bg-warning">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">you must stere built your profile</h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-0"> oops its semes like you need start built you profile !!
+                            by accepting the policys </p>
+                    </div>
                 </div>
             </div>
             {% endif %}
-            {% if progres.ResumeUploading_completed %}
-            <div class="col step-item ">
-                <div class="card border-left-primary shadow h-100 py-2">
-                  <div class="card-body">
-                    <p class="card-text">Video resume</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                    {% if progres.ResumeUploading_completed %}
-                      <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                      </div>
-                    {% endif %}
-                    </div>
-                  </div>
-                </div>
-            </div>
-            {% endif %}
-            {% if progres.ResumeUploading_completed %}
-            <div class="col step-item ">
-                <div class="card border-left-primary shadow h-100 py-2">
-                  <div class="card-body">
-                    <p class="card-text">Resume uploading</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            {% endif %}
-            {% if progres.ResumeUploading_completed %}
-            <div class="col step-item ">
-                <div class="card border-left-primary shadow h-100 py-2">
-                  <div class="card-body">
-                    <p class="card-text">Background Check</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            {% endif %}
-            {% if progres.ResumeUploading_completed %}
-            <div class="col step-item ">
-                <div class="card border-left-primary shadow h-100 py-2">
-                  <div class="card-body">
-                    <p class="card-text">Resume uploading</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            {% endif %}
-            {% if progres.ResumeUploading_completed %}
-            <div class="col step-item ">
-                <div class="card border-left-primary shadow h-100 py-2">
-                  <div class="card-body">
-                    <p class="card-text">Resume uploading</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-          </div>
-        {% else %}
-        <div class="row row-cols-1 row-cols-sm-8 row-cols-md-10">
-            <div class="card mb-4 bg-warning">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">you must stere built your profile</h6>
-                </div>
-                <div class="card-body">
-                    <p class="mb-0"> oops its semes like you need start built you profile !!
-                        by accepting the policys </p>
-                </div>
             </div>
         </div>
-        {% endif %}
-        </div>
-      </div>
-      
     </div>
     
     <!-- modele -->
     <div class="container">
         <!-- Profile Building Progress content -->
-        
         <!-- Basic Information Modal -->
         <div class="modal fade" id="basicInformationModal" tabindex="-1" aria-labelledby="basicInformationModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-scrollable">
@@ -366,7 +374,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Personal Modal -->
         <div class="modal fade" id="personalModal" tabindex="-1" aria-labelledby="personalModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -391,6 +398,33 @@
                 </div>
             </div>
         </div>
+        <!-- Modal  <h2>Step 4: Military Information</h2> -->
+        <div class="modal fade" id="militaryModal" tabindex="-1" aria-labelledby="militaryModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="militaryModalLabel">Military Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST">   
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {{ military_form|crispy }}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="submit" name="military" class="btn btn-sm btn-outline-success">Save</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    {% if military_form %}
+    {% endif %}
+    
+    <!-- Next steps... -->
+    
+
+  
     </div>     
 
 </div>  

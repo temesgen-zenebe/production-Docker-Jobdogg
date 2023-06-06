@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 from django.urls import reverse
 from .models import Personal, Language,Profile
-from .forms import PersonalForm,BasicInformationForm
+from .forms import MilitaryForm, PersonalForm,BasicInformationForm
 from employee.templatetags.mask_ssn import mask_ssn
 
 #----Policies Models ------
@@ -45,12 +45,14 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
     def get(self, request):
         basic_information_form = BasicInformationForm()
         personal_form = PersonalForm()
+        military_form = MilitaryForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
+            'military_form':military_form,
             'progress':progress,
             'progress_percentage': progress_percentage,
         }
@@ -78,38 +80,27 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 profile.personal_information_completed = True  # Mark the step as completed in the profile
                 profile.save()
                 return redirect('employee:profile_building_progress')
-
+        elif 'military' in request.POST:
+            military_form = MilitaryForm(request.POST)
+            if military_form.is_valid():
+                military = military_form.save(commit=False)
+                military.user = request.user
+                military.save()
+                profile.Military_completed = True  # Mark the step as completed in the profile
+                profile.save()
+                return redirect('employee:profile_building_progress')
+            
         # If neither form was submitted or form validation failed, render the template again with the forms
         basic_information_form = BasicInformationForm()
         personal_form = PersonalForm()
+        military_form = MilitaryForm()
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
+            'military_form':military_form,
         }
         return render(request, self.template_name, context)
 
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            # Retrieve the user's profile
-            profile = Profile.objects.get(user=request.user)
-        except Profile.DoesNotExist:
-            # If the profile doesn't exist, create a new one
-            profile = Profile(user=request.user)
-
-        if not profile.companyPolices_completed:
-            # Redirect to companyPolices_completed step if it is not completed
-            return redirect('employee:policies_list')
-
-        if not profile.basic_information_completed:
-            # Redirect to Basic Information step if it is not completed
-            return redirect('employee:basic_information_create')
-
-        profile.personal_information_completed = True
-        profile.save()
-
-        return super().dispatch(request, *args, **kwargs)
-
-    
           
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'
@@ -303,7 +294,7 @@ class BasicInformationDeleteView(LoginRequiredMixin, DeleteView):
 # Personal Create View
 class PersonalCreateView(LoginRequiredMixin, CreateView):
     model = Personal
-    form_class = PersonalForm 
+    form_class = PersonalForm
     template_name = 'employee/personal_create.html'
 
     def form_valid(self, form):
@@ -313,23 +304,15 @@ class PersonalCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('employee:personal_list')
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
-
     def dispatch(self, request, *args, **kwargs):
-        #profile = Profile.objects.get(user=request.user)
         try:
-            # Retrieve the user's profile
             profile = Profile.objects.get(user=request.user)
         except Profile.DoesNotExist:
-            # If the profile doesn't exist, create a new one
             profile = Profile(user=request.user)
             
         if not profile.basic_information_completed:
-            # Redirect to Basic Information step if it is not completed
             return redirect('employee:basic_information_create')
+        
         profile.personal_information_completed = True
         profile.save()
         

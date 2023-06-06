@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (
-     Profile, Policies, UserAcceptedPolicies,BasicInformation,Personal,Language
+     Military, Profile, Policies, UserAcceptedPolicies,BasicInformation,Personal,Language
     )
 
 @admin.register(Profile)
@@ -94,3 +94,12 @@ class PersonalAdmin(admin.ModelAdmin):
         if obj:  # editing an existing object
             return ('created', 'updated', 'slug')
         return ()
+    
+    
+class MilitaryAdmin(admin.ModelAdmin):
+    list_display = ['user', 'branch', 'rank', 'discharge_year', 'duty_flag']
+    list_filter = ['branch', 'rank', 'discharge_year', 'duty_flag']
+    search_fields = ['user__username', 'user__email']
+    readonly_fields = ['slug', 'created', 'updated']
+
+admin.site.register(Military, MilitaryAdmin)
