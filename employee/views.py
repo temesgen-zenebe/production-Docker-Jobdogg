@@ -80,8 +80,10 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 profile.personal_information_completed = True  # Mark the step as completed in the profile
                 profile.save()
                 return redirect('employee:profile_building_progress')
+            
         elif 'military' in request.POST:
-            military_form = MilitaryForm(request.POST)
+            military_form = MilitaryForm(request.POST, request.FILES)
+            
             if military_form.is_valid():
                 military = military_form.save(commit=False)
                 military.user = request.user
@@ -89,7 +91,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 profile.Military_completed = True  # Mark the step as completed in the profile
                 profile.save()
                 return redirect('employee:profile_building_progress')
-            
+        else:
+            pass   
         # If neither form was submitted or form validation failed, render the template again with the forms
         basic_information_form = BasicInformationForm()
         personal_form = PersonalForm()

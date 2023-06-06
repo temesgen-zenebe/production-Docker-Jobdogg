@@ -74,14 +74,19 @@ class BasicInformationForm(forms.ModelForm):
        
        
 class MilitaryForm(forms.ModelForm):
-    certification_license = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    certification_license = forms.FileField(
+        required=False,  # Make the field optional
+        widget=forms.ClearableFileInput(attrs={'multiple': True})
+    )
 
     class Meta:
         model = Military
         fields = ['branch', 'rank', 'discharge_year', 'duty_flag', 'certification_license']
         widgets = {
-            
-            
-           # 'certification_license': forms.ClearableFileInput(attrs={'multiple': True}),
+            'branch': forms.Select(attrs={'class': 'select form-select form-control form-control-sm'}),
+            'rank': forms.Select(attrs={'class': 'select form-select form-control form-control-sm'}),
+            'discharge_year': forms.DateInput(attrs={'type': 'date','style': 'width: 100%; font-size:13px;'}), 
+            'duty_flag': forms.Select(attrs={'class': 'select form-select form-control form-control-sm'}),
+            #'certification_license': forms.ClearableFileInput(attrs={'multiple': True}),
         
         }
