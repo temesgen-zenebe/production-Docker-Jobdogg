@@ -401,25 +401,24 @@
         <!-- Modal  <h2>Step 4: Military Information</h2> -->
         <div class="modal fade" id="militaryModal" tabindex="-1" aria-labelledby="militaryModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="militaryModalLabel">Military Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="POST">   
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="militaryModalLabel">Military Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                     <div class="modal-body">
-                        {% csrf_token %}
-                        {{ military_form|crispy }}
+                        <form method="POST" enctype="multipart/form-data">   
+                            {% csrf_token %}
+                            {{ military_form|crispy }}
+                            <div class="modal-footer">
+                                <button type="submit" name="military" class="btn btn-sm btn-outline-success">Save</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                    <button type="submit" name="military" class="btn btn-sm btn-outline-success">Save</button>
-                    </div>
-                </form>
-            </div>
+                </div>
             </div>
         </div>
-    {% if military_form %}
-    {% endif %}
+   
     
     <!-- Next steps... -->
     
