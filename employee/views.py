@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 from django.urls import reverse
 from .models import Personal, Language,Profile
-from .forms import MilitaryForm, PersonalForm,BasicInformationForm
+from .forms import MilitaryForm, PersonalForm,BasicInformationForm,UserAcceptedPoliciesForm
 from employee.templatetags.mask_ssn import mask_ssn
 
 #----Policies Models ------
@@ -43,6 +43,13 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         return int(progress_percentage)
     
     def get(self, request):
+        # Retrieve all policies from the database
+        policies = Policies.objects.all()
+        accepted_policies = UserAcceptedPolicies.objects.filter(user=request.user)
+        accepted_policies_ids = [policy.policies_id for policy in accepted_policies]
+        total_policies_count = policies.count()
+        accepted_policies_count = len(accepted_policies_ids)
+        all_policies_accepted = accepted_policies_count == total_policies_count
         basic_information_form = BasicInformationForm()
         personal_form = PersonalForm()
         military_form = MilitaryForm()
@@ -55,13 +62,51 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'military_form':military_form,
             'progress':progress,
             'progress_percentage': progress_percentage,
+            'policies': policies,
+            'accepted_policies_ids': accepted_policies_ids,
+            'all_policies_accepted': all_policies_accepted,
+            
         }
+           
         return render(request, self.template_name, context)
     
     def post(self, request):
         profile = get_object_or_404(Profile, user=request.user)  # Retrieve the Profile object
-    
-        if 'basic_information' in request.POST:
+       
+        if 'policies' in request.POST:
+            policies = Policies.objects.all()
+            accepted_policies = []
+
+            for policy in policies:
+                accepted = request.POST.get(f'policy_{policy.id}')
+                if accepted == 'on':
+                    accepted_policies.append(UserAcceptedPolicies(user=request.user, policies=policy, accepted=True))
+
+            UserAcceptedPolicies.objects.bulk_create(accepted_policies)
+        
+            # Retrieve the user's profile
+            
+            accepted_policies = UserAcceptedPolicies.objects.filter(user=request.user)
+            accepted_policies_ids = [policy.policies_id for policy in accepted_policies]
+            total_policies_count = policies.count()
+            accepted_policies_count = len(accepted_policies_ids)
+            all_policies_accepted = accepted_policies_count == total_policies_count
+            
+            if all_policies_accepted == True:
+                # Retrieve the user's profile
+                profile, created = Profile.objects.get_or_create(user=request.user)
+                # Update the  companyPolices_completed field to True
+                profile.companyPolices_completed = True
+                profile.save()
+                
+            # Update is_accepted context states to True    
+            request.session['is_accepted'] = True
+
+            messages.success(request, 'Policies accepted successfully.')
+            
+            return redirect('employee:profile_building_progress')
+            
+        elif 'basic_information' in request.POST:
             basic_information_form = BasicInformationForm(request.POST)
             if basic_information_form.is_valid():
                 basic_information = basic_information_form.save(commit=False)
@@ -159,7 +204,7 @@ class PolicyListView(LoginRequiredMixin, View):
         request.session['is_accepted'] = True
 
         messages.success(request, 'Policies accepted successfully.')
-        return redirect('employee:policies_list')
+        return redirect('employee:profile_building_progress')
         
 class AcceptPoliciesView(LoginRequiredMixin, View):
     def post(self, request):

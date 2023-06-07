@@ -22,10 +22,13 @@
                             <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                                 <div>
                                    <img class="rounded mr-3 align-self-center" src="https://www.gravatar.com/avatar?d=mp&s=50" />
-                                   <a href="{% url 'employee:personal_detail' slug=personal.slug %}">{{ personal.nickname|upper}}</a>
+                                   <a href="{% url 'employee:personal_detail' slug=personal.slug %}">{{ personal.nickname|upper}}
+                                    <i class="bi bi-arrows-fullscreen px-1"></i>
+                                   </a>
                                    
                                 </div>
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">
+                                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
                                     <a class="btn btn-sm btn-outline-warning"
                                      href="{% url 'employee:personal_update' slug=personal.slug %}">Update</a>
                                      {% if user.is_authenticated and user|is_admin %}
