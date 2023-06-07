@@ -8,6 +8,7 @@ from localflavor.us.us_states import STATE_CHOICES
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES, DUTY_FLAG_CHOICES, BRANCH, RANK_CHOICES
 from multiupload.fields import MultiFileField 
 
+
 #Profile
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

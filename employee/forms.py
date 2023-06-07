@@ -3,8 +3,13 @@ from datetime import datetime
 from .models import Military, Personal, Language, BasicInformation
 from django.utils.safestring import mark_safe
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
+from .models import UserAcceptedPolicies
 
-
+class UserAcceptedPoliciesForm(forms.ModelForm):
+    class Meta:
+        model = UserAcceptedPolicies
+        fields = ['policies']
+        
 class MultiSelectDropdown(forms.SelectMultiple):
     def value_from_datadict(self, data, files, name):
         if isinstance(data, (list, tuple)):

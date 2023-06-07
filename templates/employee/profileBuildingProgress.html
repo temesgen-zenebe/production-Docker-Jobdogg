@@ -25,40 +25,42 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                 {% for progres in progress %}
                 <div class="col step-item ">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        
-                    <p class="card-text font-weight-bold">
-                        <i class="fas fa-shield fa-1x text-gray-300" aria-hidden="true"></i>
-                        Policies 
-                    </p>
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
                     
-                    <div class="d-flex justify-content-between align-items-center">
-                        {% if  progres.companyPolices_completed %}
-                            <div class="btn-group gap-1">
-                                <button type="button" class="prev-btn  btn btn-sm btn-success">
-                                    <i class="bi bi-check2-circle text-light px-1"></i><small>Completed</small>
+                        <h6 class="card-text ">
+                            <i class="fas fa-shield fa-1x text-gray-300" aria-hidden="true"></i>
+                            Policies 
+                        </h6>
+                        <small class="">Step 1: Accept Policies</small>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if  progres.companyPolices_completed %}
+                                <div class="btn-group gap-1">
+                                    <button type="button" class="prev-btn  btn btn-sm btn-success">
+                                        <i class="bi bi-check2-circle text-light px-1"></i><small>Completed</small>
+                                    </button>
+                                    <a href="{% url 'employee:policies_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-box-arrow-left"></i></a>
+                                </div>
+                            {% else %}                       
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#policiesModal">
+                                    Accept 
                                 </button>
-                                <a href="{% url 'employee:policies_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-box-arrow-left"></i></a>
-                                {% if not progres.basic_information_completed %}
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" id="basicInformationModalButton" data-bs-toggle="modal" data-bs-target="#basicInformationModal">Next</button>   
-                                {% endif %}
-                            </div>
-                        {% else %}
-                            <a type="button" href="" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Accept</a>
-                        {% endif %}
+                            {% endif %}
+                            
+                        </div>
+                        
+                        </div>
                     </div>
-                    </div>
-                </div>
                 </div>
                 {% if  progres.companyPolices_completed %}
                 <div class="col step-item ">
-                <div class="card border-left-success shadow h-100 py-2">
+                <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
-                    <p class="card-text ">
+                    <h6 class="card-text ">
                         <i class="bi bi-info-circle"></i>
                         Basic Information
-                    </p>
+                    </h6>
+                    <small class="">Step 2: Basic Information</small>
                     <div class="d-flex justify-content-between align-items-center">
                         
                             {% if progres.basic_information_completed %}
@@ -68,14 +70,12 @@
                                         <small>Completed</small>
                                     </button>
                                     <a href="{% url 'employee:basic_information_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
-                                    {% if not progres.personal_information_completed %}
-                                    <button type="button" class="btn btn btn-sm btn-outline-secondary" id="personalModalButton" data-bs-toggle="modal" data-bs-target="#personalModal">Next</button>   
-                                    {% endif %}
+                                   
                                 </div>
                             {% else %} 
                                 <!-- Basic Information Step -->
                                 <button type="button" class="btn btn-sm btn-outline-secondary" id="basicInformationModalButton" data-bs-toggle="modal" data-bs-target="#basicInformationModal">
-                                Create
+                                    Create
                                 </button>
                             {% endif %}
                         
@@ -86,52 +86,60 @@
                 {% endif %}
                 {% if progres.basic_information_completed %}
                 <div class="col step-item ">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        
-                    <p class="card-text">
-                        <i class="bi bi-person-circle px-1"></i>
-                        Personal
-                    </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        {% if progres.personal_information_completed %}
-                            <div class="btn-group gap-1">
-                                <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
-                                    <i class="bi bi-check2-circle "></i><small>Completed!</small>
-                                </button>
-                                <a href="{% url 'employee:personal_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
-                                
-                                 <!-- Modal Trigger Button -->
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#militaryModal">
-                                    Next
-                                </button>
-                            </div>
-                        {% else %}
-                            <!-- Personal Step -->
-                            <button type="button" class="btn btn btn-sm btn-outline-secondary" id="personalModalButton" data-bs-toggle="modal" data-bs-target="#personalModal">
-                                Create
-                            </button>
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
                             
-                        {% endif %}
+                        <h6 class="card-text text-decoration-bold">
+                            <i class="bi bi-person-circle px-1"></i>
+                            Personal
+                        </h6>
+                        <small class="">Step 3: Personal Information</small>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if progres.personal_information_completed %}
+                                <div class="btn-group gap-1">
+                                    <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                        <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                                    </button>
+                                    <a href="{% url 'employee:personal_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                                    
+                                    <!-- Modal Trigger Button -->
+                                
+                                </div>
+                            {% else %}
+                                <!-- Personal Step -->
+                                <button type="button" class="btn btn btn-sm btn-outline-secondary" id="personalModalButton" data-bs-toggle="modal" data-bs-target="#personalModal">
+                                    Create
+                                </button> 
+                            {% endif %}
+                        </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
                 </div>
                 {% endif %}
                 {% if progres.personal_information_completed %} 
                 <div class="col step-item ">
                     <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
-                        <p class="card-text">
+                        <h6 class="card-text">
                             <i class="bi bi-airplane-fill px-1"></i>
-                            Military</p>
+                            Military
+                        </h6>
+                        <small class="">Step 4: Military </small>
                         <div class="d-flex justify-content-between align-items-center">
                             {% if progres.Military_completed  %}
                             <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Skip</button>
+                                <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                    <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                                </button>
+                               <a href="#" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                            </div>
+                            {% else %}
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#militaryModal">
+                                    Create
+                                </button>
+                               
+                                <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Skip</button>
                             </div>
                             {% endif %}
                         </div>
@@ -351,79 +359,234 @@
     <!-- modele -->
     <div class="container">
         <!-- Profile Building Progress content -->
-        <!-- Basic Information Modal -->
-        <div class="modal fade" id="basicInformationModal" tabindex="-1" aria-labelledby="basicInformationModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-scrollable">
-                <div class="modal-content mx-4">
+        <!-- profileBuildingProgress.html -->
+
+            <!-- Policies Modal -->
+            <div class="modal fade" id="policiesModal" tabindex="-1" aria-labelledby="policiesModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Basic Information</h1>
+                    <h5 class="modal-title" id="policiesModalLabel">Accept Policies</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                {% if all_policies_accepted %}
+                                 <h6 class="m-0 font-weight-bold text-success">To Review all policies Click Read </h6>
+                                {% else %}
+                                 <h6 class="m-0 font-weight-bold text-primary">Read and accepted for next steps</h6>
+                                {% endif %}
+                                <div class="dropdown no-arrow">
+                                    {% if all_policies_accepted %}               
+                                        <a class="btn btn-sm btn-outline-success text-decoration-none" data-bs-toggle="collapse" 
+                                            href="#multiCollapseExample2" role="button" aria-expanded="true" aria-controls="multiCollapseExample2">
+                                            <i class="bi bi-arrows-fullscreen text-white-600 px-2"></i> Read
+                                        </a>
+                                    {% else %}
+                                        <a class="btn btn-sm btn-outline-primary text-decoration-none" data-bs-toggle="collapse" 
+                                            href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">
+                                            <i class="bi bi-arrows-fullscreen text-white-600"></i> Start
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="multi-collapse collapsing show" id="multiCollapseExample1" style="">
+                                                {% if all_policies_accepted %}
+                                                <p>All policies have been accepted.</p>
+                                                {% else %}
+                                                <form id="policy-form"  method="POST"  class="needs-validation was-validated" novalidate="">
+                                                    {% csrf_token %}
+                                                    <div class="card card-body">
+                                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                        
+                                                                {% for policy in policies %}
+                                                                    <div class="accordion-item ">
+                                                                        <h2 class="accordion-header" id="flush-heading{{policy.id}}">
+                                                                            <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
+                                                                                {{ policy.title }} *
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
+                                                                            <div class="accordion-body " style="overflow: auto; height: 300px;">
+                                                                                <div>
+                                                                                    <h5 class="card-title">Special title treatment</h5>
+                                                                                    <p class="card-text">
+                                                                                        {{ policy.description }}
+                                                                                    </p>
+                                                                                    {% if user.is_authenticated %}
+                                                                                        {% if policy.id not in accepted_policies_ids %}
+                                                                                        <!--<input type="radio" name="policy_{{ policy.id }}">-->
+                                                                                        <div class="col-12">
+                                                                                            <div class="form-check">
+                                                                                              <input class="form-check-input" name="policy_{{ policy.id }}" type="checkbox" id="invalidCheck{{ policy.id }}" required="">
+                                                                                              <label class="form-check-label" for="invalidCheck">
+                                                                                                Agree to terms and conditions
+                                                                                              </label>
+                                                                                              <div class="invalid-feedback">
+                                                                                                You must agree before submitting.
+                                                                                              </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        {% endif %}
+                                                                                            
+                                                                                    {% endif %}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div class="row row-cols-lg-auto g-1 align-items-center border-0 ">
+                                                            <div class="col-8 text-start px-1 py-1 border-0">
+                                                                <div class="form-check ">
+                                                                    <input class="form-check-input" type="checkbox" id="inlineFormCheckMane">
+                                                                    <label class="form-check-label" for="inlineFormCheckMane">
+                                                                    I Read and Accept all.
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                            <div class="col-4 text-end  px-1 py-1 border-none">
+                                                                <button name="policies" class=" btn btn-sm btn-outline-primary" type="submit">I Accept</button>
+                                                            </div>
+                                                    </div>
+                                                    
+                                                </form>
+                                                {% endif %}
+                                                {% if all_policies_accepted %}
+                                                <script>
+                                                document.getElementById("policy-form").style.display = "none";
+                                                </script>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12">
+                                            <div class="multi-collapse collapsing show" id="multiCollapseExample2" style="">
+                                                <div class="card card-body">
+                                                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                        {% if all_policies_accepted %}
+                                                            <p>All policies have been accepted.</p>
+                                                            {% for policy in policies %}
+                                                                <div class="accordion-item ">
+                                                                    <h2 class="accordion-header" id="flush-heading{{policy.id}}">
+                                                                        <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
+                                                                            {{ policy.title }}
+                                                                        </button>
+                                                                    </h2>
+                                                                    <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
+                                                                        <div class="accordion-body " style="overflow: auto; height: 300px;">
+                                                                            <div>
+                                                                                <h5 class="card-title">Special title treatment</h5>
+                                                                                <p class="card-text">
+                                                                                    {{ policy.description }}
+                                                                                </p>
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if all_policies_accepted %}
+                                <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <p>All policies have been accepted successfuly, You Can read it whenever you want it, just click read button.</p>
+                                    <a class="btn btn-sm btn-outline-success text-decoration-none" href="{% url 'employee:profile_building_progress' %}" role="button" >
+                                        Back
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- Basic Information Modal -->
+            <div class="modal fade" id="basicInformationModal" tabindex="-1" aria-labelledby="basicInformationModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content mx-4">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Basic Information</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!--Modal content for Basic Information -->
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{ basic_information_form|crispy }}
+                                <div class="modal-footer">
+                                    <button type="submit" name="basic_information" class="btn btn-sm btn-outline-primary">Save</button>
+                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Back</button>
+                                </div>
+                            </form>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Personal Modal -->
+            <div class="modal fade" id="personalModal" tabindex="-1" aria-labelledby="personalModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                    <!-- Modal content for Personal -->
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Personal Information</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <!--Modal content for Basic Information -->
                         <form method="POST">
                             {% csrf_token %}
-                            {{ basic_information_form|crispy }}
+                            {{ personal_form|crispy }}
                             <div class="modal-footer">
-                                <button type="submit" name="basic_information" class="btn btn-sm btn-outline-primary">Save</button>
+                                <button type="submit"  name="personal"  class="btn btn-sm btn-outline-primary">Save</button>
                                 <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Back</button>
                             </div>
                         </form>
                     
                     </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Personal Modal -->
-        <div class="modal fade" id="personalModal" tabindex="-1" aria-labelledby="personalModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                <div class="modal-content">
-                <!-- Modal content for Personal -->
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Personal Information</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!--Modal content for Basic Information -->
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ personal_form|crispy }}
-                        <div class="modal-footer">
-                            <button type="submit"  name="personal"  class="btn btn-sm btn-outline-primary">Save</button>
-                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-dismiss="modal">Back</button>
+            <!--Modal Step 4: Military Information -->
+            <div class="modal fade" id="militaryModal" tabindex="-1" aria-labelledby="militaryModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="militaryModalLabel">Military Information</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    </form>
-                
-                </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal  <h2>Step 4: Military Information</h2> -->
-        <div class="modal fade" id="militaryModal" tabindex="-1" aria-labelledby="militaryModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="militaryModalLabel">Military Information</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" enctype="multipart/form-data">   
-                            {% csrf_token %}
-                            {{ military_form|crispy }}
-                            <div class="modal-footer">
-                                <button type="submit" name="military" class="btn btn-sm btn-outline-success">Save</button>
-                            </div>
-                        </form>
+                        <div class="modal-body">
+                            <form method="POST" enctype="multipart/form-data">   
+                                {% csrf_token %}
+                                {{ military_form|crispy }}
+                                <div class="modal-footer">
+                                    <button type="submit" name="military" class="btn btn-sm btn-outline-success">Save</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-   
-    
-    <!-- Next steps... -->
-    
-
-  
     </div>     
 
 </div>  
