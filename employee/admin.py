@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (
-     Education, Military, Profile, Policies, UserAcceptedPolicies,BasicInformation,Personal,Language
+     CertificationLicense, Education, Military, Profile, Policies, UserAcceptedPolicies,BasicInformation,Personal,Language
     )
 
 @admin.register(Profile)
@@ -109,6 +109,7 @@ class MilitaryAdmin(admin.ModelAdmin):
     
 @admin.register(Education)
 class EducationAdmin(admin.ModelAdmin):
+    model = Education
     list_display = ['user', 'school_name', 'degree_type', 'graduated','created','updated']
     list_filter = ('graduated',)
     search_fields = ('user__username', 'school_name', 'degree_type')
@@ -117,3 +118,9 @@ class EducationAdmin(admin.ModelAdmin):
         if obj:  # editing an existing object
             return ('created', 'updated', 'slug')
         return ()
+    
+@admin.register(CertificationLicense)
+class CertificationLicenseAdmin(admin.ModelAdmin):
+    model = CertificationLicense
+    list_display = ['document_name', 'education', 'created', 'updated']
+    prepopulated_fields = {'slug': ['document_name']}

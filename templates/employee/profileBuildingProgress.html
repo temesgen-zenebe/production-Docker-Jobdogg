@@ -153,16 +153,34 @@
                 <div class="col step-item ">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
-                    <p class="card-text">Education</p>
+                    <h6 class="card-text"><i class="fa-solid fa-user-graduate"></i> Education</h6>
+                    <small class="">Step 5: Education & upload files</small>
                     <div class="d-flex justify-content-between align-items-center">
                         {% if progres.Education_completed  %}
-                        <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        <div class="btn-group gap-1">
+                          <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                            <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                          </button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
+                            <i class="fa-regular fa-square-plus"></i> <i class="fa-solid fa-upload"></i>
+                         </button>
+                          <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
                         </div>
+                        {% else %}
+                         <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#educationModal">
+                            Create
+                         </button>
                         {% endif %}
+
                     </div>
+                    {% if certification_licenses %}
+                    <ul class="list-unstyled list-group-flush">
+                    {% for certification in certification_licenses %}
+                        <li class="list-item"><a href="{{ certification.certification_file.url}}"><i class="bi bi-files px-1"></i><small class="">{{ certification.document_name|truncatewords:2 }}</small></a></li>
+                    {% endfor %}
+                    </ul>
+                    {% endif %}
+                   
                     </div>
                 </div>
                 </div>
@@ -571,7 +589,7 @@
             </div>
             <!--Modal Step 4: Military Information -->
             <div class="modal fade" id="militaryModal" tabindex="-1" aria-labelledby="militaryModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-dialog modal-sm modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="militaryModalLabel">Military Information</h5>
@@ -589,6 +607,45 @@
                     </div>
                 </div>
             </div>
+            <!-- Education Modal -->
+            <div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="educationModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="educationModalLabel">Education</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{% url 'employee:profile_building_progress' %}">
+                                {% csrf_token %}
+                                {{ education_form|crispy}}
+                                <!-- Include other fields of the EducationForm -->
+                                <button type="submit" name="education" class="btn btn-primary">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- Education Modal -->
+             <div class="modal fade" id="CertificationLicenseModal" tabindex="-1" aria-labelledby="CertificationLicenseModalModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="CertificationLicenseModalModalLabel">Education</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" enctype="multipart/form-data" action="{% url 'employee:profile_building_progress' %}">
+                                {% csrf_token %}
+                                {{ CertificationLicense_form|crispy}}
+                                <!-- Include other fields of the EducationForm -->
+                                <button type="submit" name="certificationLicense" class="btn btn-sm btn-outline-success">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
     </div>     
 
 </div>  
