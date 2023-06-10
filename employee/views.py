@@ -1,15 +1,32 @@
 from django.views.generic import ListView, DetailView, FormView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin,PermissionRequiredMixin
 from django.urls import reverse_lazy
-from .models import Policies, Profile, UserAcceptedPolicies,BasicInformation
+from .models import (
+    CertificationLicense,
+    Education, 
+    Policies, 
+    Profile, 
+    UserAcceptedPolicies,
+    BasicInformation,
+    Personal, 
+    Language,
+    Military,
+    )
 from django.contrib import messages
 from django.template import Library
 from django import forms
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 from django.urls import reverse
-from .models import Personal, Language,Profile, Military
-from .forms import MilitaryForm, PersonalForm,BasicInformationForm,UserAcceptedPoliciesForm
+
+from .forms import (
+    CertificationLicenseForm,
+    EducationForm,
+    MilitaryForm,
+    PersonalForm,
+    BasicInformationForm,
+    UserAcceptedPoliciesForm
+)
 from employee.templatetags.mask_ssn import mask_ssn
 from django.shortcuts import get_object_or_404
 
@@ -54,6 +71,10 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         basic_information_form = BasicInformationForm()
         personal_form = PersonalForm()
         military_form = MilitaryForm()
+        education_form = EducationForm()
+        CertificationLicense_form = CertificationLicenseForm()
+        # Retrieve all Certification License objects related to the user's Education
+        certification_licenses = CertificationLicense.objects.filter(education__user=request.user)
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
@@ -61,11 +82,15 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
             'military_form':military_form,
+            'education_form': education_form,
+            'CertificationLicense_form':CertificationLicense_form,
             'progress':progress,
             'progress_percentage': progress_percentage,
             'policies': policies,
             'accepted_policies_ids': accepted_policies_ids,
             'all_policies_accepted': all_policies_accepted,
+            'certification_licenses':certification_licenses,
+            'documents_uploaded': True,  # Set the flag to True if there are uploaded documents
             
         }
            
@@ -137,16 +162,47 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 profile.Military_completed = True  # Mark the step as completed in the profile
                 profile.save()
                 return redirect('employee:profile_building_progress')
+        
+        elif 'education' in request.POST:
+            education_form = EducationForm(request.POST)
+            
+            if education_form.is_valid():
+               education = education_form.save(commit=False)
+               education.user = request.user
+               education.save()
+                # Update the corresponding profile completion field if needed
+               profile.Education_completed = True
+               profile.save()
+               return redirect('employee:profile_building_progress')
+        
+        elif 'certificationLicense' in request.POST:
+             form = CertificationLicenseForm(request.POST, request.FILES)
+             if form.is_valid():
+                certification_license = form.save(commit=False)
+                education = Education.objects.get(user=request.user)
+                #print("Education object retrieved:", education)
+                certification_license.education = education
+                certification_license.save()
+                return redirect('employee:profile_building_progress')
+             else:
+                print("Certification License form is invalid")
+
         else:
             pass   
         # If neither form was submitted or form validation failed, render the template again with the forms
         basic_information_form = BasicInformationForm()
         personal_form = PersonalForm()
         military_form = MilitaryForm()
+        education_form = EducationForm()
+        CertificationLicense_form = CertificationLicenseForm()
+       
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
             'military_form':military_form,
+            'education_form':education_form,
+            'CertificationLicense_form':CertificationLicense_form,
+           
         }
         return render(request, self.template_name, context)
 #skip military 

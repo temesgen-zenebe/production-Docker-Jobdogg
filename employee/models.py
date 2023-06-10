@@ -188,4 +188,21 @@ class Education(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.user.username}'s Education: {self.degree_type} from {self.school_name}"   
+        return f"{self.user.username}'s Education: {self.degree_type} from {self.school_name}"  
+     
+class CertificationLicense(models.Model):
+    education = models.ForeignKey(Education, on_delete=models.CASCADE)
+    document_name = models.CharField(max_length=100)
+    certification_file = models.FileField(upload_to='certificationsEducation/')
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.document_name} {self.education.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.document_name
