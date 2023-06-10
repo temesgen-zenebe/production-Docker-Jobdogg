@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (
-     Military, Profile, Policies, UserAcceptedPolicies,BasicInformation,Personal,Language
+     Education, Military, Profile, Policies, UserAcceptedPolicies,BasicInformation,Personal,Language
     )
 
 @admin.register(Profile)
@@ -95,11 +95,25 @@ class PersonalAdmin(admin.ModelAdmin):
             return ('created', 'updated', 'slug')
         return ()
     
-    
+@admin.register(Military)
 class MilitaryAdmin(admin.ModelAdmin):
-    list_display = ['user', 'branch', 'rank', 'discharge_year', 'duty_flag']
-    list_filter = ['branch', 'rank', 'discharge_year', 'duty_flag']
-    search_fields = ['user__username', 'user__email']
-    readonly_fields = ['slug', 'created', 'updated']
+    model = Military
+    list_display = ['user', 'branch', 'rank', 'discharge_year', 'duty_flag','created','updated']
+    list_filter = ('branch', 'rank', 'discharge_year', 'duty_flag')
+   
 
-admin.site.register(Military, MilitaryAdmin)
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # editing an existing object
+            return ('created', 'updated', 'slug')
+        return ()
+    
+@admin.register(Education)
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ['user', 'school_name', 'degree_type', 'graduated','created','updated']
+    list_filter = ('graduated',)
+    search_fields = ('user__username', 'school_name', 'degree_type')
+    
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # editing an existing object
+            return ('created', 'updated', 'slug')
+        return ()

@@ -88,3 +88,24 @@ RANK_CHOICES = [
     ('O-11 Fleet Admiral', 'O-11 Fleet Admiral'),
     ('Other', 'Other'),
 ]
+
+
+#school_type
+SCHOOL_TYPE_CHOICES = (
+    ('elementary', 'Elementary School'),
+    ('middle', 'Middle School'),
+    ('high', 'High School'),
+    ('college', 'College/University'),
+    ('other', 'Other'),
+)
+
+#DEGREE_TYPE
+DEGREE_TYPE_CHOICES = (
+    ('associate', 'Associate Degree'),
+    ('bachelor', 'Bachelor\'s Degree'),
+    ('master', 'Master\'s Degree'),
+    ('doctorate', 'Doctorate Degree'),
+    ('diploma', 'Diploma'),
+    ('certificate', 'Certificate'),
+    ('other', 'Other'),
+)

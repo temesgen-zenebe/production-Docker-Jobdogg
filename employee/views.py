@@ -8,9 +8,10 @@ from django import forms
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 from django.urls import reverse
-from .models import Personal, Language,Profile
+from .models import Personal, Language,Profile, Military
 from .forms import MilitaryForm, PersonalForm,BasicInformationForm,UserAcceptedPoliciesForm
 from employee.templatetags.mask_ssn import mask_ssn
+from django.shortcuts import get_object_or_404
 
 #----Policies Models ------
 class DashboardInformation(LoginRequiredMixin, View):
@@ -72,7 +73,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
     
     def post(self, request):
         profile = get_object_or_404(Profile, user=request.user)  # Retrieve the Profile object
-       
+        
         if 'policies' in request.POST:
             policies = Policies.objects.all()
             accepted_policies = []
@@ -148,7 +149,14 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'military_form':military_form,
         }
         return render(request, self.template_name, context)
-
+#skip military 
+class SkipMilitaryView(LoginRequiredMixin, View):
+    def post(self, request):
+        profile = get_object_or_404(Profile, user=request.user)
+        profile.Military_completed = True
+        profile.save()
+        messages.success(request, 'Military step skipped successfully.')
+        return redirect('employee:profile_building_progress')
           
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'
@@ -443,3 +451,67 @@ class PersonalDeleteView(LoginRequiredMixin, DeleteView):
     slug_url_kwarg = 'slug'
 
 
+#Military
+class MilitaryCreateView(LoginRequiredMixin, CreateView):
+    model = Military
+    form_class = MilitaryForm
+    template_name = 'employee/military_create.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('employee:military_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+
+        if not profile.basic_information_completed:
+            return redirect('employee:personal_information_completed')
+
+        profile.Military_completed = True
+        profile.save()
+
+        return super().dispatch(request, *args, **kwargs)
+    
+class MilitaryUpdateView(LoginRequiredMixin, UpdateView):
+    model = Military
+    form_class = MilitaryForm
+    template_name = 'employee/military_update.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_success_url(self):
+        return reverse_lazy('employee:military_list')
+
+class MilitaryDetailView(LoginRequiredMixin, DetailView):
+    model = Military
+    template_name = 'employee/military_detail.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
+class MilitaryListView(LoginRequiredMixin, ListView):
+    model = Military
+    template_name = 'employee/military_list.html'
+    context_object_name = 'military_list'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
+class MilitaryDeleteView(LoginRequiredMixin, DeleteView):
+    model = Military
+    template_name = 'employee/military_confirm_delete.html'
+    success_url = reverse_lazy('employee:military_list')
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
