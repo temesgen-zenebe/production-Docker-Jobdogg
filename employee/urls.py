@@ -28,6 +28,14 @@ from .views import (
     PersonalListView,
     PersonalUpdateView,
     
+    #----- Military----
+    MilitaryCreateView,
+    MilitaryUpdateView,
+    MilitaryDetailView,
+    MilitaryListView,
+    MilitaryDeleteView,
+    SkipMilitaryView,
+    
 )
 app_name = 'employee' 
 
@@ -36,7 +44,7 @@ urlpatterns = [
     # DashboardInformation Employee
     path('dashboardInformation/employee', DashboardInformation.as_view(), name='dashboard_information_employee'),
     path('profileBuildingProgress/', ProfileBuildingProgress.as_view(), name='profile_building_progress'),
-
+    path('skipMilitary/', SkipMilitaryView.as_view(), name='skip_military'),
     #-----policies-----------
     path('policies/list/', PolicyListView.as_view(), name='policies_list'),
     path('policies/accept/', AcceptPoliciesView.as_view(), name='accept_policies'),
@@ -48,7 +56,7 @@ urlpatterns = [
     path('policies/update/<slug:slug>/', PoliciesUpdateView.as_view(), name='policies_update'),
     path('policies/delete/<slug:slug>/', PoliciesDeleteView.as_view(), name='policies_delete'),
     
-    #----basic_information----
+    # basic_information
     path('basic_information/list/', BasicInformationListView.as_view(), name='basic_information_list'),
     path('basic_information/create/', BasicInformationCreateView.as_view(), name='basic_information_create'),
     path('basic_information/update/<slug:slug>/', BasicInformationUpdateView.as_view(), name='basic_information_update'),
@@ -61,8 +69,15 @@ urlpatterns = [
     path('personal/create/', PersonalCreateView.as_view(), name='personal_create'),
     path('personal/update/<slug:slug>/', PersonalUpdateView.as_view(), name='personal_update'),
     path('personal/delete/<slug:slug>/', PersonalDeleteView.as_view(), name='personal_delete'),
-]
 
+    #  Military
+    path('military/list/', MilitaryListView.as_view(), name='military_list'),
+    path('military/create/', MilitaryCreateView.as_view(), name='military_create'),
+    path('military/<slug:slug>/', MilitaryDetailView.as_view(), name='military_detail'),
+    path('military/<slug:slug>/update/', MilitaryUpdateView.as_view(), name='military_update'),
+    path('military/<slug:slug>/delete/', MilitaryDeleteView.as_view(), name='military_delete'),
+   
+]
 
 
 

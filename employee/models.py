@@ -5,7 +5,7 @@ from django.conf import settings
 from common.utils.text import unique_slug
 from localflavor.us.models import USStateField 
 from localflavor.us.us_states import STATE_CHOICES
-from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES, DUTY_FLAG_CHOICES, BRANCH, RANK_CHOICES
+from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES, DUTY_FLAG_CHOICES, BRANCH, RANK_CHOICES, SCHOOL_TYPE_CHOICES,DEGREE_TYPE_CHOICES
 from multiupload.fields import MultiFileField 
 
 
@@ -166,3 +166,26 @@ class Military(models.Model):
         
     def __str__(self):
         return f"{self.user.username}'s Military Information"
+    
+class Education(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    school_type = models.CharField(max_length=20, choices=SCHOOL_TYPE_CHOICES)
+    school_name = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    graduated = models.BooleanField(default=False)
+    graduation_date = models.DateField(null=True, blank=True)
+    degree_type = models.CharField(max_length=100, choices=DEGREE_TYPE_CHOICES)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.degree_type} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user.username}'s Education: {self.degree_type} from {self.school_name}"   

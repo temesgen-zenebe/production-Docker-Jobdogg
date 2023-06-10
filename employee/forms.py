@@ -1,6 +1,6 @@
 from django import forms
 from datetime import datetime
-from .models import Military, Personal, Language, BasicInformation
+from .models import Education, Military, Personal, Language, BasicInformation
 from django.utils.safestring import mark_safe
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
 from .models import UserAcceptedPolicies
@@ -95,3 +95,14 @@ class MilitaryForm(forms.ModelForm):
             #'certification_license': forms.ClearableFileInput(attrs={'multiple': True}),
         
         }
+        
+        
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        fields = ('school_type', 'school_name', 'country', 'city', 'state', 'graduated', 'graduation_date', 'degree_type')
+        widgets = {
+            'graduation_date': forms.DateInput(attrs={'type': 'date','style': 'width: 100%; font-size:13px;'})
+        }
+
+
