@@ -8,10 +8,14 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
-                    <h5>Basic Information List</h5>
+                    <h6>Basic Information List</h6>
+                    <div class="btn-group">
+                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Back</a>
+                    
                     {% if not basic_information %}
                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:basic_information_create'  %}">CREATE</a>
                     {% endif %}
+                    </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -28,9 +32,7 @@
                                     </a>
                                 </div>
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">
-                                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Back to Profile</a>
-                                    <a class="btn btn-sm btn-outline-warning"
-                                     href="{% url 'employee:basic_information_update' slug=basic_information.slug %}">Update</a>
+                                    <a class="btn btn-sm btn-outline-warning" href="{% url 'employee:basic_information_update' slug=basic_information.slug %}">Update</a>
                                     {% if user.is_authenticated and user|is_admin %}
                                         <a class="btn btn-sm btn-outline-danger" 
                                         href="{% url 'employee:basic_information_delete' slug=basic_information.slug %}">Delete</a>
