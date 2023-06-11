@@ -1,6 +1,16 @@
 from django.contrib import admin
 from .models import (
-     CertificationLicense, Education, Military, Profile, Policies, UserAcceptedPolicies,BasicInformation,Personal,Language
+     CertificationLicense, 
+     Education,
+     Experience, 
+     Military, 
+     Profile, 
+     Policies,
+     UserAcceptedPolicies,
+     BasicInformation,
+     Personal,
+     Language
+   
     )
 
 @admin.register(Profile)
@@ -124,3 +134,15 @@ class CertificationLicenseAdmin(admin.ModelAdmin):
     model = CertificationLicense
     list_display = ['document_name', 'education', 'created', 'updated']
     prepopulated_fields = {'slug': ['document_name']}
+  
+    
+@admin.register(Experience)
+class ExperienceAdmin(admin.ModelAdmin):
+    list_display = ['user', 'company_name', 'job_title', 'start_date', 'end_date']
+    search_fields = ('user__username', 'company_name', 'job_title')
+    list_filter = ('start_date', 'end_date')
+    
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # editing an existing object
+            return ('created', 'updated', 'slug')
+        return ()
