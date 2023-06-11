@@ -1,0 +1,54 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load user_tags %}
+{% block title %}Certification & License ListView {% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h5>Certification & License List</h5>
+                    <div class="btn-group">
+                    {% if certification_license_list %}
+                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:certification_license_create' %}">Create</a>
+                    {% endif %}
+                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:education_list' %}">Back</a>
+                   </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                 
+                    <ul class="list-unstyled ">
+                        {% for certification_license in certification_license_list %}
+                        <li >
+                            <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div>
+                                   <img class="rounded mr-3 align-self-center" src="https://www.gravatar.com/avatar?d=mp&s=50" />
+                                   <a href="{% url 'employee:certification_license_detail' pk=certification_license.id %}">{{ certification_license.education}}
+                                    <i class="bi bi-arrows-fullscreen px-1"></i>
+                                   </a>
+                                   
+                                </div>
+                                <div class="d-flex flex-row align-items-center justify-content-between gap-2">
+                                   
+                                    <a class="btn btn-sm btn-outline-warning"
+                                     href="{% url 'employee:certification_license_update' pk=certification_license.id %}">Update</a>
+                                     {% if user.is_authenticated and user|is_admin %}
+                                     <a class="btn btn-sm btn-outline-danger" 
+                                        href="{% url 'employee:certification_license_delete' pk=certification_license.id %}">Delete</a>
+                                    {% endif %}
+                                    </div>
+                            </div>
+                        </li>
+                        {% empty %}
+                        <li>No certification_license found.</li>
+                        {% endfor %}
+                    </ul>  
+                </div>
+               
+            </div>
+        </div>
+    
+    <!-- End Example Code -->
+{% endblock %}
