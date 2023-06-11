@@ -8,17 +8,19 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     {% if all_policies_accepted %}
-                     <h6 class="m-0 font-weight-bold text-success">To Review all policies Click Read </h6>
+                     <h6 class="m-0 font-weight-bold text-success">Review the policies </h6>
                     {% else %}
-                     <h6 class="m-0 font-weight-bold text-primary">Read and accepted for next steps</h6>
+                     <h6 class="m-0 font-weight-bold text-primary">Read and accepted </h6>
                     {% endif %}
                     <div class="dropdown no-arrow">
-                        {% if all_policies_accepted %}               
+                        {% if all_policies_accepted %}   
+                        <div class="d-flex flex-row align-items-center justify-content-between gap-1">            
                             <a class="btn btn-sm btn-outline-success text-decoration-none" data-bs-toggle="collapse" 
                                 href="#multiCollapseExample2" role="button" aria-expanded="true" aria-controls="multiCollapseExample2">
-                                <i class="bi bi-arrows-fullscreen text-white-600 px-2"></i> Read
+                                 Read
                             </a>
-                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Back To Profile</a>
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Back</a>
+                        </div>
                         {% else %}
                             <a class="btn btn-sm btn-outline-primary text-decoration-none" data-bs-toggle="collapse" 
                                 href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">
