@@ -36,6 +36,20 @@ from .views import (
     MilitaryDeleteView,
     SkipMilitaryView,
     
+    #Education
+    EducationListView,
+    EducationCreateView,
+    EducationDetailView,
+    EducationUpdateView,
+    EducationDeleteView,
+    
+    #Certification&License
+    CertificationLicenseListView,
+    CertificationLicenseCreateView,
+    CertificationLicenseUpdateView,
+    CertificationLicenseDeleteView,
+    CertificationLicenseDetailView,
+     
 )
 app_name = 'employee' 
 
@@ -76,7 +90,21 @@ urlpatterns = [
     path('military/<slug:slug>/', MilitaryDetailView.as_view(), name='military_detail'),
     path('military/<slug:slug>/update/', MilitaryUpdateView.as_view(), name='military_update'),
     path('military/<slug:slug>/delete/', MilitaryDeleteView.as_view(), name='military_delete'),
-   
+    
+    #Education
+    path('education/list/', EducationListView.as_view(), name='education_list'),
+    path('education/create/',EducationCreateView.as_view(), name='education_create'),
+    path('education/<slug:slug>/', EducationDetailView.as_view(), name='education_detail'),
+    path('education/<slug:slug>/update/', EducationUpdateView.as_view(), name='education_update'),
+    path('education/<slug:slug>/delete/', EducationDeleteView.as_view(), name='education_delete'),
+    
+   # Certification License URLs
+    path('certification-licenses/', CertificationLicenseListView.as_view(), name='certification_license_list'),
+    path('certification-licenses/create/', CertificationLicenseCreateView.as_view(), name='certification_license_create'),
+    path('certification-licenses/<int:pk>/update/', CertificationLicenseUpdateView.as_view(), name='certification_license_update'),
+    path('certification-licenses/<int:pk>/delete/', CertificationLicenseDeleteView.as_view(), name='certification_license_delete'),
+    path('certification-licenses/<int:pk>/', CertificationLicenseDetailView.as_view(), name='certification_license_detail'),
+ 
 ]
 
 

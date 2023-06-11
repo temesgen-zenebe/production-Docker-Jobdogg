@@ -179,7 +179,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
              form = CertificationLicenseForm(request.POST, request.FILES)
              if form.is_valid():
                 certification_license = form.save(commit=False)
-                education = Education.objects.get(user=request.user)
+                education = Education.objects.filter(user=self.request.user).first()
                 #print("Education object retrieved:", education)
                 certification_license.education = education
                 certification_license.save()
@@ -506,7 +506,6 @@ class PersonalDeleteView(LoginRequiredMixin, DeleteView):
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
 
-
 #Military
 class MilitaryCreateView(LoginRequiredMixin, CreateView):
     model = Military
@@ -526,8 +525,8 @@ class MilitaryCreateView(LoginRequiredMixin, CreateView):
         except Profile.DoesNotExist:
             profile = Profile(user=request.user)
 
-        if not profile.basic_information_completed:
-            return redirect('employee:personal_information_completed')
+        if not profile.personal_information_completed:
+            return redirect('employee:personal_list')
 
         profile.Military_completed = True
         profile.save()
@@ -571,3 +570,115 @@ class MilitaryDeleteView(LoginRequiredMixin, DeleteView):
     
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
+
+
+#Education
+class EducationListView(LoginRequiredMixin, ListView):
+    model = Education
+    template_name = 'employee/education_list.html'
+    context_object_name = 'education_list'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        certification_licenses = CertificationLicense.objects.filter(education__user=self.request.user)
+        context['certification_licenses'] = certification_licenses
+        return context
+
+class EducationDetailView(LoginRequiredMixin, DetailView):
+    model = Education
+    template_name = 'employee/education_detail.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
+class EducationCreateView(LoginRequiredMixin, CreateView):
+    model = Education
+    form_class = EducationForm
+    template_name = 'employee/education_create.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('employee:education_list')
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+
+        if not profile.Military_completed:
+            return redirect('employee:military_list')
+
+        profile.Education_completed = True
+        profile.save()
+
+        return super().dispatch(request, *args, **kwargs)
+    
+    
+class EducationUpdateView(LoginRequiredMixin, UpdateView):
+    model = Education
+    form_class = EducationForm
+    template_name = 'employee/education_update.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_success_url(self):
+        return reverse_lazy('employee:education_list')
+    
+class EducationDeleteView(LoginRequiredMixin, DeleteView):
+    model = Education
+    template_name = 'employee/education_confirm_delete.html'
+    success_url = reverse_lazy('employee:education_list')
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+    
+#CertificationLicense    
+class CertificationLicenseListView(LoginRequiredMixin, ListView):
+    model = CertificationLicense
+    template_name = 'employee/certification_license_list.html'
+    context_object_name = 'certification_license_list'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return super().get_queryset().filter(education__user=self.request.user)
+
+class CertificationLicenseCreateView(LoginRequiredMixin, CreateView):
+    model = CertificationLicense
+    form_class = CertificationLicenseForm
+    template_name = 'employee/certification_license_create.html'
+    success_url = reverse_lazy('employee:certification_license_list')
+
+    def form_valid(self, form):
+        education = Education.objects.filter(user=self.request.user).first()
+        form.instance.education = education
+        return super().form_valid(form)
+
+
+
+class CertificationLicenseUpdateView(LoginRequiredMixin, UpdateView):
+    model = CertificationLicense
+    template_name = 'employee/certification_license_update.html'
+    fields = ['education', 'document_name', 'certification_file']
+    success_url = reverse_lazy('employee:certification_license_list')
+
+class CertificationLicenseDeleteView(LoginRequiredMixin, DeleteView):
+    model = CertificationLicense
+    template_name = 'employee/certification_license_delete.html'
+    success_url = reverse_lazy('employee:certification_license_list')
+
+class CertificationLicenseDetailView(LoginRequiredMixin, DetailView):
+    model = CertificationLicense
+    template_name = 'employee/certification_license_detail.html'
+    context_object_name = 'certification_license'
