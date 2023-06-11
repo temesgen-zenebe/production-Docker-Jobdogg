@@ -3,7 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin,P
 from django.urls import reverse_lazy
 from .models import (
     CertificationLicense,
-    Education, 
+    Education,
+    Experience, 
     Policies, 
     Profile, 
     UserAcceptedPolicies,
@@ -22,6 +23,7 @@ from django.urls import reverse
 from .forms import (
     CertificationLicenseForm,
     EducationForm,
+    ExperienceForm,
     MilitaryForm,
     PersonalForm,
     BasicInformationForm,
@@ -72,6 +74,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         personal_form = PersonalForm()
         military_form = MilitaryForm()
         education_form = EducationForm()
+        experienceForm_form = ExperienceForm()
         CertificationLicense_form = CertificationLicenseForm()
         # Retrieve all Certification License objects related to the user's Education
         certification_licenses = CertificationLicense.objects.filter(education__user=request.user)
@@ -84,6 +87,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'military_form':military_form,
             'education_form': education_form,
             'CertificationLicense_form':CertificationLicense_form,
+            'experienceForm_form':experienceForm_form,
             'progress':progress,
             'progress_percentage': progress_percentage,
             'policies': policies,
@@ -186,6 +190,19 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 return redirect('employee:profile_building_progress')
              else:
                 print("Certification License form is invalid")
+                
+        elif 'experience' in request.POST:
+            experience_form = ExperienceForm(request.POST)
+            if experience_form.is_valid():
+               experience = experience_form.save(commit=False)
+               experience.user = request.user
+               experience.save()
+               # Update the corresponding profile completion field if needed
+               profile.Experience_completed = True
+               profile.save()
+               return redirect('employee:profile_building_progress')
+            else:
+              print("Certification License form is invalid")
 
         else:
             pass   
@@ -195,6 +212,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         military_form = MilitaryForm()
         education_form = EducationForm()
         CertificationLicense_form = CertificationLicenseForm()
+        experienceForm_form = ExperienceForm()
        
         context = {
             'basic_information_form': basic_information_form,
@@ -202,7 +220,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'military_form':military_form,
             'education_form':education_form,
             'CertificationLicense_form':CertificationLicense_form,
-           
+            'experienceForm_form':experienceForm_form,
         }
         return render(request, self.template_name, context)
 #skip military 

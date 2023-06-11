@@ -1,6 +1,6 @@
 from django import forms
 from datetime import datetime
-from .models import CertificationLicense, Education, Military, Personal, Language, BasicInformation
+from .models import CertificationLicense, Education, Experience, Military, Personal, Language, BasicInformation
 from django.utils.safestring import mark_safe
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
 from .models import UserAcceptedPolicies
@@ -110,3 +110,8 @@ class CertificationLicenseForm(forms.ModelForm):
     class Meta:
         model = CertificationLicense
         fields = ['document_name', 'certification_file']
+        
+class ExperienceForm(forms.ModelForm):
+    class Meta:
+        model = Experience
+        fields = ['company_name', 'company_phone', 'job_title', 'start_date', 'end_date', 'description']

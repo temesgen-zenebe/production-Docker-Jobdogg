@@ -206,3 +206,26 @@ class CertificationLicense(models.Model):
 
     def __str__(self):
         return self.document_name
+
+
+
+class Experience(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=100)
+    company_phone = models.CharField(max_length=20)
+    job_title = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    description = models.TextField()
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.job_title} {self.user.username}"
+            self.slug = unique_slug(value)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user.username}'s Experience: {self.job_title} at {self.company_name}"
