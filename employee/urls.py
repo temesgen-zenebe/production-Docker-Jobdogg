@@ -56,6 +56,8 @@ from .views import (
     ExperienceListView,
     ExperienceUpdateView,
     ExperienceCreateView,
+    
+    #No ExperienceView 
     NoExperienceView,
     
      
@@ -67,7 +69,9 @@ urlpatterns = [
     # DashboardInformation Employee
     path('dashboardInformation/employee', DashboardInformation.as_view(), name='dashboard_information_employee'),
     path('profileBuildingProgress/', ProfileBuildingProgress.as_view(), name='profile_building_progress'),
+    #skip Military
     path('skipMilitary/', SkipMilitaryView.as_view(), name='skip_military'),
+    #No ExperienceView 
     path('no_Experience/', NoExperienceView.as_view(), name='no_Experience'),
     #-----policies-----------
     path('policies/list/', PolicyListView.as_view(), name='policies_list'),
