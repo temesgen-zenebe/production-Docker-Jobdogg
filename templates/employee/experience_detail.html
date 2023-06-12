@@ -1,0 +1,72 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load humanize %}
+{% load mask_ssn %}
+{% block title %}Experience Detail{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h6>Experience Profile</h6>
+                    <div>
+                    <a class="btn btn-sm btn-outline-success" href="{% url 'employee:experience_update' slug=object.slug %}">Edit</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:experience_list' %}">Back</a>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <ul class="list-unstyled list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Name: 
+                          <span class="">{{ object.user.username|capfirst }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Company name : 
+                          <span class="">{{ object.company_name}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Company Phone :
+                          <span class="">{{ object.company_phone|format_phone_number }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                         Job Title :
+                          <span class="">{{ object.job_title}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                         Start Date :
+                          <span class="">{{ object.start_date|date }}</span>
+                        </li>
+                        {% if object.end_date %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            End Date :
+                          <span class="">{{ object.end_date|date }}</span>
+                        </li>
+                        {% else %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Is current ? :
+                          <span class="">{{ object.is_current }}</span>
+                        </li>
+                        {% endif %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Description :
+                          <span class="">{{ object.description }}</span>
+                        </li>
+                        
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            created: 
+                            <span class="">{{ object.created|date }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                           
+                        </li>
+                      </ul>
+                      
+                    
+                </div>
+                   
+            </div>
+        </div>
+    <!-- End Example Code -->
+{% endblock %}

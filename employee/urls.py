@@ -49,6 +49,14 @@ from .views import (
     CertificationLicenseUpdateView,
     CertificationLicenseDeleteView,
     CertificationLicenseDetailView,
+    
+    #Experience
+    ExperienceDeleteView,
+    ExperienceDetailView,
+    ExperienceListView,
+    ExperienceUpdateView,
+    ExperienceCreateView
+    
      
 )
 app_name = 'employee' 
@@ -105,6 +113,13 @@ urlpatterns = [
     path('certification-licenses/<int:pk>/delete/', CertificationLicenseDeleteView.as_view(), name='certification_license_delete'),
     path('certification-licenses/<int:pk>/', CertificationLicenseDetailView.as_view(), name='certification_license_detail'),
  
+    #Experience
+    path('experience/list/', ExperienceListView.as_view(), name='experience_list'),
+    path('experience/create/',ExperienceCreateView.as_view(), name='experience_create'),
+    path('experience/<slug:slug>/', ExperienceDetailView.as_view(), name='experience_detail'),
+    path('experience/<slug:slug>/update/', ExperienceUpdateView.as_view(), name='experience_update'),
+    path('experience/<slug:slug>/delete/', ExperienceDeleteView.as_view(), name='experience_delete'),
+
 ]
 
 

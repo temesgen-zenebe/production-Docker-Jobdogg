@@ -203,7 +203,7 @@
                             <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                                 <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                             </button>
-                           <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                           <a href="{% url 'employee:experience_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
                         </div>
                         {% else %}
                         <div class="btn-group gap-1">
@@ -217,11 +217,13 @@
                 </div>
                 </div>
                 {% endif %}
+                <!--Preferences-->
                 {% if progres.Experience_completed %}
                 <div class="col step-item ">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
-                    <p class="card-text">Experience</p>
+                    <h6 class="card-text"><i class="fa-solid fa-asterisk px-1"></i>Preferences</h6>
+                    <small class="">Step 7: Preferences </small>
                     <div class="d-flex justify-content-between align-items-center">
                         {% if progres.Preferences_completed %}
                         <div class="btn-group">
@@ -751,18 +753,7 @@
         setActiveStep();
         });
     </script>
-    <script>
-        const endDateInput = document.getElementById('div_id_end_date');
-        const isCurrentInput = document.getElementById('id_is_current');
-      
-        isCurrentInput.addEventListener('change', function() {
-          if (isCurrentInput.checked) {
-            endDateInput.style.display = 'none';
-          } else {
-            endDateInput.style.display = 'block';
-          }
-        });
-      </script>
+    
       
 {% endblock %} 
 {% endblock %}

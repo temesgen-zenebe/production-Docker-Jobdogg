@@ -301,6 +301,17 @@
     })()
 
 </script>
+<script>
+  const endDateInput = document.getElementById('div_id_end_date');
+  const isCurrentInput = document.getElementById('id_is_current');
 
+  isCurrentInput.addEventListener('change', function() {
+    if (isCurrentInput.checked) {
+      endDateInput.style.display = 'none';
+    } else {
+      endDateInput.style.display = 'block';
+    }
+  });
+</script>
 </body>
 </html>
