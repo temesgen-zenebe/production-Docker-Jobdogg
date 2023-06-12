@@ -8,22 +8,23 @@
 <!-- Code -->
 <div class="my-4 py-4" >
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mx-3 mb-4">
-        <h4 class="h3 mx-3 mb-0 text-gray-800">Profile Buiding Lookup </h1>
+    <div class="d-sm-flex align-items-center justify-content-between mx-3 mb-3">
+        <h4 class="mx-3 mb-0 text-gray-800">Profile Buiding Lookup </h4>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50 px-3"></i> Generate Report</a>
     </div>
    <!-- progress bar -->
     <div class="container mt-5">
-        <div class="progress my-3" style="height: 25px;">
-            <div class="text-dark progress-bar {% if progress_percentage < 25 %}bg-danger{% elif progress_percentage < 50 %}bg-warning{% elif progress_percentage < 75 %}bg-info{% else %}bg-success{% endif %}" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
-              <span class="py-5 fs-6">{{ progress_percentage }}%</span>
+        <div class="progress my-3 mx-auto" style="height: 20px; width:95%;">
+            <div class="shadow text-white progress-bar {% if progress_percentage < 25 %}bg-danger{% elif progress_percentage < 50 %}bg-warning{% elif progress_percentage < 75 %}bg-info{% else %}bg-success{% endif %}" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
+              <span class="py-5 fs-6">{{ progress_percentage }} %</span>
             </div>
         </div>  
         <div class="album py-3 bg-light">
             {% if progress %}
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 {% for progres in progress %}
+                <!--Accept Policies-->
                 <div class="col step-item ">
                     <div class="card border-left-danger shadow h-100 py-2">
                         <div class="card-body">
@@ -52,6 +53,7 @@
                         </div>
                     </div>
                 </div>
+                <!--Basic Information-->
                 {% if  progres.companyPolices_completed %}
                 <div class="col step-item ">
                 <div class="card border-left-warning shadow h-100 py-2">
@@ -84,6 +86,7 @@
                 </div>
                 </div>
                 {% endif %}
+                <!--Personal-->
                 {% if progres.basic_information_completed %}
                 <div class="col step-item ">
                     <div class="card border-left-success shadow h-100 py-2">
@@ -116,6 +119,7 @@
                     </div>
                 </div>
                 {% endif %}
+                <!--Military-->
                 {% if progres.personal_information_completed %} 
                 <div class="col step-item ">
                     <div class="card border-left-primary shadow h-100 py-2">
@@ -149,9 +153,10 @@
                     </div>
                 </div>
                 {% endif %}
+                <!--Education-->
                 {% if progres.Military_completed  %}
                 <div class="col step-item ">
-                <div class="card border-left-primary shadow h-100 py-2">
+                 <div class="card border-left-primary shadow h-100 pt-1">
                     <div class="card-body">
                     <h6 class="card-text"><i class="fa-solid fa-user-graduate"></i> Education</h6>
                     <small class="">Step 5: Education & upload files</small>
@@ -175,27 +180,36 @@
                     </div>
                     {% if certification_licenses %}
                     <ul class="list-unstyled list-group-flush">
-                    {% for certification in certification_licenses %}
-                        <li class="list-item"><a href="{{ certification.certification_file.url}}"><i class="bi bi-files px-1"></i><small class="">{{ certification.document_name|truncatewords:2 }}</small></a></li>
+                    {% for certification in certification_licenses|slice:":2" %}
+                        <li class="list-item"><small class=""><a href="{{ certification.certification_file.url}}"><i class="bi bi-files px-1"></i>{{ certification.document_name|truncatewords:2 }}</a></small></li>
                     {% endfor %}
                     </ul>
                     {% endif %}
                    
                     </div>
-                </div>
+                 </div>
                 </div>
                 {% endif %}
+                <!--Experience-->
                 {% if progres.Education_completed   %}
                 <div class="col step-item ">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
-                    <p class="card-text">Experience</p>
+                    <h6 class="card-text"><i class="fa-sharp fa-solid fa-trophy"></i>  Experience</h6>
+                    <small class="">Step 6: Experience </small>
                     <div class="d-flex justify-content-between align-items-center">
                         {% if progres.Experience_completed %}
-                        <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        <div class="btn-group gap-1">
+                            <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                            </button>
+                           <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                        </div>
+                        {% else %}
+                        <div class="btn-group gap-1">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#experienceFormModal">
+                                Create
+                            </button>
                         </div>
                         {% endif %}
                     </div>
@@ -645,7 +659,26 @@
                     </div>
                 </div>
             </div>
-            
+             <!--Modal Step 6: experience Form Modal-->
+             <div class="modal fade" id="experienceFormModal" tabindex="-1" aria-labelledby="experienceFormModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="experienceFormModalLabel">Experience Information</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" enctype="multipart/form-data">   
+                                {% csrf_token %}
+                                {{ experienceForm_form|crispy }}
+                                <div class="modal-footer">
+                                    <button type="submit" name="experience" class="btn btn-sm btn-outline-success">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>     
 
 </div>  
@@ -718,5 +751,18 @@
         setActiveStep();
         });
     </script>
+    <script>
+        const endDateInput = document.getElementById('div_id_end_date');
+        const isCurrentInput = document.getElementById('id_is_current');
+      
+        isCurrentInput.addEventListener('change', function() {
+          if (isCurrentInput.checked) {
+            endDateInput.style.display = 'none';
+          } else {
+            endDateInput.style.display = 'block';
+          }
+        });
+      </script>
+      
 {% endblock %} 
 {% endblock %}
