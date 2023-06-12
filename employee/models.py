@@ -207,8 +207,6 @@ class CertificationLicense(models.Model):
     def __str__(self):
         return self.document_name
 
-
-
 class Experience(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=100)

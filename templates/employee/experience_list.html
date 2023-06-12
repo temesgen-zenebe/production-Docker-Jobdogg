@@ -1,39 +1,41 @@
 {% extends 'pages/employee_dashboard.html' %}
 {% load static %}
 {% load user_tags %}
-{% block title %}Personal Information {% endblock %}
+{% block title %}Experience Information {% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
         <div class="col-xl-8 col-lg-6">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
-                    <h5>Personal Information List</h5>
-                    {% if not personal_list %}
-                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:personal_create' %}">CREATE</a>
-                    {% endif %}
+                    <h6>Experience List</h6>
+                    <div class="btn-group gap-1">
+                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:experience_create' %}">Create</a>
+                     <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
+                    </div>
                 </div>
                 <!-- Card Body -->
+                {% if experienceList %}
                 <div class="card-body">
-                 
                     <ul class="list-unstyled ">
-                        {% for personal in personal_list %}
+                        {% for experience in experienceList %}
                         <li >
                             <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                                 <div>
                                    <img class="rounded mr-3 align-self-center" src="https://www.gravatar.com/avatar?d=mp&s=50" />
-                                   <a href="{% url 'employee:personal_detail' slug=personal.slug %}">{{ personal.nickname|capfirst}}
-                                    <i class="bi bi-arrows-fullscreen px-1"></i>
+                                   <a href="{% url 'employee:experience_detail' slug=experience.slug %}"><small>{{ experience.user.username|capfirst}}
+                                   [from:<span class="">{{ experience.start_date|date }}</span>to <span class="">{{ experience.end_date|date }}</span>]
+                                    <i class="bi bi-arrows-fullscreen px-1"></i></small>
                                    </a>
                                    
                                 </div>
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">
-                                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
+                                   
                                     <a class="btn btn-sm btn-outline-warning"
-                                     href="{% url 'employee:personal_update' slug=personal.slug %}">Update</a>
+                                     href="{% url 'employee:experience_update' slug=experience.slug %}">Update</a>
                                      {% if user.is_authenticated and user|is_admin %}
                                      <a class="btn btn-sm btn-outline-danger" 
-                                        href="{% url 'employee:personal_delete' slug=personal.slug %}">Delete</a>
+                                        href="{% url 'employee:experience_delete' slug=experience.slug %}">Delete</a>
                                     {% endif %}
                                     </div>
                             </div>
@@ -43,7 +45,7 @@
                         {% endfor %}
                     </ul>  
                 </div>
-               
+                {% endif %}
             </div>
         </div>
     <!-- End Example Code -->

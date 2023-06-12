@@ -28,7 +28,7 @@
                             <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                                 <div>
                                    <img class="rounded mr-3 align-self-center" src="https://www.gravatar.com/avatar?d=mp&s=50" />
-                                   <a href="{% url 'employee:education_detail' slug=education.slug %}">{{ education.user}}
+                                   <a href="{% url 'employee:education_detail' slug=education.slug %}">{{ education.user.username|capfirst}}
                                     <i class="bi bi-arrows-fullscreen px-1"></i>
                                    </a>
                                    

@@ -1,0 +1,11 @@
+{% extends 'pages/admin_dashboard.html' %}
+{% load static %}
+{% block dashboard_employee %}
+<h1>Delete Experience Information</h1>
+<p>Are you sure you want to delete "{{ object.user.name }}"?</p>
+<form method="POST">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+  <a href="{% url 'employee:experience_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
