@@ -138,7 +138,7 @@ class CertificationLicenseAdmin(admin.ModelAdmin):
     
 @admin.register(Experience)
 class ExperienceAdmin(admin.ModelAdmin):
-    list_display = ['user', 'company_name', 'job_title', 'start_date', 'end_date']
+    list_display = ['user', 'company_name', 'company_phone','job_title', 'start_date', 'end_date','is_current','description']
     search_fields = ('user__username', 'company_name', 'job_title')
     list_filter = ('start_date', 'end_date')
     

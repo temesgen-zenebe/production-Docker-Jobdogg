@@ -215,8 +215,9 @@ class Experience(models.Model):
     company_phone = models.CharField(max_length=20)
     job_title = models.CharField(max_length=100)
     start_date = models.DateField()
-    end_date = models.DateField()
-    description = models.TextField()
+    end_date = models.DateField(null=True, blank=True)
+    is_current = models.BooleanField(default=False)
+    description = models.TextField(help_text="tell about your specific roles", max_length=500, null=True, blank=True)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -224,7 +225,7 @@ class Experience(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             value = f"{self.job_title} {self.user.username}"
-            self.slug = unique_slug(value)
+            self.slug = unique_slug(value,type(self))
         super().save(*args, **kwargs)
 
     def __str__(self):

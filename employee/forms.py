@@ -114,4 +114,8 @@ class CertificationLicenseForm(forms.ModelForm):
 class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
-        fields = ['company_name', 'company_phone', 'job_title', 'start_date', 'end_date', 'description']
+        fields = ['company_name', 'company_phone', 'job_title', 'start_date','is_current', 'end_date', 'description']
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+        }

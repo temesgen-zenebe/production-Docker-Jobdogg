@@ -223,6 +223,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'experienceForm_form':experienceForm_form,
         }
         return render(request, self.template_name, context)
+    
 #skip military 
 class SkipMilitaryView(LoginRequiredMixin, View):
     def post(self, request):
