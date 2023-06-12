@@ -210,6 +210,10 @@
                             <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#experienceFormModal">
                                 Create
                             </button>
+                            <form action="{% url 'employee:no_Experience' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="next-btn btn btn-sm btn-outline-secondary">No experience</button>
+                            </form>
                         </div>
                         {% endif %}
                     </div>
