@@ -759,3 +759,12 @@ class ExperienceDeleteView(LoginRequiredMixin, DeleteView):
     
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
+    
+# NoExperienceView   
+class NoExperienceView(LoginRequiredMixin, View):
+    def post(self, request):
+        profile = get_object_or_404(Profile, user=request.user)
+        profile.Experience_completed = True
+        profile.save()
+        messages.success(request, 'No ExperienceView saved successfully.')
+        return redirect('employee:profile_building_progress')
