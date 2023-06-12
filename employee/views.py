@@ -760,7 +760,7 @@ class ExperienceDeleteView(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
     
-# NoExperienceView   
+# No ExperienceView   
 class NoExperienceView(LoginRequiredMixin, View):
     def post(self, request):
         profile = get_object_or_404(Profile, user=request.user)
