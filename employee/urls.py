@@ -1,3 +1,4 @@
+from . import views
 from django.urls import path
 from .views import (
     #-------Policies------
@@ -62,6 +63,7 @@ from .views import (
     
      
 )
+from employee import views
 app_name = 'employee' 
 
 urlpatterns = [
@@ -125,6 +127,8 @@ urlpatterns = [
     path('experience/<slug:slug>/', ExperienceDetailView.as_view(), name='experience_detail'),
     path('experience/<slug:slug>/update/', ExperienceUpdateView.as_view(), name='experience_update'),
     path('experience/<slug:slug>/delete/', ExperienceDeleteView.as_view(), name='experience_delete'),
+    
+   
 
 ]
 

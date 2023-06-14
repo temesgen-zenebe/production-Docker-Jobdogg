@@ -231,9 +231,10 @@
                     <div class="d-flex justify-content-between align-items-center">
                         {% if progres.Preferences_completed %}
                         <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#PreferencesModal">
+                                Open Modal
+                            </button>
+                        
                         </div>
                         {% endif %}
                     </div>
@@ -685,6 +686,34 @@
                     </div>
                 </div>
             </div>
+            <!-- Bootstrap Modal Button -->
+
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="PreferencesModal" tabindex="-1" aria-labelledby="PreferencesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="PreferencesModalLabel">Modal Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Employee Preferences Section -->
+                <h2>Employee Preferences</h2>
+                <form method="POST" action="{% url 'employee:profile_building_progress' %}">
+                    {% csrf_token %}
+                    {{ employee_preferences_form|crispy}}
+                    <button type="submit" name="employee_preferences" class="btn btn-primary mt-3">Save Preferences</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     </div>     
 
 </div>  

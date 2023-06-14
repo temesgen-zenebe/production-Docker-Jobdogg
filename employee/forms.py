@@ -1,6 +1,7 @@
 from django import forms
+from django.shortcuts import get_object_or_404
 from datetime import datetime
-from .models import CertificationLicense, Education, Experience, Military, Personal, Language, BasicInformation
+from .models import Category, CertificationLicense, Education, EmployeePreferences, Experience, Military, Personal, Language, BasicInformation, Position
 from django.utils.safestring import mark_safe
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
 from .models import UserAcceptedPolicies
@@ -120,3 +121,49 @@ class ExperienceForm(forms.ModelForm):
             'end_date': forms.DateInput(attrs={'type': 'date'}),
             'description': forms.Textarea(attrs={'rows': 3}),
         }
+
+class EmployeePreferencesForm(forms.ModelForm):
+    class Meta:
+        model = EmployeePreferences
+        fields = [
+            'minimum_salary',
+            'salary_type',
+            'location',
+            'job_type',
+            'can_relocation', 
+            'years_of_experience',  
+            'category', 
+            'desired_positions',
+            'skills'
+            ]
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Populate category choices
+        categories = Category.objects.all()
+        self.fields['category'].queryset = categories
+        
+        # Populate position choices based on selected category
+        if 'category' in self.data:
+            try:
+                category_id = int(self.data['category'])
+                category = get_object_or_404(Category, id=category_id)
+                positions = category.positions.all()
+                self.fields['desired_positions'].queryset = positions
+            except (ValueError, TypeError):
+                pass
+        elif self.instance.pk:
+            self.fields['desired_positions'].queryset = self.instance.category.positions.all()
+        
+        # Populate skill choices based on selected position
+        if 'desired_positions' in self.data:
+            try:
+                position_id = int(self.data['desired_positions'])
+                position = get_object_or_404(Position, id=position_id)
+                skills = position.skills.all()
+                self.fields['skills'].queryset = skills
+            except (ValueError, TypeError):
+                pass
+        elif self.instance.pk:
+            self.fields['skills'].queryset = self.instance.desired_positions.skills.all()

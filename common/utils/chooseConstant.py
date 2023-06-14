@@ -89,7 +89,6 @@ RANK_CHOICES = [
     ('Other', 'Other'),
 ]
 
-
 #school_type
 SCHOOL_TYPE_CHOICES = (
     ('elementary', 'Elementary School'),
@@ -109,3 +108,32 @@ DEGREE_TYPE_CHOICES = (
     ('certificate', 'Certificate'),
     ('other', 'Other'),
 )
+#SALARY_TYPES
+SALARY_TYPES = (
+        ('annual', 'Annual Salary'),
+        ('monthly', 'Monthly Salary'),
+        ('twoWeeks', 'Two Weeks Salary'),
+        ('weekly', 'Weekly Salary'),
+        ('daily', 'Daily Rate'),
+        ('hourly', 'Hourly Wage'),
+        ('commission', 'Commission'),
+        ('bonus', 'Bonus'),
+        ('profit_sharing', 'Profit Sharing'),
+        ('other', 'Other'),
+    )
+
+#JOB_TYPES
+JOB_TYPES = (
+        ('full-time', 'Full-time'),
+        ('part-time', 'Part-time'),
+        ('contract', 'Contract/Freelance'),
+        ('internship', 'Internship'),
+        ('apprenticeship', 'Apprenticeship'),
+        ('remote', 'Remote/Telecommute'),
+        ('shift-based', 'Shift-based'),
+        ('volunteer', 'Volunteer'),
+        ('consultant', 'Consultant'),
+        ('permanent', 'Permanent'),
+        ('temporary', 'Temporary'),
+        ('other', 'Other'),
+    )

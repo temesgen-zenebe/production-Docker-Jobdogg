@@ -1,6 +1,11 @@
 from django.views.generic import ListView, DetailView, FormView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin,PermissionRequiredMixin
 from django.urls import reverse_lazy
+import pandas as pd
+import pyxlsb
+import openpyxl
+import json
+
 from .models import (
     CertificationLicense,
     Education,
@@ -23,6 +28,7 @@ from django.urls import reverse
 from .forms import (
     CertificationLicenseForm,
     EducationForm,
+    EmployeePreferencesForm,
     ExperienceForm,
     MilitaryForm,
     PersonalForm,
@@ -78,6 +84,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         CertificationLicense_form = CertificationLicenseForm()
         # Retrieve all Certification License objects related to the user's Education
         certification_licenses = CertificationLicense.objects.filter(education__user=request.user)
+        employee_preferences_form = EmployeePreferencesForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
@@ -88,6 +95,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'education_form': education_form,
             'CertificationLicense_form':CertificationLicense_form,
             'experienceForm_form':experienceForm_form,
+            'employee_preferences_form':employee_preferences_form,
             'progress':progress,
             'progress_percentage': progress_percentage,
             'policies': policies,
@@ -203,6 +211,20 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                return redirect('employee:profile_building_progress')
             else:
               print("Certification License form is invalid")
+              
+        elif 'employee_preferences' in request.POST:
+            employee_preferences_form = EmployeePreferencesForm(request.POST)
+            
+            if employee_preferences_form.is_valid():
+                employee_preferences = employee_preferences_form.save(commit=False)
+                employee_preferences.user = request.user
+               
+                employee_preferences.save()
+                
+                profile.Preferences_completed = True  # Mark the step as completed in the profile
+                profile.save()
+                
+                return redirect('employee:profile_building_progress')
 
         else:
             pass   
@@ -213,6 +235,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         education_form = EducationForm()
         CertificationLicense_form = CertificationLicenseForm()
         experienceForm_form = ExperienceForm()
+        employee_preferences_form = EmployeePreferencesForm()
        
         context = {
             'basic_information_form': basic_information_form,
@@ -768,3 +791,5 @@ class NoExperienceView(LoginRequiredMixin, View):
         profile.save()
         messages.success(request, 'No ExperienceView saved successfully.')
         return redirect('employee:profile_building_progress')
+    
+
