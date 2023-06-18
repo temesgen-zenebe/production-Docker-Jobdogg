@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 import pandas as pd
 import pyxlsb
 import openpyxl
-import json
+
 
 from .models import (
     Category,
