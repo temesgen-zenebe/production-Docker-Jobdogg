@@ -168,9 +168,14 @@ class SkillAdmin(admin.ModelAdmin):
     
 @admin.register(EmployeePreferences)
 class EmployeePreferencesAdmin(admin.ModelAdmin):
-    list_display = ('user', 'minimum_salary', 'category', 'get_desired_positions', 'skills')
-    list_filter = ('category', 'desired_positions', 'skills')
-    
+    list_display = ('user', 'category', 'get_desired_positions', 'get_skills', 'minimum_salary', 'salary_type', 'location', 'job_type')
+
     def get_desired_positions(self, obj):
         return ", ".join([str(position) for position in obj.desired_positions.all()])
+
     get_desired_positions.short_description = 'Desired Positions'
+
+    def get_skills(self, obj):
+        return ", ".join([str(skill) for skill in obj.skills.all()])
+
+    get_skills.short_description = 'Skills'

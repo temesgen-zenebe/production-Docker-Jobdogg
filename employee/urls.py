@@ -60,7 +60,8 @@ from .views import (
     
     #No ExperienceView 
     NoExperienceView,
-    
+    PositionsView,
+    SkillsView,
      
 )
 from employee import views
@@ -75,6 +76,9 @@ urlpatterns = [
     path('skipMilitary/', SkipMilitaryView.as_view(), name='skip_military'),
     #No ExperienceView 
     path('no_Experience/', NoExperienceView.as_view(), name='no_Experience'),
+    #Positions
+    path('positions/', PositionsView.as_view(), name='positions'),
+    path('skills/', SkillsView.as_view(), name='skills'),
     #-----policies-----------
     path('policies/list/', PolicyListView.as_view(), name='policies_list'),
     path('policies/accept/', AcceptPoliciesView.as_view(), name='accept_policies'),
@@ -127,8 +131,6 @@ urlpatterns = [
     path('experience/<slug:slug>/', ExperienceDetailView.as_view(), name='experience_detail'),
     path('experience/<slug:slug>/update/', ExperienceUpdateView.as_view(), name='experience_update'),
     path('experience/<slug:slug>/delete/', ExperienceDeleteView.as_view(), name='experience_delete'),
-    
-   
 
 ]
 
