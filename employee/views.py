@@ -230,7 +230,6 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                     employee_preferences.category_id = request.POST.get('category')  # Set the category ID from the form data
                     employee_preferences.user = request.user
                     employee_preferences.save()  # Save the EmployeePreferences instance
-
                     # Get the selected positions and skills from the form data
                     desired_positions = request.POST.getlist('desired_positions')
                     skills = request.POST.getlist('skills')
