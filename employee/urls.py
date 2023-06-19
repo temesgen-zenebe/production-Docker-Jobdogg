@@ -1,4 +1,3 @@
-from . import views
 from django.urls import path
 from .views import (
     #-------Policies------
@@ -60,11 +59,9 @@ from .views import (
     
     #No ExperienceView 
     NoExperienceView,
-    PositionsView,
-    SkillsView,
+    
      
 )
-from employee import views
 app_name = 'employee' 
 
 urlpatterns = [
@@ -76,9 +73,6 @@ urlpatterns = [
     path('skipMilitary/', SkipMilitaryView.as_view(), name='skip_military'),
     #No ExperienceView 
     path('no_Experience/', NoExperienceView.as_view(), name='no_Experience'),
-    #Positions
-    path('positions/', PositionsView.as_view(), name='positions'),
-    path('skills/', SkillsView.as_view(), name='skills'),
     #-----policies-----------
     path('policies/list/', PolicyListView.as_view(), name='policies_list'),
     path('policies/accept/', AcceptPoliciesView.as_view(), name='accept_policies'),

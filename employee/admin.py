@@ -1,7 +1,5 @@
 from django.contrib import admin
 from .models import (
-    
-     #Education
      CertificationLicense, 
      Education,
      Experience, 
@@ -10,14 +8,9 @@ from .models import (
      Policies,
      UserAcceptedPolicies,
      BasicInformation,
-     #Personal
      Personal,
-     Language,
-     #preferences
-     Category, 
-     Position, 
-     Skill, 
-     EmployeePreferences, 
+     Language
+   
     )
 
 @admin.register(Profile)
@@ -153,29 +146,3 @@ class ExperienceAdmin(admin.ModelAdmin):
         if obj:  # editing an existing object
             return ('created', 'updated', 'slug')
         return ()
-    
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('category',)
-    
-@admin.register(Position)
-class PositionAdmin(admin.ModelAdmin):
-    list_display = ('position', 'category', 'skill_test_link')
-    
-@admin.register(Skill)
-class SkillAdmin(admin.ModelAdmin):
-    list_display = ('skill',)
-    
-@admin.register(EmployeePreferences)
-class EmployeePreferencesAdmin(admin.ModelAdmin):
-    list_display = ('user', 'category', 'get_desired_positions', 'get_skills', 'minimum_salary', 'salary_type', 'location', 'job_type')
-
-    def get_desired_positions(self, obj):
-        return ", ".join([str(position) for position in obj.desired_positions.all()])
-
-    get_desired_positions.short_description = 'Desired Positions'
-
-    def get_skills(self, obj):
-        return ", ".join([str(skill) for skill in obj.skills.all()])
-
-    get_skills.short_description = 'Skills'
