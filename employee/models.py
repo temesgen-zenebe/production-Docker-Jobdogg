@@ -269,7 +269,6 @@ class Skill(models.Model):
     def __str__(self):
         return self.skill
 
-
 class EmployeePreferences(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     minimum_salary = models.DecimalField(max_digits=10, decimal_places=2)

@@ -229,12 +229,25 @@
                     <h6 class="card-text"><i class="fa-solid fa-asterisk px-1"></i>Preferences</h6>
                     <small class="">Step 7: Preferences </small>
                     <div class="d-flex justify-content-between align-items-center">
+                        
                         {% if progres.Preferences_completed %}
-                        <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        <div class="btn-group gap-1">
+                            <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                            </button>
+                            <a href="#" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                            
+                            <!-- Modal Trigger Button -->
+                        
                         </div>
+                        {% else %}
+                            <!-- Personal Step -->
+                            <div class="btn-group">
+                                <button type="button"  class="btn btn btn-sm btn-outline-secondary mt-3" data-bs-toggle="modal" data-bs-target="#preferencesModal">
+                                    Create
+                                </button>
+                            </div>
+                         
                         {% endif %}
                     </div>
                     </div>
@@ -685,6 +698,72 @@
                     </div>
                 </div>
             </div>
+            <!-- Bootstrap Modal Button -->
+
+            <!-- Bootstrap Modal -->
+            <div class="modal fade" id="preferencesModal" tabindex="-1" aria-labelledby="preferencesModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="preferencesModalLabel">Employee Preferences</h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Employee Preferences Section -->
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <!-- Other form fields -->
+                                {{ employee_preferences_form|crispy }}
+                                <button name="preferences" value="save" type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script>
+                                $(document).ready(function() {
+                                // Update positions dropdown based on selected category
+                                $('#id_category').on('change', function() {
+                                    var categoryId = $(this).val();
+                                    $.ajax({
+                                    url: "{% url 'employee:positions' %}",
+                                    data: { category_id: categoryId },
+                                    success: function(response) {
+                                        var positions = response.positions;
+                                        var positionSelect = $('#id_desired_positions');
+                                        positionSelect.empty();
+                                        
+                                        // Add default option for positions dropdown
+                                        positionSelect.append('<option value="" selected="">---------</option>');
+                                        
+                                        $.each(positions, function(index, position) {
+                                        positionSelect.append('<option value="' + position.id + '">' + position.position + '</option>');
+                                        });
+                                    }
+                                    });
+                                });
+                            
+                                // Update skills dropdown based on selected position
+                                $('#id_desired_positions').on('change', function() {
+                                    var positionId = $(this).val();
+                                    $.ajax({
+                                    url: "{% url 'employee:skills' %}",
+                                    data: { position_id: positionId },
+                                    success: function(response) {
+                                        var skills = response.skills;
+                                        var skillsSelect = $('#id_skills');
+                                        skillsSelect.empty();
+                                        
+                                        $.each(skills, function(index, skill) {
+                                        skillsSelect.append('<option value="' + skill.id + '">' + skill.skill + '</option>');
+                                        });
+                                    }
+                                    });
+                                });
+                                });
+                            </script>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
     </div>     
 
 </div>  
@@ -756,8 +835,6 @@
         updateProgressBar();
         setActiveStep();
         });
-    </script>
-    
-      
+    </script> 
 {% endblock %} 
 {% endblock %}

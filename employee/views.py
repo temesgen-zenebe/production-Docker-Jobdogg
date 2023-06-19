@@ -1,12 +1,22 @@
+from django.http import JsonResponse
 from django.views.generic import ListView, DetailView, FormView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin,PermissionRequiredMixin
 from django.urls import reverse_lazy
+import pandas as pd
+import pyxlsb
+import openpyxl
+
+
 from .models import (
+    Category,
     CertificationLicense,
     Education,
+    EmployeePreferences,
     Experience, 
-    Policies, 
-    Profile, 
+    Policies,
+    Position, 
+    Profile,
+    Skill, 
     UserAcceptedPolicies,
     BasicInformation,
     Personal, 
@@ -21,8 +31,14 @@ from django.views import View
 from django.urls import reverse
 
 from .forms import (
+    BasicInformationForm,
     CertificationLicenseForm,
     EducationForm,
+    EmployeePreferencesForm,
+    ExperienceForm,
+    MilitaryForm,
+    PersonalForm,
+    EmployeePreferencesForm,
     ExperienceForm,
     MilitaryForm,
     PersonalForm,
@@ -78,9 +94,13 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         CertificationLicense_form = CertificationLicenseForm()
         # Retrieve all Certification License objects related to the user's Education
         certification_licenses = CertificationLicense.objects.filter(education__user=request.user)
+        employee_preferences_form = EmployeePreferencesForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
+        categories = Category.objects.all()
+        positions = Position.objects.all()
+        skills = Skill.objects.all()
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
@@ -88,6 +108,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'education_form': education_form,
             'CertificationLicense_form':CertificationLicense_form,
             'experienceForm_form':experienceForm_form,
+            'employee_preferences_form':employee_preferences_form,
             'progress':progress,
             'progress_percentage': progress_percentage,
             'policies': policies,
@@ -95,6 +116,9 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'all_policies_accepted': all_policies_accepted,
             'certification_licenses':certification_licenses,
             'documents_uploaded': True,  # Set the flag to True if there are uploaded documents
+            'categories': categories,
+            'positions': positions,
+            'skills': skills
             
         }
            
@@ -203,7 +227,31 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                return redirect('employee:profile_building_progress')
             else:
               print("Certification License form is invalid")
+              
+        elif 'preferences' in request.POST:
+                employee_preferences_form = EmployeePreferencesForm(request.POST)
+                if employee_preferences_form.is_valid():
+                    employee_preferences = employee_preferences_form.save(commit=False)
+                    employee_preferences.category_id = request.POST.get('category')  # Set the category ID from the form data
+                    employee_preferences.user = request.user
+                    employee_preferences.save()  # Save the EmployeePreferences instance
+                    # Get the selected positions and skills from the form data
+                    desired_positions = request.POST.getlist('desired_positions')
+                    skills = request.POST.getlist('skills')
 
+                    # Clear existing desired_positions and skills and set the new values
+                    employee_preferences.desired_positions.clear()
+                    employee_preferences.skills.clear()
+                    employee_preferences.desired_positions.set(desired_positions)
+                    employee_preferences.skills.set(skills)
+                   
+                    profile.Preferences_completed = True
+                    profile.save()
+                    return redirect('employee:profile_building_progress')
+                else:
+                    print(employee_preferences_form.errors)  # Print form errors
+
+                
         else:
             pass   
         # If neither form was submitted or form validation failed, render the template again with the forms
@@ -213,6 +261,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         education_form = EducationForm()
         CertificationLicense_form = CertificationLicenseForm()
         experienceForm_form = ExperienceForm()
+        employee_preferences_form = EmployeePreferencesForm()
        
         context = {
             'basic_information_form': basic_information_form,
@@ -221,6 +270,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'education_form':education_form,
             'CertificationLicense_form':CertificationLicense_form,
             'experienceForm_form':experienceForm_form,
+            'employee_preferences_form': employee_preferences_form
         }
         return render(request, self.template_name, context)
     
@@ -232,7 +282,23 @@ class SkipMilitaryView(LoginRequiredMixin, View):
         profile.save()
         messages.success(request, 'Military step skipped successfully.')
         return redirect('employee:profile_building_progress')
-          
+
+# Dynamic dropdown views
+#Positions View 
+class PositionsView(View):
+    def get(self, request):
+        category_id = request.GET.get('category_id')
+        positions = Position.objects.filter(category_id=category_id).values('id', 'position')
+        return JsonResponse({'positions': list(positions)})
+    
+#Skills View
+class SkillsView(View):
+    def get(self, request):
+        position_id = request.GET.get('position_id')
+        skills = Skill.objects.filter(position__id=position_id)
+        skills_data = [{'id': skill.id, 'skill': skill.skill} for skill in skills]
+        return JsonResponse({'skills': skills_data})
+    
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'
     context_object_name = 'policies'
@@ -768,3 +834,5 @@ class NoExperienceView(LoginRequiredMixin, View):
         profile.save()
         messages.success(request, 'No ExperienceView saved successfully.')
         return redirect('employee:profile_building_progress')
+    
+
