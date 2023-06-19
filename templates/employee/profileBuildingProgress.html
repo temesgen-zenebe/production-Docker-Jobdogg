@@ -709,12 +709,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <!-- Employee Preferences Section 
+                            <!-- Employee Preferences Section -->
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{ employee_preferences_form|crispy }}
                                 <button name="preferences" value="save" type="submit" class="btn btn-primary">Save</button>
-                            </form>-->
+                            </form><!--
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
@@ -803,7 +803,7 @@
                                     </div>
                                 </div>
                                 <button name="preferences" value="save" type="submit" class="btn btn-sm btn-outline-primary my-3">Save</button>
-                            </form>
+                            </form>-->
                             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                             <script>
                                 $(document).ready(function() {

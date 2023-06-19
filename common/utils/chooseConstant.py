@@ -136,3 +136,5 @@ JOB_TYPES = (
         ('temporary', 'Temporary'),
         ('other', 'Other'),
     )
+#RELOCATION
+RELOCATION = (('Yes', 'Yes'),('No', 'No'),)

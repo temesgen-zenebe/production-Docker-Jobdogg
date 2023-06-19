@@ -135,7 +135,7 @@ class EmployeePreferencesForm(forms.ModelForm):
         queryset=Skill.objects.none(),
         widget=forms.SelectMultiple(attrs={'class': 'form-control form-control-sm', 'id': 'id_skills'})
     )
-
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if 'category' in self.data:
@@ -164,3 +164,13 @@ class EmployeePreferencesForm(forms.ModelForm):
             'custom_positions',
             'custom_skills'
         ]
+        widgets = {
+            'minimum_salary': forms.NumberInput(attrs={'class': 'numberinput form-control form-control-sm', 'id': 'id_minimum_salary'}),
+            'salary_type': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_salary_type'}),
+            'location': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_location'}),
+            'can_relocation': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_can_relocation','placeholder':'select'}),
+            'job_type': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_job_type'}),
+            'years_of_experience': forms.NumberInput(attrs={'class': 'numberinput form-control form-control-sm', 'id': 'id_years_of_experience'}),
+            'custom_positions': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_custom_positions'}),
+            'custom_skills': forms.Textarea(attrs={'class': 'textarea form-control form-control-sm', 'id': 'id_custom_skills'}),
+        }

@@ -14,7 +14,8 @@ from common.utils.chooseConstant import (
     SCHOOL_TYPE_CHOICES,
     DEGREE_TYPE_CHOICES,
     SALARY_TYPES,
-    JOB_TYPES
+    JOB_TYPES,
+    RELOCATION
     )
 from multiupload.fields import MultiFileField 
 
@@ -275,7 +276,7 @@ class EmployeePreferences(models.Model):
     salary_type = models.CharField(max_length=20, choices=SALARY_TYPES)
     location = models.CharField(max_length=100)
     job_type = models.CharField(max_length=20, choices=JOB_TYPES)
-    can_relocation = models.BooleanField(default=False)
+    can_relocation = models.CharField(max_length=10, choices=RELOCATION)
     years_of_experience = models.PositiveIntegerField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     desired_positions = models.ManyToManyField(Position, related_name='employee_preferences')
