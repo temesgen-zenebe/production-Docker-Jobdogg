@@ -1,11 +1,21 @@
 import re
+from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings 
+from django.urls import reverse
 from common.utils.text import unique_slug
 from localflavor.us.models import USStateField 
 from localflavor.us.us_states import STATE_CHOICES
-from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES, DUTY_FLAG_CHOICES, BRANCH, RANK_CHOICES, SCHOOL_TYPE_CHOICES,DEGREE_TYPE_CHOICES
+from common.utils.chooseConstant import (
+    DISCHARGE_YEAR_CHOICES, 
+    DUTY_FLAG_CHOICES,
+    BRANCH, RANK_CHOICES, 
+    SCHOOL_TYPE_CHOICES,
+    DEGREE_TYPE_CHOICES,
+    SALARY_TYPES,
+    JOB_TYPES
+    )
 from multiupload.fields import MultiFileField 
 
 
@@ -228,3 +238,85 @@ class Experience(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Experience: {self.job_title} at {self.company_name}"
+
+class Category(models.Model):
+    category = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.category
+
+class Position(models.Model):
+    position = models.CharField(max_length=200)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='positions')
+    skill_test_link = models.URLField()
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.position} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.position
+
+class Skill(models.Model):
+    skill = models.CharField(max_length=200)
+    position = models.ManyToManyField(Position, related_name='skills')
+
+    def __str__(self):
+        return self.skill
+
+
+class EmployeePreferences(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    minimum_salary = models.DecimalField(max_digits=10, decimal_places=2)
+    salary_type = models.CharField(max_length=20, choices=SALARY_TYPES)
+    location = models.CharField(max_length=100)
+    job_type = models.CharField(max_length=20, choices=JOB_TYPES)
+    can_relocation = models.BooleanField(default=False)
+    years_of_experience = models.PositiveIntegerField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    desired_positions = models.ManyToManyField(Position, related_name='employee_preferences')
+    skills = models.ManyToManyField(Skill)
+    custom_positions = models.CharField(max_length=200, null=True, blank=True)
+    custom_skills = models.TextField(null=True, blank=True)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.job_type} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user.username}'s Preferences"
+
+    def get_absolute_url(self):
+        return reverse('employee-preferences-detail', kwargs={'slug': self.slug})
+
+    @property
+    def positions_cache_key(self):
+        return f"employee_positions_{self.category_id}"
+
+    @property
+    def skills_cache_key(self):
+        return f"employee_skills_{self.desired_positions.values_list('id', flat=True)}"
+
+    def get_positions(self):
+        positions = cache.get(self.positions_cache_key)
+        if not positions:
+            positions = Position.objects.filter(category=self.category)
+            cache.set(self.positions_cache_key, positions)
+        return positions
+
+    def get_skills(self):
+        skills = cache.get(self.skills_cache_key)
+        if not skills:
+            skills = Skill.objects.filter(position__in=self.desired_positions.all())
+            cache.set(self.skills_cache_key, skills)
+        return skills
