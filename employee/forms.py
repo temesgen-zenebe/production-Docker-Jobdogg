@@ -125,15 +125,15 @@ class ExperienceForm(forms.ModelForm):
 class EmployeePreferencesForm(forms.ModelForm):
     category = forms.ModelChoiceField(
         queryset=Category.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control', 'id': 'id_category'})
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_category'})
     )
     desired_positions = forms.ModelChoiceField(
         queryset=Position.objects.none(),
-        widget=forms.Select(attrs={'class': 'form-control', 'id': 'id_desired_positions'})
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_desired_positions'})
     )
     skills = forms.ModelMultipleChoiceField(
         queryset=Skill.objects.none(),
-        widget=forms.SelectMultiple(attrs={'class': 'form-control', 'id': 'id_skills'})
+        widget=forms.SelectMultiple(attrs={'class': 'form-control form-control-sm', 'id': 'id_skills'})
     )
 
     def __init__(self, *args, **kwargs):

@@ -709,12 +709,100 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <!-- Employee Preferences Section -->
+                            <!-- Employee Preferences Section 
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
-                                <!-- Other form fields -->
                                 {{ employee_preferences_form|crispy }}
                                 <button name="preferences" value="save" type="submit" class="btn btn-primary">Save</button>
+                            </form>-->
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
+                                    <div class="col" id="div_id_minimum_salary">
+                                        <label for="id_minimum_salary" class="form-label requiredField">Minimum salary<span class="asteriskField">*</span></label>
+                                        <input type="number" name="minimum_salary" min="1.00" step="0.01" class="numberinput form-control form-control-sm" required="" id="id_minimum_salary">
+                                    </div>
+                                    <div class="col" id="div_id_salary_type">
+                                        <label for="id_salary_type" class="form-label requiredField">Salary type<span class="asteriskField">*</span></label>
+                                        <select name="salary_type" class="select form-select form-select-sm" required="" id="id_salary_type" aria-label="salary type">
+                                            <option value="" selected="">---------</option>
+                                            <option value="annual">Annual Salary</option>
+                                            <option value="monthly">Monthly Salary</option>
+                                            <option value="twoWeeks">Two Weeks Salary</option>
+                                            <option value="weekly">Weekly Salary</option>
+                                            <option value="daily">Daily Rate</option>
+                                            <option value="hourly">Hourly Wage</option>
+                                            <option value="commission">Commission</option>
+                                            <option value="bonus">Bonus</option>
+                                            <option value="profit_sharing">Profit Sharing</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col" id="div_id_location">
+                                        <label for="id_location" class="form-label requiredField">Location<span class="asteriskField">*</span></label>
+                                        <input type="text" name="location" maxlength="100" class="textinput form-control form-control-sm" required="" id="id_location">
+                                    </div>
+                                    <div class="col" id="div_id_can_relocation">
+                                        <label for="id_can_relocation" class="form-label requiredField">Relocation?<span class="asteriskField">*</span></label>
+                                        <select name="can_relocation" class="select form-select form-select-sm" required="" id="id_can_relocation">
+                                            <option value="" selected="">---</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="col" id="div_id_job_type">
+                                        <label for="id_job_type" class="form-label requiredField">Job type<span class="asteriskField">*</span></label>
+                                        <select name="job_type" class="select form-select form-select-sm" required="" id="id_job_type">
+                                            <option value="" selected="">---------</option>
+                                            <option value="full-time">Full-time</option>
+                                            <option value="part-time">Part-time</option>
+                                            <option value="contract">Contract/Freelance</option>
+                                            <option value="internship">Internship</option>
+                                            <option value="apprenticeship">Apprenticeship</option>
+                                            <option value="remote">Remote/Telecommute</option>
+                                            <option value="shift-based">Shift-based</option>
+                                            <option value="volunteer">Volunteer</option>
+                                            <option value="consultant">Consultant</option>
+                                            <option value="permanent">Permanent</option>
+                                            <option value="temporary">Temporary</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col" id="div_id_years_of_experience">
+                                        <label for="id_years_of_experience" class="form-label requiredField">Years of experience<span class="asteriskField">*</span></label>
+                                        <input type="number" name="years_of_experience" step="0.01" class="numberinput form-control form-control-sm" required="" id="id_years_of_experience">
+                                    </div>
+                                    <div class="col" id="div_id_category">
+                                        <label for="id_category" class="form-label requiredField">Category<span class="asteriskField">*</span></label>
+                                        <select name="category" class="form-control form-select-sm select form-select" id="id_category" required="">
+                                            <option value="" selected="">---------</option>
+                                            <option value="1">accounting &amp; finance</option>
+                                        </select>
+                                    </div>
+                                    <div class="col" id="div_id_desired_positions">
+                                        <label for="id_desired_positions" class="form-label requiredField">Desired positions<span class="asteriskField">*</span></label>
+                                        <select name="desired_positions" class="form-control select form-select-sm form-select" id="id_desired_positions" required="">
+                                            <option value="" selected="">---------</option>
+                                        </select>
+                                    </div>
+                                    <div class="col" id="div_id_skills">
+                                        <div id="div_id_custom_positions">
+                                            <label for="id_skills" class="form-label requiredField">Skills<span class="asteriskField">*</span></label>
+                                            <select name="skills" size="2" aria-label="size 3" class="form-control selectmultiple form-select form-select-sm" id="id_skills" required="" multiple=""></select>
+                                        </div>
+                                    </div>
+                                    <div class="col d-flex gap-2">
+                                        <div id="div_id_custom_positions">
+                                            <label for="id_custom_positions" class="form-label">Positions</label>
+                                            <input type="text" name="custom_positions" maxlength="200" class="textinput form-control form-control-sm" id="id_custom_positions">
+                                        </div>
+                                        <div id="div_id_custom_skills" class="mb-3">
+                                            <label for="id_custom_skills" class="form-label">Skills</label>
+                                            <textarea name="custom_skills" cols="40" rows="1" class="textarea form-control form-control-sm" id="id_custom_skills"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button name="preferences" value="save" type="submit" class="btn btn-sm btn-outline-primary my-3">Save</button>
                             </form>
                             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                             <script>
