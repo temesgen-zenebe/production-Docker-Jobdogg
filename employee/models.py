@@ -7,6 +7,7 @@ from django.contrib.auth.models import Group
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from common.utils.text import unique_slug
 from localflavor.us.models import USStateField 
@@ -164,7 +165,7 @@ class Personal(models.Model):
     
 #Military
 class Military(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     branch = models.CharField(max_length=50, choices=BRANCH)
     rank = models.CharField(max_length=100, choices=RANK_CHOICES)
     discharge_year = models.DateField(verbose_name="discharge year" )
@@ -173,13 +174,25 @@ class Military(models.Model):
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    def form_valid(self, form):
+        military = form.save(commit=False)
+        military.user = self.request.user
+        military.save()
+        
+        # Update the profile completion status
+        profile = get_object_or_404(Profile, user=self.request.user)
+        profile.Military_completed = True
+        profile.save()
 
+        return super().form_valid(form)
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             value = f"{self.branch} {self.user.username}"
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
-        
+           
     def __str__(self):
         return f"{self.user.username}'s Military Information"
     

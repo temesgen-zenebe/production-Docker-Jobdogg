@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.views.generic import ListView, DetailView, FormView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin,PermissionRequiredMixin
 from django.urls import reverse_lazy
+from django.db import IntegrityError
 import pandas as pd
 import pyxlsb
 import openpyxl
@@ -592,26 +593,36 @@ class MilitaryCreateView(LoginRequiredMixin, CreateView):
     model = Military
     form_class = MilitaryForm
     template_name = 'employee/military_create.html'
-
+    success_url = reverse_lazy('employee:military_create')
+    
     def form_valid(self, form):
+        # Set the user field to the currently logged-in user
         form.instance.user = self.request.user
+
+        # Check if a Military record already exists for the user
+        military_qs = Military.objects.filter(user=self.request.user)
+        if military_qs.exists():
+            # Update the existing Military record with the form data
+            military = military_qs.first()
+            military.branch = form.cleaned_data['branch']
+            military.rank = form.cleaned_data['rank']
+            military.discharge_year = form.cleaned_data['discharge_year']
+            military.duty_flag = form.cleaned_data['duty_flag']
+            military.certification_license = form.cleaned_data['certification_license']
+            military.save()
+        else:
+            # Create a new Military record for the user
+            military = form.save()
+
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('employee:military_list')
 
     def dispatch(self, request, *args, **kwargs):
-        try:
-            profile = Profile.objects.get(user=request.user)
-        except Profile.DoesNotExist:
-            profile = Profile(user=request.user)
-
-        if not profile.personal_information_completed:
-            return redirect('employee:personal_list')
-
+        profile = get_object_or_404(Profile, user=request.user)
         profile.Military_completed = True
         profile.save()
-
         return super().dispatch(request, *args, **kwargs)
     
 class MilitaryUpdateView(LoginRequiredMixin, UpdateView):
@@ -773,9 +784,10 @@ class ExperienceListView(LoginRequiredMixin, ListView):
         return Experience.objects.filter(user=self.request.user)
     
 class ExperienceCreateView(LoginRequiredMixin, CreateView):
-    model = Experience
-    form_class = ExperienceForm
-    template_name = 'employee/experience_create.html'
+    model = Military
+    form_class = MilitaryForm
+    template_name = 'employee/military_create.html'
+    success_url = reverse_lazy('employee:military_list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
