@@ -24,6 +24,7 @@
             {% if progress %}
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 {% for progres in progress %}
+                {% if  progres.account_created %}
                 <!--Accept Policies-->
                 <div class="col step-item ">
                     <div class="card border-left-danger shadow h-100 py-2">
@@ -53,6 +54,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 <!--Basic Information-->
                 {% if  progres.companyPolices_completed %}
                 <div class="col step-item ">

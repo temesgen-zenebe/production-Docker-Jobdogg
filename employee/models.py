@@ -1,8 +1,12 @@
 import re
+from django.conf import settings
+from django.dispatch import receiver
+from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
+from django.contrib.auth.models import Group
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.conf import settings 
 from django.urls import reverse
 from common.utils.text import unique_slug
 from localflavor.us.models import USStateField 
@@ -23,6 +27,7 @@ from multiupload.fields import MultiFileField
 #Profile
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    account_created = models.BooleanField(default=False)
     companyPolices_completed = models.BooleanField(default=False)
     basic_information_completed = models.BooleanField(default=False)
     personal_information_completed = models.BooleanField(default=False)
@@ -34,11 +39,11 @@ class Profile(models.Model):
     VideoResume_completed = models.BooleanField(default=False)
     ResumeUploading_completed = models.BooleanField(default=False)
     
-    # Add any other fields related to the profile
-
     def __str__(self):
         return str(self.user)
+    
 
+        
 #Policies
 class Policies(models.Model):
     title = models.CharField(max_length=255)
