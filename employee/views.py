@@ -1,36 +1,28 @@
-from django.http import JsonResponse
-from django.views.generic import ListView, DetailView, FormView,CreateView,UpdateView,DeleteView
+from typing import Any
+from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin,PermissionRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.shortcuts import render, redirect
 from django.db import IntegrityError
-import pandas as pd
-import pyxlsb
-import openpyxl
-
-
-from .models import (
-    Category,
-    CertificationLicense,
-    Education,
-    EmployeePreferences,
-    Experience, 
-    Policies,
-    Position, 
-    Profile,
-    Skill, 
-    UserAcceptedPolicies,
-    BasicInformation,
-    Personal, 
-    Language,
-    Military,
-    )
 from django.contrib import messages
 from django.template import Library
 from django import forms
 from django.shortcuts import get_object_or_404, render, redirect
+from employee.templatetags.mask_ssn import mask_ssn
+from django.forms import CheckboxSelectMultiple
 from django.views import View
-from django.urls import reverse
+import pandas as pd
+import pyxlsb
+import openpyxl
+from django.views.generic import (
+    ListView, CreateView, UpdateView, DetailView, DeleteView, FormView
+)
 
+from .models import (
+    Category,CertificationLicense,Education,EmployeePreferences,Experience, 
+    Policies,Position,Profile,Skill,UserAcceptedPolicies,BasicInformation,
+    Personal,Language,Military,
+)
 from .forms import (
     BasicInformationForm,
     CertificationLicenseForm,
@@ -39,15 +31,13 @@ from .forms import (
     ExperienceForm,
     MilitaryForm,
     PersonalForm,
-    EmployeePreferencesForm,
     ExperienceForm,
     MilitaryForm,
     PersonalForm,
     BasicInformationForm,
     UserAcceptedPoliciesForm
 )
-from employee.templatetags.mask_ssn import mask_ssn
-from django.shortcuts import get_object_or_404
+
 
 #----Policies Models ------
 class DashboardInformation(LoginRequiredMixin, View):
@@ -429,8 +419,6 @@ class PoliciesDeleteView(PoliciesAdminRequiredMixin, DeleteView):
     template_name = 'employee/policies_delete.html'
     success_url = reverse_lazy('employee:policies_list')
 
-# ----end-------
-
 #-----BasicInformation-----------------------------
 class BasicInformationListView(LoginRequiredMixin, ListView):
     model = BasicInformation
@@ -457,7 +445,6 @@ class BasicInformationCreateView(LoginRequiredMixin, CreateView):
         profile.basic_information_completed = True
         profile.save()
         return super().dispatch(request, *args, **kwargs)
-    
     
 class BasicInformationDetailView(LoginRequiredMixin, DetailView):
     model = BasicInformation
@@ -847,5 +834,107 @@ class NoExperienceView(LoginRequiredMixin, View):
         profile.save()
         messages.success(request, 'No ExperienceView saved successfully.')
         return redirect('employee:profile_building_progress')
+
+#EmployeePreferences
+class EmployeePreferencesListView(LoginRequiredMixin,ListView):
+    model = EmployeePreferences
+    template_name = 'employee/preferences/employeePreferences_list.html'
+    context_object_name = 'preferences_list'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return EmployeePreferences.objects.filter(user=self.request.user)
+
+class EmployeePreferencesCreateView(LoginRequiredMixin,CreateView):
+    model = EmployeePreferences
+    form_class = EmployeePreferencesForm
+    template_name = 'employee/preferences/employeePreferences_create.html'
+    success_url = reverse_lazy('employee:employee-preferences-list')
+
+    def post(self, request):
+        if 'preferences' in request.POST:
+            employee_preferences_form = EmployeePreferencesForm(request.POST)
+            if employee_preferences_form.is_valid():
+                    employee_preferences = employee_preferences_form.save(commit=False)
+                    employee_preferences.category_id = request.POST.get('category')  # Set the category ID from the form data
+                    employee_preferences.user = request.user
+                    employee_preferences.save()  # Save the EmployeePreferences instance
+                    # Get the selected positions and skills from the form data
+                    desired_positions = request.POST.getlist('desired_positions')
+                    skills = request.POST.getlist('skills')
+
+                    # Clear existing desired_positions and skills and set the new values
+                    employee_preferences.desired_positions.clear()
+                    employee_preferences.skills.clear()
+                    employee_preferences.desired_positions.set(desired_positions)
+                    employee_preferences.skills.set(skills)
+                   
+                    return redirect('employee:employee-preferences-list')
+         
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            
+        if not profile.Experience_completed:
+            return redirect('employee:experience_list')
+        
+        profile.Preferences_completed= True
+        profile.save()
+        return super().dispatch(request, *args, **kwargs)
     
+class EmployeePreferencesUpdateView(LoginRequiredMixin, UpdateView):
+    model = EmployeePreferences
+    form_class = EmployeePreferencesForm
+    template_name = 'employee/preferences/employeePreferences_update.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_queryset(self):
+        return EmployeePreferences.objects.filter(user=self.request.user)
+
+    def post(self, request, *args, **kwargs):
+        if 'preferences' in request.POST:
+            employee_preferences_form = EmployeePreferencesForm(request.POST, instance=self.get_object())
+            if employee_preferences_form.is_valid():
+                employee_preferences = employee_preferences_form.save(commit=False)
+                employee_preferences.category_id = request.POST.get('category')  # Set the category ID from the form data
+                employee_preferences.user = request.user
+                employee_preferences.save()  # Save the EmployeePreferences instance
+                
+                # Get the selected positions and skills from the form data
+                desired_positions = request.POST.getlist('desired_positions')
+                skills = request.POST.getlist('skills')
+
+                # Clear existing desired_positions and skills and set the new values
+                employee_preferences.desired_positions.clear()
+                employee_preferences.skills.clear()
+                employee_preferences.desired_positions.set(desired_positions)
+                employee_preferences.skills.set(skills)
+                
+                return redirect('employee:employee-preferences-list')
+
+        return super().post(request, *args, **kwargs)
+
+
+class EmployeePreferencesDetailView(DetailView):
+    model = EmployeePreferences
+    template_name = 'employee/preferences/employeePreferences_detail.html'
+    context_object_name='preferences'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_queryset(self):
+        return EmployeePreferences.objects.filter(user=self.request.user)
+
+class EmployeePreferencesDeleteView(DeleteView):
+    model = EmployeePreferences
+    template_name = 'employee/preferences/employeePreferences_confirm_delete.html'
+    success_url = reverse_lazy('employee:employee-preferences-list')
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_queryset(self):
+        return EmployeePreferences.objects.filter(user=self.request.user)
 

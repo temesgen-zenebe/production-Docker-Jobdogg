@@ -133,9 +133,10 @@ class EmployeePreferencesForm(forms.ModelForm):
     )
     skills = forms.ModelMultipleChoiceField(
         queryset=Skill.objects.none(),
-        widget=forms.SelectMultiple(attrs={'class': 'form-control form-control-sm', 'id': 'id_skills'})
+        widget=forms.SelectMultiple(attrs={'class': 'form-control form-control-sm', 'id': 'id_skills'}),
+        help_text="Select multiple options by holding down the Ctrl key (or Command key on Mac)."
     )
-    
+  
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if 'category' in self.data:

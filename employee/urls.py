@@ -63,6 +63,12 @@ from .views import (
     PositionsView,
     SkillsView,
      
+    #Preferences
+    EmployeePreferencesListView,
+    EmployeePreferencesCreateView,
+    EmployeePreferencesUpdateView,
+    EmployeePreferencesDetailView,
+    EmployeePreferencesDeleteView,
 )
 from employee import views
 app_name = 'employee' 
@@ -131,6 +137,13 @@ urlpatterns = [
     path('experience/<slug:slug>/', ExperienceDetailView.as_view(), name='experience_detail'),
     path('experience/<slug:slug>/update/', ExperienceUpdateView.as_view(), name='experience_update'),
     path('experience/<slug:slug>/delete/', ExperienceDeleteView.as_view(), name='experience_delete'),
+    
+    #Preferences 
+    path('preferences/', EmployeePreferencesListView.as_view(), name='employee-preferences-list'),
+    path('preferences/create/', EmployeePreferencesCreateView.as_view(), name='employee-preferences-create'),
+    path('preferences/<slug:slug>/', EmployeePreferencesDetailView.as_view(), name='employee-preferences-detail'),
+    path('preferences/<slug:slug>/update/', EmployeePreferencesUpdateView.as_view(), name='employee-preferences-update'),
+    path('preferences/<slug:slug>/delete/', EmployeePreferencesDeleteView.as_view(), name='employee-preferences-delete'),
 
 ]
 

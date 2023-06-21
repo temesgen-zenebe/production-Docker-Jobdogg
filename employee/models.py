@@ -315,7 +315,7 @@ class EmployeePreferences(models.Model):
         return f"{self.user.username}'s Preferences"
 
     def get_absolute_url(self):
-        return reverse('employee-preferences-detail', kwargs={'slug': self.slug})
+        return reverse('employee:employee-preferences-detail', kwargs={'slug': self.slug})
 
     @property
     def positions_cache_key(self):

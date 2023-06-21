@@ -237,7 +237,7 @@
                             <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                                 <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                             </button>
-                            <a href="#" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                            <a href="{% url 'employee:employee-preferences-list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
                             
                             <!-- Modal Trigger Button -->
                         
@@ -806,49 +806,7 @@
                                 </div>
                                 <button name="preferences" value="save" type="submit" class="btn btn-sm btn-outline-primary my-3">Save</button>
                             </form>-->
-                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                            <script>
-                                $(document).ready(function() {
-                                // Update positions dropdown based on selected category
-                                $('#id_category').on('change', function() {
-                                    var categoryId = $(this).val();
-                                    $.ajax({
-                                    url: "{% url 'employee:positions' %}",
-                                    data: { category_id: categoryId },
-                                    success: function(response) {
-                                        var positions = response.positions;
-                                        var positionSelect = $('#id_desired_positions');
-                                        positionSelect.empty();
-                                        
-                                        // Add default option for positions dropdown
-                                        positionSelect.append('<option value="" selected="">---------</option>');
-                                        
-                                        $.each(positions, function(index, position) {
-                                        positionSelect.append('<option value="' + position.id + '">' + position.position + '</option>');
-                                        });
-                                    }
-                                    });
-                                });
                             
-                                // Update skills dropdown based on selected position
-                                $('#id_desired_positions').on('change', function() {
-                                    var positionId = $(this).val();
-                                    $.ajax({
-                                    url: "{% url 'employee:skills' %}",
-                                    data: { position_id: positionId },
-                                    success: function(response) {
-                                        var skills = response.skills;
-                                        var skillsSelect = $('#id_skills');
-                                        skillsSelect.empty();
-                                        
-                                        $.each(skills, function(index, skill) {
-                                        skillsSelect.append('<option value="' + skill.id + '">' + skill.skill + '</option>');
-                                        });
-                                    }
-                                    });
-                                });
-                                });
-                            </script>
                         </div> 
                     </div>
                 </div>
