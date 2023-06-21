@@ -836,7 +836,7 @@ class NoExperienceView(LoginRequiredMixin, View):
         return redirect('employee:profile_building_progress')
 
 #EmployeePreferences
-class EmployeePreferencesListView(LoginRequiredMixin,ListView):
+class EmployeePreferencesListView(ListView):
     model = EmployeePreferences
     template_name = 'employee/preferences/employeePreferences_list.html'
     context_object_name = 'preferences_list'
@@ -845,7 +845,7 @@ class EmployeePreferencesListView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         return EmployeePreferences.objects.filter(user=self.request.user)
 
-class EmployeePreferencesCreateView(LoginRequiredMixin,CreateView):
+class EmployeePreferencesCreateView(CreateView):
     model = EmployeePreferences
     form_class = EmployeePreferencesForm
     template_name = 'employee/preferences/employeePreferences_create.html'
@@ -884,7 +884,7 @@ class EmployeePreferencesCreateView(LoginRequiredMixin,CreateView):
         profile.save()
         return super().dispatch(request, *args, **kwargs)
     
-class EmployeePreferencesUpdateView(LoginRequiredMixin, UpdateView):
+class EmployeePreferencesUpdateView(UpdateView):
     model = EmployeePreferences
     form_class = EmployeePreferencesForm
     template_name = 'employee/preferences/employeePreferences_update.html'
