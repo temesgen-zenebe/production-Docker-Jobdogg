@@ -8,8 +8,8 @@
             <!-- Card Header - Dropdown -->
             <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-ligh">Employee Preferences List</h6>
-                {% if not preferences_list %}
-                    <a class="dropdown-item" href="{% url 'employee:employee-preferences-create' %}">CREATE</a>
+                {% if preferences_list %}
+                    <a class="dropdown-item" href="{% url 'employee:employee-preferences-create' %}">Create</a>
                 {% endif %}
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -19,11 +19,11 @@
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                         aria-labelledby="dropdownMenuLink">
                         <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="{% url 'employee:profile_building_progress' %}">profile</a>
-                        {% if not preferences_list %}
-                        <a class="dropdown-item" href="{% url 'employee:employee-preferences-create' %}">CREATE</a>
+                        <a class="dropdown-item" href="{% url 'employee:profile_building_progress' %}">Profile</a>
+                        {% if preferences_list %}
+                        <a class="dropdown-item" href="{% url 'employee:employee-preferences-create' %}">Create</a>
                         {% endif %}
-                        <a class="dropdown-item" href="#">update</a>
+                        <a class="dropdown-item" href="#">Update</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Back</a>
                     </div>

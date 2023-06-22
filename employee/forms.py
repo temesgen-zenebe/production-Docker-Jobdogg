@@ -138,6 +138,7 @@ class EmployeePreferencesForm(forms.ModelForm):
     )
   
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)  # Remove the 'user' argument from kwargs
         super().__init__(*args, **kwargs)
         if 'category' in self.data:
             try:
