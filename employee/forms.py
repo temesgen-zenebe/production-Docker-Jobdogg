@@ -163,6 +163,7 @@ class EmployeePreferencesForm(forms.ModelForm):
             'can_relocation',
             'job_type',
             'years_of_experience',
+           
             'custom_positions',
             'custom_skills'
         ]
