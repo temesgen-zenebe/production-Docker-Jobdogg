@@ -274,9 +274,18 @@ class SkipMilitaryView(LoginRequiredMixin, View):
         profile.save()
         messages.success(request, 'Military step skipped successfully.')
         return redirect('employee:profile_building_progress')
+    
+#skip Skip SkillSet Test
+class SkipSkillSetTestView(LoginRequiredMixin, View):
+    def post(self, request):
+        profile = get_object_or_404(Profile, user=request.user)
+        profile.SkillSetTest_completed = True
+        profile.save()
+        messages.success(request, 'Skip SkillSet Test step skipped successfully.')
+        return redirect('employee:profile_building_progress')
+    
 
-# Dynamic dropdown views
-#Positions View 
+#Positions View and Dynamic dropdown views
 class PositionsView(View):
     def get(self, request):
         category_id = request.GET.get('category_id')

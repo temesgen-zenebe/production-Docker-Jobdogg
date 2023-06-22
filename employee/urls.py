@@ -69,6 +69,9 @@ from .views import (
     EmployeePreferencesUpdateView,
     EmployeePreferencesDetailView,
     EmployeePreferencesDeleteView,
+    
+    #SkipSkillSetTestView
+    SkipSkillSetTestView,
 )
 from employee import views
 app_name = 'employee' 
@@ -144,7 +147,9 @@ urlpatterns = [
     path('preferences/<slug:slug>/', EmployeePreferencesDetailView.as_view(), name='employee-preferences-detail'),
     path('preferences/<slug:slug>/update/', EmployeePreferencesUpdateView.as_view(), name='employee-preferences-update'),
     path('preferences/<slug:slug>/delete/', EmployeePreferencesDeleteView.as_view(), name='employee-preferences-delete'),
-
+    
+    #SkipSkillSetTestView
+     path('skipSkillSetTestView/', SkipSkillSetTestView.as_view(), name='SkipSkillSetTestView'),
 ]
 
 

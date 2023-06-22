@@ -238,8 +238,6 @@
                                 <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                             </button>
                             <a href="{% url 'employee:employee-preferences-list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
-                            
-                            <!-- Modal Trigger Button -->
                         
                         </div>
                         {% else %}
@@ -260,16 +258,31 @@
                 <div class="col step-item ">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
-                    <p class="card-text">Preferences</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        {% if progres.SkillSetTest_completed %}
-                        <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                    
+                        <h6 class="card-text"><i class="bi bi-award-fill px-1"></i>SkillSetTest</h6>
+                        <small class="">Step 8: SkillSet Test </small>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if progres.SkillSetTest_completed %}
+                            <div class="btn-group gap-1">
+                                <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                    <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                                </button>
+                                <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                            </div>
+                            {% else %}
+                            <!-- Personal Step -->
+                            <div class="btn-group gap-1">
+                                <button type="button"  class="btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">
+                                        Start
+                                </button>
+                                <button type="button"  class="btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkipForNowtModal">
+                                        Skip 
+                                </button>
+                                    
+                            </div>
+                            {% endif %}
+                    
                         </div>
-                        {% endif %}
-                    </div>
                     </div>
                 </div>
                 </div>
@@ -700,9 +713,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Bootstrap Modal Button -->
 
-            <!-- Bootstrap Modal -->
+            <!-- Modal Step 7:  Employee Preferences Modal -->
             <div class="modal fade" id="preferencesModal" tabindex="-1" aria-labelledby="preferencesModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md modal-dialog-scrollable">
                     <div class="modal-content">
@@ -811,6 +823,68 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal Step 8:  Employee Skill Set Test Modal -->
+            <div class="modal fade" id="SkillSetTestModal" tabindex="-1" aria-labelledby="SkillSetTestModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="SkillSetTestModalLabel">Employee Preferences</h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Employee Preferences Section -->
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ employee_preferences_form|crispy }}
+                                <button name="preferences" value="save" type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+             <!-- Modal Step 8:  Employee Skill Set Skip Modal -->
+             <div class="modal fade" id="SkipForNowtModal" tabindex="-1" aria-labelledby="SkipForNowtModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="SkipForNowtModalLabel">You Must Know befor you skip the Skill test </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-warning" role="alert">
+                                <h5 class="alert-heading">Warning !</h5>
+                                <p>Skipping the SkillSet test will mark your status as "Pending" 
+                                    for the employer's review, impacting your chances of getting
+                                     the desired job assignment. Act now to complete this crucial
+                                      step and secure better opportunities. Don't miss out on your 
+                                      preferred job assignment. Take the SkillSet test promptly to 
+                                      maximize your chances of success.
+                                </p>
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Acknowledged the warning, currently skipping the test. Will complete the SkillSet test soon.
+                                        </label>
+                                    </div>
+                                    <div id="skillsTestSkipButton" class="d-none">
+                                        <form action="{% url 'employee:SkipSkillSetTestView' %}" method="POST">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-outline-warning">Skip</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                              </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button type="submit" class="next-btn btn btn-sm btn-outline-success align-center">Start SkillSet Test</button>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
 
     </div>     
 
@@ -884,5 +958,21 @@
         setActiveStep();
         });
     </script> 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var checkbox = document.getElementById('flexCheckDefault');
+            var skipButton = document.getElementById('skillsTestSkipButton');
+        
+            checkbox.addEventListener('change', function() {
+                if (checkbox.checked) {
+                    skipButton.classList.add('d-block');
+                } else {
+                    skipButton.classList.remove('d-block');
+                    skipButton.classList.add('d-none');
+                }
+            });
+        });
+        
+    </script>
 {% endblock %} 
 {% endblock %}
