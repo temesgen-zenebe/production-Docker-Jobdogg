@@ -10,14 +10,19 @@ from .models import (
      Policies,
      UserAcceptedPolicies,
      BasicInformation,
+     
      #Personal
      Personal,
      Language,
+     
      #preferences
      Category, 
      Position, 
      Skill, 
      EmployeePreferences, 
+    
+     #SkillSetTestResult
+     SkillSetTestResult,
     )
 
 @admin.register(Profile)
@@ -179,3 +184,17 @@ class EmployeePreferencesAdmin(admin.ModelAdmin):
         return ", ".join([str(skill) for skill in obj.skills.all()])
 
     get_skills.short_description = 'Skills'
+
+#SkillSetTestResult
+@admin.register(SkillSetTestResult)
+class SkillSetTestResultAdmin(admin.ModelAdmin):
+    model = SkillSetTestResult
+    list_display = ['user','position', 'skill_test','states','result','slug', 'created','updated']
+    
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # editing an existing object
+            return ('created', 'updated', 'slug')
+        return ()
+
+
+

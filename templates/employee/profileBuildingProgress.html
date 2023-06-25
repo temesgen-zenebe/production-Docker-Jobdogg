@@ -264,21 +264,27 @@
                         <div class="d-flex justify-content-between align-items-center">
                             {% if progres.SkillSetTest_completed %}
                             <div class="btn-group gap-1">
-                                <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                {% if not skipped %}
+                                <button type="button" class="prev-btn btn btn-sm btn-danger shadow" id="Onpanding">
+                                    <i class="bi bi-check2-circle px-1"></i><small>Onpanding!</small>
+                                </button>
+                                {% else %}
+                                <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
                                     <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                                 </button>
-                                <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                                <button type="button" class="prev-btn btn btn-sm btn-warning shadow" id="OnPrecess">
+                                    <i class="bi bi-check2-circle px-1"></i><small>OnPrecess!</small>
+                                </button>
+                                {% endif %}
+                                <a href="#" type="button" class="prev-btn btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-pen"></i>
+                                </a>
                             </div>
                             {% else %}
                             <!-- Personal Step -->
                             <div class="btn-group gap-1">
-                                <button type="button"  class="btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">
-                                        Start
-                                </button>
-                                <button type="button"  class="btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkipForNowtModal">
-                                        Skip 
-                                </button>
-                                    
+                                <button type="button" id="StartTest" class="btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">Start</button>
+                                <button type="button" id="SkipTest" class="btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkipForNowtModal">Skip</button>
                             </div>
                             {% endif %}
                     
@@ -825,19 +831,65 @@
             </div>
             <!-- Modal Step 8:  Employee Skill Set Test Modal -->
             <div class="modal fade" id="SkillSetTestModal" tabindex="-1" aria-labelledby="SkillSetTestModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-md modal-dialog-scrollable">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h6 class="modal-title" id="SkillSetTestModalLabel">Employee Preferences</h6>
+                            <h5 class="modal-title px-2 " id="SkillSetTestModalLabel"><i class="fas fa-palette fontColor-orang"></i> Your Skill Set Test lookup</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <!-- Employee Preferences Section -->
-                            <form method="POST" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{ employee_preferences_form|crispy }}
-                                <button name="preferences" value="save" type="submit" class="btn btn-primary">Save</button>
-                            </form>
+                            <!-- Example Code -->
+                            <div class="position-relative mb-4">
+                                <img src="{% static 'images/banner-skilltest.png'%}" width="100%" height="60%" class="img-fluid" alt="banner">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table ">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Position</th>
+                                        <th scope="col">SkillsTast</th>
+                                        <th scope="col">States</th>
+                                        <th scope="col">Result</th>
+                                        <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if testList %}
+                                            {% for position_list in testList %}
+                                            <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>{{position_list.position}}</td>
+                                            <td><a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Start</a></td>
+                                            <td>{{position_list.states}}</td>
+                                            <td>{{position_list.result}}</td>
+                                            <td>{{position_list.updated|date}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bd-callout bd-callout-info">
+                                
+                                <h6>Notce:</h6>
+                                <hr>
+                                      <ul class="list-unstyled list-group-flush ">
+                                        <li >
+                                          <i class="bi bi-info-circle "></i> <small>You are not supposed to take more than two skill tests.</small>
+                                        </li>
+                                        <li>
+                                          <i class="bi bi-info-circle"></i> <small> Your test results from skill tests will not be shared with anyone other than the respective employers.</small>
+                                        </li>
+                                        <li>
+                                          <i class="bi bi-info-circle"></i> <small>You can retake one skill test multiple times to aim for improved results.</small>
+                                        </li>
+                                        <li>
+                                          <i class="bi bi-info-circle"></i> <small> The objectives of skill tests are to elevate you as the best candidate in the eyes of employers.</small>
+                                        </li>
+                                      </ul>
+                                   
+                            </div>
                         </div> 
                     </div>
                 </div>
@@ -879,7 +931,10 @@
                                 
                               </div>
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="submit" class="next-btn btn btn-sm btn-outline-success align-center">Start SkillSet Test</button>
+                                <button type="button"  class="next-btn btn btn-sm btn-outline-success align-center" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">
+                                    Start SkillSet Test
+                                </button>
+                               
                             </div>
                         </div> 
                     </div>
@@ -974,5 +1029,6 @@
         });
         
     </script>
+   
 {% endblock %} 
 {% endblock %}

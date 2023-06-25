@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import Group
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -20,7 +21,8 @@ from common.utils.chooseConstant import (
     DEGREE_TYPE_CHOICES,
     SALARY_TYPES,
     JOB_TYPES,
-    RELOCATION
+    RELOCATION,
+    TEST_STATES,
     )
 from multiupload.fields import MultiFileField 
 
@@ -304,10 +306,35 @@ class EmployeePreferences(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
+        creating = self.pk  # Check if the object is being created
+
         if not self.slug:
             value = f"{self.job_type} {self.user.username}"
             self.slug = unique_slug(value, type(self))
-        super().save(*args, **kwargs)
+
+        super().save(*args, **kwargs)  # Save the object
+
+        if creating:
+            desired_positions = self.desired_positions.all()
+            last_skill_test_link = desired_positions.order_by('-created').values_list('skill_test_link', flat=True).first()
+
+            for position in desired_positions:
+                try:
+                    skill_test_result, created = SkillSetTestResult.objects.get_or_create(user=self.user, position=position)
+                    skill_test_result.skill_test = last_skill_test_link if last_skill_test_link else ''
+                    skill_test_result.save()
+                except ObjectDoesNotExist:
+                    SkillSetTestResult.objects.create(
+                        user=self.user,
+                        position=position,
+                        skill_test=last_skill_test_link if last_skill_test_link else ''
+                    )
+        else:
+            # Update existing SkillSetTestResult objects
+            desired_position = self.desired_positions.first()
+            if desired_position:
+                skill_test_results = SkillSetTestResult.objects.filter(position=desired_position)
+                skill_test_results.update(user=self.user)
 
     def __str__(self):
         return f"{self.user.username}'s Preferences"
@@ -336,3 +363,24 @@ class EmployeePreferences(models.Model):
             skills = Skill.objects.filter(position__in=self.desired_positions.all())
             cache.set(self.skills_cache_key, skills)
         return skills
+
+
+class SkillSetTestResult(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE)
+    skill_test = models.CharField(max_length=200)
+    states = models.CharField(max_length=20, choices=TEST_STATES, default="lookup")
+    result = models.DecimalField(max_digits=5, decimal_places=2, default=00)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.user.username} {self.position}"
+            self.slug = unique_slug(value, type(self))
+            
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user.username}'s Skill Set Test Result"

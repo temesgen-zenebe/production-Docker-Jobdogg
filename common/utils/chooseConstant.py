@@ -138,3 +138,13 @@ JOB_TYPES = (
     )
 #RELOCATION
 RELOCATION = (('Yes', 'Yes'),('No', 'No'),)
+
+
+TEST_STATES = (
+        ('in-progress', 'In Progress'),
+        ('pending', 'Pending'),
+        ('success', 'Success'),
+        ('skipped', 'Skipped'),
+        ('started', 'Started'),
+        ('lookup', 'lookup'),
+    )

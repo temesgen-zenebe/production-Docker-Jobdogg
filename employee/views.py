@@ -1,4 +1,5 @@
 from typing import Any
+from urllib import response
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin,PermissionRequiredMixin
 from django.urls import reverse_lazy, reverse
@@ -11,6 +12,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from employee.templatetags.mask_ssn import mask_ssn
 from django.forms import CheckboxSelectMultiple
 from django.views import View
+from django.db.models import Q
 import pandas as pd
 import pyxlsb
 import openpyxl
@@ -20,7 +22,7 @@ from django.views.generic import (
 
 from .models import (
     Category,CertificationLicense,Education,EmployeePreferences,Experience, 
-    Policies,Position,Profile,Skill,UserAcceptedPolicies,BasicInformation,
+    Policies,Position,Profile,Skill, SkillSetTestResult,UserAcceptedPolicies,BasicInformation,
     Personal,Language,Military,
 )
 from .forms import (
@@ -93,6 +95,13 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         categories = Category.objects.all()
         positions = Position.objects.all()
         skills = Skill.objects.all()
+        testList = SkillSetTestResult.objects.filter(user=self.request.user)
+        # Filter positions based on the logged-in user's preferences
+        employee_preferences = EmployeePreferences.objects.filter(user=self.request.user).first()
+        if employee_preferences:
+            user_positions = Position.objects.filter(category=employee_preferences.category)
+        else: 
+            user_positions = []
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
@@ -110,7 +119,9 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'documents_uploaded': True,  # Set the flag to True if there are uploaded documents
             'categories': categories,
             'positions': positions,
-            'skills': skills
+            'skills': skills,
+            'user_positions':user_positions,
+            'testList':testList,
             
         }
            
@@ -236,7 +247,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                     employee_preferences.skills.clear()
                     employee_preferences.desired_positions.set(desired_positions)
                     employee_preferences.skills.set(skills)
-                   
+                    
                     profile.Preferences_completed = True
                     profile.save()
                     return redirect('employee:profile_building_progress')
@@ -277,6 +288,13 @@ class SkipMilitaryView(LoginRequiredMixin, View):
     
 #skip Skip SkillSet Test
 class SkipSkillSetTestView(LoginRequiredMixin, View):
+    def get(self, request):
+        skipped = True,
+        context={
+            'skipped':skipped
+        }
+        
+        return render (request , 'employee/profileBuildingProgress.html', context)
     def post(self, request):
         profile = get_object_or_404(Profile, user=request.user)
         profile.SkillSetTest_completed = True
@@ -853,7 +871,8 @@ class EmployeePreferencesListView(LoginRequiredMixin,ListView):
 
     def get_queryset(self):
         return EmployeePreferences.objects.filter(user=self.request.user)
-
+    
+   
 class EmployeePreferencesCreateView(LoginRequiredMixin, CreateView):
     model = EmployeePreferences
     form_class = EmployeePreferencesForm

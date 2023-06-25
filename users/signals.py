@@ -10,7 +10,7 @@ def update_user_type(sender, instance, created, **kwargs):
     if created:
         
         user_type = instance.user_type
-        print(user_type)
+       # print(user_type)
         
         if user_type == 'employee':
             employee_group, _ = Group.objects.get_or_create(name='employee')
