@@ -305,6 +305,8 @@ class EmployeePreferences(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    
+
     def save(self, *args, **kwargs):
         creating = self.pk  # Check if the object is being created
 
@@ -314,10 +316,10 @@ class EmployeePreferences(models.Model):
 
         super().save(*args, **kwargs)  # Save the object
 
-        if creating:
-            desired_positions = self.desired_positions.all()
-            last_skill_test_link = desired_positions.order_by('-created').values_list('skill_test_link', flat=True).first()
+        desired_positions = self.desired_positions.all()
+        last_skill_test_link = desired_positions.order_by('-created').values_list('skill_test_link', flat=True).first()
 
+        if creating:
             for position in desired_positions:
                 try:
                     skill_test_result, created = SkillSetTestResult.objects.get_or_create(user=self.user, position=position)
@@ -330,11 +332,10 @@ class EmployeePreferences(models.Model):
                         skill_test=last_skill_test_link if last_skill_test_link else ''
                     )
         else:
-            # Update existing SkillSetTestResult objects
-            desired_position = self.desired_positions.first()
-            if desired_position:
-                skill_test_results = SkillSetTestResult.objects.filter(position=desired_position)
-                skill_test_results.update(user=self.user)
+            for position in desired_positions:
+                skill_test_result, created = SkillSetTestResult.objects.get_or_create(user=self.user, position=position)
+                skill_test_result.skill_test = last_skill_test_link if last_skill_test_link else ''
+                skill_test_result.save()
 
     def __str__(self):
         return f"{self.user.username}'s Preferences"
