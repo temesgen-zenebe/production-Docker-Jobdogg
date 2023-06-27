@@ -72,6 +72,7 @@ from .views import (
     
     #SkipSkillSetTestView
     SkipSkillSetTestView,
+    OnProgressSkillTestView,
 )
 from employee import views
 app_name = 'employee' 
@@ -149,7 +150,8 @@ urlpatterns = [
     path('preferences/<slug:slug>/delete/', EmployeePreferencesDeleteView.as_view(), name='employee-preferences-delete'),
     
     #SkipSkillSetTestView
-     path('skipSkillSetTestView/', SkipSkillSetTestView.as_view(), name='SkipSkillSetTestView'),
+    path('skipSkillSetTestView/', SkipSkillSetTestView.as_view(), name='SkipSkillSetTestView'),
+    path('OnProgress/', OnProgressSkillTestView.as_view(), name='OnProgressSetTest'),
 ]
 
 

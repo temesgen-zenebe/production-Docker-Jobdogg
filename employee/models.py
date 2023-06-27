@@ -39,6 +39,8 @@ class Profile(models.Model):
     Experience_completed = models.BooleanField(default=False)
     Preferences_completed = models.BooleanField(default=False)
     SkillSetTest_completed = models.BooleanField(default=False)
+    OnProgressSkillTest_completed = models.BooleanField(default=False)
+    Skipped_completed = models.BooleanField(default=False)
     VideoResume_completed = models.BooleanField(default=False)
     ResumeUploading_completed = models.BooleanField(default=False)
     

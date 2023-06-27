@@ -262,28 +262,34 @@
                         <h6 class="card-text"><i class="bi bi-award-fill px-1"></i>SkillSetTest</h6>
                         <small class="">Step 8: SkillSet Test </small>
                         <div class="d-flex justify-content-between align-items-center">
-                            {% if progres.SkillSetTest_completed %}
+                            
+                            {% if progres.SkillSetTest_completed or progres.Skipped_completed or progres.OnProgressSkillTest_completed %}
                             <div class="btn-group gap-1">
-                                {% if not skipped %}
-                                <button type="button" class="prev-btn btn btn-sm btn-danger shadow" id="Onpanding">
-                                    <i class="bi bi-check2-circle px-1"></i><small>Onpanding!</small>
-                                </button>
-                                {% else %}
+                                {% if progres.SkillSetTest_completed  %}
                                 <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
                                     <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                                 </button>
+                                {% elif progres.OnProgressSkillTest_completed %}
                                 <button type="button" class="prev-btn btn btn-sm btn-warning shadow" id="OnPrecess">
-                                    <i class="bi bi-check2-circle px-1"></i><small>OnPrecess!</small>
+                                    <i class="bi bi-check2-circle px-1"></i><small>OnProgress!</small>
                                 </button>
+                                {% elif progres.Skipped_completed %}
+                                <button type="button" class="prev-btn btn btn-sm btn-danger shadow" id="Onpanding">
+                                    <i class="bi bi-check2-circle px-1"></i><small>Onpanding!</small>
+                                </button>
+                               
+                                {% else %}
+
                                 {% endif %}
-                                <a href="#" type="button" class="prev-btn btn btn-sm btn-outline-secondary">
+                               
+                                <button  type="button"  class="prev-btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">
                                     <i class="bi bi-pen"></i>
-                                </a>
+                                </button>
                             </div>
                             {% else %}
                             <!-- Personal Step -->
                             <div class="btn-group gap-1">
-                                <button type="button" id="StartTest" class="btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">Start</button>
+                                <button type="button" id="SkillSetTestStart" class="btn btn btn-sm btn-outline-secondary SkillSetTestStart" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">Start</button>
                                 <button type="button" id="SkipTest" class="btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkipForNowtModal">Skip</button>
                             </div>
                             {% endif %}
@@ -834,7 +840,7 @@
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title px-2 " id="SkillSetTestModalLabel"><i class="fas fa-palette fontColor-orang"></i> Your Skill Set Test lookup</h5>
+                            <h5 class="modal-title px-2 " id="SkillSetTestModalLabel"><i class="fas fa-palette fontColor-orang px-2"></i> Your Skill Set Test lookup</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -860,7 +866,10 @@
                                             <tr>
                                             <th scope="row">{{ forloop.counter }}</th>
                                             <td>{{position_list.position}}</td>
-                                            <td><a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Start</a></td>
+                                            <td>
+                                                <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Start</a>
+                                                
+                                            </td>
                                             <td>{{position_list.states}}</td>
                                             <td>{{position_list.result}}</td>
                                             <td>{{position_list.updated|date}}</td>
@@ -921,7 +930,7 @@
                                             Acknowledged the warning, currently skipping the test. Will complete the SkillSet test soon.
                                         </label>
                                     </div>
-                                    <div id="skillsTestSkipButton" class="d-none">
+                                    <div id="SkillSetTestStart" class="d-none ">
                                         <form action="{% url 'employee:SkipSkillSetTestView' %}" method="POST">
                                             {% csrf_token %}
                                             <button type="submit" class="btn btn-sm btn-outline-warning">Skip</button>
@@ -931,7 +940,7 @@
                                 
                               </div>
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button"  class="next-btn btn btn-sm btn-outline-success align-center" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">
+                                <button id="SkillSetTestModal" type="button"  class="SkillSetTestStart next-btn btn btn-sm btn-outline-success align-center" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">
                                     Start SkillSet Test
                                 </button>
                                
@@ -1029,6 +1038,66 @@
         });
         
     </script>
-   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var modal = document.getElementById('SkillSetTestModal');
+            var closeButton = modal.querySelector('.btn-close');
+            // Add event listener to both the close button and the modal itself
+            var refreshPage = function() {
+                // Refresh the page
+                window.location.href = "{% url 'employee:profile_building_progress' %}";
+                window.location.href = url;
+            };
+            $('.SkillSetTestStart').on('click', function(event) {
+                event.preventDefault(); // Prevent the default behavior of the link
+                var url = $(this).attr('href'); // Retrieve the URL from the href attribute
+    
+                // Perform AJAX request to execute the server-side code
+                $.ajax({
+                    url: '{% url 'employee:OnProgressSetTest' %}',
+                    type: 'POST',
+                    dataType: 'json',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+                    },
+                    success: function(response) {
+                        // Display success message or perform any other actions
+                        console.log(response.message);
+    
+                        // Redirect to the URL after the AJAX request is complete
+                       
+                        refreshPage();
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.log('Error occurred during the AJAX request: ' + errorThrown);
+                    }
+                });
+            });
+    
+            closeButton.addEventListener('click', function() {
+                refreshPage();
+            });
+            modal.addEventListener('hidden.bs.modal', function() {
+                refreshPage();
+            });
+    
+            // Function to retrieve the value of a cookie by name
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        });
+    </script>
 {% endblock %} 
 {% endblock %}

@@ -37,9 +37,12 @@ class ProfileAdmin(admin.ModelAdmin):
                 'Education_completed',
                 'Experience_completed', 
                 'Preferences_completed', 
+                'Skipped_completed' ,
+                'OnProgressSkillTest_completed' ,
                 'SkillSetTest_completed',
                 'VideoResume_completed', 
-                'ResumeUploading_completed'
+                'ResumeUploading_completed',
+                
             ]
     
 @admin.register(Policies)

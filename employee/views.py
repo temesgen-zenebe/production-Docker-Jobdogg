@@ -288,20 +288,24 @@ class SkipMilitaryView(LoginRequiredMixin, View):
     
 #skip Skip SkillSet Test
 class SkipSkillSetTestView(LoginRequiredMixin, View):
-    def get(self, request):
-        skipped = True,
-        context={
-            'skipped':skipped
-        }
-        
-        return render (request , 'employee/profileBuildingProgress.html', context)
     def post(self, request):
         profile = get_object_or_404(Profile, user=request.user)
-        profile.SkillSetTest_completed = True
+        profile.Skipped_completed = True
+        profile.SkillSetTest_completed = False
+        profile.OnProgressSkillTest_completed=False
         profile.save()
         messages.success(request, 'Skip SkillSet Test step skipped successfully.')
         return redirect('employee:profile_building_progress')
     
+class OnProgressSkillTestView(LoginRequiredMixin, View):
+    def post(self, request):
+        profile = get_object_or_404(Profile, user=request.user)
+        profile.OnProgressSkillTest_completed = True
+        profile.Skipped_completed = False
+        profile.SkillSetTest_completed = False
+        profile.save()
+        messages.success(request, 'Skip SkillSet OnPrecess successfully.')
+        return redirect('employee:profile_building_progress')  
 
 #Positions View and Dynamic dropdown views
 class PositionsView(View):
