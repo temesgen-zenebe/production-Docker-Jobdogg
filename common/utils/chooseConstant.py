@@ -123,6 +123,9 @@ SALARY_TYPES = (
 
 #JOB_TYPES
 JOB_TYPES = (
+        ('temp', 'Temp'),
+        ('temp-Perm', 'Temp-Perm'),
+        ('perm', 'Perm'),
         ('full-time', 'Full-time'),
         ('part-time', 'Part-time'),
         ('contract', 'Contract/Freelance'),
