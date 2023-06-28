@@ -68,13 +68,13 @@
               <a class="nav-link active" aria-current="page" href="{% url 'pages:homepage' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Our Doggs</a>
+              <a class="nav-link" href="{% url 'pages:gurDoggsView' %}">Our Doggs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Get Staff</a>
+              <a class="nav-link" href="{% url 'pages:getStaffView' %}">Get Staff</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Get Work</a>
+              <a class="nav-link" href="{% url 'pages:getWorkView' %}">Get Work</a>
             </li>
             {% if not user.is_authenticated %}
             <li class="nav-item">
@@ -201,9 +201,9 @@
       <div class="col-6 col-lg-2  mb-3">
         <h6 class="textFooter2">Dog Pound</h6>
         <ul class="list-unstyled">
-          <li class="mb-2"><a class="textFooter4" href="/">Find Bones</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/">Find Doggs</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/">Our Doggs</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:getStaffView' %}">Get Staff</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:getWorkView' %}">Get work</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:gurDoggsView' %}">Our Doggs</a></li>
           
         </ul>
       </div>
@@ -354,6 +354,37 @@
     });
     });
 </script>                              
+<script >
+  var multipleCardCarousel = document.querySelector("#carouselExampleControls");
+      if (window.matchMedia("(min-width: 576px)").matches) {
+      var carousel = new bootstrap.Carousel(multipleCardCarousel, {
+          interval: false
+      });
+      var carouselWidth = $(".carousel-inner")[0].scrollWidth;
+      var cardWidth = $(".carousel-item").width();
+      var scrollPosition = 0;
+      $("#carouselExampleControls .carousel-control-next").on("click", function () {
+          if (scrollPosition < carouselWidth - cardWidth * 3) {
+          scrollPosition += cardWidth;
+          $("#carouselExampleControls .carousel-inner").animate(
+              { scrollLeft: scrollPosition },
+              600
+          );
+          }
+      });
+      $("#carouselExampleControls .carousel-control-prev").on("click", function () {
+          if (scrollPosition > 0) {
+          scrollPosition -= cardWidth;
+          $("#carouselExampleControls .carousel-inner").animate(
+              { scrollLeft: scrollPosition },
+              600
+          );
+          }
+      });
+      } else {
+      $(multipleCardCarousel).addClass("slide");
+      }
 
+</script>
 </body>
 </html>

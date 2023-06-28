@@ -19,7 +19,19 @@ class AboutUsView(TemplateView):
     
 class ContactUsView(TemplateView):
     template_name = 'pages/contact_us.html'
-
+    
+#OurDoggsView, 
+class OurDoggsView(TemplateView):
+    template_name = 'pages/ourDoggs.html'
+    
+#GetStaffView, 
+class GetStaffView(TemplateView):
+    template_name = 'pages/getStaff.html'
+    
+#GetWorkView
+class GetWorkView(TemplateView):
+    template_name = 'pages/getWork.html'
+    
 
 def dashboard(request):
     if request.user.is_authenticated and is_admin(request.user):
