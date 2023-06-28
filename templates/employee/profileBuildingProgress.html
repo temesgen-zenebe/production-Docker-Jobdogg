@@ -299,7 +299,7 @@
                 </div>
                 </div>
                 {% endif %}
-                {% if progres.SkillSetTest_completed %}
+                {% if progres.SkillSetTest_completed or progres.Skipped_completed or progres.OnProgressSkillTest_completed %}
                 <div class="col step-item ">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -930,7 +930,7 @@
                                             Acknowledged the warning, currently skipping the test. Will complete the SkillSet test soon.
                                         </label>
                                     </div>
-                                    <div id="SkillSetTestStart" class="d-none ">
+                                    <div id="skillsTestSkipButton" class="d-none ">
                                         <form action="{% url 'employee:SkipSkillSetTestView' %}" method="POST">
                                             {% csrf_token %}
                                             <button type="submit" class="btn btn-sm btn-outline-warning">Skip</button>
