@@ -33,6 +33,7 @@
     {% if user.is_authenticated and user|is_employee %}
         {% block employee %}{% endblock employee %}
     {% endif %}
-   
+   {% block getWorkView %} {% endblock getWorkView %} 
+   {% block getStaffView %} {% endblock getStaffView %} 
 </div>
 {% endblock %}
