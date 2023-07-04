@@ -7,3 +7,4 @@ class EmployeeConfig(AppConfig):
 
     def ready(self):
         import employee.signals  # Import the signals module
+        

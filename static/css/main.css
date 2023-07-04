@@ -88,7 +88,9 @@ a{
   border-color: #123f8b;
   text-decoration: none;
 }
-
+.s-font{
+  font-size: 13px;
+}
 .textFooter{
   color: #fff;
 }
@@ -195,8 +197,7 @@ section.signup{
     background-size: cover;
     background-position: center;
     margin: 10 auto;
-  }
-
+}
 .masthead-content {
     position: absolute;
     top: 50%;
@@ -204,12 +205,12 @@ section.signup{
     transform: translate(-50%, -50%);
     color: #fff;
     text-align: left;
-  }
+}
 
 .masthead-content h3 {
     font-size: 1.3rem;
     margin-bottom: 1.5rem;
-  }
+}
 
 .masthead-content p {
     font-size: 1rem;
@@ -235,7 +236,6 @@ section.on-demand{
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 
 /*side menu*/
 .text-bg-dark1 {

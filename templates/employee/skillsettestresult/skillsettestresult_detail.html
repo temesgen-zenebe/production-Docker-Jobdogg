@@ -1,0 +1,71 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load user_tags %}
+{% load static %}
+{% block dashboard_employee %}
+<div class="col-xl-8 col-lg-7">
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">skillSet Test Result Detail</h6>
+            <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-header">Dropdown Header:</div>
+                    <a class="dropdown-item" href="{% url 'employee:profile_building_progress' %}">profile</a>
+                    <a class="dropdown-item" href="#">update</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Back</a>
+                </div>
+            </div>
+        </div>
+      
+        <div class="card-body">
+           
+                <div class="table-responsive ">
+                    <table class="table table-sm">
+                        
+                        <tr>
+                            <th>User</th>
+                            <td>{{ skillSetTestResultList.user }}</td>
+                        </tr>
+                        <tr>
+                            <th>Position</th>
+                            <td>{{ skillSetTestResultList.position }}</td>
+                        </tr>
+                        <tr>
+                            <th>Skill test</th>
+                            <td>{{ skillSetTestResultList.skill_test }}</td>
+                        </tr>
+                        <tr>
+                            <th>States</th>
+                            <td>{{ skillSetTestResultList.states }}</td>
+                        </tr>
+                        <tr>
+                            <th>Result</th>
+                            <td>{{ skillSetTestResultList.result }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Created</th>
+                            <td>{{ skillSetTestResultList.created|date:"F j, Y" }}</td>
+                        </tr>
+                        <tr>
+                            <th>Updated</th>
+                             <td>{{ skillSetTestResultList.updated|date:"F j, Y" }}</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            
+        </div>
+        <div class="card-footer">
+             <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:skillsettestresult-list' %}">Back</a>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

@@ -876,7 +876,6 @@ class EmployeePreferencesListView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         return EmployeePreferences.objects.filter(user=self.request.user)
     
-   
 class EmployeePreferencesCreateView(LoginRequiredMixin, CreateView):
     model = EmployeePreferences
     form_class = EmployeePreferencesForm
@@ -912,8 +911,6 @@ class EmployeePreferencesCreateView(LoginRequiredMixin, CreateView):
         profile.Preferences_completed = True
         profile.save()
         return super().dispatch(request, *args, **kwargs)
-
-
 
 class EmployeePreferencesUpdateView(LoginRequiredMixin, UpdateView):
     model = EmployeePreferences
@@ -968,3 +965,62 @@ class EmployeePreferencesDeleteView(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         return EmployeePreferences.objects.filter(user=self.request.user)
 
+
+#SkillSetTestResultList
+class SkillSetTestResultListView(LoginRequiredMixin,ListView):
+    model = SkillSetTestResult
+    template_name = 'employee/skillsettestresult/skillsettestresult_list.html'
+    context_object_name = 'skillsettestresults'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return SkillSetTestResult.objects.filter(user=self.request.user)
+
+class SkillSetTestResultCreateView(LoginRequiredMixin,CreateView):
+    model = SkillSetTestResult
+    template_name = 'employee/skillsettestresult/skillsettestresult_form.html'
+    fields = ['user', 'position', 'skill_test', 'states', 'result']
+    success_url = reverse_lazy('employee:skillsettestresult-list')
+
+class SkillSetTestResultUpdateView(LoginRequiredMixin,UpdateView):
+    model = SkillSetTestResult
+    template_name = 'employee/skillsettestresult/skillsettestresult_form.html'
+    fields = ['result']
+    success_url = reverse_lazy('employee:skillsettestresult-list')
+    
+    def get_queryset(self):
+        return SkillSetTestResult.objects.filter(user=self.request.user)
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+
+        if not profile.Preferences_completed:
+            return redirect('employee:employee-preferences-create')
+
+        profile.SkillSetTest_completed = True
+        profile.OnProgressSkillTest_completed = False
+        profile.save()
+        return super().dispatch(request, *args, **kwargs)
+
+class SkillSetTestResultDeleteView(LoginRequiredMixin,DeleteView):
+    model = SkillSetTestResult
+    template_name = 'employee/skillsettestresult/skillsettestresult_confirm_delete.html'
+    success_url = reverse_lazy('employee:skillsettestresult-list')
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_queryset(self):
+        return SkillSetTestResult.objects.filter(user=self.request.user)
+      
+class SkillSetTestResultDetailView(LoginRequiredMixin, DetailView):
+    model = SkillSetTestResult
+    template_name = 'employee/skillsettestresult/skillsettestresult_detail.html'
+    context_object_name='skillSetTestResultList'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+
+    def get_queryset(self):
+        return SkillSetTestResult.objects.filter(user=self.request.user)

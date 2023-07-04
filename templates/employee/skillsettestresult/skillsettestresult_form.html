@@ -1,21 +1,24 @@
 {% extends 'pages/employee_dashboard.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block title %}Employee Preferences{% endblock %}
+{% block title %}skillset Test Result Update{% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
         <div class="col-xl-8 col-lg-6">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
-                    <h5>Create Employee Preferences</h5>
+                    <h5>Update skillset Test Result</h5>
+                   <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:skillsettestresult-list' %}">Back</a>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                <div class="card-body">
+                    
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button name="preferences"  class="btn btn-sm btn-outline-primary" type="submit">Save</button>
+                        <button class="btn btn-sm btn-outline-primary" type="submit">Update</button>
+                        <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:skillsettestresult-list' %}">Cancel</a>
                     </form>
                 </div>
                

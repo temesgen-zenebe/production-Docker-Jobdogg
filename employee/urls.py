@@ -1,5 +1,6 @@
 from . import views
 from django.urls import path
+from employee import views
 from .views import (
     #-------Policies------
     PoliciesListView,
@@ -73,8 +74,16 @@ from .views import (
     #SkipSkillSetTestView
     SkipSkillSetTestView,
     OnProgressSkillTestView,
+    
+    #SkillSetTestResultList
+    SkillSetTestResultListView, 
+    SkillSetTestResultCreateView, 
+    SkillSetTestResultUpdateView, 
+    SkillSetTestResultDeleteView,
+    SkillSetTestResultDetailView,
 )
-from employee import views
+
+
 app_name = 'employee' 
 
 urlpatterns = [
@@ -152,6 +161,13 @@ urlpatterns = [
     #SkipSkillSetTestView
     path('skipSkillSetTestView/', SkipSkillSetTestView.as_view(), name='SkipSkillSetTestView'),
     path('OnProgress/', OnProgressSkillTestView.as_view(), name='OnProgressSetTest'),
+    
+    #SkillSetTestResultList 
+    path('skillsettestresult/', SkillSetTestResultListView.as_view(), name='skillsettestresult-list'),
+    path('skillsettestresult/create/', SkillSetTestResultCreateView.as_view(), name='skillsettestresult-create'),
+    path('skillsettestresult/<slug:slug>/', SkillSetTestResultDetailView.as_view(), name='skillsettestresult-detail'),
+    path('skillsettestresult/<slug:slug>/update/', SkillSetTestResultUpdateView.as_view(), name='skillsettestresult-update'),
+    path('skillsettestresult/<slug:slug>/delete/', SkillSetTestResultDeleteView.as_view(), name='skillsettestresult-delete'),
 ]
 
 

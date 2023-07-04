@@ -310,35 +310,12 @@ class EmployeePreferences(models.Model):
     
 
     def save(self, *args, **kwargs):
-        creating = self.pk  # Check if the object is being created
-
         if not self.slug:
             value = f"{self.job_type} {self.user.username}"
             self.slug = unique_slug(value, type(self))
 
         super().save(*args, **kwargs)  # Save the object
-
-        desired_positions = self.desired_positions.all()
-        last_skill_test_link = desired_positions.order_by('-created').values_list('skill_test_link', flat=True).first()
-
-        if creating:
-            for position in desired_positions:
-                try:
-                    skill_test_result, created = SkillSetTestResult.objects.get_or_create(user=self.user, position=position)
-                    skill_test_result.skill_test = last_skill_test_link if last_skill_test_link else ''
-                    skill_test_result.save()
-                except ObjectDoesNotExist:
-                    SkillSetTestResult.objects.create(
-                        user=self.user,
-                        position=position,
-                        skill_test=last_skill_test_link if last_skill_test_link else ''
-                    )
-        else:
-            for position in desired_positions:
-                skill_test_result, created = SkillSetTestResult.objects.get_or_create(user=self.user, position=position)
-                skill_test_result.skill_test = last_skill_test_link if last_skill_test_link else ''
-                skill_test_result.save()
-
+        
     def __str__(self):
         return f"{self.user.username}'s Preferences"
 

@@ -193,7 +193,7 @@
                 </div>
                 {% endif %}
                 <!--Experience-->
-                {% if progres.Education_completed   %}
+                {% if progres.Education_completed %}
                 <div class="col step-item ">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -303,7 +303,8 @@
                 <div class="col step-item ">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
-                    <p class="card-text">Skillset Test</p>
+                    <h6 class="card-text"><i class="bi bi-award-fill px-1"></i>Skillset Test Result update</h6>
+                    <small class="">Step 8: SkillSet Test </small>
                     <div class="d-flex justify-content-between align-items-center">
                         {% if progres.VideoResume_completed %}
                         <div class="btn-group">
@@ -687,7 +688,7 @@
                 </div>
             </div>
              <!-- Education Modal -->
-             <div class="modal fade" id="CertificationLicenseModal" tabindex="-1" aria-labelledby="CertificationLicenseModalModalLabel" aria-hidden="true">
+            <div class="modal fade" id="CertificationLicenseModal" tabindex="-1" aria-labelledby="CertificationLicenseModalModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -706,7 +707,7 @@
                 </div>
             </div>
              <!--Modal Step 6: experience Form Modal-->
-             <div class="modal fade" id="experienceFormModal" tabindex="-1" aria-labelledby="experienceFormModalLabel" aria-hidden="true">
+            <div class="modal fade" id="experienceFormModal" tabindex="-1" aria-labelledby="experienceFormModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -728,13 +729,13 @@
 
             <!-- Modal Step 7:  Employee Preferences Modal -->
             <div class="modal fade" id="preferencesModal" tabindex="-1" aria-labelledby="preferencesModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-md modal-dialog-scrollable">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h6 class="modal-title" id="preferencesModalLabel">Employee Preferences</h6>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body mx-2" >
                             <!-- Employee Preferences Section -->
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
@@ -837,27 +838,34 @@
             </div>
             <!-- Modal Step 8:  Employee Skill Set Test Modal -->
             <div class="modal fade" id="SkillSetTestModal" tabindex="-1" aria-labelledby="SkillSetTestModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title px-2 " id="SkillSetTestModalLabel"><i class="fas fa-palette fontColor-orang px-2"></i> Your Skill Set Test lookup</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="btn-group gap-1">
+                                <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:skillsettestresult-list' %}" ><i class="bi bi-three-dots"></i></a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
+                            </div>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body ">
                             <!-- Example Code -->
                             <div class="position-relative mb-4">
-                                <img src="{% static 'images/banner-skilltest.png'%}" width="100%" height="60%" class="img-fluid" alt="banner">
+                                <img src="{% static 'images/banner-skilltest.png'%}" width="100%" height="40%" class="img-fluid" alt="banner">
+                                
                             </div>
                             <div class="table-responsive">
                                 <table class="table ">
                                     <thead>
                                         <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">No.</th>
                                         <th scope="col">Position</th>
                                         <th scope="col">SkillsTast</th>
                                         <th scope="col">States</th>
                                         <th scope="col">Result</th>
-                                        <th scope="col">Date</th>
+                                        <th scope="col">Start</th>
+                                        <th scope="col">Finshed</th>
+                                        <th scope="col">Action</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -866,13 +874,27 @@
                                             <tr>
                                             <th scope="row">{{ forloop.counter }}</th>
                                             <td>{{position_list.position}}</td>
-                                            <td>
-                                                <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Start</a>
-                                                
+                                            <td>{% if progress %}
+                                                    {% for progres in progress %}
+                                                        {% if progres.SkillSetTest_completed or progres.Skipped_completed or progres.OnProgressSkillTest_completed %}
+                                                        
+                                                        <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Retake</a>
+                                                        {% else %}
+                                                        <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Start</a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
                                             </td>
-                                            <td>{{position_list.states}}</td>
-                                            <td>{{position_list.result}}</td>
-                                            <td>{{position_list.updated|date}}</td>
+                                            {% if position_list.states == 'success' %}
+                                                <td><span class="badge rounded-pill text-bg-success px-2"> {{position_list.states}} <i class="bi bi-check2-circle px-1"></i></span></td>
+                                            {% else %}
+                                                <td>{{position_list.states}}</td>
+                                            {% endif %}
+                                            <td>{{position_list.result|floatformat:0 }}%</td>
+                                            <td>{{position_list.created|date:"F j, Y"}}</td>
+                                            <td>{{position_list.updated|date:"F j, Y"}}</td>
+                                            <td><a class="btn btn-sm btn-outline-warning"
+                                                href="{% url 'employee:skillsettestresult-update' slug=position_list.slug %}"><i class="bi bi-pencil-square"></i></a></td>
                                             </tr>
                                             {% endfor %}
                                         {% endif %}
@@ -905,7 +927,7 @@
             </div>
 
              <!-- Modal Step 8:  Employee Skill Set Skip Modal -->
-             <div class="modal fade" id="SkipForNowtModal" tabindex="-1" aria-labelledby="SkipForNowtModalLabel" aria-hidden="true">
+            <div class="modal fade" id="SkipForNowtModal" tabindex="-1" aria-labelledby="SkipForNowtModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg ">
                     <div class="modal-content">
                         <div class="modal-header">
