@@ -10,7 +10,11 @@
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
                     <h5>Military Information List</h5>
                     <div class="btn-group gap-2">
+                    {% if military_list %}
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:military_create' %}">Add</a>
+                    {% else %}
                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:military_create' %}">Create</a>
+                    {% endif %}
                     <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
                    </div>
                 </div>
@@ -31,7 +35,7 @@
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">
                                    
                                     <a class="btn btn-sm btn-outline-warning"
-                                     href="{% url 'employee:military_update' slug=military.slug %}">Update</a>
+                                     href="{% url 'employee:military_update' slug=military.slug %}"><i class="bi bi-pen"></i></a>
                                      {% if user.is_authenticated and user|is_admin %}
                                      <a class="btn btn-sm btn-outline-danger" 
                                         href="{% url 'employee:military_delete' slug=military.slug %}">Delete</a>

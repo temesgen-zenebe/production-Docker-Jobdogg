@@ -77,8 +77,7 @@ class BasicInformationForm(forms.ModelForm):
             'emergency_contact_number': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm'}),
             'emergency_contact_name': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm'}),
         }
-       
-       
+             
 class MilitaryForm(forms.ModelForm):
     certification_license = forms.FileField(
         required=False,  # Make the field optional
@@ -96,8 +95,7 @@ class MilitaryForm(forms.ModelForm):
             #'certification_license': forms.ClearableFileInput(attrs={'multiple': True}),
         
         }
-        
-        
+               
 class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
@@ -105,7 +103,6 @@ class EducationForm(forms.ModelForm):
         widgets = {
             'graduation_date': forms.DateInput(attrs={'type': 'date','style': 'width: 100%; font-size:13px;'})
         }
-
 
 class CertificationLicenseForm(forms.ModelForm):
     class Meta:

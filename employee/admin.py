@@ -30,6 +30,7 @@ class ProfileAdmin(admin.ModelAdmin):
     model = Profile
     list_display =[
                 'user',
+                'account_created',
                 'companyPolices_completed',
                 'basic_information_completed', 
                 'personal_information_completed',

@@ -27,9 +27,9 @@ from common.utils.chooseConstant import (
 from multiupload.fields import MultiFileField 
 
 
-#Profile Safety Video and Test, PROFILE DETAILS(Profile Photo ,Tell us all the interesting things about you, 
+#Profile Safety_Video_and_Test, PROFILE DETAILS(Profile Photo ,Tell us all the interesting things about you, 
 # UPLOAD YOUR VIDEO(Supported Video Formats: mp4, mpg, avi, mov, mkv, wmv, ogv, webm, flv You can upload a video, however if it is longer than 2 minutes, it will be cut to 2 minutes.  Record Video or uploading)),
-# Background Check, Treat Box,  Select Ride
+# Background_Check, Treat_Box,  Select Ride
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     account_created = models.BooleanField(default=False)
@@ -40,11 +40,17 @@ class Profile(models.Model):
     Education_completed = models.BooleanField(default=False)
     Experience_completed = models.BooleanField(default=False)
     Preferences_completed = models.BooleanField(default=False)
+    
     SkillSetTest_completed = models.BooleanField(default=False)
     OnProgressSkillTest_completed = models.BooleanField(default=False)
     Skipped_completed = models.BooleanField(default=False)
+    
     VideoResume_completed = models.BooleanField(default=False)
     ResumeUploading_completed = models.BooleanField(default=False)
+    #Safety_Video_and_Test_completed = models.BooleanField(default=False)
+    #Background_Check_completed = models.BooleanField(default=False)
+    #Treat_Box_completed = models.BooleanField(default=False)
+    #Select_Ride_completed = models.BooleanField(default=False)
     
     def __str__(self):
         return str(self.user)
@@ -129,16 +135,13 @@ def validate_social_security_number(ssn):
     
     p = re.compile(ssn_validate_pattern) 
     if (ssn == None):
-      
         return False
     else:
         if(re.search(p, ssn)):
             return True
         else:
             return False
-
     # Additional validation rules can be added here based on specific requirements
-
     return True
 
 #PERSONAL INFORMATION MODELS 
@@ -366,3 +369,17 @@ class SkillSetTestResult(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Skill Set Test Result"
+
+
+#VideoResume_completed
+#class VideoResume(models.Model):
+    #user, VideoResume, tell_about_you, tag, NumberViews, comments, slug, created, updated, 
+    #pass
+
+#Safety_Video_and_Test_completed
+#class Safety_Video_and_Test(models.Model):
+    #pass
+#Background_Check
+#class Background_Check(models.Model):
+    #user , uploadingW2 , uploadingW2, background_check_states,  slug, created, updated
+    #pass

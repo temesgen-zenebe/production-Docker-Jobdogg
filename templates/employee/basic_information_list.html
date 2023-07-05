@@ -10,7 +10,7 @@
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
                     <h6>Basic Information List</h6>
                     <div class="btn-group">
-                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Back</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
                     
                     {% if not basic_information %}
                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:basic_information_create'  %}">CREATE</a>
@@ -20,22 +20,26 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <ul class="list-unstyled ">
-                        {% for basic_information in basic_information %}
+                        {% for basic_inf in basic_information %}
                         <li >
                             <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                                
                                 <div>
-                                    <!--<img class="rounded-circle border mr-n2" src="https://www.gravatar.com/avatar?d=mp&s=40" />-->
-                                    <img class="rounded mr-3 align-self-center" src="https://www.gravatar.com/avatar?d=mp&s=50" />
-                                    <a href="{% url 'employee:basic_information_detail' slug=basic_information.slug %}" class="text-dark">
-                                        {{ basic_information.user.username|capfirst}} <i class="bi bi-arrows-fullscreen px-1"></i>
+                                    <!--{{ user.username }}-->
+                                    {% if user.avatar and not form.avatar.errors %}
+                                    <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded mr-3 align-self-center img-fluid shadow"/>
+                                    {% else %}
+                                    <img class="rounded mr-3 align-self-center img-fluid shadow" src="{% static 'images/userPlaceHolder.png' %}" alt="Logo" width="30" height="40"/>
+                                    {% endif %}
+                                    <a href="{% url 'employee:basic_information_detail' slug=basic_inf.slug %}" class="text-dark text-decoration-none ">
+                                        {{ basic_inf.user.username|capfirst}} <i class="bi bi-box-arrow-in-up-right px-1"></i>
                                     </a>
                                 </div>
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">
-                                    <a class="btn btn-sm btn-outline-warning" href="{% url 'employee:basic_information_update' slug=basic_information.slug %}">Update</a>
+                                    <a class="btn btn-sm btn-outline-warning" href="{% url 'employee:basic_information_update' slug=basic_inf.slug %}"><i class="bi bi-pen"></i></a>
                                     {% if user.is_authenticated and user|is_admin %}
                                         <a class="btn btn-sm btn-outline-danger" 
-                                        href="{% url 'employee:basic_information_delete' slug=basic_information.slug %}">Delete</a>
+                                        href="{% url 'employee:basic_information_delete' slug=basic_inf.slug %}">Delete</a>
                                     {% endif %}
                                 </div>
                             </div>

@@ -455,6 +455,9 @@ class BasicInformationListView(LoginRequiredMixin, ListView):
     model = BasicInformation
     template_name = 'employee/basic_information_list.html'
     context_object_name = 'basic_information'
+    
+    def get_queryset(self):
+        return BasicInformation.objects.filter(user=self.request.user)
 
 class BasicInformationCreateView(LoginRequiredMixin, CreateView):
     model = BasicInformation
@@ -483,14 +486,19 @@ class BasicInformationDetailView(LoginRequiredMixin, DetailView):
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
     
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+    
 class BasicInformationUpdateView(LoginRequiredMixin, UpdateView):
     model = BasicInformation
     form_class = BasicInformationForm
     template_name = 'employee/basic_information_update.html'
-    
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
-    success_url = reverse_lazy('employee:basic_information_list')
+    
+    
+    def get_success_url(self):
+        return reverse_lazy('employee:basic_information_list')
     
     def dispatch(self, request, *args, **kwargs):
         #profile = Profile.objects.get(user=request.user)
@@ -802,10 +810,10 @@ class ExperienceListView(LoginRequiredMixin, ListView):
         return Experience.objects.filter(user=self.request.user)
     
 class ExperienceCreateView(LoginRequiredMixin, CreateView):
-    model = Military
-    form_class = MilitaryForm
-    template_name = 'employee/military_create.html'
-    success_url = reverse_lazy('employee:military_list')
+    model = Experience
+    form_class = ExperienceForm
+    template_name = 'employee/experience_create.html'
+    success_url = reverse_lazy('employee:experience_list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user

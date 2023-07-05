@@ -166,6 +166,7 @@ urlpatterns = [
     path('skillsettestresult/', SkillSetTestResultListView.as_view(), name='skillsettestresult-list'),
     path('skillsettestresult/create/', SkillSetTestResultCreateView.as_view(), name='skillsettestresult-create'),
     path('skillsettestresult/<slug:slug>/', SkillSetTestResultDetailView.as_view(), name='skillsettestresult-detail'),
+
     path('skillsettestresult/<slug:slug>/update/', SkillSetTestResultUpdateView.as_view(), name='skillsettestresult-update'),
     path('skillsettestresult/<slug:slug>/delete/', SkillSetTestResultDeleteView.as_view(), name='skillsettestresult-delete'),
 ]

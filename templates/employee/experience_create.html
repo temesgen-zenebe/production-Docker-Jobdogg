@@ -16,6 +16,7 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                         <button class="btn btn-sm btn-outline-primary" type="submit">Save</button>
+                        <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:experience_list' %}">Cancel</a>
                     </form>
                 </div>
                

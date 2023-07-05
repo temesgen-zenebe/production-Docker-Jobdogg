@@ -10,7 +10,11 @@
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
                     <h6>Experience List</h6>
                     <div class="btn-group gap-1">
+                    {% if experienceList %}
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:experience_create' %}">Add</a>
+                    {% else %}
                      <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:experience_create' %}">Create</a>
+                    {% endif %}
                      <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Back</a>
                     </div>
                 </div>
@@ -32,7 +36,7 @@
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">
                                    
                                     <a class="btn btn-sm btn-outline-warning"
-                                     href="{% url 'employee:experience_update' slug=experience.slug %}">Update</a>
+                                     href="{% url 'employee:experience_update' slug=experience.slug %}"><i class="bi bi-pen"></i> </a>
                                      {% if user.is_authenticated and user|is_admin %}
                                      <a class="btn btn-sm btn-outline-danger" 
                                         href="{% url 'employee:experience_delete' slug=experience.slug %}">Delete</a>
