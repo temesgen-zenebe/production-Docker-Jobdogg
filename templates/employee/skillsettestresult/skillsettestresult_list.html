@@ -31,7 +31,7 @@
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">
                                     
                                     <a class="btn btn-sm btn-outline-warning"
-                                     href="{% url 'employee:skillsettestresult-update' slug=skillsettest.slug %}">Update</a>
+                                     href="{% url 'employee:skillsettestresult-update' slug=skillsettest.slug %}"><i class="bi bi-pen"></i></a>
                                      {% if user.is_authenticated and user|is_admin %}
                                      <a class="btn btn-sm btn-outline-danger" 
                                         href="{% url 'employee:skillsettestresult-delete' slug=skillsettest.slug %}">Delete</a>

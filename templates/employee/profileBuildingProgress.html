@@ -834,6 +834,17 @@
                     </div>
                 </div>
             </div>
+
+           <!-- Add a container to hold the popover content -->
+           <div class="container alert fade alert-dismissible" role="alert">
+            <div id="popover-content" style="display: none;">
+                <h3>Congratulations!</h3>
+                <p>A pending status indicates that you have completed the skills test and updated your results. Our dedicated teams will review and confirm your status within one hour. 
+                    Once updated, employers will be able to see your profile.</p>
+                
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <!-- Modal Step 8:  Employee Skill Set Test Modal -->
             <div class="modal fade" id="SkillSetTestModal" tabindex="-1" aria-labelledby="SkillSetTestModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-scrollable">
@@ -874,19 +885,28 @@
                                             <td>{{position_list.position}}</td>
                                             <td>{% if progress %}
                                                     {% for progres in progress %}
-                                                        {% if progres.SkillSetTest_completed or progres.Skipped_completed or progres.OnProgressSkillTest_completed %}
-                                                        
-                                                        <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Retake</a>
-                                                        {% else %}
+                                                        {% if progres.Skipped_completed or progres.OnProgressSkillTest_completed %}
                                                         <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Start</a>
+                                                        {% elif progres.SkillSetTest_completed  %}
+                                                        <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Retake</a>
                                                         {% endif %}
                                                     {% endfor %}
                                                 {% endif %}
                                             </td>
                                             {% if position_list.states == 'success' %}
-                                                <td><span class="badge rounded-pill text-bg-success px-2"> {{position_list.states}} <i class="bi bi-check2-circle px-1"></i></span></td>
+                                                <td>
+                                                    <span class="badge rounded-pill text-bg-success px-2"> {{position_list.states}} <i class="bi bi-check2-circle px-1"></i></span>
+                                                   
+                                                </td>
                                             {% else %}
-                                                <td>{{position_list.states}}</td>
+                                                <td>{{position_list.states}}
+                                                    
+                                                    <!-- Add a button that triggers the popover -->
+                                                    <a  id="myAlert" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Popover content">
+                                                        <i class="bi bi-info-circle px-1 fontColor-blue"></i>
+                                                    </a>
+                                                   
+                                                </td>
                                             {% endif %}
                                             <td>{{position_list.result|floatformat:0 }}%</td>
                                             <td>{{position_list.created|date:"F j, Y"}}</td>
@@ -898,7 +918,9 @@
                                         {% endif %}
                                     </tbody>
                                 </table>
+                             
                             </div>
+                            
                             <div class="bd-callout bd-callout-info">
                                 
                                 <h6>Notce:</h6>
@@ -969,6 +991,9 @@
                     </div>
                 </div>
             </div>
+
+            
+             <!-- Employee Skill Set Skip Modal --> 
 
     </div>     
 
@@ -1118,6 +1143,9 @@
                 return cookieValue;
             }
         });
+    </script>
+    <script>
+       
     </script>
 {% endblock %} 
 {% endblock %}

@@ -193,7 +193,7 @@ class EmployeePreferencesAdmin(admin.ModelAdmin):
 @admin.register(SkillSetTestResult)
 class SkillSetTestResultAdmin(admin.ModelAdmin):
     model = SkillSetTestResult
-    list_display = ['user','position', 'skill_test','states','result','slug', 'created','updated']
+    list_display = ['user','position', 'skill_test','states','result','conformation','slug', 'created','updated']
     
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object

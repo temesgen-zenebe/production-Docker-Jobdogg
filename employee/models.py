@@ -356,6 +356,7 @@ class SkillSetTestResult(models.Model):
     skill_test = models.CharField(max_length=200)
     states = models.CharField(max_length=20, choices=TEST_STATES, default="lookup")
     result = models.DecimalField(max_digits=5, decimal_places=2, default=00)
+    conformation = models.CharField(max_length=200, default='Id12565874', null=True)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -364,7 +365,8 @@ class SkillSetTestResult(models.Model):
         if not self.slug:
             value = f"{self.user.username} {self.position}"
             self.slug = unique_slug(value, type(self))
-            
+        if not self.result == 0.00:
+            self.states = 'pending'
         super().save(*args, **kwargs)
 
     def __str__(self):

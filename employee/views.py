@@ -993,7 +993,7 @@ class SkillSetTestResultCreateView(LoginRequiredMixin,CreateView):
 class SkillSetTestResultUpdateView(LoginRequiredMixin,UpdateView):
     model = SkillSetTestResult
     template_name = 'employee/skillsettestresult/skillsettestresult_form.html'
-    fields = ['result']
+    fields = ['result','conformation']
     success_url = reverse_lazy('employee:skillsettestresult-list')
     
     def get_queryset(self):

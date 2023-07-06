@@ -13,7 +13,20 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    
+                    <div class="bd-callout bd-callout-warning">
+                        <h5 id="asynchronous-methods-and-transitions">Congratulations!</h5>
+                        <hr>
+                        <p> 
+                            <ul class="s-font">
+                                <li>Now, when you update your new results, your status changes to "pending".</li>
+                                <li>Your pending status indicates successful completion of the skills test and result update.</li> 
+                                <li>Rest assured, our dedicated teams will review and confirm your status within one hour.</li>
+                                <li>Once the review is complete, your status will be updated to "success".</li>
+                                <li>This means that you will become visible to potential employers who are actively seeking candidates with your skills and qualifications.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <hr>
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}

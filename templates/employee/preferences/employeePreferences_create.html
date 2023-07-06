@@ -11,11 +11,12 @@
                     <h5>Create Employee Preferences</h5>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                <div class="card-body" style="max-height: 600px; overflow-y: auto;">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
                         <button name="preferences"  class="btn btn-sm btn-outline-primary" type="submit">Save</button>
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:employee-preferences-list' %}">Cancle</a>
                     </form>
                 </div>
                
