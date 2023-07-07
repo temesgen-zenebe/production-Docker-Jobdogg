@@ -20,3 +20,15 @@ def create_or_update_skill_test_results(sender, instance, created, **kwargs):
                     position=position,
                     skill_test=last_skill_test_link if last_skill_test_link else ''
                 )
+    elif not created and not instance.desired_positions.exists():
+        # Create a default SkillSetTestResult object for the first EmployeePreferences object
+        try:
+            skill_test_result = SkillSetTestResult.objects.get(user=instance.user, position=None)
+            skill_test_result.user = instance.user
+            skill_test_result.save()
+        except SkillSetTestResult.DoesNotExist:
+            SkillSetTestResult.objects.create(
+                user=instance.user,
+                skill_test=last_skill_test_link if last_skill_test_link else ''
+            )
+

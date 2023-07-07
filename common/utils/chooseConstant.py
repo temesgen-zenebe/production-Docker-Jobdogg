@@ -149,5 +149,5 @@ TEST_STATES = (
         ('success', 'Success'),
         ('skipped', 'Skipped'),
         ('started', 'Started'),
-        ('lookup', 'lookup'),
+        
     )

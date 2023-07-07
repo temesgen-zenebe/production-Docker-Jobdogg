@@ -163,6 +163,11 @@ class EmployeePreferencesForm(forms.ModelForm):
             'custom_positions',
             'custom_skills'
         ]
+        labels = {
+            'can_relocation': 'Are you willing to relocate?',
+            'years_of_experience': 'Years of experience'
+            # Add labels for other fields here
+        }
         widgets = {
             'minimum_salary': forms.NumberInput(attrs={'class': 'numberinput form-control form-control-sm', 'id': 'id_minimum_salary'}),
             'salary_type': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_salary_type'}),

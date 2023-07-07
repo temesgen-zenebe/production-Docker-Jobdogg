@@ -44,10 +44,10 @@ class Profile(models.Model):
     SkillSetTest_completed = models.BooleanField(default=False)
     OnProgressSkillTest_completed = models.BooleanField(default=False)
     Skipped_completed = models.BooleanField(default=False)
-    
+    #Safety_Video_and_Test_completed = models.BooleanField(default=False)
     VideoResume_completed = models.BooleanField(default=False)
     ResumeUploading_completed = models.BooleanField(default=False)
-    #Safety_Video_and_Test_completed = models.BooleanField(default=False)
+    
     #Background_Check_completed = models.BooleanField(default=False)
     #Treat_Box_completed = models.BooleanField(default=False)
     #Select_Ride_completed = models.BooleanField(default=False)
@@ -312,8 +312,6 @@ class EmployeePreferences(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    
-
     def save(self, *args, **kwargs):
         if not self.slug:
             value = f"{self.job_type} {self.user.username}"
@@ -354,7 +352,7 @@ class SkillSetTestResult(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
     skill_test = models.CharField(max_length=200)
-    states = models.CharField(max_length=20, choices=TEST_STATES, default="lookup")
+    states = models.CharField(max_length=20, choices=TEST_STATES, default="started")
     result = models.DecimalField(max_digits=5, decimal_places=2, default=00)
     conformation = models.CharField(max_length=200, default='Id12565874', null=True)
     slug = models.SlugField(unique=True)
@@ -365,22 +363,20 @@ class SkillSetTestResult(models.Model):
         if not self.slug:
             value = f"{self.user.username} {self.position}"
             self.slug = unique_slug(value, type(self))
-        if not self.result == 0.00:
-            self.states = 'pending'
         super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.user.username}'s Skill Set Test Result"
 
-
+#Safety_Video_and_Test_completed
+#class Safety_Video_and_Test(models.Model):
+    pass
+    
 #VideoResume_completed
 #class VideoResume(models.Model):
     #user, VideoResume, tell_about_you, tag, NumberViews, comments, slug, created, updated, 
     #pass
 
-#Safety_Video_and_Test_completed
-#class Safety_Video_and_Test(models.Model):
-    #pass
 #Background_Check
 #class Background_Check(models.Model):
     #user , uploadingW2 , uploadingW2, background_check_states,  slug, created, updated

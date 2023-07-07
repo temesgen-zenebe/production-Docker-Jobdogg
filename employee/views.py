@@ -300,10 +300,13 @@ class SkipSkillSetTestView(LoginRequiredMixin, View):
 class OnProgressSkillTestView(LoginRequiredMixin, View):
     def post(self, request):
         profile = get_object_or_404(Profile, user=request.user)
+        OnSkipSkill = get_object_or_404(SkillSetTestResult, user=request.user).first()
         profile.OnProgressSkillTest_completed = True
         profile.Skipped_completed = False
         profile.SkillSetTest_completed = False
+        OnSkipSkill.states = 'in-progress'
         profile.save()
+        OnSkipSkill.save()
         messages.success(request, 'Skip SkillSet OnPrecess successfully.')
         return redirect('employee:profile_building_progress')  
 
@@ -1002,15 +1005,19 @@ class SkillSetTestResultUpdateView(LoginRequiredMixin,UpdateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             profile = Profile.objects.get(user=request.user)
+            completedSkill = SkillSetTestResult.objects.filter(user=request.user).order_by('-created').first()
         except Profile.DoesNotExist:
             profile = Profile(user=request.user)
-
+            completedSkill = SkillSetTestResult(user=request.user)
         if not profile.Preferences_completed:
             return redirect('employee:employee-preferences-create')
 
         profile.SkillSetTest_completed = True
         profile.OnProgressSkillTest_completed = False
+        profile.Skipped_completed = False
+        completedSkill.states = 'pending'
         profile.save()
+        completedSkill.save()
         return super().dispatch(request, *args, **kwargs)
 
 class SkillSetTestResultDeleteView(LoginRequiredMixin,DeleteView):
