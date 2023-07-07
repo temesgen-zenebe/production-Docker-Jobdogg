@@ -23,6 +23,9 @@ from .models import (
     
      #SkillSetTestResult
      SkillSetTestResult,
+     
+     #Safety_Video_and_Test
+     Safety_Video_and_Test,
     )
 
 @admin.register(Profile)
@@ -201,4 +204,21 @@ class SkillSetTestResultAdmin(admin.ModelAdmin):
         return ()
 
 
+@admin.register(Safety_Video_and_Test)
+class Safety_Video_and_TestAdmin(admin.ModelAdmin):
+    model = Safety_Video_and_Test
+    list_display = [
+        'title',
+        'image', 
+        'video_url', 
+        'description',
+        'created_at', 
+        'updated_at', 
+        'view_count',
+    ]
+   
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('created_at', 'updated_at')
+        return ()

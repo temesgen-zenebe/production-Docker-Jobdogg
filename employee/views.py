@@ -16,6 +16,7 @@ from django.db.models import Q
 import pandas as pd
 import pyxlsb
 import openpyxl
+
 from django.views.generic import (
     ListView, CreateView, UpdateView, DetailView, DeleteView, FormView
 )
@@ -23,7 +24,7 @@ from django.views.generic import (
 from .models import (
     Category,CertificationLicense,Education,EmployeePreferences,Experience, 
     Policies,Position,Profile,Skill, SkillSetTestResult,UserAcceptedPolicies,BasicInformation,
-    Personal,Language,Military,
+    Personal,Language,Military,Safety_Video_and_Test
 )
 from .forms import (
     BasicInformationForm,
@@ -1039,3 +1040,47 @@ class SkillSetTestResultDetailView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return SkillSetTestResult.objects.filter(user=self.request.user)
+    
+    
+class SafetyVideoTestListView(LoginRequiredMixin, ListView):
+    model = Safety_Video_and_Test
+    template_name = 'safetyVideoTest/safetyVideoTest_list.html'
+    context_object_name = 'safetyVideoTest'
+    
+class SafetyVideoTestDetailView(LoginRequiredMixin, DetailView):
+    model = Safety_Video_and_Test
+    template_name = 'safetyVideoTest/safetyVideoTest_detail.html'
+    context_object_name = 'safetyVideoTestDetailView'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # get a list of data entries for the given model
+        context['related_entries'] = Safety_Video_and_Test.objects.all().order_by('-created_at')[:5]
+        # increment view_count field by 1 every time the DetailView is accessed
+        self.object.view_count += 1
+        self.object.save()
+        return context
+    
+class SafetyVideoTestCreateView(LoginRequiredMixin, CreateView):
+    model = Safety_Video_and_Test
+    template_name = 'safetyVideoTest/safetyVideoTest_form.html'
+    fields = ['title', 'image', 'video_url', 'description']
+    success_url = reverse_lazy('employee:safetyVideoTest_list')
+    extra_context = {'is_create': True}
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class SafetyVideoTestUpdateView(LoginRequiredMixin, UpdateView):
+    model = Safety_Video_and_Test
+    template_name = 'safetyVideoTest/safetyVideoTest_form.html'
+    fields = ['title', 'image', 'video_url', 'description']
+    success_url = reverse_lazy('employee:safetyVideoTest_list')
+    extra_context = {'is_create': False}
+
+class SafetyVideoTestDeleteView(LoginRequiredMixin, DeleteView):
+    model = Safety_Video_and_Test
+    template_name = 'safetyVideoTest/safetyVideoTest_confirm_delete.html'
+    success_url = reverse_lazy('employee:safetyVideoTest_list')
+

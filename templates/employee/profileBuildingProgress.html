@@ -301,14 +301,20 @@
                 <div class="col step-item ">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
-                    <h6 class="card-text"><i class="bi bi-award-fill px-1"></i>Skillset Test Result update</h6>
-                    <small class="">Step 8: SkillSet Test </small>
+                    <h6 class="card-text"><i class="bi bi-cone-striped px-1 fs-5"></i>Safety Video</h6>
+                    <small class="">Step 9: Safety Video & Test </small>
                     <div class="d-flex justify-content-between align-items-center">
-                        {% if progres.VideoResume_completed %}
+                        {% if progres.Safety_Video_and_Test_completed %}
+                        <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
+                            <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                        </button>
+                        <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                        {% else %}
                         <div class="btn-group">
-                        <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                        <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        
+                        <a class="prev-btn  btn btn-sm btn-outline-secondary" data-bs-toggle="modal" href="#SafetyVideoModalToggle" role="button">
+                            <i class="bi bi-film fs-6 px-1"></i><i class="bi bi-play-circle"></i>
+                        </a>
                         </div>
                         {% endif %}
                     </div>
@@ -898,19 +904,21 @@
                                                 {% endif %}
                                             </td>
                                             {% if position_list.states == 'success' %}
-                                                <td>
-                                                    <span class="badge rounded-pill text-bg-success px-2"> {{position_list.states}} <i class="bi bi-check2-circle px-1"></i></span>
-                                                   
-                                                </td>
-                                            {% else %}
+                                                <td><span class="badge rounded-pill text-bg-success px-2"> {{position_list.states}}
+                                                     <i class="bi bi-check2-circle px-1"></i></span></td>
+                                            {% elif position_list.states == 'started' %}
+                                              <td>{{position_list.states}} </td>
+                                            {% elif position_list.states == 'skipped' %}
+                                              <td>{{position_list.states}} </td>
+                                            {% elif position_list.states == 'pending' %}
                                                 <td>{{position_list.states}}
-                                                    
                                                     <!-- Add a button that triggers the popover -->
                                                     <a data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Popover content">
                                                         <i class="bi bi-info-circle px-1 fontColor-blue"></i>
                                                     </a>
-                                                   
                                                 </td>
+                                            {% else %}
+                                            <td>{{position_list.states}} </td>
                                             {% endif %}
                                             <td>{{position_list.result|floatformat:0 }}%</td>
                                             <td>{{position_list.created|date:"F j, Y"}}</td>
@@ -996,9 +1004,40 @@
                 </div>
             </div>
 
-            
-             <!-- Employee Skill Set Skip Modal --> 
-
+            <!-- Employee Safety Video & Test Modal --> 
+            <div class="modal fade" id="SafetyVideoModalToggle" aria-hidden="true" aria-labelledby="SafetyVideoModalToggleleLabel" tabindex="-1">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="SafetyVideoModalToggleleLabel">Safety Video</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Show a second modal and hide this one with the button below.
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" data-bs-target="#SafetyVideoModalToggle2" data-bs-toggle="modal">Open second modal</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="modal fade" id="SafetyVideoModalToggle2" aria-hidden="true" aria-labelledby="SafetyVideoModalToggleLabel2" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="SafetyVideoModalToggleLabel2">Safety Video Test</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Hide this modal and show the first with the button below.
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+             
     </div>     
 
 </div>  

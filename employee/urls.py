@@ -81,6 +81,13 @@ from .views import (
     SkillSetTestResultUpdateView, 
     SkillSetTestResultDeleteView,
     SkillSetTestResultDetailView,
+    
+    #SafetyVideoTest
+    SafetyVideoTestListView,
+    SafetyVideoTestDetailView,
+    SafetyVideoTestCreateView,
+    SafetyVideoTestUpdateView,
+    SafetyVideoTestDeleteView,
 )
 
 
@@ -169,6 +176,14 @@ urlpatterns = [
 
     path('skillsettestresult/<slug:slug>/update/', SkillSetTestResultUpdateView.as_view(), name='skillsettestresult-update'),
     path('skillsettestresult/<slug:slug>/delete/', SkillSetTestResultDeleteView.as_view(), name='skillsettestresult-delete'),
+
+    #SafetyVideoTest
+    path('safety-video-test/', SafetyVideoTestListView.as_view(), name='safetyVideoTest_list'),
+    path('safety-video-test/create/', SafetyVideoTestCreateView.as_view(), name='safetyVideoTest_create'),
+    path('safety-video-test/<int:pk>/', SafetyVideoTestDetailView.as_view(), name='safetyVideoTest_detail'),
+    path('safety-video-test/<int:pk>/update/', SafetyVideoTestUpdateView.as_view(), name='safetyVideoTest_update'),
+    path('safety-video-test/<int:pk>/delete/', SafetyVideoTestDeleteView.as_view(), name='safetyVideoTest_delete'),
+
 ]
 
 

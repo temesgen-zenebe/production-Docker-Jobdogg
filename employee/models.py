@@ -44,7 +44,8 @@ class Profile(models.Model):
     SkillSetTest_completed = models.BooleanField(default=False)
     OnProgressSkillTest_completed = models.BooleanField(default=False)
     Skipped_completed = models.BooleanField(default=False)
-    #Safety_Video_and_Test_completed = models.BooleanField(default=False)
+    
+    Safety_Video_and_Test_completed = models.BooleanField(default=False)
     VideoResume_completed = models.BooleanField(default=False)
     ResumeUploading_completed = models.BooleanField(default=False)
     
@@ -369,8 +370,20 @@ class SkillSetTestResult(models.Model):
         return f"{self.user.username}'s Skill Set Test Result"
 
 #Safety_Video_and_Test_completed
-#class Safety_Video_and_Test(models.Model):
-    pass
+class Safety_Video_and_Test(models.Model):
+    title = models.CharField(max_length=255 ,blank=True, null=True)
+    image = models.ImageField(upload_to="Safety_Video_image/%Y/%m/%d" ,blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True)
+    description = models.TextField(max_length=500,blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    view_count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return str(self.title)
+    
+    #def get_absolute_url(self):
+       # return reverse("employee:Safety_Video", kwargs={"pk": self.pk})
     
 #VideoResume_completed
 #class VideoResume(models.Model):
