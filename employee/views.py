@@ -66,6 +66,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 profile.Experience_completed,
                 profile.Preferences_completed,
                 profile.SkillSetTest_completed,
+                profile.Safety_Video_and_Test_completed,
                 profile.VideoResume_completed,
                 profile.ResumeUploading_completed,
             ]
@@ -96,6 +97,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         categories = Category.objects.all()
         positions = Position.objects.all()
         skills = Skill.objects.all()
+        safetyVideo = Safety_Video_and_Test.objects.all()
         testList = SkillSetTestResult.objects.filter(user=self.request.user)
         # Filter positions based on the logged-in user's preferences
         employee_preferences = EmployeePreferences.objects.filter(user=self.request.user).first()
@@ -123,6 +125,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'skills': skills,
             'user_positions':user_positions,
             'testList':testList,
+            'safetyVideo':safetyVideo,
             
         }
            
@@ -1041,7 +1044,7 @@ class SkillSetTestResultDetailView(LoginRequiredMixin, DetailView):
     def get_queryset(self):
         return SkillSetTestResult.objects.filter(user=self.request.user)
     
-    
+#SafetyVideoTest 
 class SafetyVideoTestListView(LoginRequiredMixin, ListView):
     model = Safety_Video_and_Test
     template_name = 'safetyVideoTest/safetyVideoTest_list.html'
