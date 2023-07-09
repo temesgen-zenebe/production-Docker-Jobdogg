@@ -385,6 +385,19 @@ class Safety_Video_and_Test(models.Model):
     #def get_absolute_url(self):
        # return reverse("employee:Safety_Video", kwargs={"pk": self.pk})
     
+#SafetyTestResult
+class SafetyTestResult(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    safety_result = models.CharField(max_length=50)
+    states = models.CharField(max_length=20)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Test Result for {self.user.username}"
+
+
 #VideoResume_completed
 #class VideoResume(models.Model):
     #user, VideoResume, tell_about_you, tag, NumberViews, comments, slug, created, updated, 

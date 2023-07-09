@@ -1087,18 +1087,214 @@
                 </div>
               </div>
             <div class="modal fade" id="SafetyVideoModalToggle2" aria-hidden="true" aria-labelledby="SafetyVideoModalToggleLabel2" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h1 class="modal-title fs-5" id="SafetyVideoModalToggleLabel2">Safety Video Test</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <a class="btn btn-sm btn-outline-secondary align-end" href="{% url 'employee:profile_building_progress' %}"><i class="bi bi-x"></i></a>
+                      
                     </div>
+                   
                     <div class="modal-body">
-                      Hide this modal and show the first with the button below.
+                        <div class="container">
+                            <form id="safety-test-form">
+                              <div class="mb-3">
+                                <label for="q1">1. The main goal of occupational safety is:</label>
+                                <select class="form-select form-select-sm" id="q1" name="q1" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Protection</option>
+                                  <option value="b">Prevention</option>
+                                  <option value="c">All of the above</option>
+                                  <option value="d">None of the above</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q2">2. Managers and employers must work together to keep workspaces from becoming a:</label>
+                                <select class="form-select form-select-sm" id="q2" name="q2" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Safety Risk</option>
+                                  <option value="b">Socializing area</option>
+                                  <option value="c">Disaster</option>
+                                  <option value="d">None of the above</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q3">3. True or False<br> Osha, by law, does not require employers to provide safe working conditions:</label>
+                                <select class="form-select form-select-sm" id="q3" name="q3" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">True</option>
+                                  <option value="b">False</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q4">4. What does OSHA stand for:</label>
+                                <select class="form-select form-select-sm" id="q4" name="q4" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Occupational Safety and Health Awards</option>
+                                  <option value="b">Occupational Safety and Health Administration</option>
+                                  <option value="c">Operational Safety and Health Administration</option>
+                                  <option value="d">Occupational Safety and Help Administration</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q5">5. Safety is not only the responsibility of the employer but:</label>
+                                <select class="form-select form-select-sm" id="q5" name="q5" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Family</option>
+                                  <option value="b">Dog</option>
+                                  <option value="c">You</option>
+                                  <option value="d">Supervisor</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q6">6. Safety is the condition of not being protected or the prevention from or unlikely to cause danger, risk, or injury:</label>
+                                <select class="form-select form-select-sm" id="q6" name="q6" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">True</option>
+                                  <option value="b">False</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q7">7. Accidents are unexpected, unplanned, and may cause injury to you and others around you:</label>
+                                <select class="form-select form-select-sm" id="q7" name="q7" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">True</option>
+                                  <option value="b">False</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q8">8. What does PPE stand for:</label>
+                                <select class="form-select form-select-sm" id="q8" name="q8" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Personal Paper Evaluation</option>
+                                  <option value="b">Personal Personal Equipment</option>
+                                  <option value="c">Personal Protective Equipment</option>
+                                  <option value="d">Personal Prevention Equipment</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q9">9. Injury is defined as a harmful condition on the body caused by an accident:</label>
+                                <select class="form-select form-select-sm" id="q9" name="q9" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">True</option>
+                                  <option value="b">False</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q10">10. What is an example of equipment that can protect you from hazardous conditions:</label>
+                                <select class="form-select form-select-sm" id="q10" name="q10" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Gloves</option>
+                                  <option value="b">Hard hat accessories</option>
+                                  <option value="c">Disposable Respiratory Protection</option>
+                                  <option value="d">Chemical Resistant Clothing and Accessories</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q11">11. If you injure yourself or cause an accident you should immediately:</label>
+                                <select class="form-select form-select-sm" id="q11" name="q11" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Finish the task for the day then report the incident.</option>
+                                  <option value="b">Finish the task and notify your peers to report it on your behalf.</option>
+                                  <option value="c">End the task and report it to your immediate supervisor or manager.</option>
+                                  <option value="d">Ignore the injury or accident.</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q12">12. Please be sure to __________________and use your knees instead of bending at your waist when lifting heavy or small objects:</label>
+                                <select class="form-select form-select-sm" id="q12" name="q12" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Jump</option>
+                                  <option value="b">Crawl</option>
+                                  <option value="c">Stretch</option>
+                                  <option value="d">Squat</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q13">13. _______________ at work are utilized to maximize attentiveness by providing rest and stress reduction:</label>
+                                <select class="form-select form-select-sm" id="q13" name="q13" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Breaks</option>
+                                  <option value="b">Sleep</option>
+                                  <option value="c">Exercises</option>
+                                  <option value="d">Meditation</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q14">14. Staying in your designated work area allows you to be familiar with your surroundings and the rules of conduct pertaining to that particular workspace:</label>
+                                <select class="form-select form-select-sm" id="q14" name="q14" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">True</option>
+                                  <option value="b">False</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q15">15. Remaining alert and attentive to your surroundings limits________________and allows you to remain focused on your tasks:</label>
+                                <select class="form-select form-select-sm" id="q15" name="q15" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Illnesses</option>
+                                  <option value="b">Distraction</option>
+                                  <option value="c">Confusion</option>
+                                  <option value="d">Traction</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q16">16. All employees must take the initiative to keep all exits and walkways clear, including ensuring that emergency exits are not blocked:</label>
+                                <select class="form-select form-select-sm" id="q16" name="q16" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">True</option>
+                                  <option value="b">False</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q17">17. The responsibility for fire prevention belongs to:</label>
+                                <select class="form-select form-select-sm" id="q17" name="q17" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">The Supervisor</option>
+                                  <option value="b">The Manager</option>
+                                  <option value="c">The Fire Department</option>
+                                  <option value="d">Everyone</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q18">18. An employee that spots a risk in the workplace should:</label>
+                                <select class="form-select form-select-sm" id="q18" name="q18" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">Report it to their supervisor/safety and compliance officer</option>
+                                  <option value="b">Ignore the risk</option>
+                                  <option value="c">Make it safe before management sees it</option>
+                                  <option value="d">All of the above</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q19">19. All risks must be identified and controlled before starting a job:</label>
+                                <select class="form-select form-select-sm" id="q19" name="q19" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>Open this select the correct answer</option>
+                                  <option value="a">True</option>
+                                  <option value="b">False</option>
+                                </select>
+                              </div>
+                              <div class="mb-3">
+                                <label for="q20">20. If you need assistance while performing a job, please:</label>
+                                <select class="form-select form-select-sm" id="q20" name="q20" aria-label="Select the correct answer" required>
+                                  <option selected disabled value=''>select the correct answer</option>
+                                  <option value="a">Ask for help</option>
+                                  <option value="b">Keep performing to the best of your ability</option>
+                                  <option value="c">Take a break</option>
+                                  <option value="d">None of the above</option>
+                                </select>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Submit</button>
+                              </div>
+                            </form>
+                            <div id="result" class="mt-3"></div>
+                        </div>
+                          
+                        
                     </div>
-                    <div class="modal-footer">
-                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
-                    </div>
+                   
+                   </form>
                   </div>
                 </div>
             </div>
@@ -1252,6 +1448,8 @@
             }
         });
     </script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/safetyTestFormscript.js"></script>
+   
 {% endblock %} 
 {% endblock %}

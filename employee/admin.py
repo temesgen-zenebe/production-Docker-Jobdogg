@@ -8,6 +8,7 @@ from .models import (
      Military, 
      Profile, 
      Policies,
+     SafetyTestResult,
      UserAcceptedPolicies,
      BasicInformation,
      
@@ -221,4 +222,15 @@ class Safety_Video_and_TestAdmin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
             return ('created_at', 'updated_at')
+        return ()
+   
+#SafetyTestResult 
+@admin.register(SafetyTestResult)
+class SafetyTestResultAdmin(admin.ModelAdmin):
+    model = SafetyTestResult
+    list_display =['user', 'safety_result','states','slug','created','updated',]
+   
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('created', 'updated','slug')
         return ()
