@@ -45,6 +45,7 @@ class ProfileAdmin(admin.ModelAdmin):
                 'Skipped_completed' ,
                 'OnProgressSkillTest_completed' ,
                 'SkillSetTest_completed',
+                'Safety_Video_and_Test_completed',
                 'VideoResume_completed', 
                 'ResumeUploading_completed',
                 

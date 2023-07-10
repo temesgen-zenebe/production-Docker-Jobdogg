@@ -1005,7 +1005,7 @@
             </div>
 
             <!-- Employee Safety Video & Test Modal --> 
-            <div class="modal fade" id="SafetyVideoModalToggle" aria-hidden="true" aria-labelledby="SafetyVideoModalToggleleLabel" tabindex="-1">
+            <div class="modal fade" id="SafetyVideoModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SafetyVideoModalToggleleLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -1085,8 +1085,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            <div class="modal fade" id="SafetyVideoModalToggle2" aria-hidden="true" aria-labelledby="SafetyVideoModalToggleLabel2" tabindex="-1">
+            </div>
+            <div class="modal fade" id="SafetyVideoModalToggle2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SafetyVideoModalToggleLabel2" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -1096,15 +1096,17 @@
                     </div>
                    
                     <div class="modal-body">
-                        <div class="container">
-                            <form id="safety-test-form">
+                        <div class="container d-block" id="fromResultCalculator">
+                            <form method="POST" id="safety-test-form" action="{% url 'employee:profile_building_progress' %}">
+
+                              {% csrf_token %}
                               <div class="mb-3">
                                 <label for="q1">1. The main goal of occupational safety is:</label>
                                 <select class="form-select form-select-sm" id="q1" name="q1" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
                                   <option value="a">Protection</option>
                                   <option value="b">Prevention</option>
-                                  <option value="c">All of the above</option>
+                                  <option value="c">All of the above.</option>
                                   <option value="d">None of the above</option>
                                 </select>
                               </div>
@@ -1112,7 +1114,7 @@
                                 <label for="q2">2. Managers and employers must work together to keep workspaces from becoming a:</label>
                                 <select class="form-select form-select-sm" id="q2" name="q2" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
-                                  <option value="a">Safety Risk</option>
+                                  <option value="a">Safety Risk.</option>
                                   <option value="b">Socializing area</option>
                                   <option value="c">Disaster</option>
                                   <option value="d">None of the above</option>
@@ -1123,7 +1125,7 @@
                                 <select class="form-select form-select-sm" id="q3" name="q3" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
                                   <option value="a">True</option>
-                                  <option value="b">False</option>
+                                  <option value="b">False.</option>
                                 </select>
                               </div>
                               <div class="mb-3">
@@ -1131,7 +1133,7 @@
                                 <select class="form-select form-select-sm" id="q4" name="q4" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
                                   <option value="a">Occupational Safety and Health Awards</option>
-                                  <option value="b">Occupational Safety and Health Administration</option>
+                                  <option value="b">Occupational Safety and Health Administration.</option>
                                   <option value="c">Operational Safety and Health Administration</option>
                                   <option value="d">Occupational Safety and Help Administration</option>
                                 </select>
@@ -1142,7 +1144,7 @@
                                   <option selected disabled value=''>Open this select the correct answer</option>
                                   <option value="a">Family</option>
                                   <option value="b">Dog</option>
-                                  <option value="c">You</option>
+                                  <option value="c">You.</option>
                                   <option value="d">Supervisor</option>
                                 </select>
                               </div>
@@ -1151,14 +1153,14 @@
                                 <select class="form-select form-select-sm" id="q6" name="q6" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
                                   <option value="a">True</option>
-                                  <option value="b">False</option>
+                                  <option value="b">False.</option>
                                 </select>
                               </div>
                               <div class="mb-3">
                                 <label for="q7">7. Accidents are unexpected, unplanned, and may cause injury to you and others around you:</label>
                                 <select class="form-select form-select-sm" id="q7" name="q7" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
-                                  <option value="a">True</option>
+                                  <option value="a">True.</option>
                                   <option value="b">False</option>
                                 </select>
                               </div>
@@ -1168,7 +1170,7 @@
                                   <option selected disabled value=''>Open this select the correct answer</option>
                                   <option value="a">Personal Paper Evaluation</option>
                                   <option value="b">Personal Personal Equipment</option>
-                                  <option value="c">Personal Protective Equipment</option>
+                                  <option value="c">Personal Protective Equipment.</option>
                                   <option value="d">Personal Prevention Equipment</option>
                                 </select>
                               </div>
@@ -1176,7 +1178,7 @@
                                 <label for="q9">9. Injury is defined as a harmful condition on the body caused by an accident:</label>
                                 <select class="form-select form-select-sm" id="q9" name="q9" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
-                                  <option value="a">True</option>
+                                  <option value="a">True.</option>
                                   <option value="b">False</option>
                                 </select>
                               </div>
@@ -1186,7 +1188,7 @@
                                   <option selected disabled value=''>Open this select the correct answer</option>
                                   <option value="a">Gloves</option>
                                   <option value="b">Hard hat accessories</option>
-                                  <option value="c">Disposable Respiratory Protection</option>
+                                  <option value="c">Disposable Respiratory Protection.</option>
                                   <option value="d">Chemical Resistant Clothing and Accessories</option>
                                 </select>
                               </div>
@@ -1196,7 +1198,7 @@
                                   <option selected disabled value=''>Open this select the correct answer</option>
                                   <option value="a">Finish the task for the day then report the incident.</option>
                                   <option value="b">Finish the task and notify your peers to report it on your behalf.</option>
-                                  <option value="c">End the task and report it to your immediate supervisor or manager.</option>
+                                  <option value="c">End the task and report it to your immediate supervisor or manager..</option>
                                   <option value="d">Ignore the injury or accident.</option>
                                 </select>
                               </div>
@@ -1207,14 +1209,14 @@
                                   <option value="a">Jump</option>
                                   <option value="b">Crawl</option>
                                   <option value="c">Stretch</option>
-                                  <option value="d">Squat</option>
+                                  <option value="d">Squat.</option>
                                 </select>
                               </div>
                               <div class="mb-3">
                                 <label for="q13">13. _______________ at work are utilized to maximize attentiveness by providing rest and stress reduction:</label>
                                 <select class="form-select form-select-sm" id="q13" name="q13" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
-                                  <option value="a">Breaks</option>
+                                  <option value="a">Breaks.</option>
                                   <option value="b">Sleep</option>
                                   <option value="c">Exercises</option>
                                   <option value="d">Meditation</option>
@@ -1224,7 +1226,7 @@
                                 <label for="q14">14. Staying in your designated work area allows you to be familiar with your surroundings and the rules of conduct pertaining to that particular workspace:</label>
                                 <select class="form-select form-select-sm" id="q14" name="q14" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
-                                  <option value="a">True</option>
+                                  <option value="a">True.</option>
                                   <option value="b">False</option>
                                 </select>
                               </div>
@@ -1233,7 +1235,7 @@
                                 <select class="form-select form-select-sm" id="q15" name="q15" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
                                   <option value="a">Illnesses</option>
-                                  <option value="b">Distraction</option>
+                                  <option value="b">Distraction.</option>
                                   <option value="c">Confusion</option>
                                   <option value="d">Traction</option>
                                 </select>
@@ -1242,7 +1244,7 @@
                                 <label for="q16">16. All employees must take the initiative to keep all exits and walkways clear, including ensuring that emergency exits are not blocked:</label>
                                 <select class="form-select form-select-sm" id="q16" name="q16" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
-                                  <option value="a">True</option>
+                                  <option value="a">True.</option>
                                   <option value="b">False</option>
                                 </select>
                               </div>
@@ -1253,14 +1255,14 @@
                                   <option value="a">The Supervisor</option>
                                   <option value="b">The Manager</option>
                                   <option value="c">The Fire Department</option>
-                                  <option value="d">Everyone</option>
+                                  <option value="d">Everyone.</option>
                                 </select>
                               </div>
                               <div class="mb-3">
                                 <label for="q18">18. An employee that spots a risk in the workplace should:</label>
                                 <select class="form-select form-select-sm" id="q18" name="q18" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
-                                  <option value="a">Report it to their supervisor/safety and compliance officer</option>
+                                  <option value="a">Report it to their supervisor/safety and compliance officer.</option>
                                   <option value="b">Ignore the risk</option>
                                   <option value="c">Make it safe before management sees it</option>
                                   <option value="d">All of the above</option>
@@ -1270,7 +1272,7 @@
                                 <label for="q19">19. All risks must be identified and controlled before starting a job:</label>
                                 <select class="form-select form-select-sm" id="q19" name="q19" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>Open this select the correct answer</option>
-                                  <option value="a">True</option>
+                                  <option value="a">True.</option>
                                   <option value="b">False</option>
                                 </select>
                               </div>
@@ -1278,20 +1280,39 @@
                                 <label for="q20">20. If you need assistance while performing a job, please:</label>
                                 <select class="form-select form-select-sm" id="q20" name="q20" aria-label="Select the correct answer" required>
                                   <option selected disabled value=''>select the correct answer</option>
-                                  <option value="a">Ask for help</option>
+                                  <option value="a">Ask for help.</option>
                                   <option value="b">Keep performing to the best of your ability</option>
                                   <option value="c">Take a break</option>
                                   <option value="d">None of the above</option>
                                 </select>
                               </div>
                               <div class="modal-footer">
-                                <button type="submit" class="btn btn-sm btn-outline-primary">Submit</button>
+                                <button name="safetyVideoTesting" type="submit" class="btn btn-sm btn-outline-primary">Submit</button>
                               </div>
                             </form>
-                            <div id="result" class="mt-3"></div>
+                            <div class="p-3 m-0 border-0 bd-example d-none" id="resultNotPass">
+                                <!-- Example Code -->
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                  <strong>OPPS! You Not pass For now </strong> You need to Retake the test until you pass.
+                                   passing mark is 80% and more but your test result show: <span id="result"></span>.Try agin and GoodLack!!
+                                 
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="RefreshForm"></button>
+                                  
+                                </div>
+                                <!-- End Example Code -->
+                            </div>
                         </div>
-                          
-                        
+                        <div class="container d-none" id="fromResultSubmit">
+                            <div id="result" class="mt-3"></div>
+                            <form method="POST" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              {{ safetyVideo_form|crispy }}
+                              <div class="modal-footer">
+                                <button name="safetyVideoTesting" type="submit" class="btn btn-sm btn-outline-success">Continue</button>
+                              </div>
+                            </form>
+                            
+                        </div>
                     </div>
                    
                    </form>
@@ -1299,6 +1320,7 @@
                 </div>
             </div>
              
+            
     </div>     
 
 </div>  
@@ -1449,7 +1471,6 @@
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="js/safetyTestFormscript.js"></script>
-   
+    <script type="text/javascript" src="{% static 'js/safetyTestFormscript.js' %}"></script>
 {% endblock %} 
 {% endblock %}

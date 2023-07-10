@@ -16,14 +16,15 @@ from django.db.models import Q
 import pandas as pd
 import pyxlsb
 import openpyxl
-
+import logging
+logger = logging.getLogger(__name__)
 from django.views.generic import (
     ListView, CreateView, UpdateView, DetailView, DeleteView, FormView
 )
 
 from .models import (
     Category,CertificationLicense,Education,EmployeePreferences,Experience, 
-    Policies,Position,Profile,Skill, SkillSetTestResult,UserAcceptedPolicies,BasicInformation,
+    Policies,Position,Profile, SafetyTestResult,Skill, SkillSetTestResult,UserAcceptedPolicies,BasicInformation,
     Personal,Language,Military,Safety_Video_and_Test
 )
 from .forms import (
@@ -38,6 +39,7 @@ from .forms import (
     MilitaryForm,
     PersonalForm,
     BasicInformationForm,
+    SafetyTestResultForm,
     UserAcceptedPoliciesForm
 )
 
@@ -91,6 +93,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         # Retrieve all Certification License objects related to the user's Education
         certification_licenses = CertificationLicense.objects.filter(education__user=request.user)
         employee_preferences_form = EmployeePreferencesForm()
+        safetyVideo_form = SafetyTestResultForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
@@ -113,6 +116,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'CertificationLicense_form':CertificationLicense_form,
             'experienceForm_form':experienceForm_form,
             'employee_preferences_form':employee_preferences_form,
+            'safetyVideo_form':safetyVideo_form,
             'progress':progress,
             'progress_percentage': progress_percentage,
             'policies': policies,
@@ -257,8 +261,20 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                     return redirect('employee:profile_building_progress')
                 else:
                     print(employee_preferences_form.errors)  # Print form errors
-
-                
+                    
+        elif 'safetyVideoTesting' in request.POST:
+            SafetyTestResult_form = SafetyTestResultForm(request.POST)
+            if SafetyTestResult_form.is_valid():
+               SafetyTestResult = SafetyTestResult_form.save(commit=False)
+               SafetyTestResult.user = request.user
+               SafetyTestResult.save()
+               # Update the profile building process states
+               profile.Safety_Video_and_Test_completed = True
+               profile.save()
+               return redirect('employee:profile_building_progress')
+            else:
+              print("Safety Test Result form is invalid")
+         
         else:
             pass   
         # If neither form was submitted or form validation failed, render the template again with the forms
@@ -269,7 +285,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         CertificationLicense_form = CertificationLicenseForm()
         experienceForm_form = ExperienceForm()
         employee_preferences_form = EmployeePreferencesForm()
-       
+        safetyVideo_form = SafetyTestResultForm()
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
@@ -277,7 +293,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'education_form':education_form,
             'CertificationLicense_form':CertificationLicense_form,
             'experienceForm_form':experienceForm_form,
-            'employee_preferences_form': employee_preferences_form
+            'employee_preferences_form': employee_preferences_form,
+            'safetyVideo_form':safetyVideo_form
         }
         return render(request, self.template_name, context)
     

@@ -1,7 +1,7 @@
 from django import forms
 from django.shortcuts import get_object_or_404
 from datetime import datetime
-from .models import Category, CertificationLicense, Education, EmployeePreferences, Experience, Military, Personal, Language, BasicInformation, Position, Skill
+from .models import Category, CertificationLicense, Education, EmployeePreferences, Experience, Military, Personal, Language, BasicInformation, Position, SafetyTestResult, Skill
 from django.utils.safestring import mark_safe
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
 from .models import UserAcceptedPolicies
@@ -177,4 +177,14 @@ class EmployeePreferencesForm(forms.ModelForm):
             'years_of_experience': forms.NumberInput(attrs={'class': 'numberinput form-control form-control-sm', 'id': 'id_years_of_experience'}),
             'custom_positions': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_custom_positions'}),
             'custom_skills': forms.Textarea(attrs={'class': 'textarea form-control form-control-sm', 'id': 'id_custom_skills'}),
+        }
+        
+        
+class SafetyTestResultForm(forms.ModelForm):
+    class Meta:
+        model = SafetyTestResult
+        fields = ['safety_result', 'states']
+        widgets = {
+            'safety_result': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm ', 'id': 'id_safety_result'}),
+            'states': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_states'}),
         }
