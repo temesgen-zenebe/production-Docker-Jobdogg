@@ -27,9 +27,10 @@ $(document).ready(function() {
     var testContainer = document.getElementById("fromResultCalculator");
     var resultContainer = document.getElementById("fromResultSubmit");
     var safety_result = document.getElementById("id_safety_result");
+    var userResultElement = document.getElementById("userResult");
+    var userScoreElement = document.getElementById("userScore");
     
-    
-    
+
     var userResult = '';
     var score = calculateScore(answers);
     if (score >= 80) {
@@ -39,19 +40,23 @@ $(document).ready(function() {
     }
 
     if (userResult === 'pass') {
+      
       autofill(userResult, score);
       resultContainer.classList.remove('d-none');
       resultContainer.classList.add('d-block');
       testContainer.classList.remove('d-block');
       testContainer.classList.add('d-none');
-      //alert('pass mark is 80% more but your show', score );
+
+      userResultElement.textContent = userResult;
+      userScoreElement.textContent = score;
+     
     } else {
       // Prompt the user to retake the test until they pass
-      
       resultNotPass.classList.remove('d-none');
       resultNotPass.classList.add('d-block');
-     
-      $('#result').html('<p>Result: ' + userResult + ' with ' + score + '%');
+      $('#result').html('<p>Result: ' + userResult + ' with ' + score + '% </p>');
+      userResultElement.textContent = "";
+      userScoreElement.textContent = "";
       
     }
   });
@@ -112,11 +117,13 @@ $(document).ready(function() {
   
     // Set the value of the 'score' field
     document.getElementById('id_safety_result').value = score;
+
   }
 
     // Add this code inside the $(document).ready() function
   $('#RefreshForm').on('click', function() {
     resetForm();
+    
   });
 
   function resetForm() {

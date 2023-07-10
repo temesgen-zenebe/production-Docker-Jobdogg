@@ -179,12 +179,12 @@ class EmployeePreferencesForm(forms.ModelForm):
             'custom_skills': forms.Textarea(attrs={'class': 'textarea form-control form-control-sm', 'id': 'id_custom_skills'}),
         }
         
-        
+#SafetyTestResultForm      
 class SafetyTestResultForm(forms.ModelForm):
     class Meta:
         model = SafetyTestResult
         fields = ['safety_result', 'states']
         widgets = {
-            'safety_result': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm ', 'id': 'id_safety_result'}),
-            'states': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_states'}),
+            'safety_result': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_safety_result', 'type': 'hidden'}),
+            'states': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_states', 'type': 'hidden'}),
         }
