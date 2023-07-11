@@ -339,6 +339,7 @@
                         </div>
                         {% else %}
                         <div class="btn-group">
+                            
                         <a class="prev-btn  btn btn-sm btn-outline-secondary" data-bs-toggle="modal" href="#VideoResumeModalToggle" role="button">
                             <i class="bi bi-film fs-6 px-1"></i><i class="bi bi-play-circle"></i>
                         </a>
@@ -1333,6 +1334,175 @@
                   </div>
                 </div>
             </div>  
+            <!--Create Video Resume-->
+            <div class="modal fade" id="VideoResumeModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="VideoResumeModalToggleLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="VideoResumeModalToggleLabel">
+                        Create Video Resume
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                    </div>
+                    <div class="modal-body">
+                    <h5 class="modal-title fs-6">
+                        Share With Us One Fascinating fact About Yourself.
+                    </h5>
+                    <div class="form-floating">
+                        <textarea
+                        class="form-control"
+                        placeholder="Leave a comment here"
+                        id="floatingTextarea"
+                        ></textarea>
+                        <label for="floatingTextarea">Comments</label>
+                    </div>
+                    <div class="bd-callout bd-callout-info">
+                        <h5 class="modal-title fs-6">
+                        Tip how you Recording your video Resume
+                        </h5>
+                        <hr />
+                        <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-info">
+                            1. Begin with a captivating introduction to grab the viewer's
+                            attention immediately.
+                        </li>
+                        <li class="list-group-item list-group-item-info">
+                            2. Clearly articulate your skills and experiences,
+                            highlighting your unique strengths and achievements.
+                        </li>
+                        <li class="list-group-item list-group-item-info">
+                            3. Keep your video resume concise and to the point, focusing
+                            on the most relevant information.
+                        </li>
+                        <li class="list-group-item list-group-item-info">
+                            4. Use a professional and well-lit setting with good audio
+                            quality to enhance your presentation.
+                        </li>
+                        <li class="list-group-item list-group-item-info">
+                            5. Practice and rehearse your video resume to ensure a
+                            confident and engaging delivery.
+                        </li>
+                        <li class="list-group-item list-group-item-info text-center">
+                            <button
+                            class="btn btn-sm btn-outline-info"
+                            data-bs-target="#exampleModalToggle4"
+                            data-bs-toggle="modal"
+                            >
+                            Learn more
+                            </button>
+                        </li>
+                        </ul>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button
+                        class="btn btn-sm btn-outline-primary"
+                        data-bs-target="#exampleModalToggle2"
+                        data-bs-toggle="modal"
+                    >
+                        Upload Video
+                    </button>
+                    <button
+                        class="btn btn-sm btn-outline-primary"
+                        data-bs-target="#exampleModalToggle3"
+                        data-bs-toggle="modal"
+                    >
+                        Recording Video
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!--Create Video Resume Upload Video-->
+            <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="VideoResumeModalToggleLabel2"aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="VideoResumeModalToggleLabel2">
+                        Upload Video
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                    </div>
+                    <div class="modal-body">
+                    Hide this modal and show the first with the button below.
+                    </div>
+                    <div class="modal-footer">
+                    <button
+                        class="btn btn-primary"
+                        data-bs-target="#VideoResumeModalToggle"
+                        data-bs-toggle="modal"
+                    >
+                        Back to first
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!--Create Video Resume Recording Video-->
+            <div class="modal fade" id="exampleModalToggle3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalToggleLabel3"aria-hidden="true">
+                <div class="modal-dialog modal-lg  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+                        Recording Video
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                    </div>
+                    <div class="modal-body">
+                    Hide this modal and show the first with the button below.
+                    </div>
+                    <div class="modal-footer">
+                    <button
+                        class="btn btn-primary"
+                        data-bs-target="#VideoResumeModalToggle"
+                        data-bs-toggle="modal"
+                    >
+                        Back to first
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!--Create Video Resume Tip how you Recording your video Resume-->
+            <div class="modal fade" id="exampleModalToggle4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalToggleLabel4"aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel4">
+                        Tip how you Recording your video Resume
+                    </h1>
+                    </div>
+                    <div class="modal-body">
+                    Tip how you Recording your video Resume video
+                    </div>
+                    <div class="modal-footer">
+                    <button
+                        class="btn btn-sm btn-outline-primary"
+                        data-bs-target="#VideoResumeModalToggle"
+                        data-bs-toggle="modal"
+                    >
+                        Back to first
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+          
     </div>     
 
 </div>  
