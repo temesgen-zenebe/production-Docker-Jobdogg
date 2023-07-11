@@ -56,7 +56,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
     template_name = 'employee/profileBuildingProgress.html'
     
     def get_progress_percentage(self, profile):
-        total_steps = 10  # Total number of steps in the profile
+        total_steps = 12  # Total number of steps in the profile
         completed_steps = sum(
             [
                 profile.account_created,

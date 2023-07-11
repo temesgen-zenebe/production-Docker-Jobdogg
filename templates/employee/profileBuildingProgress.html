@@ -1066,7 +1066,10 @@
                                         <!-- Card Body -->
                                         <div class="card-body">
                                             <div class="">
-                                                <p class="">{{video.description}}</p>
+                                                <p class="s1-font">{{video.description}}</p>
+                                                <hr>
+                                                <p class="s1-font">The reason you take the safety quiz is to ensure your knowledge and understanding of workplace safety measures,
+                                                     promoting a safe environment for yourself and others.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1096,6 +1099,7 @@
                   </div>
                 </div>
             </div>
+            <!--SafetyVideo-->
             <div class="modal fade" id="SafetyVideoModalToggle2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SafetyVideoModalToggleLabel2" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                   <div class="modal-content">
@@ -1107,6 +1111,17 @@
                    
                     <div class="modal-body">
                         <div class="container d-block" id="fromResultCalculator">
+                            <div class="p-3 m-0 border-0 bd-example d-none" id="resultNotPass">
+                                <!-- Example Code -->
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                  <strong>OPPS! You Not pass For now </strong> You need to Retake the test until you pass.
+                                   passing mark is 80% and more but your test result show: <span id="result"></span>Try agin and GoodLack!!
+                                 
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="RefreshForm"></button>
+                                  
+                                </div>
+                                <!-- End Example Code -->
+                            </div>
                             <form method="POST" id="safety-test-form" action="{% url 'employee:profile_building_progress' %}">
 
                               {% csrf_token %}
@@ -1300,17 +1315,7 @@
                                 <button name="safetyVideoTesting" type="submit" class="btn btn-sm btn-outline-primary">Submit</button>
                               </div>
                             </form>
-                            <div class="p-3 m-0 border-0 bd-example d-none" id="resultNotPass">
-                                <!-- Example Code -->
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                  <strong>OPPS! You Not pass For now </strong> You need to Retake the test until you pass.
-                                   passing mark is 80% and more but your test result show: <span id="result"></span>.Try agin and GoodLack!!
-                                 
-                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="RefreshForm"></button>
-                                  
-                                </div>
-                                <!-- End Example Code -->
-                            </div>
+                           
                         </div>
                         <div class="container d-none" id="fromResultSubmit">
                             <div class="bd-callout bd-callout-info mt-3">
@@ -1426,22 +1431,13 @@
                     <h1 class="modal-title fs-5" id="VideoResumeModalToggleLabel2">
                         Upload Video
                     </h1>
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                    ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     Hide this modal and show the first with the button below.
                     </div>
                     <div class="modal-footer">
-                    <button
-                        class="btn btn-primary"
-                        data-bs-target="#VideoResumeModalToggle"
-                        data-bs-toggle="modal"
-                    >
+                    <button class="btn btn-primary" data-bs-target="#VideoResumeModalToggle" data-bs-toggle="modal">
                         Back to first
                     </button>
                     </div>
@@ -1456,22 +1452,14 @@
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
                         Recording Video
                     </h1>
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     ></button>
                     </div>
                     <div class="modal-body">
-                    Hide this modal and show the first with the button below.
+                     Hide this modal and show the first with the button below.
                     </div>
                     <div class="modal-footer">
-                    <button
-                        class="btn btn-primary"
-                        data-bs-target="#VideoResumeModalToggle"
-                        data-bs-toggle="modal"
-                    >
+                    <button class="btn btn-primary" data-bs-target="#VideoResumeModalToggle" data-bs-toggle="modal" >
                         Back to first
                     </button>
                     </div>
@@ -1491,13 +1479,12 @@
                     Tip how you Recording your video Resume video
                     </div>
                     <div class="modal-footer">
-                    <button
-                        class="btn btn-sm btn-outline-primary"
-                        data-bs-target="#VideoResumeModalToggle"
-                        data-bs-toggle="modal"
-                    >
+                    <button class="btn btn-sm btn-outline-primary" data-bs-target="#VideoResumeModalToggle" data-bs-toggle="modal">
                         Back to first
                     </button>
+                    <a class="prev-btn  btn btn-sm btn-outline-secondary" data-bs-toggle="modal" href="#VideoResumeModalToggle" role="button">
+                        <i class="bi bi-film fs-6 px-1"></i><i class="bi bi-play-circle"></i>
+                    </a>
                     </div>
                 </div>
                 </div>
