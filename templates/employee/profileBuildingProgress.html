@@ -16,9 +16,9 @@
    <!-- progress bar -->
     <div class="container mt-5">
         <div class="progress my-3 mx-auto" style="height: 20px; width:95%;">
-            <div class="shadow text-white progress-bar {% if progress_percentage < 8.33 %}bg-Eminence{% elif progress_percentage < 16.66 %}bg-Indigo{% elif progress_percentage < 24.99 %}bg-Turquoise{% elif progress_percentage < 33.32 %}bg-Plum{% elif progress_percentage < 41.65 %}bg-Crimson{% elif progress_percentage < 49.98 %}bg-Goldenrod{% elif progress_percentage < 58.31 %}bg-Coral{% elif progress_percentage < 66.64 %}bg-Lavender{% elif progress_percentage < 74.97 %}bg-ornge{% elif progress_percentage < 83.3 %}bg-Peru{% elif progress_percentage < 91.63 %}bg-info{% elif progress_percentage < 99.96 %}bg-success{% else %}bg-DarkOliveGreen{% endif %}" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="shadow text-white progress-bar {% if progress_percentage < 8.33 %}bg-Eminence{% elif progress_percentage < 24.99 %}bg-Turquoise{% elif progress_percentage < 33.32 %}bg-Plum{% elif progress_percentage < 41.65 %}bg-Crimson{% elif progress_percentage < 49.98 %}bg-Goldenrod{% elif progress_percentage < 58.31 %}bg-Coral{% elif progress_percentage < 66.64 %}bg-Lavender{% elif progress_percentage < 74.97 %}bg-SlateBlue{% elif progress_percentage < 83.3 %}bg-Peru{% elif progress_percentage < 91.63 %}bg-info{% elif progress_percentage < 99.96 %}bg-success{% else %}bg-DarkOliveGreen{% endif %}" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
                 <span class="py-5 fs-6">{{ progress_percentage }} %</span>
-              </div>              
+              </div>                          
         </div>  
         <div class="album py-3 bg-light">
             {% if progress %}
@@ -41,7 +41,7 @@
                                     <button type="button" class="prev-btn  btn btn-sm btn-success ">
                                         <i class="bi bi-check2-circle text-light px-1"></i><small>Completed</small>
                                     </button>
-                                    <a href="{% url 'employee:policies_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-box-arrow-left"></i></a>
+                                    <a href="{% url 'employee:policies_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Eminence"><i class="bi bi-box-arrow-left"></i></a>
                                 </div>
                             {% else %}                       
                                 <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#policiesModal">
@@ -58,7 +58,7 @@
                 <!--Basic Information-->
                 {% if  progres.companyPolices_completed %}
                 <div class="col step-item ">
-                <div class="card border-left-Turquoise shadow h-100 py-2">
+                    <div class="card border-left-Indigo shadow h-100 py-2">
                     <div class="card-body">
                     <h6 class="card-text ">
                         <i class="bi bi-info-circle"></i>
@@ -73,7 +73,7 @@
                                         <i class="bi bi-check2-circle text-light px-1"></i>
                                         <small>Completed</small>
                                     </button>
-                                    <a href="{% url 'employee:basic_information_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                                    <a href="{% url 'employee:basic_information_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Indigo"><i class="bi bi-pen"></i></a>
                                    
                                 </div>
                             {% else %} 
@@ -91,7 +91,7 @@
                 <!--Personal-->
                 {% if progres.basic_information_completed %}
                 <div class="col step-item ">
-                    <div class="card border-left-Plum shadow h-100 py-2">
+                    <div class="card border-left-Turquoise shadow h-100 py-2">
                         <div class="card-body">
                             
                         <h6 class="card-text text-decoration-bold">
@@ -105,7 +105,7 @@
                                     <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                                         <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                                     </button>
-                                    <a href="{% url 'employee:personal_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                                    <a href="{% url 'employee:personal_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Turquoise"><i class="bi bi-pen"></i></a>
 
                                 </div>
                             {% else %}
@@ -122,7 +122,7 @@
                 <!--Military-->
                 {% if progres.personal_information_completed %} 
                 <div class="col step-item ">
-                    <div class="card border-left-Crimson shadow h-100 py-2">
+                    <div class="card border-left-Plum shadow h-100 py-2">
                         <div class="card-body">
                         <h6 class="card-text">
                             <i class="bi bi-airplane-fill px-1"></i>
@@ -135,7 +135,7 @@
                                 <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                                     <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                                 </button>
-                               <a href="{% url 'employee:military_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                               <a href="{% url 'employee:military_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Plum"><i class="bi bi-pen"></i></a>
                             </div>
                             {% else %}
                             <div class="btn-group gap-1">
@@ -156,7 +156,7 @@
                 <!--Education-->
                 {% if progres.Military_completed  %}
                 <div class="col step-item ">
-                 <div class="card border-left-Goldenrod shadow h-100 pt-1">
+                    <div class="card border-left-Crimson shadow h-100 py-2">
                     <div class="card-body">
                     <h6 class="card-text"><i class="fa-solid fa-user-graduate"></i> Education</h6>
                     <small class="">Step 5: Education & upload files</small>
@@ -166,10 +166,10 @@
                           <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                             <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                           </button>
-                          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
+                          <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
                             <i class="fa-regular fa-square-plus"></i> <i class="fa-solid fa-upload"></i>
                          </button>
-                          <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:education_list' %}"><i class="bi bi-pen"></i></a>
+                          <a class="btn btn-sm btn-outline-Crimson" href="{% url 'employee:education_list' %}"><i class="bi bi-pen"></i></a>
                         </div>
                         {% else %}
                          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#educationModal">
@@ -193,7 +193,7 @@
                 <!--Experience-->
                 {% if progres.Education_completed %}
                 <div class="col step-item ">
-                <div class="card border-left-Coral shadow h-100 py-2">
+                    <div class="card border-left-Goldenrod shadow h-100 py-2">
                     <div class="card-body">
                     <h6 class="card-text"><i class="fa-sharp fa-solid fa-trophy"></i>  Experience</h6>
                     <small class="">Step 6: Experience </small>
@@ -203,7 +203,7 @@
                             <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                                 <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                             </button>
-                           <a href="{% url 'employee:experience_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                           <a href="{% url 'employee:experience_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Goldenrod"><i class="bi bi-pen"></i></a>
                         </div>
                         {% else %}
                         <div class="btn-group gap-1">
@@ -224,7 +224,7 @@
                 <!--Preferences-->
                 {% if progres.Experience_completed %}
                 <div class="col step-item">
-                <div class="card border-left-Lavender shadow h-100 py-2">
+                <div class="card border-left-Coral shadow h-100 py-2">
                     <div class="card-body">
                         <h6 class="card-text"><i class="fa-solid fa-asterisk px-1"></i>Preferences</h6>
                         <small class="">Step 7: Preferences </small>
@@ -235,7 +235,7 @@
                                 <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                                     <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                                 </button>
-                                <a href="{% url 'employee:employee-preferences-list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-pen"></i></a>
+                                <a href="{% url 'employee:employee-preferences-list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Coral"><i class="bi bi-pen"></i></a>
                             
                             </div>
                             {% else %}
@@ -254,7 +254,7 @@
                 {% endif %}
                 {% if progres.Preferences_completed %}
                 <div class="col step-item ">
-                <div class="card border-left-ornge shadow h-100 py-2">
+                    <div class="card border-left-Lavender shadow h-100 py-2">
                     <div class="card-body">
                     
                         <h6 class="card-text"><i class="bi bi-award-fill px-1"></i>SkillSetTest</h6>
@@ -280,7 +280,7 @@
 
                                 {% endif %}
                                
-                                <button  type="button"  class="prev-btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">
+                                <button  type="button"  class="prev-btn btn btn-sm btn-outline-Lavender" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">
                                     <i class="bi bi-pen"></i>
                                 </button>
                             </div>
@@ -299,7 +299,7 @@
                 {% endif %}
                 {% if progres.SkillSetTest_completed or progres.Skipped_completed or progres.OnProgressSkillTest_completed %}
                 <div class="col step-item ">
-                <div class="card border-left-Peru shadow h-100 py-2">
+                <div class="card border-left-SlateBlue shadow h-100 py-2">
                     <div class="card-body">
                     <h6 class="card-text"><i class="bi bi-cone-striped px-1 fs-5"></i>Safety Video</h6>
                     <small class="">Step 9: Safety Video & Test </small>
@@ -309,7 +309,7 @@
                             <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
                                 <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                             </button>
-                            <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-stars"></i></a>
+                            <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-SlateBlue"><i class="bi bi-stars"></i></a>
                         </div>
                         {% else %}
                         <div class="btn-group">
@@ -325,7 +325,7 @@
                 {% endif %}
                 {% if progres.Safety_Video_and_Test_completed %}
                 <div class="col step-item ">
-                    <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card border-left-Peru shadow h-100 py-2">
                     <div class="card-body">
                         
                         <h6 class="card-text"><i class="bi bi-camera-video-fill fs-6 px-2"></i>Video Resume</h6>
@@ -336,7 +336,7 @@
                             <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
                                 <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                             </button>
-                            <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-secondary"><i class="bi bi-stars"></i></a>
+                            <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-Peru"><i class="bi bi-stars"></i></a>
                         </div>
                         {% else %}
                         <div class="btn-group">
@@ -351,17 +351,17 @@
                     </div>
                 </div>
                 {% endif %}
-                {% if progres.ResumeUploading_completed %}
+                {% if progres.VideoResume_completed %}
                 <div class="col step-item ">
-                    <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card border-left-info shadow h-100 py-2">
                     <div class="card-body">
                         <p class="card-text">Video resume</p>
                         <div class="d-flex justify-content-between align-items-center">
                         {% if progres.ResumeUploading_completed %}
                         <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-info">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-info">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-info">Next</button>
                         </div>
                         {% endif %}
                         </div>
@@ -371,14 +371,14 @@
                 {% endif %}
                 {% if progres.ResumeUploading_completed %}
                 <div class="col step-item ">
-                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
                         <p class="card-text">Resume uploading</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-success">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-success">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-success">Next</button>
                         </div>
                         </div>
                     </div>
@@ -387,7 +387,7 @@
                 {% endif %}
                 {% if progres.ResumeUploading_completed %}
                 <div class="col step-item ">
-                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card border-left-DarkOliveGreen shadow h-100 py-2">
                     <div class="card-body">
                         <p class="card-text">Background Check</p>
                         <div class="d-flex justify-content-between align-items-center">
@@ -403,14 +403,14 @@
                 {% endif %}
                 {% if progres.ResumeUploading_completed %}
                 <div class="col step-item ">
-                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card border-left-DarkOliveGreen shadow h-100 py-2">
                     <div class="card-body">
                         <p class="card-text">Resume uploading</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-DarkOliveGreen">Previous</button>
+                            <button type="button" class="btn btn-sm btn-outline-DarkOliveGreen">Save</button>
+                            <button type="button" class="next-btn btn btn-sm btn-outline-DarkOliveGreen">Next</button>
                         </div>
                         </div>
                     </div>
@@ -1341,7 +1341,7 @@
             </div>  
             <!--Create Video Resume-->
             <div class="modal fade" id="VideoResumeModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="VideoResumeModalToggleLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                     <h1 class="modal-title fs-5" id="VideoResumeModalToggleLabel">
@@ -1425,16 +1425,29 @@
             </div>
             <!--Create Video Resume Upload Video-->
             <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="VideoResumeModalToggleLabel2"aria-hidden="true">
-                <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-dialog modal-lg  modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                     <h1 class="modal-title fs-5" id="VideoResumeModalToggleLabel2">
-                        Upload Video
+                        Recording Video
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    Hide this modal and show the first with the button below.
+                        <h1>Video Recording Demo</h1>
+                        <div>
+                          <button onclick="startRecording()">Start Recording</button>
+                          <button onclick="stopRecording()">Stop Recording</button>
+                          <button onclick="previewVideo()">Preview Video</button>
+                          <button onclick="recordAgain()">Record Again</button>
+                          <button onclick="submitVideo()">Submit Video</button>
+                        </div>
+                        <div>
+                          <video id="videoPlayer" width="640" height="480" autoplay muted controls playsinline></video>
+                        </div>
+                       
+                        
+
                     </div>
                     <div class="modal-footer">
                     <button class="btn btn-primary" data-bs-target="#VideoResumeModalToggle" data-bs-toggle="modal">
@@ -1446,17 +1459,28 @@
             </div>
             <!--Create Video Resume Recording Video-->
             <div class="modal fade" id="exampleModalToggle3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalToggleLabel3"aria-hidden="true">
-                <div class="modal-dialog modal-lg  modal-dialog-centered">
+                <div class="modal-dialog modal-md  modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
-                        Recording Video
+                        Upload Video
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     ></button>
                     </div>
                     <div class="modal-body">
-                     Hide this modal and show the first with the button below.
+                        
+                          <div>
+                            <video controls playsinline id="videoRecorded1"></video>
+                          </div>
+                          <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                              <label for="videoFile" class="form-label">Upload Video</label>
+                              <input class="form-control" type="file" id="videoFile" name="video" accept="video/*">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="buttonSubmit" disabled>Submit</button>
+                          </form>
                     </div>
                     <div class="modal-footer">
                     <button class="btn btn-primary" data-bs-target="#VideoResumeModalToggle" data-bs-toggle="modal" >
@@ -1643,5 +1667,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="text/javascript" src="{% static 'js/safetyTestFormscript.js' %}"></script>
+    <script type="text/javascript"  src="{% static 'js/VideoResume1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/recodingVido.js' %}"></script>
 {% endblock %} 
 {% endblock %}

@@ -56,18 +56,43 @@
     }
     .bg-gradient-secondary{background-color:#858796;background-image:linear-gradient(180deg,#858796 10%,#60616f 100%);background-size:cover}.bg-gradient-success{background-color:#1cc88a;background-image:linear-gradient(180deg,#1cc88a 10%,#13855c 100%);background-size:cover}.bg-gradient-info{background-color:#36b9cc;background-image:linear-gradient(180deg,#36b9cc 10%,#258391 100%);background-size:cover}.bg-gradient-warning{background-color:#f6c23e;background-image:linear-gradient(180deg,#f6c23e 10%,#dda20a 100%);background-size:cover}.bg-gradient-danger{background-color:#e74a3b;background-image:linear-gradient(180deg,#e74a3b 10%,#be2617 100%);background-size:cover}.bg-gradient-light{background-color:#f8f9fc;background-image:linear-gradient(180deg,#f8f9fc 10%,#c2cbe5 100%);background-size:cover}.bg-gradient-dark{background-color:#5a5c69;background-image:linear-gradient(180deg,#5a5c69 10%,#373840 100%);background-size:cover}.bg-gray-100{background-color:#f8f9fc!important}.bg-gray-200{background-color:#eaecf4!important}.bg-gray-300{background-color:#dddfeb!important}.bg-gray-400{background-color:#d1d3e2!important}.bg-gray-500{background-color:#b7b9cc!important}.bg-gray-600{background-color:#858796!important}.bg-gray-700{background-color:#6e707e!important}.bg-gray-800{background-color:#5a5c69!important}.bg-gray-900{background-color:#3a3b45!important}.o-hidden{overflow:hidden!important}.text-m{font-size:1.1rem}.text-s{font-size:.9rem}.text-xs{font-size:.7rem}.text-lg{font-size:1.2rem}.text-gray-100{color:#f8f9fc!important}.text-gray-200{color:#eaecf4!important}.text-gray-300{color:#dddfeb!important}.text-gray-400{color:#d1d3e2!important}.text-gray-500{color:#b7b9cc!important}.text-gray-600{color:#858796!important}.text-gray-700{color:#6e707e!important}.text-gray-800{color:#5a5c69!important}.text-gray-900{color:#3a3b45!important}.icon-circle{height:2.5rem;width:2.5rem;border-radius:100%;display:flex;align-items:center;justify-content:center}
     /*---------------------------------------------------*/
-    .btn-Eminence {background-color: #6C3082; border-color: #6C3082}
-    .btn-Indigo {color: #fff; background-color: #4B0082; border-color: #4B0082}
-    .btn-Turquoise {color: #fff; background-color: #40E0D0; border-color: #40E0D0}
+    .btn-outline-Eminence {color: #6C3082; border-color: #6C3082}
+    .btn-outline-Indigo {color: #e74a3b; border-color: #e74a3b}
+    .btn-outline-Turquoise {color: #40E0D0; border-color: #40E0D0}
+    .btn-outline-Plum {color: #DDA0DD; border-color: #DDA0DD}
+    .btn-outline-Crimson {color: #DC143C; border-color: #DC143C}
+    .btn-outline-Goldenrod {color: #DAA520; border-color: #DAA520}
+    .btn-outline-Coral {color: #FF7F50; border-color: #FF7F50}
+    .btn-outline-Lavender {color: #a3ed34; border-color: #a3ed34}
+    .btn-outline-SlateBlue {color: #6A5ACD; border-color: #6A5ACD}
+    .btn-outline-Peru {color: #CD853F; border-color: #CD853F}
+    .btn-outline-DodgerBlue {color: #1E90FF; border-color: #1E90FF}
+    .btn-outline-MediumOrchid {color: #BA55D3; border-color: #BA55D3}
+    .btn-outline-DarkOliveGreen {color: #556B2F; border-color: #556B2F}
+    .btn-outline-CornflowerBlue {color: #6495ED; border-color: #6495ED}
+    .btn-outline-Eminence:hover {color: #fff; background-color: #6C3082; border-color: #6C3082}
+    .btn-outline-Indigo:hover {color: #fff; background-color: #e74a3b; border-color: #e74a3b}
+    .btn-outline-Turquoise:hover {color: #fff; background-color: #40E0D0; border-color: #40E0D0}
+    .btn-outline-Plum:hover {color: #fff; background-color: #DDA0DD; border-color: #DDA0DD}
+    .btn-outline-Crimson:hover {color: #fff; background-color: #DC143C; border-color: #DC143C}
+    .btn-outline-Goldenrod:hover {color: #fff; background-color: #DAA520; border-color: #DAA520}
+    .btn-outline-Coral:hover {color: #fff; background-color: #FF7F50; border-color: #FF7F50}
+    .btn-outline-Lavender:hover {color: #fff; background-color: #a3ed34; border-color: #a3ed34}
+    .btn-outline-SlateBlue:hover {color: #fff; background-color: #6A5ACD; border-color: #6A5ACD}
+    .btn-outline-Peru:hover {color: #fff; background-color: #CD853F; border-color: #CD853F}
+    .btn-outline-DodgerBlue:hover {color: #fff; background-color: #1E90FF; border-color: #1E90FF}
+    .btn-outline-MediumOrchid:hover {color: #fff; background-color: #BA55D3; border-color: #BA55D3}
+    .btn-outline-DarkOliveGreen:hover {color: #fff; background-color: #556B2F; border-color: #556B2F}
+    .btn-outline-CornflowerBlue:hover {color: #fff; background-color: #6495ED; border-color: #6495ED}
     /*----------------------------------------------------------*/
     .bg-Eminence {background-color: #6C3082!important} 
-    .bg-Indigo {background-color: #4B0082!important} 
+    .bg-Indigo {background-color: #e74a3b!important} 
     .bg-Turquoise {background-color: #40E0D0!important}
     .bg-Plum {background-color: #DDA0DD!important} 
     .bg-Crimson {background-color: #DC143C!important} 
     .bg-Goldenrod {background-color: #DAA520!important} 
     .bg-Coral {background-color: #FF7F50!important}
-    .bg-Lavender {background-color: #5b41d7!important} 
+    .bg-Lavender {background-color: #a3ed34!important} 
     .bg-SlateBlue {background-color: #6A5ACD!important} 
     .bg-Peru {background-color: #CD853F!important} 
     .bg-DodgerBlue {background-color: #1E90FF!important} 
@@ -76,13 +101,13 @@
     .bg-CornflowerBlue {background-color: #6495ED!important} 
     /*---------------------------------------------------------*/
     .border-left-Eminence {border-left: .25rem solid #6C3082!important}
-    .border-left-Indigo {border-left: .25rem solid #4B0082!important}
+    .border-left-Indigo {border-left: .25rem solid #e74a3b!important}
     .border-left-Turquoise {border-left: .25rem solid #40E0D0!important}
     .border-left-Plum {border-left: .25rem solid #DDA0DD!important}
     .border-left-Crimson {border-left: .25rem solid #DC143C!important}
     .border-left-Goldenrod {border-left: .25rem solid #DAA520!important}
     .border-left-Coral {border-left: .25rem solid #FF7F50!important}
-    .border-left-Lavender {border-left: .25rem solid #5b41d7!important}
+    .border-left-Lavender {border-left: .25rem solid #a3ed34!important}
     .border-left-SlateBlue {border-left: .25rem solid #6A5ACD!important}
     .border-left-Peru {border-left: .25rem solid #CD853F!important}
     .border-left-DodgerBlue {border-left: .25rem solid #1E90FF!important}
@@ -91,13 +116,13 @@
     .border-left-CornflowerBlue {border-left: .25rem solid #6495ED!important}
     /*---------------------------------------------------------*/
     .border-bottom-Eminence {border-bottom: .25rem solid #6C3082!important}
-    .border-bottom-Indigo {border-bottom: .25rem solid #4B0082!important}
+    .border-bottom-Indigo {border-bottom: .25rem solid #e74a3b!important}
     .border-bottom-Turquoise {border-bottom: .25rem solid #40E0D0!important}
     .border-bottom-Plum {border-bottom: .25rem solid #DDA0DD!important}
     .border-bottom-Crimson {border-bottom: .25rem solid #DC143C!important}
     .border-bottom-Goldenrod {border-bottom: .25rem solid #DAA520!important}
     .border-bottom-Coral {border-bottom: .25rem solid #FF7F50!important}
-    .border-bottom-Lavender {border-bottom: .25rem solid #5b41d7!important}
+    .border-bottom-Lavender {border-bottom: .25rem solid #a3ed34!important}
     .border-bottom-SlateBlue {border-bottom: .25rem solid #6A5ACD!important}
     .border-bottom-Peru {border-bottom: .25rem solid #CD853F!important}
     .border-bottom-DodgerBlue {border-bottom: .25rem solid #1E90FF!important}
