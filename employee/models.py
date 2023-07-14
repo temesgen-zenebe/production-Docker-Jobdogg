@@ -350,7 +350,7 @@ class EmployeePreferences(models.Model):
             cache.set(self.skills_cache_key, skills)
         return skills
 
-
+#SkillSetTestResult
 class SkillSetTestResult(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
@@ -368,8 +368,7 @@ class SkillSetTestResult(models.Model):
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
         
-    #def get_absolute_url(self):
-       # return reverse('employee:video_resume_list', kwargs={'slug': self.slug})
+    
 
     def __str__(self):
         return f"{self.user.username}'s Skill Set Test Result"
@@ -407,7 +406,7 @@ class SafetyTestResult(models.Model):
 class VideoResume(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     video = models.FileField(upload_to='videoResumes/%Y/%m/%d')
-    tell_about_you=models.TextField(help_text="Share a fascinating fact or story about yourself.", max_length=300, null=True, blank=True)
+    tell_about_you=models.TextField(help_text="Share a fascinating fact or story about yourself.", max_length=600, null=True, blank=True)
     viewCount = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -422,6 +421,10 @@ class VideoResume(models.Model):
     def __str__(self):
         return f"video Resumes for {self.user.username}"
     
+    #def get_absolute_url(self):
+       # return reverse('employee:video_resume_list', kwargs={'slug': self.slug})
+   
+#RettingCommenting 
 class RettingCommenting(models.Model):  
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     retting = models.SmallIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
