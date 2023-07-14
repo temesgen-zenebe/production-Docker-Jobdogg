@@ -246,3 +246,27 @@ section.on-demand{
   background-color: #061e36 !important;
   opacity: 1;
 }
+
+
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: center;
+}
+.rating input {
+  display: none;
+}
+.rating label {
+  display: inline-block;
+  padding: 5px;
+  color: #ddd;
+  font-size: 2rem;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label {
+  color: #ffc107;
+}
