@@ -88,6 +88,13 @@ from .views import (
     SafetyVideoTestCreateView,
     SafetyVideoTestUpdateView,
     SafetyVideoTestDeleteView,
+    
+    #VideoResume
+    VideoResumeListView,
+    VideoResumeCreateView,
+    VideoResumeUpdateView,
+    VideoResumeDeleteView,
+    VideoResumeDetailView,
 )
 
 
@@ -184,8 +191,10 @@ urlpatterns = [
     path('safety-video-test/<int:pk>/update/', SafetyVideoTestUpdateView.as_view(), name='safetyVideoTest_update'),
     path('safety-video-test/<int:pk>/delete/', SafetyVideoTestDeleteView.as_view(), name='safetyVideoTest_delete'),
 
+    path('video-resumes/', VideoResumeListView.as_view(), name='video_resume_list'),
+    path('video-resumes/create/', VideoResumeCreateView.as_view(), name='video_resume_create'),
+    path('video-resumes/<slug:slug>/', VideoResumeDetailView.as_view(), name='video_resume_detail'),
+    path('video-resumes/<slug:slug>/update/', VideoResumeUpdateView.as_view(), name='video_resume_update'),
+    path('video-resumes/<slug:slug>/delete/', VideoResumeDeleteView.as_view(), name='video_resume_delete'),
+
 ]
-
-
-
-

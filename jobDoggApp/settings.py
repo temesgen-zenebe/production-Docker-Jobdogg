@@ -207,6 +207,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 
+ALLOWED_VIDEO_EXTENSIONS = ['.mp4', '.mpg', '.avi', '.mov', '.mkv', '.wmv', '.ogv', '.webm', '.flv']
+MAX_VIDEO_DURATION = 60  # 1 minutes in seconds
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # BOTTOM OF settings.py

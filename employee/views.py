@@ -24,8 +24,9 @@ from django.views.generic import (
 
 from .models import (
     Category,CertificationLicense,Education,EmployeePreferences,Experience, 
-    Policies,Position,Profile, SafetyTestResult,Skill, SkillSetTestResult,UserAcceptedPolicies,BasicInformation,
-    Personal,Language,Military,Safety_Video_and_Test
+    Policies,Position,Profile, SafetyTestResult,Skill, SkillSetTestResult,UserAcceptedPolicies,
+    BasicInformation,Personal,Language,Military,Safety_Video_and_Test, VideoResume, RettingCommenting,
+    
 )
 from .forms import (
     BasicInformationForm,
@@ -40,8 +41,10 @@ from .forms import (
     PersonalForm,
     BasicInformationForm,
     SafetyTestResultForm,
-    UserAcceptedPoliciesForm
+    UserAcceptedPoliciesForm,
+    VideoResumeForm,
 )
+
 
 
 #----Policies Models ------
@@ -1104,3 +1107,39 @@ class SafetyVideoTestDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'safetyVideoTest/safetyVideoTest_confirm_delete.html'
     success_url = reverse_lazy('employee:safetyVideoTest_list')
 
+
+
+#videoResume
+class VideoResumeListView(LoginRequiredMixin, ListView):
+    model = VideoResume
+    template_name = 'employee/videoResume/video_resume_list.html'
+    context_object_name = 'video_resumes'
+    
+class VideoResumeDetailView(LoginRequiredMixin, DetailView):
+    model = VideoResume
+    template_name = 'employee/videoResume/video_resume_detail.html'
+    context_object_name = 'video_resume_detail'
+
+class VideoResumeCreateView(LoginRequiredMixin,CreateView):
+    model = VideoResume
+    form_class = VideoResumeForm
+    template_name = 'employee/videoResume/video_resume_create.html'
+    success_url = reverse_lazy('employee:video_resume_list')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class VideoResumeUpdateView(LoginRequiredMixin, UpdateView):
+    model = VideoResume
+    form_class = VideoResumeForm
+    template_name = 'employee/videoResume/video_resume_update.html'
+    success_url = reverse_lazy('employee:video_resume_list')
+
+class VideoResumeDeleteView(LoginRequiredMixin, DeleteView):
+    model = VideoResume
+    template_name = 'employee/videoResume/video_resume_delete.html'
+    success_url = reverse_lazy('employee:video_resume_list')
+    
+
+    

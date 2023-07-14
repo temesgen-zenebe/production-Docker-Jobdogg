@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
 from django.contrib.auth.models import Group
 from django.core.cache import cache
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
@@ -23,6 +24,7 @@ from common.utils.chooseConstant import (
     JOB_TYPES,
     RELOCATION,
     TEST_STATES,
+    TAG_CHOOSES,
     )
 from multiupload.fields import MultiFileField 
 
@@ -365,6 +367,9 @@ class SkillSetTestResult(models.Model):
             value = f"{self.user.username} {self.position}"
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
+        
+    #def get_absolute_url(self):
+       # return reverse('employee:video_resume_list', kwargs={'slug': self.slug})
 
     def __str__(self):
         return f"{self.user.username}'s Skill Set Test Result"
@@ -399,9 +404,42 @@ class SafetyTestResult(models.Model):
 
 
 #VideoResume_completed
-#class VideoResume(models.Model):
-    #user, VideoResume, tell_about_you, tag, NumberViews, comments, slug, created, updated, 
-    #pass
+class VideoResume(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    video = models.FileField(upload_to='videoResumes/%Y/%m/%d')
+    tell_about_you=models.TextField(help_text="Share a fascinating fact or story about yourself.", max_length=300, null=True, blank=True)
+    viewCount = models.PositiveIntegerField(default=0)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.user.username}-videoResumes-{self.viewCount}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"video Resumes for {self.user.username}"
+    
+class RettingCommenting(models.Model):  
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    retting = models.SmallIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
+    tag = models.CharField(max_length=50, choices=TAG_CHOOSES)
+    comments= models.TextField(help_text="comments me", max_length=300, null=True, blank=True)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.user.username}-retting-{self.retting}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f" retting and tagging for {self.user.username}"
+
 
 #Background_Check
 #class Background_Check(models.Model):

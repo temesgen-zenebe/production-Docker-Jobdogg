@@ -1,10 +1,25 @@
 from django import forms
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 from datetime import datetime
-from .models import Category, CertificationLicense, Education, EmployeePreferences, Experience, Military, Personal, Language, BasicInformation, Position, SafetyTestResult, Skill
+import os
+import moviepy.editor as mp
+
+from .models import (
+    Category, CertificationLicense, 
+    Education, EmployeePreferences, 
+    Experience, Military, Personal, 
+    Language, BasicInformation, 
+    Position, SafetyTestResult, 
+    Skill, RettingCommenting, VideoResume,
+)
 from django.utils.safestring import mark_safe
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
 from .models import UserAcceptedPolicies
+
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+from .models import VideoResume
 
 class UserAcceptedPoliciesForm(forms.ModelForm):
     class Meta:
@@ -188,3 +203,74 @@ class SafetyTestResultForm(forms.ModelForm):
             'safety_result': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_safety_result', 'type': 'hidden'}),
             'states': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_states', 'type': 'hidden'}),
         }
+        
+
+#VideoResumeForm
+class VideoResumeForm(forms.ModelForm):
+    class Meta:
+        model = VideoResume
+        fields = ['video', 'tell_about_you']
+        widgets = {
+            'video': forms.ClearableFileInput(attrs={'accept': ','.join(settings.ALLOWED_VIDEO_EXTENSIONS), 'class': 'textinput form-control form-control-sm'}),
+            'tell_about_you': forms.Textarea(attrs={'rows': 3,'class': 'textinput form-control form-control-sm'}),
+        }
+
+    def clean_video1(self):
+        video = self.cleaned_data.get('video')
+        if video:
+            if not video.name.lower().endswith(tuple(settings.ALLOWED_VIDEO_EXTENSIONS)):
+                raise ValidationError(_('Invalid video format. Supported formats are: {}').format(', '.join(settings.ALLOWED_VIDEO_EXTENSIONS)))
+
+            duration = self.get_video_duration(video)
+            if duration > settings.MAX_VIDEO_DURATION:
+                raise ValidationError(_('Maximum video duration exceeded. Please upload a video with a maximum duration of 1 minutes.'))
+        
+        return video
+    
+    def clean_video(self):
+        video = self.cleaned_data.get('video')
+        duration = self.cleaned_data.get('duration')
+
+        if video and duration is not None and duration > 2:
+            # Trim the video duration to 2 minutes
+            # Add your logic here to trim the video duration to the desired length
+            if not video.name.lower().endswith(tuple(settings.ALLOWED_VIDEO_EXTENSIONS)):
+                raise ValidationError(_('Invalid video format. Supported formats are: {}').format(', '.join(settings.ALLOWED_VIDEO_EXTENSIONS)))
+
+            duration = self.get_video_duration(video)
+            if duration > settings.MAX_VIDEO_DURATION:
+                raise ValidationError(_('Maximum video duration exceeded. Please upload a video with a maximum duration of 1 minutes.'))
+        return video
+
+    def get_video_duration1(self, video):
+        try:
+            from moviepy.editor import VideoFileClip
+        except ImportError:
+            raise ImportError('Please install moviepy library for video duration retrieval.')
+
+        try:
+            clip = VideoFileClip(video.path)
+            duration = clip.duration
+            clip.close()
+            return duration
+        except Exception as e:
+            raise ValidationError(_('Error retrieving video duration: {}').format(str(e)))
+
+
+    def get_video_duration(self, video_file):
+        try:
+            # Get the temporary file path
+            temp_file_path = video_file.temporary_file_path()
+
+            # Use moviepy to get the video duration
+            video = mp.VideoFileClip(temp_file_path)
+            duration = video.duration
+
+            # Clean up the temporary file
+            os.remove(temp_file_path)
+
+            return duration
+        except Exception as e:
+            # Handle any exceptions
+            print(f"Error retrieving video duration: {str(e)}")
+            return None

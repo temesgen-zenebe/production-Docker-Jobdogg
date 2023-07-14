@@ -151,3 +151,11 @@ TEST_STATES = (
         ('started', 'Started'),
         
     )
+TAG_CHOOSES = (
+        ('like', 'like'),
+        ('dislike', 'dislike'),
+        ('good', 'good'),
+        ('bast', 'bast'),
+        ('qualified', 'qualified'),
+        
+    )

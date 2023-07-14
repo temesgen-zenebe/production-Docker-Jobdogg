@@ -27,6 +27,13 @@ from .models import (
      
      #Safety_Video_and_Test
      Safety_Video_and_Test,
+     
+     #VideoResume
+     VideoResume,
+     
+     #RettingCommenting
+     RettingCommenting,
+    
     )
 
 @admin.register(Profile)
@@ -229,9 +236,33 @@ class Safety_Video_and_TestAdmin(admin.ModelAdmin):
 @admin.register(SafetyTestResult)
 class SafetyTestResultAdmin(admin.ModelAdmin):
     model = SafetyTestResult
-    list_display =['user', 'safety_result','states','slug','created','updated',]
+    list_display =['user', 'safety_result','states','slug','created','updated']
    
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
             return ('created', 'updated','slug')
         return ()
+    
+ #VideoResume 
+@admin.register(VideoResume)
+class VideoResumeAdmin(admin.ModelAdmin):
+    model = VideoResume
+    list_display =['user', 'video', 'tell_about_you','viewCount','slug','created','updated']
+   
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('created', 'updated','slug')
+        return ()   
+
+ #RettingCommenting
+@admin.register(RettingCommenting)
+class RettingCommentingAdmin(admin.ModelAdmin):
+    model = RettingCommenting
+    list_display =['user', 'retting', 'tag','comments','slug','created','updated']
+   
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('created', 'updated','slug')
+        return ()
+    
+    
