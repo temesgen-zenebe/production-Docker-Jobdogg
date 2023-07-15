@@ -247,7 +247,7 @@ class SafetyTestResultAdmin(admin.ModelAdmin):
 @admin.register(VideoResume)
 class VideoResumeAdmin(admin.ModelAdmin):
     model = VideoResume
-    list_display =['user', 'video', 'tell_about_you','viewCount','slug','created','updated']
+    list_display =['user', 'video', 'tell_about_you','states','viewCount','slug','created','updated']
    
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object

@@ -159,3 +159,8 @@ TAG_CHOOSES = (
         ('qualified', 'qualified'),
         
     )
+VIDEO_STATES_CHOOSES=(
+    ('InProgress', 'InProgress'),
+    ('pending', 'pending'),
+    ('activated', 'activated'),
+)

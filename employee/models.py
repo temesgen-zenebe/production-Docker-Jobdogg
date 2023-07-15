@@ -20,6 +20,7 @@ from common.utils.chooseConstant import (
     BRANCH, RANK_CHOICES, 
     SCHOOL_TYPE_CHOICES,
     DEGREE_TYPE_CHOICES,
+    VIDEO_STATES_CHOOSES,
     SALARY_TYPES,
     JOB_TYPES,
     RELOCATION,
@@ -407,6 +408,7 @@ class VideoResume(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     video = models.FileField(upload_to='videoResumes/%Y/%m/%d')
     tell_about_you=models.TextField(help_text="Share a fascinating fact or story about yourself.", max_length=600, null=True, blank=True)
+    states = models.CharField(max_length=20, choices=VIDEO_STATES_CHOOSES , default='pending')
     viewCount = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)

@@ -209,10 +209,11 @@ class SafetyTestResultForm(forms.ModelForm):
 class VideoResumeForm(forms.ModelForm):
     class Meta:
         model = VideoResume
-        fields = ['video', 'tell_about_you']
+        fields = ['video', 'tell_about_you', 'states']
         widgets = {
             'video': forms.ClearableFileInput(attrs={'accept': ','.join(settings.ALLOWED_VIDEO_EXTENSIONS), 'class': 'textinput form-control form-control-sm'}),
             'tell_about_you': forms.Textarea(attrs={'rows': 3,'class': 'textinput form-control form-control-sm'}),
+            'states': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'type': 'hidden'}),
         }
 
     def clean_video1(self):
@@ -241,21 +242,6 @@ class VideoResumeForm(forms.ModelForm):
             if duration > settings.MAX_VIDEO_DURATION:
                 raise ValidationError(_('Maximum video duration exceeded. Please upload a video with a maximum duration of 1 minutes.'))
         return video
-
-    def get_video_duration1(self, video):
-        try:
-            from moviepy.editor import VideoFileClip
-        except ImportError:
-            raise ImportError('Please install moviepy library for video duration retrieval.')
-
-        try:
-            clip = VideoFileClip(video.path)
-            duration = clip.duration
-            clip.close()
-            return duration
-        except Exception as e:
-            raise ValidationError(_('Error retrieving video duration: {}').format(str(e)))
-
 
     def get_video_duration(self, video_file):
         try:
