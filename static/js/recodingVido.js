@@ -86,9 +86,34 @@ const recordAgain = () => {
 const submitVideo = () => {
   const recordedVideoURL = localStorage.getItem('recordedVideo');
   if (recordedVideoURL) {
-    // Save the recorded video to the database
-    // Add your code here to submit the video to the database
-    console.log('Video submitted:', recordedVideoURL);
+    // Remove the existing file input field
+    const fileInput = document.getElementById('id_video');
+    fileInput.remove();
+
+    // Create a new file input element
+    const newFileInput = document.createElement('input');
+    newFileInput.type = 'file';
+    newFileInput.name = 'video';
+    newFileInput.className = 'form-control textinput form-control form-control-sm';
+    newFileInput.accept = '.mp4,.mpg,.avi,.mov,.mkv,.wmv,.ogv,.webm,.flv';
+    newFileInput.id = 'id_video';
+    newFileInput.required = true;
+
+    // Insert the new file input element into the form
+    const form = document.getElementById('videoForm');
+    form.appendChild(newFileInput);
+
+    // Submit the form
+    //form.submit();
+
+    var submit2 = document.getElementById('submit2');
+    var submit1 = document.getElementById('submit1');
+    submit2.classList.remove('d-none');
+    submit2.classList.add('d-block');
+    submit1.classList.remove('d-block');
+    submit1.classList.add('d-none');
+
+    //console.log('Video submitted:', recordedVideoURL);
   } else {
     console.error('No recorded video available to submit.');
   }

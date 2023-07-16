@@ -1347,25 +1347,10 @@
                     <h1 class="modal-title fs-5" id="VideoResumeModalToggleLabel">
                         Create Video Resume
                     </h1>
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                    ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <h5 class="modal-title fs-6">
-                        Share With Us One Fascinating fact About Yourself.
-                    </h5>
-                    <div class="form-floating">
-                        <textarea
-                        class="form-control"
-                        placeholder="Leave a comment here"
-                        id="floatingTextarea"
-                        ></textarea>
-                        <label for="floatingTextarea">Comments</label>
-                    </div>
+                    
                     <div class="bd-callout bd-callout-info">
                         <h5 class="modal-title fs-6">
                         Tip how you Recording your video Resume
@@ -1405,88 +1390,93 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-                    <button
-                        class="btn btn-sm btn-outline-primary"
-                        data-bs-target="#exampleModalToggle2"
-                        data-bs-toggle="modal"
-                    >
-                        Upload Video
-                    </button>
-                    <button
-                        class="btn btn-sm btn-outline-primary"
-                        data-bs-target="#exampleModalToggle3"
-                        data-bs-toggle="modal"
-                    >
-                        Recording Video
-                    </button>
+                       
+                        <button class="btn btn-sm btn-outline-primary" data-bs-target="#RecordingVideoModalToggle" data-bs-toggle="modal">
+                            <i class="bi bi-record-btn fs-6 px-1"></i> Record
+                        </button>
+                        <button class="btn btn-sm btn-outline-primary" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal">
+                            <i class="bi bi-upload fs-6 px-1"></i> Upload 
+                        </button>
                     </div>
                 </div>
                 </div>
             </div>
-            <!--Create Video Resume Upload Video-->
-            <div class="modal fade" id="exampleModalToggle2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="VideoResumeModalToggleLabel2"aria-hidden="true">
+           
+            <div class="modal fade" id="RecordingVideoModalToggle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="RecordingVideoModalToggleLabel2"aria-hidden="true">
                 <div class="modal-dialog modal-lg  modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="VideoResumeModalToggleLabel2">
-                        Recording Video
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h1>Video Recording Demo</h1>
-                        <div>
-                          <button onclick="startRecording()">Start Recording</button>
-                          <button onclick="stopRecording()">Stop Recording</button>
-                          <button onclick="previewVideo()">Preview Video</button>
-                          <button onclick="recordAgain()">Record Again</button>
-                          <button onclick="submitVideo()">Submit Video</button>
-                        </div>
-                        <div>
-                          <video id="videoPlayer" width="640" height="480" autoplay muted controls playsinline></video>
-                        </div>
-                       
+                        <h6 class="modal-title fs-6" id="RecordingVideoModalToggleLabel2">
+                            Recording your Video Resume (<small>Must be 1 mint</small>)
+                        </h6>
                         
-
+                        <div class="btn-group gap-1">
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}" ><i class="bi bi-x-circle"></i></a>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#VideoResumeModalToggle" data-bs-toggle="modal">
-                        Back to first
-                    </button>
+                    <div class="modal-body d-block" id="submit1">
+                        <div class="ratio ratio-16x9">
+                            <video id="videoPlayer" class="embed-responsive-item" width="640" height="480" autoplay muted controls playsinline></video>
+                        </div>
+                        <div class="modal-footer mt-3">
+                            <div class="text-center  mb-2">
+                                <button class="btn btn-sm btn-outline-primary" onclick="startRecording()"><i class="bi bi-circle-fill"></i> Start </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="stopRecording()"><i class="bi bi-stop-fill"></i> Stop </button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="previewVideo()"><i class="bi bi-play-fill"></i> Preview </button>
+                                <button class="btn btn-sm btn-outline-info" onclick="recordAgain()"><i class="bi bi-camera-reels-fill"></i> Rerecord </button>
+                                <button class="btn btn-sm btn-outline-success" onclick="submitVideo()"><i class="bi bi-cloud-upload-fill"></i> Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-body d-none" id="submit2">
+                        <form method="POST" enctype="multipart/form-data" id="videoForm">  
+                            {% csrf_token %}
+                            {{ videoResume_form|crispy}}
+                         <button type="submit" class="btn btn-sm btn-outline-success" name="uploadVideoResumeFormSubmit" >Submit</button>
+                        </form>
                     </div>
                 </div>
                 </div>
             </div>
+          
             <!--Create Video Resume Recording Video-->
             <div class="modal fade" id="exampleModalToggle3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalToggleLabel3"aria-hidden="true">
                 <div class="modal-dialog modal-md  modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+                    <h6 class="modal-title fs-5" id="exampleModalToggleLabel2">
                         Upload Video
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                    ></button>
+                    </h6>
+                    <div class="btn-group gap-1">
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}" ><i class="bi bi-x-circle"></i></a> 
                     </div>
-                    <div class="modal-body">
-                        
-                          <div>
-                            <video controls playsinline id="videoRecorded1"></video>
-                          </div>
-                          <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="mb-3">
-                              <label for="videoFile" class="form-label">Upload Video</label>
-                              <input class="form-control" type="file" id="videoFile" name="video" accept="video/*">
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="buttonSubmit" disabled>Submit</button>
-                          </form>
                     </div>
-                    <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#VideoResumeModalToggle" data-bs-toggle="modal" >
-                        Back to first
-                    </button>
-                    </div>
+                    
+                        <div class="modal-body">
+                            <form method="post" enctype="multipart/form-data">  
+                                <div class="mb-3">
+                                    {% csrf_token %}
+                                    {{ videoResume_form|crispy}}
+                                    
+                                </div>
+                                <div class="ratio ratio-16x9">
+                                    <div class="embed-responsive-item">
+                                        <video controls playsinline id="videoRecorded1" class="embed-responsive">
+                                            <source src="" type="" allowfullscreen>
+                                        </video>
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex jestifing-content-between">
+                                    <button type="submit" class="btn btn-sm btn-outline-primary" name="uploadVideoResumeFormSubmit" >Submit</button>
+                                    <button class="btn btn-sm btn-outline-success" data-bs-target="#RecordingVideoModalToggle" data-bs-toggle="modal" >
+                                        Record
+                                    </button>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                     
                 </div>
                 </div>
             </div>
@@ -1513,6 +1503,7 @@
                 </div>
                 </div>
             </div>
+           
           
     </div>     
 

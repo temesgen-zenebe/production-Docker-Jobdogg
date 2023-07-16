@@ -204,12 +204,15 @@ class SafetyTestResultForm(forms.ModelForm):
             'states': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_states', 'type': 'hidden'}),
         }
         
-
 #VideoResumeForm
 class VideoResumeForm(forms.ModelForm):
     class Meta:
         model = VideoResume
         fields = ['video', 'tell_about_you', 'states']
+        labels = {
+            'video': 'Upload Video',
+            'tell_about_you': 'Share a fascinating fact or story about yourself',
+        }
         widgets = {
             'video': forms.ClearableFileInput(attrs={'accept': ','.join(settings.ALLOWED_VIDEO_EXTENSIONS), 'class': 'textinput form-control form-control-sm'}),
             'tell_about_you': forms.Textarea(attrs={'rows': 3,'class': 'textinput form-control form-control-sm'}),

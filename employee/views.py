@@ -43,6 +43,7 @@ from .forms import (
     SafetyTestResultForm,
     UserAcceptedPoliciesForm,
     VideoResumeForm,
+    
 )
 
 
@@ -97,6 +98,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         certification_licenses = CertificationLicense.objects.filter(education__user=request.user)
         employee_preferences_form = EmployeePreferencesForm()
         safetyVideo_form = SafetyTestResultForm()
+        videoResume_form = VideoResumeForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
@@ -133,6 +135,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'user_positions':user_positions,
             'testList':testList,
             'safetyVideo':safetyVideo,
+            'videoResume_form' :videoResume_form
             
         }
            
@@ -277,7 +280,33 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                return redirect('employee:profile_building_progress')
             else:
               print("Safety Test Result form is invalid")
+              
+        elif 'RecordedVideoResumeFormSubmit' in request.POST:
+            VideoResumeSubmited_form = VideoResumeForm(request.POST, request.FILES)
+            if VideoResumeSubmited_form.is_valid():
+                VideoResume = VideoResumeSubmited_form.save(commit=False)
+                VideoResume.user = request.user
+                VideoResume.save()
+                # Update the profile building process states
+                profile.VideoResume_completed = True
+                profile.save()
+                return redirect('employee:profile_building_progress')
+            else:
+                print("VideoResume form is invalid")
          
+        elif 'uploadVideoResumeFormSubmit' in request.POST:
+            VideoResumeSubmited_form = VideoResumeForm(request.POST, request.FILES)
+            if VideoResumeSubmited_form.is_valid():
+                VideoResume = VideoResumeSubmited_form.save(commit=False)
+                VideoResume.user = request.user
+                VideoResume.save()
+                # Update the profile building process states
+                profile.VideoResume_completed = True
+                profile.save()
+                return redirect('employee:profile_building_progress')
+            else:
+                print("VideoResume form is invalid")
+
         else:
             pass   
         # If neither form was submitted or form validation failed, render the template again with the forms
@@ -289,6 +318,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         experienceForm_form = ExperienceForm()
         employee_preferences_form = EmployeePreferencesForm()
         safetyVideo_form = SafetyTestResultForm()
+        videoResume_form = VideoResumeForm()
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
@@ -297,7 +327,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'CertificationLicense_form':CertificationLicense_form,
             'experienceForm_form':experienceForm_form,
             'employee_preferences_form': employee_preferences_form,
-            'safetyVideo_form':safetyVideo_form
+            'safetyVideo_form':safetyVideo_form,
+            'videoResume_form':videoResume_form
         }
         return render(request, self.template_name, context)
     

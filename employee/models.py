@@ -407,7 +407,7 @@ class SafetyTestResult(models.Model):
 class VideoResume(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     video = models.FileField(upload_to='videoResumes/%Y/%m/%d')
-    tell_about_you=models.TextField(help_text="Share a fascinating fact or story about yourself.", max_length=600, null=True, blank=True)
+    tell_about_you=models.TextField(max_length=600, null=True)
     states = models.CharField(max_length=20, choices=VIDEO_STATES_CHOOSES , default='pending')
     viewCount = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True)
