@@ -1424,18 +1424,21 @@
                                 <button class="btn btn-sm btn-outline-danger" onclick="stopRecording()"><i class="bi bi-stop-fill"></i> Stop </button>
                                 <button class="btn btn-sm btn-outline-secondary" onclick="previewVideo()"><i class="bi bi-play-fill"></i> Preview </button>
                                 <button class="btn btn-sm btn-outline-info" onclick="recordAgain()"><i class="bi bi-camera-reels-fill"></i> Rerecord </button>
-                                <button class="btn btn-sm btn-outline-success" onclick="submitVideo()"><i class="bi bi-cloud-upload-fill"></i> Submit</button>
+                                <form method="POST" enctype="multipart/form-data" id="videoForm">
+                                {% csrf_token %}
+                                <button 
+                                 onclick="submitVideo()"
+                                 id="videoResumeFinaleSubmit" 
+                                 class="btn btn-sm btn-outline-success" 
+                                 >
+                                 <i class="bi bi-cloud-upload-fill"></i>Submit
+                                </button>
+                                </form> 
                             </div>
                         </div>
                     </div>
 
-                    <div class="modal-body d-none" id="submit2">
-                        <form method="POST" enctype="multipart/form-data" id="videoForm">  
-                            {% csrf_token %}
-                            {{ videoResume_form|crispy}}
-                         <button type="submit" class="btn btn-sm btn-outline-success" name="uploadVideoResumeFormSubmit" >Submit</button>
-                        </form>
-                    </div>
+                    
                 </div>
                 </div>
             </div>
@@ -1593,7 +1596,7 @@
         });
         
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             var modal = document.getElementById('SkillSetTestModal');
@@ -1654,9 +1657,6 @@
             }
         });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script type="text/javascript" src="{% static 'js/safetyTestFormscript.js' %}"></script>
     <script type="text/javascript"  src="{% static 'js/VideoResume1.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/recodingVido.js' %}"></script>

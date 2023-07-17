@@ -4,6 +4,7 @@ let recordedChunks = [];
 let isRecording = false;
 const videoPlayer = document.getElementById('videoPlayer');
 
+
 const startRecording = async () => {
   try {
     stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
@@ -75,8 +76,6 @@ const previewVideo1 = () => {
   }
 };
 
-
-
 const recordAgain = () => {
   // Remove the previous recorded video from local storage
   localStorage.removeItem('recordedVideo');
@@ -85,35 +84,34 @@ const recordAgain = () => {
 
 const submitVideo = () => {
   const recordedVideoURL = localStorage.getItem('recordedVideo');
+  const csrfmiddlewaretoken1 = document.getElementsByName('csrfmiddlewaretoken')[0].value;
   if (recordedVideoURL) {
-    // Remove the existing file input field
-    const fileInput = document.getElementById('id_video');
-    fileInput.remove();
-
-    // Create a new file input element
-    const newFileInput = document.createElement('input');
-    newFileInput.type = 'file';
-    newFileInput.name = 'video';
-    newFileInput.className = 'form-control textinput form-control form-control-sm';
-    newFileInput.accept = '.mp4,.mpg,.avi,.mov,.mkv,.wmv,.ogv,.webm,.flv';
-    newFileInput.id = 'id_video';
-    newFileInput.required = true;
-
-    // Insert the new file input element into the form
-    const form = document.getElementById('videoForm');
-    form.appendChild(newFileInput);
-
-    // Submit the form
-    //form.submit();
-
-    var submit2 = document.getElementById('submit2');
-    var submit1 = document.getElementById('submit1');
-    submit2.classList.remove('d-none');
-    submit2.classList.add('d-block');
-    submit1.classList.remove('d-block');
-    submit1.classList.add('d-none');
-
-    //console.log('Video submitted:', recordedVideoURL);
+    // Log the recorded video URL and the fetch request
+    console.log('Recorded Video URL:', recordedVideoURL);
+    
+    const requestOptions = {
+      method: 'POST',
+      
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest', // Set the X-Requested-With header
+        'X-CSRFToken': csrfmiddlewaretoken1,
+        // Add other required headers if necessary
+      },
+      
+      body: JSON.stringify({ recordedVideoURL }),
+    };
+    console.log('Fetch Request:', requestOptions);
+    
+    // Send the recorded video URL to the server using AJAX
+    fetch('/recorded-video-resume-submit/', requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Video submitted:', data.message);
+      })
+      .catch(error => {
+        console.error('Error submitting video:', error);
+      });
   } else {
     console.error('No recorded video available to submit.');
   }

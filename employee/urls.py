@@ -95,6 +95,8 @@ from .views import (
     VideoResumeUpdateView,
     VideoResumeDeleteView,
     VideoResumeDetailView,
+    recorded_video_resume_submit,
+    video_resume_submit,
 )
 
 
@@ -105,6 +107,7 @@ urlpatterns = [
     # DashboardInformation Employee
     path('dashboardInformation/employee', DashboardInformation.as_view(), name='dashboard_information_employee'),
     path('profileBuildingProgress/', ProfileBuildingProgress.as_view(), name='profile_building_progress'),
+    
     #skip Military
     path('skipMilitary/', SkipMilitaryView.as_view(), name='skip_military'),
     #No ExperienceView 
@@ -196,5 +199,8 @@ urlpatterns = [
     path('video-resumes/<slug:slug>/', VideoResumeDetailView.as_view(), name='video_resume_detail'),
     path('video-resumes/<slug:slug>/update/', VideoResumeUpdateView.as_view(), name='video_resume_update'),
     path('video-resumes/<slug:slug>/delete/', VideoResumeDeleteView.as_view(), name='video_resume_delete'),
+    
+    path('VideoResumeSubmit/', video_resume_submit, name='video_resume_submit'),
+    path('recorded-video-resume-submit/', recorded_video_resume_submit, name='resume_submit'),
 
 ]
