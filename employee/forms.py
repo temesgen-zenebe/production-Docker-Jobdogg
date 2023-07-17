@@ -215,7 +215,7 @@ class VideoResumeForm(forms.ModelForm):
         }
         widgets = {
             'video': forms.ClearableFileInput(attrs={'accept': ','.join(settings.ALLOWED_VIDEO_EXTENSIONS), 'class': 'textinput form-control form-control-sm'}),
-            'tell_about_you': forms.Textarea(attrs={'rows': 3,'class': 'textinput form-control form-control-sm'}),
+            'tell_about_you': forms.Textarea(attrs={'rows': 4,'class': 'textinput form-control form-control-sm'}),
         }
 
     def clean_video1(self):
@@ -235,7 +235,7 @@ class VideoResumeForm(forms.ModelForm):
         duration = self.cleaned_data.get('duration')
 
         if video and duration is not None and duration > 2:
-            # Trim the video duration to 2 minutes
+            # Trim the video duration to 1 minutes
             # Add your logic here to trim the video duration to the desired length
             if not video.name.lower().endswith(tuple(settings.ALLOWED_VIDEO_EXTENSIONS)):
                 raise ValidationError(_('Invalid video format. Supported formats are: {}').format(', '.join(settings.ALLOWED_VIDEO_EXTENSIONS)))
