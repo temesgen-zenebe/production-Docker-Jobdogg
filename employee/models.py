@@ -367,10 +367,10 @@ class SkillSetTestResult(models.Model):
         if not self.slug:
             value = f"{self.user.username} {self.position}"
             self.slug = unique_slug(value, type(self))
+            
+
         super().save(*args, **kwargs)
         
-    
-
     def __str__(self):
         return f"{self.user.username}'s Skill Set Test Result"
 
@@ -384,6 +384,8 @@ class Safety_Video_and_Test(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     view_count = models.PositiveIntegerField(default=0)
 
+    
+    
     def __str__(self):
         return str(self.title)
     
@@ -394,11 +396,16 @@ class Safety_Video_and_Test(models.Model):
 class SafetyTestResult(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     safety_result = models.CharField(max_length=50)
-    states = models.CharField(max_length=20)
+    states = models.CharField(max_length=20, default='success')
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.user.username} {self.states}"
+            self.slug = unique_slug(value, type(self))
+    
     def __str__(self):
         return f"Test Result for {self.user.username}"
 

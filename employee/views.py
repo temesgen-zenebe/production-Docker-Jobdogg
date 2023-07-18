@@ -277,8 +277,10 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                SafetyTestResult.user = request.user
                SafetyTestResult.save()
                # Update the profile building process states
+               
                profile.Safety_Video_and_Test_completed = True
                profile.save()
+               
                return redirect('employee:profile_building_progress')
             else:
               print("Safety Test Result form is invalid")
@@ -1087,12 +1089,12 @@ class SkillSetTestResultDetailView(LoginRequiredMixin, DetailView):
 #SafetyVideoTest 
 class SafetyVideoTestListView(LoginRequiredMixin, ListView):
     model = Safety_Video_and_Test
-    template_name = 'safetyVideoTest/safetyVideoTest_list.html'
+    template_name = 'employee/safetyVideoTest/safetyVideoTest_list.html'
     context_object_name = 'safetyVideoTest'
     
 class SafetyVideoTestDetailView(LoginRequiredMixin, DetailView):
     model = Safety_Video_and_Test
-    template_name = 'safetyVideoTest/safetyVideoTest_detail.html'
+    template_name = 'employee/safetyVideoTest/safetyVideoTest_detail.html'
     context_object_name = 'safetyVideoTestDetailView'
 
     def get_context_data(self, **kwargs):
@@ -1106,7 +1108,7 @@ class SafetyVideoTestDetailView(LoginRequiredMixin, DetailView):
     
 class SafetyVideoTestCreateView(LoginRequiredMixin, CreateView):
     model = Safety_Video_and_Test
-    template_name = 'safetyVideoTest/safetyVideoTest_form.html'
+    template_name = 'employee/safetyVideoTest/safetyVideoTest_form.html'
     fields = ['title', 'image', 'video_url', 'description']
     success_url = reverse_lazy('employee:safetyVideoTest_list')
     extra_context = {'is_create': True}
@@ -1117,14 +1119,14 @@ class SafetyVideoTestCreateView(LoginRequiredMixin, CreateView):
 
 class SafetyVideoTestUpdateView(LoginRequiredMixin, UpdateView):
     model = Safety_Video_and_Test
-    template_name = 'safetyVideoTest/safetyVideoTest_form.html'
+    template_name = 'employee/safetyVideoTest/safetyVideoTest_form.html'
     fields = ['title', 'image', 'video_url', 'description']
     success_url = reverse_lazy('employee:safetyVideoTest_list')
     extra_context = {'is_create': False}
 
 class SafetyVideoTestDeleteView(LoginRequiredMixin, DeleteView):
     model = Safety_Video_and_Test
-    template_name = 'safetyVideoTest/safetyVideoTest_confirm_delete.html'
+    template_name = 'employee/safetyVideoTest/safetyVideoTest_confirm_delete.html'
     success_url = reverse_lazy('employee:safetyVideoTest_list')
 
 

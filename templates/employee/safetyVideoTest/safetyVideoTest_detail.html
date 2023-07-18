@@ -1,0 +1,34 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load humanize %}
+{% load mask_ssn %}
+{% block title %}Education Detail{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h5>Education Profile</h5>
+                    <div>
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:safetyVideoTest_list' %}">Back</a>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <ul class="list-unstyled list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Name: 
+                          <span class="">{{ safetyVideoTestDetailView.user.username|capfirst }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            description : 
+                          <span class="">{{ safetyVideoTestDetailView.description}}</span>
+                        </li>
+                    </ul>  
+                </div>
+                   
+            </div>
+        </div>
+    <!-- End Example Code -->
+{% endblock %}
