@@ -95,8 +95,7 @@ from .views import (
     VideoResumeUpdateView,
     VideoResumeDeleteView,
     VideoResumeDetailView,
-    recorded_video_resume_submit,
-    video_resume_submit,
+   
 )
 
 
@@ -200,7 +199,5 @@ urlpatterns = [
     path('video-resumes/<slug:slug>/update/', VideoResumeUpdateView.as_view(), name='video_resume_update'),
     path('video-resumes/<slug:slug>/delete/', VideoResumeDeleteView.as_view(), name='video_resume_delete'),
     
-    path('VideoResumeSubmit/', video_resume_submit, name='video_resume_submit'),
-    path('recorded-video-resume-submit/', recorded_video_resume_submit, name='resume_submit'),
 
 ]

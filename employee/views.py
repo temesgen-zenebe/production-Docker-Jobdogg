@@ -283,24 +283,6 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             else:
               print("Safety Test Result form is invalid")
               
-        elif 'RecordedVideoResumeFormSubmit' in request.POST:
-            about_you = request.POST.get('tell_about_you')
-            video = request.FILES.get('video')
-
-            VideoResumeSubmited_form = VideoResumeForm(request.POST, request.FILES)
-            if VideoResumeSubmited_form.is_valid():
-                VideoResume = VideoResumeSubmited_form.save(commit=False)
-                VideoResume.user = request.user
-                VideoResume.save()
-                # Update the profile building process states
-                profile.VideoResume_completed = True
-                profile.save()
-                return redirect(reverse('employee:profile_building_progress'))
-            else:
-                print("VideoResume form is invalid")
-                print("Form errors:", VideoResumeSubmited_form.errors)
-
-         
         elif 'uploadVideoResumeFormSubmit' in request.POST:
             VideoResumeSubmited_form = VideoResumeForm(request.POST, request.FILES)
             if VideoResumeSubmited_form.is_valid():
@@ -1167,12 +1149,28 @@ class VideoResumeCreateView(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            
+        if not profile.Safety_Video_and_Test_completed:
+            return redirect('employee:video_resume_list')
+        
+        profile.VideoResume_completed = True
+        profile.save()
+        
+        return super().dispatch(request, *args, **kwargs)
 
 class VideoResumeUpdateView(LoginRequiredMixin, UpdateView):
     model = VideoResume
     form_class = VideoResumeForm
     template_name = 'employee/videoResume/video_resume_update.html'
     success_url = reverse_lazy('employee:video_resume_list')
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
 
 class VideoResumeDeleteView(LoginRequiredMixin, DeleteView):
     model = VideoResume
@@ -1180,60 +1178,4 @@ class VideoResumeDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('employee:video_resume_list')
     
 
-from django.shortcuts import render, redirect
-from .forms import VideoResumeForm
-from django.http import JsonResponse
 
-
-
-def recorded_video_resume_submit(request): 
-    profile = get_object_or_404(Profile, user=request.user)
-    
-    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        
-        data = json.loads(request.body)  # Parse the JSON payload
-        recorded_video_url = data.get('recordedVideoURL')  # Get the recorded video URL from the JSON payload
-        
-        print(recorded_video_url)
-        about_me = "I will share a fascinating fact or story about myself"
-        
-        
-        form_data = {
-            'video': recorded_video_url,
-            'tell_about_you': about_me,
-        }
-        form = VideoResumeForm(form_data, request.FILES)  # Pass request.FILES to handle file uploads
-        
-        if form.is_valid():
-            video_resume = form.save(commit=False)
-            video_resume.user = request.user
-            video_resume.save()
-            
-            # Update the profile building process states
-            profile.VideoResume_completed = True
-            profile.save()
-
-            return redirect('employee:profile_building_progress')
-
-    # Return an error JSON response if the request is not valid
-    return JsonResponse({'error': 'Invalid request.'}, status=400)
-
-
-def video_resume_submit(request):
-    profile = get_object_or_404(Profile, user=request.user) 
-    
-    if request.method == 'POST':
-        form = VideoResumeForm(request.POST, request.FILES)
-        if form.is_valid():
-            video_resume = form.save(commit=False)
-            video_resume.user = request.user
-            video_resume.save()
-            # Update the profile building process states
-            profile.VideoResume_completed = True
-            profile.save()
-            return redirect('employee:profile_building_progress')
-    else:
-        form = VideoResumeForm()
-    
-    context = {'form': form}
-    return render(request, 'video_resume_submit.html', context)

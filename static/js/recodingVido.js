@@ -2,8 +2,22 @@ let stream;
 let mediaRecorder;
 let recordedChunks = [];
 let isRecording = false;
+let recordedBlob;
 const videoPlayer = document.getElementById('videoPlayer');
+const userName = document.getElementById('user-name');
 
+
+function generateUniqueID() {
+  const alphanumericChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let uniqueID = '';
+
+  for (let i = 0; i < 8; i++) {
+    const randomIndex = Math.floor(Math.random() * alphanumericChars.length);
+    uniqueID += alphanumericChars[randomIndex];
+  }
+
+  return uniqueID + userName.innerText;
+}
 
 const startRecording = async () => {
   try {
@@ -16,12 +30,14 @@ const startRecording = async () => {
     });
 
     mediaRecorder.addEventListener('stop', () => {
-      const recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
+      recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
       recordedChunks = [];
 
       // Save the recorded video to local storage
       const recordedVideoURL = URL.createObjectURL(recordedBlob);
       localStorage.setItem('recordedVideo', recordedVideoURL);
+    
+
     });
 
     mediaRecorder.start();
@@ -35,8 +51,8 @@ const startRecording = async () => {
   } catch (error) {
     console.error('Error starting the recording:', error);
   }
+  return recordedBlob
 };
-
 
 const stopRecording = () => {
   if (isRecording) {
@@ -45,6 +61,7 @@ const stopRecording = () => {
     isRecording = false;
   }
 };
+
 
 
 const previewVideo = () => {
@@ -57,62 +74,30 @@ const previewVideo = () => {
   }
 };
 
-const previewVideo1 = () => {
-  const recordedVideoURL = localStorage.getItem('recordedVideo');
-  if (recordedVideoURL) {
-    const previewVideoElement = document.createElement('video');
-    previewVideoElement.src = recordedVideoURL;
-    previewVideoElement.controls = true;
-    previewVideoElement.autoplay = true;
-    
-    // Remove previous preview video, if any
-    const existingPreviewVideoElement = document.querySelector('#previewVideoElement');
-    if (existingPreviewVideoElement) {
-      existingPreviewVideoElement.remove();
-    }
-    
-    previewVideoElement.id = 'previewVideoElement';
-    videoPlayer.parentNode.insertBefore(previewVideoElement, videoPlayer);
-  }
-};
+
 
 const recordAgain = () => {
   // Remove the previous recorded video from local storage
   localStorage.removeItem('recordedVideo');
   videoPlayer.srcObject = stream;
+  startRecording();
+
 };
 
+
 const submitVideo = () => {
-  const recordedVideoURL = localStorage.getItem('recordedVideo');
-  const csrfmiddlewaretoken1 = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+  const recordedVideoURL = URL.createObjectURL(recordedBlob);
   if (recordedVideoURL) {
-    // Log the recorded video URL and the fetch request
-    console.log('Recorded Video URL:', recordedVideoURL);
-    
-    const requestOptions = {
-      method: 'POST',
-      
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest', // Set the X-Requested-With header
-        'X-CSRFToken': csrfmiddlewaretoken1,
-        // Add other required headers if necessary
-      },
-      
-      body: JSON.stringify({ recordedVideoURL }),
-    };
-    console.log('Fetch Request:', requestOptions);
-    
-    // Send the recorded video URL to the server using AJAX
-    fetch('/recorded-video-resume-submit/', requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        console.log('Video submitted:', data.message);
-      })
-      .catch(error => {
-        console.error('Error submitting video:', error);
-      });
-  } else {
-    console.error('No recorded video available to submit.');
+    const link = document.createElement('a');
+    link.href = recordedVideoURL;
+    link.download = generateUniqueID()+'jobdogg-recordedVideo.webm';
+    link.click();
+
+    var submit2 = document.getElementById('submit2');
+    var submit1 = document.getElementById('submit1');
+    submit2.classList.remove('d-none');
+    submit2.classList.add('d-block');
+    submit1.classList.remove('d-block');
+    submit1.classList.add('d-none');
   }
 };
