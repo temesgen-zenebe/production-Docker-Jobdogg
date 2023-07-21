@@ -11,7 +11,7 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-start justify-content-between">
                    
-                    <h6 class="modal-title fs-6" >{{ video_resume_detail.user|capfirst }} Video Resume</h6>
+                    <h6 class="modal-title fs-6" >{{ video_resume_detail.user.username|capfirst }} Video Resume</h6>
                     <div>
                     <a class="btn btn-sm btn-outline-success" href="{% url 'employee:video_resume_update' slug=video_resume_detail.slug %}"><i class="bi bi-pencil-square"></i></a>
                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:video_resume_list' %}"><i class="bi bi-back"></i></a>

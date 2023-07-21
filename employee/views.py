@@ -83,7 +83,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         return int(progress_percentage)
     
     def get(self, request):
-        # Retrieve all policies from the database
+        
+        #progress_percentage = 50.0  # Replace this with the actual progress_percentage value you want to display
         policies = Policies.objects.all()
         accepted_policies = UserAcceptedPolicies.objects.filter(user=request.user)
         accepted_policies_ids = [policy.policies_id for policy in accepted_policies]
@@ -1171,13 +1172,12 @@ class VideoResumeUpdateView(LoginRequiredMixin, UpdateView):
     form_class = VideoResumeForm
     template_name = 'employee/videoResume/video_resume_update.html'
     success_url = reverse_lazy('employee:video_resume_list')
-    slug_field = 'slug'
-    slug_url_kwarg = 'slug'
-
+   
 class VideoResumeDeleteView(LoginRequiredMixin, DeleteView):
     model = VideoResume
     template_name = 'employee/videoResume/video_resume_delete.html'
     success_url = reverse_lazy('employee:video_resume_list')
     
+
 
 

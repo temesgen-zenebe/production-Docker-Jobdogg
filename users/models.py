@@ -12,7 +12,7 @@ def validate_avatar(value):
 
 # Create your models here.
 class CustomUser(AbstractUser):
-    USER_TYPE_CHOICES = [('employee', 'employee'),('employer', 'employer'),]
+    USER_TYPE_CHOICES = [('admin', 'admin'),('employee', 'employee'),('employer', 'employer'),]
     
     dob = models.DateField(
         verbose_name= "Date of Birth", null=True , blank=True
