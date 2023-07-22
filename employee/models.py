@@ -14,8 +14,11 @@ from django.urls import reverse
 from common.utils.text import unique_slug
 from localflavor.us.models import USStateField 
 from localflavor.us.us_states import STATE_CHOICES
+from datetime import datetime, timedelta
+from django.utils import timezone
 from common.utils.chooseConstant import (
     DISCHARGE_YEAR_CHOICES, 
+    BACKGROUND_CHECK_CHOOSES_STATES,
     DUTY_FLAG_CHOICES,
     BRANCH, RANK_CHOICES, 
     SCHOOL_TYPE_CHOICES,
@@ -42,17 +45,15 @@ class Profile(models.Model):
     Military_completed = models.BooleanField(default=False)
     Education_completed = models.BooleanField(default=False)
     Experience_completed = models.BooleanField(default=False)
-    Preferences_completed = models.BooleanField(default=False)
-    
+    Preferences_completed = models.BooleanField(default=False) 
     SkillSetTest_completed = models.BooleanField(default=False)
     OnProgressSkillTest_completed = models.BooleanField(default=False)
     Skipped_completed = models.BooleanField(default=False)
-    
     Safety_Video_and_Test_completed = models.BooleanField(default=False)
     VideoResume_completed = models.BooleanField(default=False)
     ResumeUploading_completed = models.BooleanField(default=False)
     
-    #Background_Check_completed = models.BooleanField(default=False)
+    Background_Check_completed = models.BooleanField(default=False)
     #Treat_Box_completed = models.BooleanField(default=False)
     #Select_Ride_completed = models.BooleanField(default=False)
     
@@ -454,6 +455,34 @@ class RettingCommenting(models.Model):
 
 
 #Background_Check
-#class Background_Check(models.Model):
-    #user , uploadingW2 , uploadingW2, background_check_states,  slug, created, updated
-    #pass
+class Background_Check(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    certification_file = models.FileField(upload_to='certificationsBackground/', blank=True, null=True)
+    expiration_date = models.DateTimeField(blank=True, null=True)
+    expiration_states = models.CharField(max_length=50, default="valid")
+    states = models.CharField(max_length=50, choices=BACKGROUND_CHECK_CHOOSES_STATES, default="pending")
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.user.username}-BackgroundCheck"
+            self.slug = unique_slug(value, type(self))
+              
+        # Set the `created` field only during the first save
+        if not self.id:
+            self.created = timezone.now()
+
+        if self.created == self.updated and self.expiration_states == 'valid' and not self.expiration_date:
+            self.expiration_date = self.created + timezone.timedelta(days=180)
+        elif self.expiration_date and self.expiration_date <= timezone.now():
+            self.expiration_states = 'expired'
+        elif self.created != self.updated and self.expiration_states == 'expired' and not self.expiration_date:
+            self.expiration_date = self.updated + timezone.timedelta(days=180)
+
+                
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f" BackgroundCheck for {self.user.username}"

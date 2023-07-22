@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import (
     
      #Education
+     Background_Check,
      CertificationLicense, 
      Education,
      Experience, 
@@ -265,4 +266,26 @@ class RettingCommentingAdmin(admin.ModelAdmin):
             return ('created', 'updated','slug')
         return ()
     
+
+
+ #Background_Check
+@admin.register(Background_Check)
+class Background_CheckAdmin(admin.ModelAdmin):
+    model = Background_Check
+     
+    list_display =[
+        'user', 
+        'certification_file', 
+        'expiration_date',
+        'expiration_states',
+        'states',
+        'slug',
+        'created',
+        'updated'
+        ]
+   
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('created', 'updated','slug')
+        return ()
     

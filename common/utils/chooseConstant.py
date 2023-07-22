@@ -164,3 +164,10 @@ VIDEO_STATES_CHOOSES=(
     ('pending', 'pending'),
     ('activated', 'activated'),
 )
+
+
+BACKGROUND_CHECK_CHOOSES_STATES = (
+        ("pending", "Pending"),
+        ("approved", "Approved"),
+        ("rejected", "Rejected"),
+)
