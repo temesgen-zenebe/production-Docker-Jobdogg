@@ -301,36 +301,36 @@
                 {% endif %}
                 {% if progres.SkillSetTest_completed or progres.Skipped_completed or progres.OnProgressSkillTest_completed %}
                 <div class="col step-item ">
-                <div class="card border-left-SlateBlue shadow h-100 py-2">
-                    <div class="card-body">
-                    <h6 class="card-text"><i class="bi bi-cone-striped px-1 fs-5"></i>Safety Video</h6>
-                    <small class="">Step 9: Safety Video & Test </small>
-                    <div class="d-flex justify-content-between align-items-center">
-                        {% if progres.Safety_Video_and_Test_completed %}
-                        <div class="btn-group">
-                            <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
-                                <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
-                            </button>
-                            <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-SlateBlue"><i class="bi bi-stars"></i></a>
+                    <div class="card border-left-SlateBlue shadow h-100 py-2">
+                        <div class="card-body">
+                        <h6 class="card-text"><i class="bi bi-cone-striped px-1 fs-5"></i>Safety Video</h6>
+                        <small class="">Step 9: Safety Video & Test </small>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if progres.Safety_Video_and_Test_completed %}
+                            <div class="btn-group">
+                                <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
+                                    <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                                </button>
+                                <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-SlateBlue"><i class="bi bi-stars"></i></a>
+                            </div>
+                            {% else %}
+                            <div class="btn-group">
+                            <a class="prev-btn  btn btn-sm btn-outline-secondary" data-bs-toggle="modal" href="#SafetyVideoModalToggle" role="button">
+                                <i class="bi bi-film fs-6 px-1"></i><i class="bi bi-play-circle"></i>
+                            </a>
+                            </div>
+                            {% endif %}
                         </div>
-                        {% else %}
-                        <div class="btn-group">
-                        <a class="prev-btn  btn btn-sm btn-outline-secondary" data-bs-toggle="modal" href="#SafetyVideoModalToggle" role="button">
-                            <i class="bi bi-film fs-6 px-1"></i><i class="bi bi-play-circle"></i>
-                        </a>
                         </div>
-                        {% endif %}
                     </div>
-                    </div>
-                </div>
                 </div>
                 {% endif %}
                 {% if progres.Safety_Video_and_Test_completed %}
                 <div class="col step-item ">
-                    <div class="card border-left-Peru shadow h-100 py-2">
+                    <div class="card border-left-info shadow h-100 py-2">
                     <div class="card-body">
                         
-                        <h6 class="card-text"><i class="bi bi-camera-video-fill fs-6 px-2"></i>Video Resume</h6>
+                        <h6 class="card-text"><i class="bi bi-camera-video-fill fs-5 px-1"></i>Video Resume</h6>
                         <small class="">Step 10: Video Resume </small>
                         <div class="d-flex justify-content-between align-items-center">
                         {% if progres.VideoResume_completed %}
@@ -338,7 +338,7 @@
                             <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
                                 <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                             </button>
-                            <a href="{% url 'employee:video_resume_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Peru"><i class="bi bi-pen"></i></a>
+                            <a href="{% url 'employee:video_resume_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-info"><i class="bi bi-pen"></i></a>
                         </div>
                         {% else %}
                         <div class="btn-group">
@@ -355,17 +355,17 @@
                 {% endif %}
                 {% if progres.VideoResume_completed %}
                 <div class="col step-item ">
-                    <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card border-left-Peru shadow h-100 py-2">
                     <div class="card-body">
-                        <p class="card-text">Background Check</p>
+                        <h6 class="card-text"><i class="bi bi-person-fill-check fs-5 px-1"></i>Background Check</h6>
                         <small class="">Step 11: Background Check</small>
                         <div class="d-flex justify-content-between align-items-center">
-                        {% if progres.ResumeUploading_completed %}
+                        {% if progres.Background_Check_completed %}
                         <div class="btn-group gap-1">
                             <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
                                 <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                             </button>
-                            <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-Peru"><i class="bi bi-pen"></i></a>
+                            <a href="{% url 'employee:background_check_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Peru"><i class="bi bi-pen"></i></a>
                         </div>
                         {% else %}
                          <!-- Button trigger modal -->
@@ -380,72 +380,68 @@
                     </div>
                 </div>
                 {% endif %}
-                {% if progres.ResumeUploading_completed %}
+                {% if progres.Background_Check_completed %}
                 <div class="col step-item ">
                     <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        
-                        <p class="card-text">Treat Box</p>
-                        <p class="card-text">Select Ride </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-outline-success">Previous</button>
-                            <button type="button" class="btn btn-sm btn-outline-success">Save</button>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-success">Next</button>
+                        <div class="card-body">
+                            <h6 class="card-text"><i class="bi bi-credit-card-fill fs-5 px-1"></i>Payment Preference</h6>
+                            <small class="">Step 12: Treat Box</small>
+                            <div class="d-flex justify-content-between align-items-center">
+                            {% if progres.Treat_Box_completed %}
+                            <div class="btn-group gap-1">
+                                <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
+                                    <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                                </button>
+                                <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-Peru"><i class="bi bi-pen"></i></a>
+                            </div>
+                            {% else %}
+                             <!-- Button trigger modal -->
+                             <div class="btn-group gap-1">
+                                <button type="button" class="btn btn-sm btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                  Get Payment 
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-lg-start">
+                                  <li><button class="dropdown-item" type="button" value="card" onclick="showModal('card')"><i class="bi bi-credit-card px-1"></i> Card</button></li>
+                                  <li><button class="dropdown-item" type="button" value="ewallet" onclick="showModal('ewallet')"><i class="bi bi-wallet2  px-1"></i> Mobile Wallet</button></li>
+                                  <li><button class="dropdown-item" type="button" value="bank_account" onclick="showModal('bank_account')"><i class="bi bi-bank  px-1"></i> Bank Account</button></li>
+                                  <li><button class="dropdown-item" type="button" value="Check_mail" onclick="showModal('Check_mail')"><i class="bi bi-envelope px-1"></i> Check (by mail)</button></li>
+                                </ul>
+                              </div>
+                             
+                            {% endif %}
+                            </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
                 {% endif %}
-                {% if progres.ResumeUploading_completed %}
+                {% if progres.Treat_Box_completed %}
                 <div class="col step-item ">
                     <div class="card border-left-DarkOliveGreen shadow h-100 py-2">
-                    <div class="card-body">
-                        <p class="card-text">Background Check</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
+                        <div class="card-body">
+                            <h6 class="card-text"><i class="bi bi-taxi-front-fill fs-5 px-1"></i>Select Ride</h6>
+                            <small class="">Step 12: Select Ride</small>
+                            <div class="d-flex justify-content-between align-items-center">
+                            {% if progres.Select_Ride_completed %}
+                            <div class="btn-group gap-1">
+                                <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
+                                    <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                                </button>
+                                <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-Peru"><i class="bi bi-pen"></i></a>
+                            </div>
+                            {% else %}
+                             <!-- Button trigger modal -->
+                             <div class="btn-group gap-1">
+                             <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SelectRide">
+                                start
+                            </button>
+                            <div>
+                            {% endif %}
+                            </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
                 {% endif %}
-                {% if progres.ResumeUploading_completed %}
-                <div class="col step-item ">
-                    <div class="card border-left-DarkOliveGreen shadow h-100 py-2">
-                    <div class="card-body">
-                        <p class="card-text">Resume uploading</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-outline-DarkOliveGreen">Previous</button>
-                            <button type="button" class="btn btn-sm btn-outline-DarkOliveGreen">Save</button>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-DarkOliveGreen">Next</button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% if progres.ResumeUploading_completed %}
-                <div class="col step-item ">
-                    <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <p class="card-text">Resume uploading</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="prev-btn  btn btn-sm btn-outline-secondary">Previous</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Save</button>
-                            <button type="button" class="next-btn btn btn-sm btn-outline-secondary">Next</button>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                {% endif %}
+
                 {% endfor %}
             </div>
             {% else %}
@@ -1570,16 +1566,74 @@
                     </div>
                     <div class="modal-footer">
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <button id="nextToBackgroundCheckProfile" class="btn btn-sm btn-outline-primary d-none" type="button">Next</button>  
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ background_check_form|crispy }}
+                                <button 
+                                    name="addToBackgroundCheckProfile" 
+                                    id="nextToBackgroundCheckProfile" 
+                                    class="btn btn-sm btn-outline-primary d-none" 
+                                    type="submit">Next</button>  
+                            </form>
                         </div>
                     </div>
                 </div>
                 </div>
             </div>
-          
-    </div>     
 
-</div>  
+            <!-- SelectRide -->
+            <div class="modal fade" id="SelectRide" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SelectRideStaticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="SelectRideStaticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        SelectRide
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+          
+            <!-- Treat_Box_completed -->
+            <div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-none" id="card">
+                      <!-- Modal content goes here -->
+                      <p>card  when option is clicked...</p>
+                    </div>
+                    <div class="modal-body d-none" id="ewallet">
+                      <!-- Modal content goes here -->
+                      <p>ewallet  when option is clicked...</p>
+                    </div>
+                    <div class="modal-body d-none" id="bank_account">
+                      <!-- Modal content goes here -->
+                      <p>bank_account  when option is clicked...</p>
+                    </div>
+                    <div class="modal-body d-none" id="Check_mail">
+                      <!-- Modal content goes here -->
+                      <p>Check_mail  when option is clicked...</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+            </div> 
+                
+        </div>     
+    </div>  
 {% block scripts %}
     <script>
         $(document).ready(function() {
@@ -1725,12 +1779,32 @@
             }
         });
     </script>
-    
+    <!-- Treat_Box_completed -->
+    <script>
+        function showModal(option) {
+          const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+          console.log('Selected option:', option);
+      
+          // Hide all modal-body elements
+          const modalBodies = document.querySelectorAll('.modal-body');
+          modalBodies.forEach((body) => {
+            body.classList.remove('d-block');
+            body.classList.add('d-none');
+          });
+      
+          // Show the selected modal-body based on the option
+          const selectedModalBody = document.getElementById(option);
+          selectedModalBody.classList.remove('d-none');
+          selectedModalBody.classList.add('d-block');
+      
+          myModal.show();
+        }
     </script>
+   
     <script type="text/javascript" src="{% static 'js/safetyTestFormscript.js' %}"></script>
     <script type="text/javascript"  src="{% static 'js/VideoResume1.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/recodingVido.js' %}"></script>
-    <!-- Link Bootstrap JS and Popper.js -->
+    
    
 {% endblock %} 
 {% endblock %}

@@ -265,16 +265,16 @@ class VideoResumeForm(forms.ModelForm):
 
 
 #BackgroundCheckForm
-
-
 class BackgroundCheckForm(forms.ModelForm):
     class Meta:
         model = Background_Check
         fields = ['certification_file', 'expiration_date']
         widgets = {
-            'certification_file': forms.FileInput(attrs={'class': 'form-control form-control-sm','type': 'hidden'}),
-            'expiration_date': forms.DateTimeInput(attrs={'class': 'form-control form-control-sm', 'type': 'hidden'}),
+            'certification_file': forms.FileInput(attrs={'class': 'form-control form-control-sm', 'style': 'display: none;'}),
+            'expiration_date': forms.DateTimeInput(attrs={'class': 'form-control form-control-sm', 'style': 'display: none;'}),
         }
+        
+        
 class BackgroundCheckFormUpdate(forms.ModelForm):
     class Meta:
         model = Background_Check

@@ -1,23 +1,12 @@
-import json
-from typing import Any
-from urllib import response
-from django.http import HttpRequest, HttpResponse, JsonResponse
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin,PermissionRequiredMixin
+from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect
-from django.db import IntegrityError
-from django.forms.utils import ErrorDict
 from django.contrib import messages
-from django.template import Library
 from django import forms
 from django.shortcuts import get_object_or_404, render, redirect
 from employee.templatetags.mask_ssn import mask_ssn
-from django.forms import CheckboxSelectMultiple
 from django.views import View
-from django.db.models import Q
-import pandas as pd
-import pyxlsb
-import openpyxl
 import logging
 logger = logging.getLogger(__name__)
 from django.views.generic import (
@@ -26,9 +15,9 @@ from django.views.generic import (
 
 from .models import (
     Category,CertificationLicense,Education,EmployeePreferences,Experience, 
-    Policies,Position,Profile, SafetyTestResult,Skill, SkillSetTestResult,UserAcceptedPolicies,
-    BasicInformation,Personal,Language,Military,Safety_Video_and_Test, VideoResume, 
-    RettingCommenting, Background_Check,
+    Policies,Position,Profile, Skill, SkillSetTestResult,UserAcceptedPolicies,
+    BasicInformation,Personal,Military,Safety_Video_and_Test, VideoResume, 
+    Background_Check,
     
 )
 from .forms import (
@@ -45,7 +34,6 @@ from .forms import (
     PersonalForm,
     BasicInformationForm,
     SafetyTestResultForm,
-    UserAcceptedPoliciesForm,
     VideoResumeForm,
     BackgroundCheckForm,
     
@@ -79,7 +67,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 profile.SkillSetTest_completed,
                 profile.Safety_Video_and_Test_completed,
                 profile.VideoResume_completed,
-                #profile.ResumeUploading_completed,
+                profile.Background_Check_completed,
             ]
         )
         progress_percentage = (completed_steps / total_steps) * 100
@@ -105,6 +93,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         employee_preferences_form = EmployeePreferencesForm()
         safetyVideo_form = SafetyTestResultForm()
         videoResume_form = VideoResumeForm()
+        BackgroundCheck_form= BackgroundCheckForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
@@ -141,7 +130,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'user_positions':user_positions,
             'testList':testList,
             'safetyVideo':safetyVideo,
-            'videoResume_form' :videoResume_form
+            'videoResume_form' :videoResume_form,
+            'BackgroundCheck_form':BackgroundCheck_form
             
         }
            
@@ -301,6 +291,19 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 return redirect('employee:profile_building_progress')
             else:
                 print("VideoResume form is invalid")
+                
+        elif 'addToBackgroundCheckProfile' in request.POST:
+            background_check_form = BackgroundCheckForm(request.POST, request.FILES)
+            if background_check_form.is_valid():
+                background_check = background_check_form.save(commit=False)
+                background_check.user = request.user
+                background_check.save()
+                # Update the profile building process states
+                profile.Background_Check_completed = True
+                profile.save()
+                return redirect('employee:profile_building_progress')
+            else:
+                print("BackgroundCheckProfile form is invalid")
 
         else:
             pass   
@@ -314,6 +317,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         employee_preferences_form = EmployeePreferencesForm()
         safetyVideo_form = SafetyTestResultForm()
         videoResume_form = VideoResumeForm()
+        BackgroundCheck_form= BackgroundCheckForm()
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
@@ -323,7 +327,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'experienceForm_form':experienceForm_form,
             'employee_preferences_form': employee_preferences_form,
             'safetyVideo_form':safetyVideo_form,
-            'videoResume_form':videoResume_form
+            'videoResume_form':videoResume_form,
+            'BackgroundCheck_form':BackgroundCheck_form,
         }
         return render(request, self.template_name, context)
     
