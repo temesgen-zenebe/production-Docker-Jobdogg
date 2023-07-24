@@ -1521,9 +1521,8 @@
                 </div>
                 </div>
             </div>
-           
-            
-            <!-- Modal -->
+        
+            <!-- BackgroundCheck -->
             <div class="modal fade" id="BackgroundCheck" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackgroundCheckLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg  modal-dialog-scrollable">
                 <div class="modal-content">
@@ -1571,10 +1570,8 @@
                     </div>
                     <div class="modal-footer">
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <button id="nextToBackgroundCheck" class="btn btn-sm btn-outline-primary d-none" type="button">Next</button>  
-                            
+                            <button id="nextToBackgroundCheckProfile" class="btn btn-sm btn-outline-primary d-none" type="button">Next</button>  
                         </div>
-    
                     </div>
                 </div>
                 </div>
@@ -1728,52 +1725,7 @@
             }
         });
     </script>
-    <script>
-        function myFunction() { 
-            // Get the text field
-            var copyText = document.getElementById("myInput");
-        
-            // Select the text field
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); // For mobile devices
-        
-            // Copy the text inside the text field
-            navigator.clipboard.writeText(copyText.value);
-            
-            // Alert the copied text
-            //alert("Copied the text: " + copyText.value);
-        }
-        </script>
-        <script>
-            function copyToClipboard(value) {
-                const el = document.createElement('textarea');
-                el.value = value;
-                document.body.appendChild(el);
-                el.select();
-                document.execCommand('copy');
-                document.body.removeChild(el);
-                //alert('Copied: ' + value + '. Ready to paste to another tab.');
-            }
-
-            document.getElementById("copyBtn").addEventListener("click", function() {
-                const password = "DoggPound1";
-                copyToClipboard(password);
-                this.textContent = "Copied!";
-                setTimeout(() => {
-                    this.textContent = "pasted to background check page";
-                }, 1000);
-            });
-
-            function startBackgroundCheck() {
-                const redirectURL = "https://jobdogg.volunteerportal.net"; // Replace with your desired redirect URL
-                window.open(redirectURL, '_blank');
-
-                const nextButton = document.getElementById('nextToBackgroundCheck');
-                setTimeout(() => {
-                    nextButton.classList.remove('d-none');
-                }, 20000); // 10 minutes in milliseconds
-            }
-    </script>
+    
     </script>
     <script type="text/javascript" src="{% static 'js/safetyTestFormscript.js' %}"></script>
     <script type="text/javascript"  src="{% static 'js/VideoResume1.js' %}"></script>

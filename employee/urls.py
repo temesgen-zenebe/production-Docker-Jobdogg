@@ -3,6 +3,7 @@ from django.urls import path
 from employee import views
 from .views import (
     #-------Policies------
+    
     PoliciesListView,
     PoliciesDetailView,
     PoliciesAcceptView,
@@ -95,6 +96,14 @@ from .views import (
     VideoResumeUpdateView,
     VideoResumeDeleteView,
     VideoResumeDetailView,
+    
+    #BackgroundCheckCreateView
+   
+    BackgroundCheckListView,
+    BackgroundCheckCreateView,
+    BackgroundCheckUpdateView,
+    BackgroundCheckDeleteView,
+    BackgroundCheckDetailView,
    
 )
 
@@ -193,11 +202,18 @@ urlpatterns = [
     path('safety-video-test/<int:pk>/update/', SafetyVideoTestUpdateView.as_view(), name='safetyVideoTest_update'),
     path('safety-video-test/<int:pk>/delete/', SafetyVideoTestDeleteView.as_view(), name='safetyVideoTest_delete'),
 
+    #VideoResume
     path('video-resumes/', VideoResumeListView.as_view(), name='video_resume_list'),
     path('video-resumes/create/', VideoResumeCreateView.as_view(), name='video_resume_create'),
     path('video-resumes/<slug:slug>/', VideoResumeDetailView.as_view(), name='video_resume_detail'),
     path('video-resumes/<slug:slug>/update/', VideoResumeUpdateView.as_view(), name='video_resume_update'),
     path('video-resumes/<slug:slug>/delete/', VideoResumeDeleteView.as_view(), name='video_resume_delete'),
     
+    #background_check
+    path('backgroundCheck/', BackgroundCheckListView.as_view(), name='background_check_list'),
+    path('backgroundCheck/create/', BackgroundCheckCreateView.as_view(), name='background_check_create'),
+    path('backgroundCheck/<slug:slug>/', BackgroundCheckDetailView.as_view(), name='background_check_detail'),
+    path('backgroundCheck/<slug:slug>/update/', BackgroundCheckUpdateView.as_view(), name='background_check_update'),
+    path('backgroundCheck/<slug:slug>/delete/', BackgroundCheckDeleteView.as_view(), name='background_check_delete'),
 
 ]

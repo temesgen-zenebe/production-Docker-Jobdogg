@@ -1,0 +1,56 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load humanize %}
+{% load mask_ssn %}
+{% block title %}background check Detail{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h6>background check Profile</h6>
+                    <div>
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:background_check_list' %}">Back</a>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <ul class="list-unstyled list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Name: 
+                          <span class="">{{ object.user.username|capfirst }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          certification File : 
+                          <span class="">{{ object.certification_file}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Expiration Date :
+                          <span class="">{{ object.expiration_date}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          Expiration States :
+                          <span class="">{{ object.expiration_states}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            States :
+                             <span class="">{{ object.states}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Created: 
+                            <span class="">{{ object.created|date }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Updated: 
+                            <span class="">{{ object.updated|date }}</span>
+                        </li>
+                      </ul>
+                      
+                    
+                </div>
+                   
+            </div>
+        </div>
+    <!-- End Example Code -->
+{% endblock %}

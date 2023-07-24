@@ -6,7 +6,7 @@ import os
 import moviepy.editor as mp
 
 from .models import (
-    Category, CertificationLicense, 
+    Background_Check, Category, CertificationLicense, 
     Education, EmployeePreferences, 
     Experience, Military, Personal, 
     Language, BasicInformation, 
@@ -262,3 +262,24 @@ class VideoResumeForm(forms.ModelForm):
             # Handle any exceptions
             print(f"Error retrieving video duration: {str(e)}")
             return None
+
+
+#BackgroundCheckForm
+
+
+class BackgroundCheckForm(forms.ModelForm):
+    class Meta:
+        model = Background_Check
+        fields = ['certification_file', 'expiration_date']
+        widgets = {
+            'certification_file': forms.FileInput(attrs={'class': 'form-control form-control-sm','type': 'hidden'}),
+            'expiration_date': forms.DateTimeInput(attrs={'class': 'form-control form-control-sm', 'type': 'hidden'}),
+        }
+class BackgroundCheckFormUpdate(forms.ModelForm):
+    class Meta:
+        model = Background_Check
+        fields = ['certification_file', 'expiration_date']
+        widgets = {
+            'certification_file': forms.FileInput(attrs={'class': 'form-control form-control-sm'}),
+            'expiration_date': forms.DateTimeInput(attrs={'class': 'form-control form-control-sm'}),
+        }

@@ -1,0 +1,62 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load user_tags %}
+{% block title %}Background Check {% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-8 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h5>Background Check </h5>
+                    {% if not backgroundChecked %}
+                     <!-- background_check_list.html -->
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:background_check_create' %}">CREATE</a>
+
+                    {% endif %}
+                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                 
+                    <ul class="list-unstyled ">
+                        {% for background in backgroundChecked %}
+                        <li >
+                            <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div>
+                                   <!--{{ user.username }}-->
+                                  
+                                   {% if user.avatar and not form.avatar.errors %}
+                                   <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded mr-2 align-self-center img-fluid shadow"/>
+                                   {% else %}
+                                   <img class="rounded mr-2 align-self-center img-fluid shadow" src="{% static 'images/userPlaceHolder.png' %}" alt="Logo" width="30" height="40"/>
+                                   {% endif %}
+                                   <a class="text-dark text-decoration-none" href="{% url 'employee:background_check_detail' slug=background.slug %}">{{ background.name|capfirst}}
+                                    <i class="bi bi-box-arrow-in-up-right fs-5 px-1"></i>
+                                   </a>
+                                   
+                                </div>
+                                <div class="d-flex flex-row align-items-center justify-content-between gap-2">
+                                    
+                                    {% if  background.states == 'approved' %}
+                                    <a class="btn btn-sm btn-success"><i class="bi bi-patch-check fs-6">approved</i></a>
+                                    {% else %}
+                                    <a class="btn btn-sm btn-outline-warning"><i class="bi bi-patch-question"></i></a>
+                                    {% endif %}
+                                    {% if user.is_authenticated and user|is_admin  %} 
+                                    <a class="btn btn-sm btn-outline-warning" href="{% url 'employee:background_check_update' slug=background.slug %}"><i class="bi bi-pen"></i></a>
+                                    <a class="btn btn-sm btn-outline-danger" href="{% url 'employee:background_check_delete' slug=background.slug %}"><i class="bi bi-trash3"></i></a>
+                                    {% endif %}
+                                    </div>
+                            </div>
+                        </li>
+                        {% empty %}
+                        <li>No video resumes profiles found.</li>
+                        {% endfor %}
+                    </ul>  
+                </div>
+               
+            </div>
+        </div>
+    <!-- End Example Code -->
+{% endblock %}

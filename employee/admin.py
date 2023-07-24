@@ -55,7 +55,9 @@ class ProfileAdmin(admin.ModelAdmin):
                 'SkillSetTest_completed',
                 'Safety_Video_and_Test_completed',
                 'VideoResume_completed', 
-                'ResumeUploading_completed',
+                'Background_Check_completed',
+                'Treat_Box_completed',
+                'Select_Ride_completed',
                 
             ]
     

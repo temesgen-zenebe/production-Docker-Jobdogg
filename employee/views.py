@@ -27,10 +27,12 @@ from django.views.generic import (
 from .models import (
     Category,CertificationLicense,Education,EmployeePreferences,Experience, 
     Policies,Position,Profile, SafetyTestResult,Skill, SkillSetTestResult,UserAcceptedPolicies,
-    BasicInformation,Personal,Language,Military,Safety_Video_and_Test, VideoResume, RettingCommenting,
+    BasicInformation,Personal,Language,Military,Safety_Video_and_Test, VideoResume, 
+    RettingCommenting, Background_Check,
     
 )
 from .forms import (
+    BackgroundCheckFormUpdate,
     BasicInformationForm,
     CertificationLicenseForm,
     EducationForm,
@@ -45,6 +47,7 @@ from .forms import (
     SafetyTestResultForm,
     UserAcceptedPoliciesForm,
     VideoResumeForm,
+    BackgroundCheckForm,
     
 )
 
@@ -76,7 +79,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 profile.SkillSetTest_completed,
                 profile.Safety_Video_and_Test_completed,
                 profile.VideoResume_completed,
-                profile.ResumeUploading_completed,
+                #profile.ResumeUploading_completed,
             ]
         )
         progress_percentage = (completed_steps / total_steps) * 100
@@ -1160,7 +1163,7 @@ class VideoResumeCreateView(LoginRequiredMixin,CreateView):
             profile = Profile(user=request.user)
             
         if not profile.Safety_Video_and_Test_completed:
-            return redirect('employee:video_resume_list')
+            return redirect('employee:safetyVideoTest_list')
         
         profile.VideoResume_completed = True
         profile.save()
@@ -1178,6 +1181,52 @@ class VideoResumeDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'employee/videoResume/video_resume_delete.html'
     success_url = reverse_lazy('employee:video_resume_list')
     
+#backgroundCheck
+class BackgroundCheckListView(LoginRequiredMixin,ListView):
+    model = Background_Check
+    template_name = 'employee/backgroundCheck/background_check_list.html'
+    context_object_name = 'backgroundChecked'
+    
+class BackgroundCheckCreateView(LoginRequiredMixin, CreateView):
+    model = Background_Check
+    form_class = BackgroundCheckForm
+    template_name = 'employee/backgroundCheck/background_check_create.html'
+    success_url = reverse_lazy('employee:background_check_list')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            profile.save()
 
+        if not profile.VideoResume_completed:
+            print("Redirecting to BackgroundCheckCreateView.")
+            return redirect('employee:video_resume_list')
+        
+        profile.Background_Check_completed = True
+        profile.save()
+            
+        return super().dispatch(request, *args, **kwargs)
+    
+    
+class BackgroundCheckDetailView(LoginRequiredMixin, DetailView):
+    model = Background_Check
+    template_name = 'employee/backgroundCheck/background_check_detail.html'
+   
 
+class BackgroundCheckUpdateView(LoginRequiredMixin, UpdateView):
+    model = Background_Check
+    form_class = BackgroundCheckFormUpdate
+    template_name = 'employee/backgroundCheck/background_check_update.html'
+    success_url = reverse_lazy('employee:background_check_list')
+    
+class BackgroundCheckDeleteView(LoginRequiredMixin, DeleteView):
+    model = Background_Check
+    template_name = 'employee/backgroundCheck/background_check_confirm_delete.html'
+    success_url = reverse_lazy('employee:background_check_list')
 

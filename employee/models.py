@@ -51,11 +51,9 @@ class Profile(models.Model):
     Skipped_completed = models.BooleanField(default=False)
     Safety_Video_and_Test_completed = models.BooleanField(default=False)
     VideoResume_completed = models.BooleanField(default=False)
-    ResumeUploading_completed = models.BooleanField(default=False)
-    
     Background_Check_completed = models.BooleanField(default=False)
-    #Treat_Box_completed = models.BooleanField(default=False)
-    #Select_Ride_completed = models.BooleanField(default=False)
+    Treat_Box_completed = models.BooleanField(default=False)
+    Select_Ride_completed = models.BooleanField(default=False)
     
     def __str__(self):
         return str(self.user)
@@ -385,8 +383,6 @@ class Safety_Video_and_Test(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     view_count = models.PositiveIntegerField(default=0)
 
-    
-    
     def __str__(self):
         return str(self.title)
     
@@ -409,7 +405,6 @@ class SafetyTestResult(models.Model):
     
     def __str__(self):
         return f"Test Result for {self.user.username}"
-
 
 #VideoResume_completed
 class VideoResume(models.Model):
@@ -453,7 +448,6 @@ class RettingCommenting(models.Model):
     def __str__(self):
         return f" retting and tagging for {self.user.username}"
 
-
 #Background_Check
 class Background_Check(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -479,9 +473,7 @@ class Background_Check(models.Model):
         elif self.expiration_date and self.expiration_date <= timezone.now():
             self.expiration_states = 'expired'
         elif self.created != self.updated and self.expiration_states == 'expired' and not self.expiration_date:
-            self.expiration_date = self.updated + timezone.timedelta(days=180)
-
-                
+            self.expiration_date = self.updated + timezone.timedelta(days=180)      
         super().save(*args, **kwargs)
     
     def __str__(self):

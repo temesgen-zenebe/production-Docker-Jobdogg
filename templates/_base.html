@@ -423,6 +423,56 @@
 <script async>
  
 </script>
+<script>
+  function myFunction() { 
+      // Get the text field
+      var copyText = document.getElementById("myInput");
+  
+      // Select the text field
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); // For mobile devices
+  
+      // Copy the text inside the text field
+      navigator.clipboard.writeText(copyText.value);
+      
+      // Alert the copied text
+      //alert("Copied the text: " + copyText.value);
+  }
+  </script>
+  <script>
+      function copyToClipboard(value) {
+          const el = document.createElement('textarea');
+          el.value = value;
+          document.body.appendChild(el);
+          el.select();
+          document.execCommand('copy');
+          document.body.removeChild(el);
+          //alert('Copied: ' + value + '. Ready to paste to another tab.');
+      }
 
+      document.getElementById("copyBtn").addEventListener("click", function() {
+          const password = "DoggPound1";
+          copyToClipboard(password);
+          this.textContent = "Copied!";
+          setTimeout(() => {
+              this.textContent = "pasted to background check page";
+          }, 1000);
+      });
+
+      function startBackgroundCheck() {
+          const redirectURL = "https://jobdogg.volunteerportal.net"; // Replace with your desired redirect URL
+          window.open(redirectURL, '_blank');
+
+          // JavaScript code
+          const buttonIDs = ['nextToBackgroundCheckProfile', 'nextToBackgroundCheckCreate'];
+
+          // Loop through the array of button IDs and remove the 'd-none' class after 20 seconds (20000 milliseconds)
+          buttonIDs.forEach(id => {
+              setTimeout(() => {
+                  document.getElementById(id).classList.remove('d-none');
+              }, 2000); // 20 seconds in milliseconds
+          });
+      }
+</script>
 </body>
 </html>
