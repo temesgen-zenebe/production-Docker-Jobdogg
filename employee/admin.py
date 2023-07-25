@@ -1,17 +1,8 @@
 from django.contrib import admin
 from .models import (
-    
-     #Education
-     Background_Check,
-     CertificationLicense, 
-     Education,
-     Experience, 
-     Military, 
-     Profile, 
-     Policies,
-     SafetyTestResult,
-     UserAcceptedPolicies,
-     BasicInformation,
+    Education, Background_Check,CertificationLicense,CheckByEmail,EWallet, 
+    Experience, Military, Profile, Policies,SafetyTestResult,UserAcceptedPolicies,
+    BasicInformation,
      
      #Personal
      Personal,
@@ -247,6 +238,7 @@ class SafetyTestResultAdmin(admin.ModelAdmin):
         return ()
     
  #VideoResume 
+
 @admin.register(VideoResume)
 class VideoResumeAdmin(admin.ModelAdmin):
     model = VideoResume
@@ -258,6 +250,7 @@ class VideoResumeAdmin(admin.ModelAdmin):
         return ()   
 
  #RettingCommenting
+
 @admin.register(RettingCommenting)
 class RettingCommentingAdmin(admin.ModelAdmin):
     model = RettingCommenting
@@ -271,6 +264,7 @@ class RettingCommentingAdmin(admin.ModelAdmin):
 
 
  #Background_Check
+
 @admin.register(Background_Check)
 class Background_CheckAdmin(admin.ModelAdmin):
     model = Background_Check
@@ -291,3 +285,30 @@ class Background_CheckAdmin(admin.ModelAdmin):
             return ('created', 'updated','slug')
         return ()
     
+@admin.register(CheckByEmail)
+class CheckByEmailAdmin(admin.ModelAdmin):
+    model = CheckByEmail
+    list_display = ['user', 'method_type', 'poBox', 'use_basicInfo_address', 'valid', 'slug', 'created', 'updated']
+    list_filter = ('user', 'method_type', 'valid', 'created', 'updated')
+    search_fields = ('user__username', 'method_type', 'poBox')
+    readonly_fields = ('slug','created', 'updated')
+
+@admin.register(EWallet)
+class EWalletAdmin(admin.ModelAdmin):
+    model=EWallet
+    list_display = ['user', 'e_wallet_name', 'account_email', 'valid']
+    list_filter = ['user', 'valid']
+    search_fields = ['user__username', 'e_wallet_name', 'account_email']
+    prepopulated_fields = {'slug': ('account_email',)}
+    readonly_fields = ['created', 'updated']
+    fieldsets = (
+        ('General Information', {
+            'fields': ('user', 'e_wallet_name', 'account_email', 'valid', 'slug')
+        }),
+        ('Timestamps', {
+            'fields': ('created', 'updated'),
+            'classes': ('collapse',),
+        }),
+    )
+
+

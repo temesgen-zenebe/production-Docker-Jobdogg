@@ -171,3 +171,8 @@ BACKGROUND_CHECK_CHOOSES_STATES = (
         ("approved", "Approved"),
         ("rejected", "Rejected"),
 )
+
+CARD_TYPE_CHOOSE=(
+    ("master-card", "Master-card"),
+    ("visa", "Visa"),
+)

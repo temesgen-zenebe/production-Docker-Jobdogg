@@ -29,6 +29,7 @@ from common.utils.chooseConstant import (
     RELOCATION,
     TEST_STATES,
     TAG_CHOOSES,
+    CARD_TYPE_CHOOSE,
     )
 from multiupload.fields import MultiFileField 
 
@@ -478,3 +479,87 @@ class Background_Check(models.Model):
     
     def __str__(self):
         return f" BackgroundCheck for {self.user.username}"
+
+#BankAccount
+class BankAccount(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    method_type = models.CharField(max_length=50, unique=True, default='bankAccount')  
+    account_number = models.CharField(max_length=20)
+    routing_number = models.CharField(max_length=20)
+    validity = models.CharField(max_length=20, default='valid') 
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.method_type} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs) 
+        
+    def __str__(self):
+        return f"{self.user.username} - {self.method_type}"
+
+#card
+class Card(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    method_type = models.CharField(max_length=50, unique=True, default='Card')
+    card_type = models.CharField(max_length=50, choices=CARD_TYPE_CHOOSE)
+    name_on_card = models.CharField(max_length=100)
+    card_number = models.CharField(max_length=20)
+    expiration_date = models.DateField()
+    cvv = models.SmallIntegerField()
+    valid = models.BooleanField(default=True)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.method_type} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.user.username}-{self.method_type}"
+
+#EWallet
+class EWallet(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    method_type = models.CharField(max_length=50, unique=True, default='EWallet')
+    e_wallet_name = models.CharField(max_length=100)
+    account_email = models.EmailField(unique=True)
+    valid = models.BooleanField(default=True)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.account_email} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.user.username}-{self.method_type}"
+   
+#checkByEmail 
+class CheckByEmail(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    method_type = models.CharField(max_length=50, unique=True, default='checkEmail')
+    poBox = models.CharField(max_length=200, blank=True, null=True)
+    use_basicInfo_address = models.BooleanField(default=False)
+    valid = models.BooleanField(default=True) 
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.method_type} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.user.username}-{self.method_type}"
+
