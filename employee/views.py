@@ -22,6 +22,7 @@ from .models import (
 )
 from .forms import (
     BackgroundCheckFormUpdate,
+    BankAccountForm,
     BasicInformationForm,
     CertificationLicenseForm,
     EducationForm,
@@ -48,7 +49,7 @@ class DashboardInformation(LoginRequiredMixin, View):
         context = {}
         return render(request, self.template_name, context)
     
-#----Policies Models ------
+#----Profile Models ------
 class ProfileBuildingProgress(LoginRequiredMixin, View):
     template_name = 'employee/profileBuildingProgress.html'
     
@@ -96,6 +97,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         safetyVideo_form = SafetyTestResultForm()
         videoResume_form = VideoResumeForm()
         BackgroundCheck_form= BackgroundCheckForm()
+        BankAccount_form = BankAccountForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
@@ -133,7 +135,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'testList':testList,
             'safetyVideo':safetyVideo,
             'videoResume_form' :videoResume_form,
-            'BackgroundCheck_form':BackgroundCheck_form
+            'BackgroundCheck_form':BackgroundCheck_form,
+            'BankAccount_form':BankAccount_form
             
         }
            
@@ -305,7 +308,21 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 profile.save()
                 return redirect('employee:profile_building_progress')
             else:
-                print("BackgroundCheckProfile form is invalid")
+                print("BackgroundCheckProfile form is invalid") 
+                
+        elif 'BankAccountOptionSubmission' in request.POST:
+            bankAccount_form = BankAccountForm(request.POST)
+            if bankAccount_form.is_valid():
+                bankAccount = bankAccount_form.save(commit=False)
+                bankAccount.user = request.user
+                bankAccount.save()
+                # Update the profile building process states
+                profile.Treat_Box_completed = True
+                profile.save()
+                return redirect('employee:profile_building_progress')
+            else:
+                print("bankAccount form is invalid")
+                
 
         else:
             pass   
@@ -320,6 +337,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         safetyVideo_form = SafetyTestResultForm()
         videoResume_form = VideoResumeForm()
         BackgroundCheck_form= BackgroundCheckForm()
+        BankAccount_form = BankAccountForm()
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
@@ -331,6 +349,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'safetyVideo_form':safetyVideo_form,
             'videoResume_form':videoResume_form,
             'BackgroundCheck_form':BackgroundCheck_form,
+            'BankAccount_form':BankAccount_form,
         }
         return render(request, self.template_name, context)
     

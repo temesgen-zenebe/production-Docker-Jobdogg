@@ -429,8 +429,8 @@
                                 <ul class="dropdown-menu dropdown-menu-lg-start">
                                   <li><button class="dropdown-item" type="button" value="card" onclick="showModal('card')"><i class="bi bi-credit-card px-1"></i> Card</button></li>
                                   <li><button class="dropdown-item" type="button" value="ewallet" onclick="showModal('ewallet')"><i class="bi bi-wallet2  px-1"></i> Mobile Wallet</button></li>
-                                  <li><button class="dropdown-item" type="button" value="bank_account" onclick="showModal('bank_account')"><i class="bi bi-bank  px-1"></i> Bank Account</button></li>
-                                  <li><button class="dropdown-item" type="button" value="Check_mail" onclick="showModal('Check_mail')"><i class="bi bi-envelope px-1"></i> Check (by mail)</button></li>
+                                  <li><button class="dropdown-item" type="button" value="bank_account" onclick="showModal('bankAccount')"><i class="bi bi-bank  px-1"></i> Bank Account</button></li>
+                                  <li><button class="dropdown-item" type="button" value="Check_mail" onclick="showModal('CheckByMail')"><i class="bi bi-envelope px-1"></i> Check (by mail)</button></li>
                                 </ul>
                               </div>
                              
@@ -1627,12 +1627,12 @@
             </div>
           
             <!-- Treat_Box_completed -->
-            <div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+            <div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel123" aria-hidden="true">
+                <div class="modal-dialog modal-md">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <h5 class="modal-title" id="exampleModalLabel123"></h5>
+                      <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-none" id="card">
                       <!-- Modal content goes here -->
@@ -1642,18 +1642,28 @@
                       <!-- Modal content goes here -->
                       <p>ewallet  when option is clicked...</p>
                     </div>
-                    <div class="modal-body d-none" id="bank_account">
+                    <div class="modal-body d-none" id="bankAccount">
                       <!-- Modal content goes here -->
-                      <p>bank_account  when option is clicked...</p>
+                      <div class="d-grid gap-2 col-12 mx-auto">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{  BankAccount_form|crispy }}
+                            <div class="modal-footer">
+                            <button 
+                                name="BankAccountOptionSubmission" 
+                                id="bankAccount" 
+                                class="btn btn-sm btn-outline-info" 
+                                type="submit">Submit</button>  
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-body d-none" id="Check_mail">
+                     
+                    </div>
+                    <div class="modal-body d-none" id="CheckByMail">
                       <!-- Modal content goes here -->
                       <p>Check_mail  when option is clicked...</p>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                    
                   </div>
                 </div>
             </div> 
@@ -1822,7 +1832,11 @@
           const selectedModalBody = document.getElementById(option);
           selectedModalBody.classList.remove('d-none');
           selectedModalBody.classList.add('d-block');
-      
+          
+          const exampleModalLabelText = document.getElementById('exampleModalLabel123');
+          exampleModalLabelText.textContent = option;
+
+
           myModal.show();
         }
     </script>

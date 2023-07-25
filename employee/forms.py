@@ -6,7 +6,7 @@ import os
 import moviepy.editor as mp
 
 from .models import (
-    Background_Check, Category, CertificationLicense, 
+    Background_Check, BankAccount, Category, CertificationLicense, 
     Education, EmployeePreferences, 
     Experience, Military, Personal, 
     Language, BasicInformation, 
@@ -263,7 +263,6 @@ class VideoResumeForm(forms.ModelForm):
             print(f"Error retrieving video duration: {str(e)}")
             return None
 
-
 #BackgroundCheckForm
 class BackgroundCheckForm(forms.ModelForm):
     class Meta:
@@ -283,3 +282,53 @@ class BackgroundCheckFormUpdate(forms.ModelForm):
             'certification_file': forms.FileInput(attrs={'class': 'form-control form-control-sm'}),
             'expiration_date': forms.DateTimeInput(attrs={'class': 'form-control form-control-sm'}),
         }
+        
+
+#BankAccountForm
+class BankAccountForm(forms.ModelForm):
+    class Meta:
+        model = BankAccount
+        fields = ['account_number', 'routing_number']
+        widgets = {
+            'account_number': forms.TextInput(
+                attrs={
+                    'pattern': '[0-9]*',
+                    'inputmode': 'numeric',
+                    'class': 'form-control form-control-sm',
+                    'placeholder': 'Enter account number',
+                    'title': 'Please enter a numeric account number',
+                }
+            ),
+            'routing_number': forms.TextInput(
+                attrs={
+                    'pattern': '[0-9]*',
+                    'inputmode': 'numeric',
+                    'class': 'form-control form-control-sm',
+                    'placeholder': 'Enter routing number',
+                    'title': 'Please enter a numeric routing number',
+                }
+            ),
+            'validity': forms.TextInput(
+                attrs={
+                    'class': 'form-control form-control-sm',
+                    'placeholder': 'Enter validity',
+                    'title': 'Please enter the validity of the account',
+                }
+            ),
+        }
+
+    def clean_account_number(self):
+        account_number = self.cleaned_data['account_number']
+        # Add your validation logic for the account number field here
+        # For example, you can check for the required format or length
+        if len(account_number) < 10:
+            raise forms.ValidationError("Account number must be at least 10 characters long.")
+        return account_number
+
+    def clean_routing_number(self):
+        routing_number = self.cleaned_data['routing_number']
+        # Add your validation logic for the routing number field here
+        # For example, you can check for the required format or length
+        if len(routing_number) < 9:
+            raise forms.ValidationError("Routing number must be at least 9 characters long.")
+        return routing_number
