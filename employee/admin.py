@@ -1,8 +1,11 @@
 from django.contrib import admin
+
+from common.utils.text import unique_slug
 from .models import (
-    Education, Background_Check,CertificationLicense,CheckByEmail,EWallet, 
+    BankAccount, Education, Background_Check,CertificationLicense,CheckByEmail,EWallet, 
     Experience, Military, Profile, Policies,SafetyTestResult,UserAcceptedPolicies,
-    BasicInformation,
+    BasicInformation, SkillSetTestResult,Safety_Video_and_Test,VideoResume,
+    RettingCommenting,Card,
      
      #Personal
      Personal,
@@ -13,20 +16,7 @@ from .models import (
      Position, 
      Skill, 
      EmployeePreferences, 
-    
-     #SkillSetTestResult
-     SkillSetTestResult,
-     
-     #Safety_Video_and_Test
-     Safety_Video_and_Test,
-     
-     #VideoResume
-     VideoResume,
-     
-     #RettingCommenting
-     RettingCommenting,
-    
-    )
+)
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
@@ -311,4 +301,28 @@ class EWalletAdmin(admin.ModelAdmin):
         }),
     )
 
+@admin.register(Card)
+class CardAdmin(admin.ModelAdmin):
+    list_display = ['user', 'card_type', 'name_on_card', 'card_number', 'expiration_date', 'cvv', 'valid']
+    list_filter = ['user', 'card_type', 'valid']
+    search_fields = ['user__username', 'name_on_card', 'card_number']
+    readonly_fields = ['created', 'updated']
+
+    def save_model(self, request, obj, form, change):
+        if not obj.slug:
+            obj.slug = unique_slug(f"{obj.user.username}-{obj.method_type}")
+        super().save_model(request, obj, form, change)
+
+@admin.register(BankAccount)
+class BankAccountAdmin(admin.ModelAdmin):
+    model=BankAccount
+    list_display = ['user', 'account_number', 'routing_number', 'validity', 'created', 'updated']
+    search_fields = ['user__username', 'account_number', 'routing_number']
+    readonly_fields = ['created', 'updated']
+    
+    def save_model(self, request, obj, form, change):
+        # Automatically generate slug based on the user's username
+        if not obj.slug:
+            obj.slug = unique_slug(f"{obj.method_type} {obj.user.username}")
+        super().save_model(request, obj, form, change)
 
