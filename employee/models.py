@@ -548,7 +548,7 @@ class EWallet(models.Model):
 class CheckByEmail(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     method_type = models.CharField(max_length=50, unique=True, default='checkEmail')
-    poBox = models.CharField(max_length=200, blank=True, null=True)
+    poBox = models.CharField(max_length=200)
     use_basicInfo_address = models.BooleanField(default=False)
     valid = models.BooleanField(default=True) 
     slug = models.SlugField(unique=True)

@@ -25,6 +25,8 @@ from .forms import (
     BankAccountForm,
     BasicInformationForm,
     CertificationLicenseForm,
+    CheckByEmailForm,
+    EWalletForm,
     EducationForm,
     EmployeePreferencesForm,
     ExperienceForm,
@@ -100,6 +102,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         BackgroundCheck_form= BackgroundCheckForm()
         BankAccount_form = BankAccountForm()
         Card_form =CardForm()
+        EWallet_form= EWalletForm()
+        CheckByEmail_form=CheckByEmailForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
@@ -140,6 +144,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'BackgroundCheck_form':BackgroundCheck_form,
             'BankAccount_form':BankAccount_form,
             'Card_form':Card_form,
+            'EWallet_form':EWallet_form,
+            'CheckByEmail_form':CheckByEmail_form,
             
         }
            
@@ -337,8 +343,35 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                profile.save()
                return redirect('employee:profile_building_progress')
             else:
-               print("Card form is invalid:", cardForm_form.errors)
-
+               print("Card form is invalid:", cardForm_form.errors) 
+               
+        
+        elif 'eWalletFormSubmission' in request.POST:
+            eWallet_form = EWalletForm(request.POST)
+            if eWallet_form.is_valid():
+               eWallet = eWallet_form.save(commit=False)
+               eWallet.user = request.user
+               eWallet.save()
+               # Update the profile building process states
+               profile.Treat_Box_completed = True
+               profile.save()
+               return redirect('employee:profile_building_progress')
+            else:
+               print("Card form is invalid:", eWallet_form.errors)
+        
+        elif 'CheckByEmailFormSubmission' in request.POST:
+            checkByEmail_form = CheckByEmailForm(request.POST)
+            if checkByEmail_form.is_valid():
+               checkByEmail = checkByEmail_form.save(commit=False)
+               checkByEmail.user = request.user
+               checkByEmail.save()
+               # Update the profile building process states
+               profile.Treat_Box_completed = True
+               profile.save()
+               return redirect('employee:profile_building_progress')
+            else:
+               print("Card form is invalid:", checkByEmail_form.errors)
+               
         else:
             pass   
         # If neither form was submitted or form validation failed, render the template again with the forms
@@ -354,6 +387,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         BackgroundCheck_form= BackgroundCheckForm()
         BankAccount_form = BankAccountForm()
         Card_form =CardForm()
+        EWallet_form= EWalletForm()
+        CheckByEmail_form=CheckByEmailForm()
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
@@ -367,6 +402,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'BackgroundCheck_form':BackgroundCheck_form,
             'BankAccount_form':BankAccount_form,
             'Card_form':Card_form,
+            'EWallet_form':EWallet_form,
+            'CheckByEmail_form':CheckByEmail_form
         }
         return render(request, self.template_name, context)
     

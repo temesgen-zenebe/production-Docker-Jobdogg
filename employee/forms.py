@@ -8,7 +8,7 @@ import os
 import moviepy.editor as mp
 
 from .models import (
-    Background_Check, BankAccount, Card, Category, CertificationLicense, 
+    Background_Check, BankAccount, Card, Category, CertificationLicense, CheckByEmail, EWallet, 
     Education, EmployeePreferences, 
     Experience, Military, Personal, 
     Language, BasicInformation, 
@@ -380,3 +380,32 @@ class CardForm(forms.ModelForm):
         return cvv
 
 
+
+
+class EWalletForm(forms.ModelForm):
+    class Meta:
+        model = EWallet
+        fields = ['e_wallet_name', 'account_email']
+        
+        widgets = {
+            'e_wallet_name': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'account_email': forms.EmailInput(attrs={'class': 'form-control form-control-sm', 'pattern': r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'}),
+        }
+
+        help_texts = {
+            'account_email': 'Please enter a valid email address.',
+        }
+        
+class CheckByEmailForm(forms.ModelForm):
+    class Meta:
+        model = CheckByEmail
+        fields = ['poBox', 'use_basicInfo_address']
+        
+        widgets = {
+            'poBox': forms.TextInput(attrs={'class': 'form-control form-control-sm ', 'pattern': r'^[0-9a-zA-Z\s\-,.]*$'}),
+            'use_basicInfo_address': forms.CheckboxInput(attrs={'class': 'form-check-input '}),
+        }
+
+        help_texts = {
+            'poBox': 'Please enter a valid PO Box address.',
+        }

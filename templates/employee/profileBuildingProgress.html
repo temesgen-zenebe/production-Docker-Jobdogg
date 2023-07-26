@@ -1640,7 +1640,7 @@
                     </div>
                     <div class="modal-body d-none" id="card">
                       <!--Card_form Modal content goes here -->
-                      <div class="d-grid gap-2 col-12 mx-auto">
+                       <div class="d-grid gap-2 col-12 mx-auto">
                         <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{  Card_form|crispy }}
@@ -1655,8 +1655,20 @@
                        </div>
                     </div>
                     <div class="modal-body d-none" id="ewallet">
-                      <!-- Modal content goes here -->
-                      <p>ewallet  when option is clicked...</p>
+                      <!-- Modal content goes here 'EWallet_form':EWallet_form,-->
+                      <div class="d-grid gap-2 col-12 mx-auto">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{  EWallet_form|crispy }}
+                            <div class="modal-footer">
+                            <button 
+                                name="eWalletFormSubmission" 
+                                id="eWalletform" 
+                                class="btn btn-sm btn-outline-info" 
+                                type="submit">Submit</button>  
+                            </div>
+                        </form>
+                       </div>
                     </div>
                     <div class="modal-body d-none" id="bankAccount">
                       <!-- Modal content goes here -->
@@ -1676,8 +1688,20 @@
                      
                     </div>
                     <div class="modal-body d-none" id="CheckByMail">
-                      <!-- Modal content goes here -->
-                      <p>Check_mail  when option is clicked...</p>
+                      <!-- Modal content goes here  CheckByEmailForm -->
+                      <div class="d-grid gap-2 col-12 mx-auto">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{  CheckByEmail_form|crispy }}
+                            <div class="modal-footer">
+                            <button 
+                                name="CheckByEmailFormSubmission" 
+                                id="checkByEmailForm" 
+                                class="btn btn-sm btn-outline-info" 
+                                type="submit">Submit</button>  
+                            </div>
+                        </form>
+                       </div>
                     </div>
                     
                   </div>
