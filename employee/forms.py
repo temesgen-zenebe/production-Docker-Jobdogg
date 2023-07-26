@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from datetime import datetime
@@ -6,7 +8,7 @@ import os
 import moviepy.editor as mp
 
 from .models import (
-    Background_Check, BankAccount, Category, CertificationLicense, 
+    Background_Check, BankAccount, Card, Category, CertificationLicense, 
     Education, EmployeePreferences, 
     Experience, Military, Personal, 
     Language, BasicInformation, 
@@ -292,20 +294,24 @@ class BankAccountForm(forms.ModelForm):
         widgets = {
             'account_number': forms.TextInput(
                 attrs={
-                    'pattern': '[0-9]*',
+                    'pattern': '^[0-9]{6,20}$',
+                    'maxlength': '20', 
+                    'minlength': '6',
                     'inputmode': 'numeric',
                     'class': 'form-control form-control-sm',
                     'placeholder': 'Enter account number',
-                    'title': 'Please enter a numeric account number',
+                    'title': 'Account number must be between 6 and 20 digits.'
                 }
             ),
             'routing_number': forms.TextInput(
                 attrs={
-                    'pattern': '[0-9]*',
+                    'pattern': '^\d{9}$',
+                    'maxlength': '9', 
+                    'minlength': '9',
                     'inputmode': 'numeric',
                     'class': 'form-control form-control-sm',
                     'placeholder': 'Enter routing number',
-                    'title': 'Please enter a numeric routing number',
+                     'title': 'Routing number must be exactly 9 digits.'
                 }
             ),
             'validity': forms.TextInput(
@@ -332,3 +338,45 @@ class BankAccountForm(forms.ModelForm):
         if len(routing_number) < 9:
             raise forms.ValidationError("Routing number must be at least 9 characters long.")
         return routing_number
+
+
+class CardForm(forms.ModelForm):
+    class Meta:
+        model = Card
+        fields = ['card_type', 'name_on_card', 'card_number', 'expiration_date', 'cvv']
+        widgets = {
+            'card_type': forms.Select(attrs={'class': 'form-control form-control-sm'}),
+            'name_on_card': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'card_number': forms.TextInput(attrs={'class': 'form-control form-control-sm', 'pattern': '[0-9]{16}', 'inputmode': 'numeric','maxlength': '16'}),
+            'expiration_date': forms.TextInput(attrs={'class': 'form-control form-control-sm','pattern': r'(0[1-9]|1[0-2])\/\d{2}',  'placeholder': 'MM/YY'}),
+            'cvv': forms.TextInput(attrs={'class': 'form-control form-control-sm', 'pattern': '[0-9]{3}', 'inputmode': 'numeric','maxlength': '3'}),
+        }
+        help_texts = {
+            'name_on_card': 'Please enter the same name as it appears on your card',
+            'card_number': 'Please enter a valid card number (without spaces or dashes).',
+            'expiration_date': 'Please enter date in MM/YY format as it appears on your card',
+            'cvv': 'Please enter the 3-digit CVV number at the back of your card.',
+        }
+
+    def clean_expiration_date(self):
+        expiration_date = self.cleaned_data.get('expiration_date')
+        if not expiration_date or len(expiration_date) != 5:
+            raise forms.ValidationError('Please enter a valid expiration date in MM/YY format.')
+        return expiration_date
+    
+    def clean_card_number(self):
+        card_number = self.cleaned_data.get('card_number')
+        if not card_number or not card_number.isdigit():
+            raise ValidationError('Please enter a valid card number (without spaces or dashes).')
+        return card_number
+    
+    def clean_cvv(self):
+        cvv = self.cleaned_data.get('cvv')
+        if cvv is None:
+            raise ValidationError('Please enter the 3-digit CVV number at the back of your card.')
+        cvv_str = str(cvv)
+        if not cvv_str.isdigit() or len(cvv_str) != 3:
+            raise ValidationError('Please enter a valid 3-digit CVV number.')
+        return cvv
+
+

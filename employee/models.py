@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import Group
 from django.core.cache import cache
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.core.exceptions import ValidationError
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
@@ -484,8 +485,8 @@ class Background_Check(models.Model):
 class BankAccount(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     method_type = models.CharField(max_length=50, unique=True, default='bankAccount')  
-    account_number = models.CharField(max_length=20)
-    routing_number = models.CharField(max_length=20)
+    account_number = models.CharField(max_length=20, help_text='Enter valid account number to avoid delay.')
+    routing_number = models.CharField(max_length=9, help_text='Enter valid routing number to avoid delay.')
     validity = models.CharField(max_length=20, default='valid') 
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -506,20 +507,20 @@ class Card(models.Model):
     method_type = models.CharField(max_length=50, unique=True, default='Card')
     card_type = models.CharField(max_length=50, choices=CARD_TYPE_CHOOSE)
     name_on_card = models.CharField(max_length=100)
-    card_number = models.CharField(max_length=20)
-    expiration_date = models.DateField()
-    cvv = models.SmallIntegerField()
+    card_number = models.CharField(max_length=16)
+    expiration_date = models.CharField(max_length=5)  # Change to CharField
+    cvv = models.SmallIntegerField(max_length=3)
     valid = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    
+
     def save(self, *args, **kwargs):
         if not self.slug:
             value = f"{self.method_type} {self.user.username}"
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
-    
+
     def __str__(self):
         return f"{self.user.username}-{self.method_type}"
 

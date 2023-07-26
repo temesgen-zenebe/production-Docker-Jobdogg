@@ -1628,15 +1628,31 @@
           
             <!-- Treat_Box_completed -->
             <div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel123" aria-hidden="true">
-                <div class="modal-dialog modal-md">
+                <div class="modal-dialog modal-md ">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel123"></h5>
+                        <div class="modal-title d-flex gap-2 px-3">
+                            <i class="bi bi-cash-stack fs-4"></i>
+                            <h5 class="fs-6 pt-2" id="exampleModalLabel123"></h5>
+                        </div>
+                       
                       <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-none" id="card">
-                      <!-- Modal content goes here -->
-                      <p>card  when option is clicked...</p>
+                      <!--Card_form Modal content goes here -->
+                      <div class="d-grid gap-2 col-12 mx-auto">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{  Card_form|crispy }}
+                            <div class="modal-footer">
+                            <button 
+                                name="cardOptionSubmission" 
+                                id="cardOption" 
+                                class="btn btn-sm btn-outline-info" 
+                                type="submit">Submit</button>  
+                            </div>
+                        </form>
+                       </div>
                     </div>
                     <div class="modal-body d-none" id="ewallet">
                       <!-- Modal content goes here -->
@@ -1656,7 +1672,7 @@
                                 type="submit">Submit</button>  
                             </div>
                         </form>
-                    </div>
+                       </div>
                      
                     </div>
                     <div class="modal-body d-none" id="CheckByMail">
@@ -1834,7 +1850,7 @@
           selectedModalBody.classList.add('d-block');
           
           const exampleModalLabelText = document.getElementById('exampleModalLabel123');
-          exampleModalLabelText.textContent = option;
+          exampleModalLabelText.textContent =  `To Get Paid Please enter `+ option + ` info.`;
 
 
           myModal.show();

@@ -37,6 +37,7 @@ from .forms import (
     SafetyTestResultForm,
     VideoResumeForm,
     BackgroundCheckForm,
+    CardForm,
     
 )
 
@@ -98,6 +99,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         videoResume_form = VideoResumeForm()
         BackgroundCheck_form= BackgroundCheckForm()
         BankAccount_form = BankAccountForm()
+        Card_form =CardForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         progress_percentage = self.get_progress_percentage(profile)
@@ -136,7 +138,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'safetyVideo':safetyVideo,
             'videoResume_form' :videoResume_form,
             'BackgroundCheck_form':BackgroundCheck_form,
-            'BankAccount_form':BankAccount_form
+            'BankAccount_form':BankAccount_form,
+            'Card_form':Card_form,
             
         }
            
@@ -321,8 +324,20 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 profile.save()
                 return redirect('employee:profile_building_progress')
             else:
-                print("bankAccount form is invalid")
-                
+                print("bankAccount form is invalid") 
+            
+        elif 'cardOptionSubmission' in request.POST:
+            cardForm_form = CardForm(request.POST)
+            if cardForm_form.is_valid():
+               cardForm = cardForm_form.save(commit=False)
+               cardForm.user = request.user
+               cardForm.save()
+               # Update the profile building process states
+               profile.Treat_Box_completed = True
+               profile.save()
+               return redirect('employee:profile_building_progress')
+            else:
+               print("Card form is invalid:", cardForm_form.errors)
 
         else:
             pass   
@@ -338,6 +353,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         videoResume_form = VideoResumeForm()
         BackgroundCheck_form= BackgroundCheckForm()
         BankAccount_form = BankAccountForm()
+        Card_form =CardForm()
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
@@ -350,6 +366,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'videoResume_form':videoResume_form,
             'BackgroundCheck_form':BackgroundCheck_form,
             'BankAccount_form':BankAccount_form,
+            'Card_form':Card_form,
         }
         return render(request, self.template_name, context)
     
