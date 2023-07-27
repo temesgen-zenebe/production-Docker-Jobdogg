@@ -242,5 +242,12 @@ urlpatterns = [
     path('card/<slug:slug>/', views.CardDetailView.as_view(), name='card_detail'),
     path('card/<slug:slug>/update/', views.CardUpdateView.as_view(), name='card_update'),
     path('card/<slug:slug>/delete/', views.CardDeleteView.as_view(), name='card_delete'),
+    
+    # BankAccount 
+    path('bankAccount/', views.BankAccountListView.as_view(), name='bankAccount_list'),
+    path('bankAccount/create/', views.BankAccountCreateView.as_view(), name='bankAccount_create'),
+    path('bankAccount/<slug:slug>/', views.BankAccountDetailView.as_view(), name='bankAccount_detail'),
+    path('bankAccount/<slug:slug>/update/', views.BankAccountUpdateView.as_view(), name='bankAccount_update'),
+    path('bankAccount/<slug:slug>/delete/', views.BankAccountDeleteView.as_view(), name='bankAccount_delete'),
 
 ]

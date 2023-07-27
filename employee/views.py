@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 from django.views.generic import (ListView, CreateView, UpdateView, DetailView, DeleteView, FormView)
 
 from .models import (
-    Card, Category,CertificationLicense, CheckByEmail, EWallet,Education,EmployeePreferences,Experience, 
+    BankAccount, Card, Category,CertificationLicense, CheckByEmail, EWallet,Education,EmployeePreferences,Experience, 
     Policies,Position,Profile, Skill, SkillSetTestResult,UserAcceptedPolicies,
     BasicInformation,Personal,Military,Safety_Video_and_Test, VideoResume, 
     Background_Check,    
@@ -1455,3 +1455,52 @@ class CardDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'card'
     template_name = 'employee/PaymentPreferences/Card/card_confirm_delete.html'
     success_url = reverse_lazy('employee:card_list')
+
+#BankAccountList
+class BankAccountListView(LoginRequiredMixin, ListView):
+    model = BankAccount
+    template_name = 'employee/PaymentPreferences/bankAccount/bankAccount_list.html'
+    context_object_name = 'bankAccounts'
+    paginate_by = 10
+
+class BankAccountDetailView(LoginRequiredMixin, DetailView):
+    model = BankAccount
+    template_name = 'employee/PaymentPreferences/bankAccount/bankAccount_detail.html'
+    context_object_name = 'bankAccount'
+
+class BankAccountCreateView(LoginRequiredMixin, CreateView):
+    model = BankAccount
+    form_class = BankAccountForm
+    template_name = 'employee/PaymentPreferences/bankAccount/bankAccount_create.html'
+    success_url = reverse_lazy('employee:bankAccount_list')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            
+        if not profile.Background_Check_completed:
+            return redirect('employee:background_check_list')
+        
+        profile.Treat_Box_completed = True
+        profile.save()
+        
+        return super().dispatch(request, *args, **kwargs)
+
+class BankAccountUpdateView(LoginRequiredMixin, UpdateView):
+    model = BankAccount
+    form_class = BankAccountForm
+    template_name = 'employee/PaymentPreferences/bankAccount/bankAccount_update.html'
+    context_object_name = 'bankAccount'
+    success_url = reverse_lazy('employee:bankAccount_list')
+
+class BankAccountDeleteView(LoginRequiredMixin, DeleteView):
+    model = BankAccount
+    template_name = 'employee/PaymentPreferences/bankAccount/bankAccount_confirm_delete.html'
+    context_object_name = 'bankAccount'
+    success_url = reverse_lazy('employee:bankAccount_list')
