@@ -57,14 +57,13 @@
                             <a class="collapse-item" href="{% url 'employee:video_resume_list' %}">Video Resume</a>
                             <a class="collapse-item" href="{% url 'employee:safetyVideoTest_list' %}">Safety Video Test</a>
                             <a class="collapse-item" href="{% url 'employee:background_check_list' %}">Background Check</a>
-                            <a class="collapse-item" href="">Treat Box</a>
                             <a class="collapse-item" href="">Select Ride</a>
 
                         </div>
                     </div>
                 </li>
 
-                <!-- Nav Item - Utilities Collapse Menu -->
+                <!-- Nav Policies Collapse Menu-->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                         aria-expanded="true" aria-controls="collapseUtilities">
@@ -77,6 +76,24 @@
                             <h6 class="collapse-header">Policy</h6>
                             <a class="collapse-item" href="{% url 'employee:policies_list' %}">Read</a>
                             <a class="collapse-item" href="{% url 'employee:policies_list' %}">Accept</a>
+                            
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Utilities Collapse Menu of check_by_email_list-->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTreatBox"
+                        aria-expanded="true" aria-controls="collapseTreatBox">
+                        <i class="fas fa-fw fa-wrench fs-6"></i>
+                        <span>Treat Box</span>
+                    </a>
+                    <div id="collapseTreatBox" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Payment preferences</h6>
+                            <a class="collapse-item" href="{% url 'employee:check_by_email_list' %}">CheckByEmail</a>
+                            <a class="collapse-item" href="">Accept</a>
                             
                         </div>
                     </div>

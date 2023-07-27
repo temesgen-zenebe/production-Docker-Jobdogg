@@ -18,7 +18,6 @@ from .models import (
 from django.utils.safestring import mark_safe
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
 from .models import UserAcceptedPolicies
-
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .models import VideoResume
@@ -274,8 +273,7 @@ class BackgroundCheckForm(forms.ModelForm):
             'certification_file': forms.FileInput(attrs={'class': 'form-control form-control-sm', 'style': 'display: none;'}),
             'expiration_date': forms.DateTimeInput(attrs={'class': 'form-control form-control-sm', 'style': 'display: none;'}),
         }
-        
-        
+             
 class BackgroundCheckFormUpdate(forms.ModelForm):
     class Meta:
         model = Background_Check
@@ -285,8 +283,7 @@ class BackgroundCheckFormUpdate(forms.ModelForm):
             'expiration_date': forms.DateTimeInput(attrs={'class': 'form-control form-control-sm'}),
         }
         
-
-#BankAccountForm
+#Payment Preference
 class BankAccountForm(forms.ModelForm):
     class Meta:
         model = BankAccount
@@ -339,7 +336,6 @@ class BankAccountForm(forms.ModelForm):
             raise forms.ValidationError("Routing number must be at least 9 characters long.")
         return routing_number
 
-
 class CardForm(forms.ModelForm):
     class Meta:
         model = Card
@@ -378,9 +374,6 @@ class CardForm(forms.ModelForm):
         if not cvv_str.isdigit() or len(cvv_str) != 3:
             raise ValidationError('Please enter a valid 3-digit CVV number.')
         return cvv
-
-
-
 
 class EWalletForm(forms.ModelForm):
     class Meta:

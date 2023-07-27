@@ -1,0 +1,31 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Delete Check by Email{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-8 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h4>Delete Check by Email</h4>  
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <p>Are you sure you want to delete the following Check by Email?</p>
+                    <dl class="row">
+                        <dt class="col-sm-3">PO Box:</dt>
+                        <dd class="col-sm-9">{{ check.poBox }}</dd>
+                        <dt class="col-sm-3">Use Basic Info Address:</dt>
+                        <dd class="col-sm-9">{{ check.use_basicInfo_address }}</dd>
+                      </dl>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                        <a href="{% url 'employee:check_by_email_list' %}" class="btn btn-sm btn-outline-secondary">Cancel</a>
+                    </form>    
+                </div>
+            </div>
+        </div>
+    <!-- End Code -->
+{% endblock %}

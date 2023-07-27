@@ -1,0 +1,35 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load humanize %}
+{% load mask_ssn %}
+{% block title %}Check by Email Detail{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h5>Check by Email Detail</h5>
+                    <div>
+                        <a href="{% url 'employee:check_by_email_update' slug=check.slug %}" class="btn btn-sm btn-outline-success">Edit</a>
+                        <a href="{% url 'employee:check_by_email_list' %}" class="btn btn-sm btn-outline-primary">Back</a>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">PO Box:</dt>
+                        <dd class="col-sm-9">{{ check.poBox }}</dd>
+                        <dt class="col-sm-3">Use Basic Info Address:</dt>
+                        <dd class="col-sm-9">{{ check.use_basicInfo_address }}</dd>
+                      </dl>
+                </div>   
+            </div>
+        </div>
+    <!-- End Example Code -->
+{% endblock %}
+
+
+
+  
+  

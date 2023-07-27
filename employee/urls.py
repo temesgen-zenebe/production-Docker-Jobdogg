@@ -98,12 +98,18 @@ from .views import (
     VideoResumeDetailView,
     
     #BackgroundCheckCreateView
-   
     BackgroundCheckListView,
     BackgroundCheckCreateView,
     BackgroundCheckUpdateView,
     BackgroundCheckDeleteView,
     BackgroundCheckDetailView,
+    
+    #CheckByEmail
+    CheckByEmailListView,
+    CheckByEmailDetailView,
+    CheckByEmailCreateView,
+    CheckByEmailUpdateView,
+    CheckByEmailDeleteView,
    
 )
 
@@ -215,5 +221,12 @@ urlpatterns = [
     path('backgroundCheck/<slug:slug>/', BackgroundCheckDetailView.as_view(), name='background_check_detail'),
     path('backgroundCheck/<slug:slug>/update/', BackgroundCheckUpdateView.as_view(), name='background_check_update'),
     path('backgroundCheck/<slug:slug>/delete/', BackgroundCheckDeleteView.as_view(), name='background_check_delete'),
+
+    #CheckByEmail
+    path('checkByEmail/', CheckByEmailListView.as_view(), name='check_by_email_list'),
+    path('checkByEmail/create/', CheckByEmailCreateView.as_view(), name='check_by_email_create'),
+    path('checkByEmail/<slug:slug>/', CheckByEmailDetailView.as_view(), name='check_by_email_detail'),
+    path('checkByEmail/<slug:slug>/update/', CheckByEmailUpdateView.as_view(), name='check_by_email_update'),
+    path('checkByEmail/<slug:slug>/delete/', CheckByEmailDeleteView.as_view(), name='check_by_email_delete'),
 
 ]

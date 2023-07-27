@@ -9,17 +9,17 @@ from employee.templatetags.mask_ssn import mask_ssn
 from django.views import View
 import logging
 logger = logging.getLogger(__name__)
-from django.views.generic import (
-    ListView, CreateView, UpdateView, DetailView, DeleteView, FormView
-)
+
+
+from django.views.generic import (ListView, CreateView, UpdateView, DetailView, DeleteView, FormView)
 
 from .models import (
-    Category,CertificationLicense,Education,EmployeePreferences,Experience, 
+    Category,CertificationLicense, CheckByEmail,Education,EmployeePreferences,Experience, 
     Policies,Position,Profile, Skill, SkillSetTestResult,UserAcceptedPolicies,
     BasicInformation,Personal,Military,Safety_Video_and_Test, VideoResume, 
-    Background_Check,
-    
+    Background_Check,    
 )
+
 from .forms import (
     BackgroundCheckFormUpdate,
     BankAccountForm,
@@ -39,11 +39,8 @@ from .forms import (
     SafetyTestResultForm,
     VideoResumeForm,
     BackgroundCheckForm,
-    CardForm,
-    
+    CardForm,  
 )
-
-
 
 #----Policies Models ------
 class DashboardInformation(LoginRequiredMixin, View):
@@ -931,7 +928,6 @@ class CertificationLicenseDetailView(LoginRequiredMixin, DetailView):
     template_name = 'employee/certification_license_detail.html'
     context_object_name = 'certification_license'
     
-
 #Experience
 class ExperienceListView(LoginRequiredMixin, ListView):
     model = Experience
@@ -1285,7 +1281,7 @@ class BackgroundCheckCreateView(LoginRequiredMixin, CreateView):
             profile.save()
 
         if not profile.VideoResume_completed:
-            print("Redirecting to BackgroundCheckCreateView.")
+            #print("Redirecting to BackgroundCheckCreateView.")
             return redirect('employee:video_resume_list')
         
         profile.Background_Check_completed = True
@@ -1310,3 +1306,52 @@ class BackgroundCheckDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'employee/backgroundCheck/background_check_confirm_delete.html'
     success_url = reverse_lazy('employee:background_check_list')
 
+
+
+class CheckByEmailListView(LoginRequiredMixin, ListView):
+    model = CheckByEmail
+    template_name = 'employee/PaymentPreferences/checkByEmail/check_by_email_list.html'
+    context_object_name = 'checks'
+
+class CheckByEmailDetailView(LoginRequiredMixin, DetailView):
+    model = CheckByEmail
+    template_name = 'employee/PaymentPreferences/checkByEmail/check_by_email_detail.html'
+    context_object_name = 'check'
+
+class CheckByEmailCreateView(LoginRequiredMixin, CreateView):
+    model = CheckByEmail
+    template_name = 'employee/PaymentPreferences/checkByEmail/check_by_email_form.html'
+    form_class = CheckByEmailForm
+    success_url = reverse_lazy('employee:check_by_email_list')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            
+        if not profile.Background_Check_completed:
+            return redirect('employee:background_check_list')
+        
+        profile.Treat_Box_completed = True
+        profile.save()
+        
+        return super().dispatch(request, *args, **kwargs)
+
+class CheckByEmailUpdateView(LoginRequiredMixin, UpdateView):
+    model = CheckByEmail
+    template_name = 'employee/PaymentPreferences/checkByEmail/check_by_email_update.html'
+    form_class = CheckByEmailForm
+    context_object_name = 'check'
+    success_url = reverse_lazy('employee:check_by_email_list')
+    
+
+class CheckByEmailDeleteView(LoginRequiredMixin, DeleteView):
+    model = CheckByEmail
+    template_name = 'employee/PaymentPreferences/checkByEmail/check_by_email_confirm_delete.html'
+    context_object_name = 'check'
+    success_url = reverse_lazy('employee:check_by_email_list')
