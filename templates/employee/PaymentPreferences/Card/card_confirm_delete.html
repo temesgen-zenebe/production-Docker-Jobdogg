@@ -1,0 +1,28 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Confirm Delete EWallet Info{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-8 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h5>Confirm Delete eWallet info</h5>  
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <p>Are you sure you want to delete the following "{{ card.get_card_type_display }} of {{card.user.username|capfirst}}"?</p>
+                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="btn-group gap-2">
+                           <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                           <a href="{% url 'employee:card_list' %}" class="btn btn-sm btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>    
+                </div>
+            </div>
+        </div>
+    <!-- End Code -->
+{% endblock %}

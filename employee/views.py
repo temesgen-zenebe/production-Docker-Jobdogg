@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 from django.views.generic import (ListView, CreateView, UpdateView, DetailView, DeleteView, FormView)
 
 from .models import (
-    Category,CertificationLicense, CheckByEmail, EWallet,Education,EmployeePreferences,Experience, 
+    Card, Category,CertificationLicense, CheckByEmail, EWallet,Education,EmployeePreferences,Experience, 
     Policies,Position,Profile, Skill, SkillSetTestResult,UserAcceptedPolicies,
     BasicInformation,Personal,Military,Safety_Video_and_Test, VideoResume, 
     Background_Check,    
@@ -1354,7 +1354,7 @@ class CheckByEmailDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('employee:check_by_email_list')
 
 
-
+#EWallet
 class EWalletListView(LoginRequiredMixin, ListView):
     model = EWallet
     template_name = 'employee/PaymentPreferences/eWallet/e_wallet_list.html'
@@ -1404,3 +1404,54 @@ class EWalletDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'e_wallet'
     slug_url_kwarg = 'slug'
     success_url = reverse_lazy('employee:e_wallet_list')
+
+
+
+#Card preference 
+class CardListView(LoginRequiredMixin, ListView):
+    model = Card
+    template_name = 'employee/PaymentPreferences/Card/card_list.html'
+    context_object_name = 'cards'
+    paginate_by = 10
+
+class CardDetailView(LoginRequiredMixin, DetailView):
+    model = Card
+    template_name = 'employee/PaymentPreferences/Card/card_detail.html'
+    context_object_name = 'card'
+
+class CardCreateView(LoginRequiredMixin, CreateView):
+    model = Card
+    form_class = CardForm
+    template_name = 'employee/PaymentPreferences/Card/card_create.html'
+    success_url = reverse_lazy('employee:card_list')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            
+        if not profile.Background_Check_completed:
+            return redirect('employee:background_check_list')
+        
+        profile.Treat_Box_completed = True
+        profile.save()
+        
+        return super().dispatch(request, *args, **kwargs)
+
+class CardUpdateView(LoginRequiredMixin, UpdateView):
+    model = Card
+    form_class = CardForm
+    template_name = 'employee/PaymentPreferences/Card/card_update.html'
+    context_object_name = 'card'
+    success_url = reverse_lazy('employee:card_list')
+
+class CardDeleteView(LoginRequiredMixin, DeleteView):
+    model = Card
+    context_object_name = 'card'
+    template_name = 'employee/PaymentPreferences/Card/card_confirm_delete.html'
+    success_url = reverse_lazy('employee:card_list')

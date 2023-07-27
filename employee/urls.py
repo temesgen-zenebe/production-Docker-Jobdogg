@@ -235,5 +235,12 @@ urlpatterns = [
     path('eWallet/<slug:slug>/', views.EWalletDetailView.as_view(), name='e_wallet_detail'),
     path('eWallet/<slug:slug>/update/', views.EWalletUpdateView.as_view(), name='e_wallet_update'),
     path('eWallet/<slug:slug>/delete/', views.EWalletDeleteView.as_view(), name='e_wallet_delete'),
+    
+    #Card
+    path('card/', views.CardListView.as_view(), name='card_list'),
+    path('card/create/', views.CardCreateView.as_view(), name='card_create'),
+    path('card/<slug:slug>/', views.CardDetailView.as_view(), name='card_detail'),
+    path('card/<slug:slug>/update/', views.CardUpdateView.as_view(), name='card_update'),
+    path('card/<slug:slug>/delete/', views.CardDeleteView.as_view(), name='card_delete'),
 
 ]
