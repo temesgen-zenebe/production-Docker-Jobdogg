@@ -509,7 +509,7 @@ class Card(models.Model):
     name_on_card = models.CharField(max_length=100)
     card_number = models.CharField(max_length=16)
     expiration_date = models.CharField(max_length=5)  # Change to CharField
-    cvv = models.SmallIntegerField(max_length=3)
+    cvv = models.SmallIntegerField()
     valid = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)

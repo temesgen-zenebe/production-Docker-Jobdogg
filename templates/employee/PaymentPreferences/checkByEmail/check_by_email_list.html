@@ -1,7 +1,7 @@
 {% extends 'pages/employee_dashboard.html' %}
 {% load static %}
 {% load user_tags %}
-{% block title %}Personal Information {% endblock %}
+{% block title %}PayCheckByEmail Information {% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
         <div class="col-xl-8 col-lg-6">
@@ -55,31 +55,3 @@
         </div>
     <!-- End Example Code -->
 {% endblock %}
-
-
-<h2>Check by Email List</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>PO Box</th>
-        <th>Use Basic Info Address</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for check in checks %}
-        <tr>
-          <td>{{ forloop.counter }}</td>
-          <td>{{ check.poBox }}</td>
-          <td>{{ check.use_basicInfo_address }}</td>
-          <td>
-            <a href="{% url 'your_app_name:check_by_email_detail' check.pk %}" class="btn btn-info btn-sm">Detail</a>
-            <a href="{% url 'your_app_name:check_by_email_update' check.pk %}" class="btn btn-primary btn-sm">Edit</a>
-            <a href="{% url 'your_app_name:check_by_email_delete' check.pk %}" class="btn btn-danger btn-sm">Delete</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <a href="{% url 'your_app_name:check_by_email_create' %}" class="btn btn-success">Add New Check by Email</a>

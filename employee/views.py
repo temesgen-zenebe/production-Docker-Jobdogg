@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 from django.views.generic import (ListView, CreateView, UpdateView, DetailView, DeleteView, FormView)
 
 from .models import (
-    Category,CertificationLicense, CheckByEmail,Education,EmployeePreferences,Experience, 
+    Category,CertificationLicense, CheckByEmail, EWallet,Education,EmployeePreferences,Experience, 
     Policies,Position,Profile, Skill, SkillSetTestResult,UserAcceptedPolicies,
     BasicInformation,Personal,Military,Safety_Video_and_Test, VideoResume, 
     Background_Check,    
@@ -1288,13 +1288,11 @@ class BackgroundCheckCreateView(LoginRequiredMixin, CreateView):
         profile.save()
             
         return super().dispatch(request, *args, **kwargs)
-    
-    
+       
 class BackgroundCheckDetailView(LoginRequiredMixin, DetailView):
     model = Background_Check
     template_name = 'employee/backgroundCheck/background_check_detail.html'
    
-
 class BackgroundCheckUpdateView(LoginRequiredMixin, UpdateView):
     model = Background_Check
     form_class = BackgroundCheckFormUpdate
@@ -1307,7 +1305,7 @@ class BackgroundCheckDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('employee:background_check_list')
 
 
-
+#CheckByEmail
 class CheckByEmailListView(LoginRequiredMixin, ListView):
     model = CheckByEmail
     template_name = 'employee/PaymentPreferences/checkByEmail/check_by_email_list.html'
@@ -1349,9 +1347,60 @@ class CheckByEmailUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = 'check'
     success_url = reverse_lazy('employee:check_by_email_list')
     
-
 class CheckByEmailDeleteView(LoginRequiredMixin, DeleteView):
     model = CheckByEmail
     template_name = 'employee/PaymentPreferences/checkByEmail/check_by_email_confirm_delete.html'
     context_object_name = 'check'
     success_url = reverse_lazy('employee:check_by_email_list')
+
+
+
+class EWalletListView(LoginRequiredMixin, ListView):
+    model = EWallet
+    template_name = 'employee/PaymentPreferences/eWallet/e_wallet_list.html'
+    context_object_name = 'e_wallets'
+    paginate_by = 10
+
+class EWalletDetailView(LoginRequiredMixin, DetailView):
+    model = EWallet
+    template_name = 'employee/PaymentPreferences/eWallet/e_wallet_detail.html'
+    context_object_name = 'e_wallet'
+
+class EWalletCreateView(LoginRequiredMixin, CreateView):
+    model = EWallet
+    form_class = EWalletForm
+    template_name = 'employee/PaymentPreferences/eWallet/e_wallet_create.html'
+    success_url = reverse_lazy('employee:e_wallet_list')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            
+        if not profile.Background_Check_completed:
+            return redirect('employee:background_check_list')
+        
+        profile.Treat_Box_completed = True
+        profile.save()
+        
+        return super().dispatch(request, *args, **kwargs)
+
+class EWalletUpdateView(LoginRequiredMixin, UpdateView):
+    model = EWallet
+    form_class = EWalletForm
+    template_name = 'employee/PaymentPreferences/eWallet/e_wallet_update.html'
+    context_object_name = 'e_wallet'
+    slug_url_kwarg = 'slug'
+    success_url = reverse_lazy('employee:e_wallet_list')
+
+class EWalletDeleteView(LoginRequiredMixin, DeleteView):
+    model = EWallet
+    template_name = 'employee/PaymentPreferences/eWallet/e_wallet_confirm_delete.html'
+    context_object_name = 'e_wallet'
+    slug_url_kwarg = 'slug'
+    success_url = reverse_lazy('employee:e_wallet_list')

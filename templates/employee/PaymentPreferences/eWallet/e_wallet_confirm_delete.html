@@ -1,28 +1,29 @@
 {% extends 'pages/employee_dashboard.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block title %}Check by Mail Information Create{% endblock %}
+{% block title %}Confirm Delete EWallet Info{% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
         <div class="col-xl-8 col-lg-6">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
-                    <h5>check by Mail Information</h5>
+                    <h5>Confirm Delete eWallet info</h5>  
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
+                    <p>Are you sure you want to delete the following "{{ e_wallet.e_wallet_name }}"?</p>
+                    
                     <form method="POST">
                         {% csrf_token %}
-                        {{ form|crispy }}
-                        <button class="btn btn-sm btn-outline-primary" type="submit">Save</button>
-                        <a href="{% url 'employee:check_by_email_list' %}" class="btn btn-sm btn-outline-secondary" >Cancel</a>
-                    </form>
-                    
+                        <div class="btn-group gap-2">
+                           <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                           <a href="{% url 'employee:e_wallet_list' %}" class="btn btn-sm btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>    
                 </div>
-               
             </div>
         </div>
-    <!-- End Example Code -->
+    <!-- End Code -->
 {% endblock %}
 
