@@ -1618,15 +1618,38 @@
             </div>
 
             <!-- SelectRide -->
-            <div class="modal fade" id="SelectRide" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SelectRideStaticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
+            <div class="modal fade modalCss" id="SelectRide" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SelectRideStaticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="SelectRideStaticBackdropLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="SelectRideStaticBackdropLabel">Do you need a Ride?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        SelectRide
+                        <div class="container parent">
+                            <div class="row">
+                                <div class='col text-center'>
+                                <input type="radio" name="imgbackground" id="img1" class="d-none imgbgchk" value="">
+                                  <label for="img1">
+                                    <img src="https://dummyimage.com/600x400/000/fff" alt="Image 1">
+                                    <div class="tick_container">
+                                      <div class="tick"><i class="fa fa-check"></i></div>
+                                    </div>
+                                    </label>
+                                </div>
+                                <div class='col text-center'>
+                                <input type="radio" name="imgbackground" id="img2" class="d-none imgbgchk" value="">
+                                  <label for="img2">
+                                    <img src="https://dummyimage.com/600x400/000/fff" alt="Image 2">
+                                    <div class="tick_container">
+                                      <div class="tick"><i class="fa fa-check"></i></div>
+                                    </div>
+                                  </label>
+                                </div>
+                               
+                               
+                              </div>
+                            </div>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

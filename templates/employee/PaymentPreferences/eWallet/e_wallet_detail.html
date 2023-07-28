@@ -8,8 +8,8 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
-                <h5>{{e_wallet.user.username|capfirst}}EWallet Detail</h5>
-                <div>
+                <h6>{{e_wallet.user.username|capfirst}} eWallet Detail</h6>
+                <div class="btn-group gap-2">
                     <a href="{% url 'employee:e_wallet_update' slug=e_wallet.slug %}" class="btn btn-sm btn-outline-success">Edit</a>
                     <a href="{% url 'employee:e_wallet_list' %}" class="btn btn-sm btn-outline-primary">Back</a>
                 </div>
@@ -17,10 +17,10 @@
             <!-- Card Body -->
             <div class="card-body">
                 <dl class="row">
-                    <dt class="col-sm-3">Name:</dt>
-                    <dd class="col-sm-9">{{ e_wallet.e_wallet_name }}</dd>
-                    <dt class="col-sm-3">Account Email:</dt>
-                    <dd class="col-sm-9">{{ e_wallet.account_email }}</dd>
+                    <dt class="col-sm-4">Name :</dt>
+                    <dd class="col-sm-8">{{ e_wallet.e_wallet_name }}</dd>
+                    <dt class="col-sm-4">Account Email :</dt>
+                    <dd class="col-sm-8">{{ e_wallet.account_email }}</dd>
                   </dl>
             </div>   
         </div>

@@ -67,33 +67,35 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                         aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench fs-6"></i>
+                        <i class="fas fa-fw fa-book fs-6"></i>
                         <span>Policies</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Policy</h6>
+                            {% if paymentPref.companyPolices_completed %}
                             <a class="collapse-item" href="{% url 'employee:policies_list' %}">Read</a>
+                            {% else %}
                             <a class="collapse-item" href="{% url 'employee:policies_list' %}">Accept</a>
-                            
+                            {% endif %}
                         </div>
                     </div>
                 </li>
 
                 <!-- Nav Item - Utilities Collapse Menu of check_by_email_list-->
-                
+                {% if paymentPref %}
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTreatBox"
                         aria-expanded="true" aria-controls="collapseTreatBox">
-                        <i class="fas fa-fw fa-wrench fs-6"></i>
+                        <i class="fas fa-fw fa-dollar-sign fs-6"></i>
                         <span>Treat Box</span>
                     </a>
                     <div id="collapseTreatBox" class="collapse" aria-labelledby="headingUtilities"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Payment preferences</h6>
-                            {% if profileProgress.Treat_Box_completed %}
+                            {% if paymentPref.Treat_Box_completed %}
                                 {% if paymentPref.cardBtn_completed %}
                                     <a class="collapse-item" href="{% url 'employee:card_list' %}">Payment Card</a>
                                 {% elif paymentPref.eWalletBtn_completed %}
@@ -104,16 +106,16 @@
                                     <a class="collapse-item" href="{% url 'employee:check_by_email_list' %}">CheckByEmail</a>
                                 {% endif %}
                             {% else %}
-                                <a class="collapse-item" href="{% url 'employee:bankAccount_list' %}">bankAccount</a>
-                                <a class="collapse-item" href="{% url 'employee:check_by_email_list' %}">CheckByEmail</a>
-                                <a class="collapse-item" href="{% url 'employee:e_wallet_list' %}">eWallet</a>
-                                <a class="collapse-item" href="{% url 'employee:card_list' %}">Payment Card</a>
+                            <a class="collapse-item" href="{% url 'employee:bankAccount_list' %}">bankAccount</a>
+                            <a class="collapse-item" href="{% url 'employee:check_by_email_list' %}">CheckByEmail</a>
+                            <a class="collapse-item" href="{% url 'employee:e_wallet_list' %}">eWallet</a>
+                            <a class="collapse-item" href="{% url 'employee:card_list' %}">Payment Card</a>
                             {% endif %}
                         </div>
                         
                     </div>
                 </li>
-
+                {% endif %}
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
@@ -388,6 +390,7 @@
 
                     </nav>
                     <!-- End of Topbar -->
+                    
                     {% block dashboard_employee %}<h2></h2>{% endblock %}
                     
 

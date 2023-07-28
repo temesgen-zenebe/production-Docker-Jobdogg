@@ -48,19 +48,10 @@ class DashboardInformation(LoginRequiredMixin, View):
 
     def get(self, request):
         # Get the user's profile
-        profile = Profile.objects.filter(user=request.user).first()
-
-        # Prepare the payment preferences data
-        paymentPref = {
-            'cardBtn_completed': profile.cardBtn_completed,
-            'eWalletBtn_completed': profile.eWalletBtn_completed,
-            'bankAccountBtn_completed': profile.bankAccountBtn_completed,
-            'CheckByMailBtn_completed': profile.CheckByMailBtn_completed,
-        }
-
+        profiles = Profile.objects.filter(user=request.user).first()
+        
         context = {
-            'profileProgress': profile,
-            'paymentPref': paymentPref,
+            'paymentPref': profiles,
         }
         return render(request, self.template_name, context)
     
@@ -118,6 +109,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         CheckByEmail_form=CheckByEmailForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
+        profiles = Profile.objects.filter(user=request.user).first()
         progress_percentage = self.get_progress_percentage(profile)
         categories = Category.objects.all()
         positions = Position.objects.all()
@@ -140,6 +132,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'employee_preferences_form':employee_preferences_form,
             'safetyVideo_form':safetyVideo_form,
             'progress':progress,
+            'paymentPref': profiles,
             'progress_percentage': progress_percentage,
             'policies': policies,
             'accepted_policies_ids': accepted_policies_ids,
