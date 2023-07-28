@@ -31,6 +31,7 @@ from common.utils.chooseConstant import (
     TEST_STATES,
     TAG_CHOOSES,
     CARD_TYPE_CHOOSE,
+    RIDE_CHOOSE,
     )
 from multiupload.fields import MultiFileField 
 
@@ -568,3 +569,21 @@ class CheckByEmail(models.Model):
     def __str__(self):
         return f"{self.user.username}-{self.method_type}"
 
+
+#RidePreference
+class RidePreference(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ride_preference = models.CharField(max_length=255, choices=RIDE_CHOOSE)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.ride_preference} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user}-{self.ride_preference}"

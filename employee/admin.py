@@ -3,7 +3,7 @@ from django.contrib import admin
 from common.utils.text import unique_slug
 from .models import (
     BankAccount, Education, Background_Check,CertificationLicense,CheckByEmail,EWallet, 
-    Experience, Military, Profile, Policies,SafetyTestResult,UserAcceptedPolicies,
+    Experience, Military, Profile, Policies, RidePreference,SafetyTestResult,UserAcceptedPolicies,
     BasicInformation, SkillSetTestResult,Safety_Video_and_Test,VideoResume,
     RettingCommenting,Card,
      
@@ -329,3 +329,15 @@ class BankAccountAdmin(admin.ModelAdmin):
             obj.slug = unique_slug(f"{obj.method_type} {obj.user.username}")
         super().save_model(request, obj, form, change)
 
+
+
+#RidePreference
+@admin.register(RidePreference)
+class RidePreferenceAdmin(admin.ModelAdmin):
+    model = RidePreference
+    list_display = ['user','ride_preference','slug','created','updated']
+    
+    def get_readonly_fields(self, request, obj=None):
+        if obj:  # editing an existing object
+            return ('created', 'updated', 'slug')
+        return ()

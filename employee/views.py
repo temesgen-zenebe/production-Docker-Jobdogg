@@ -40,6 +40,7 @@ from .forms import (
     VideoResumeForm,
     BackgroundCheckForm,
     CardForm,  
+    RidePreferenceForm, 
 )
 
 #---- Models ------
@@ -107,6 +108,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         Card_form =CardForm()
         EWallet_form= EWalletForm()
         CheckByEmail_form=CheckByEmailForm()
+        RidePreference_form = RidePreferenceForm()
         progress = Profile.objects.filter(user=request.user)
         profile = get_object_or_404(Profile, user=request.user)
         profiles = Profile.objects.filter(user=request.user).first()
@@ -151,6 +153,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'Card_form':Card_form,
             'EWallet_form':EWallet_form,
             'CheckByEmail_form':CheckByEmail_form,
+            'RidePreference_form':RidePreference_form,
             
         }
            
@@ -394,6 +397,20 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             else:
                print("Card form is invalid:", checkByEmail_form.errors)
                
+        elif 'ridePreferenceFormSubmit' in request.POST:
+            ridePreference_form = RidePreferenceForm(request.POST)
+            if ridePreference_form.is_valid():
+                RidePreference = ridePreference_form.save(commit=False)
+                RidePreference.user = request.user
+                RidePreference.save()
+                # Update the profile building process states
+                profile.Select_Ride_completed = True
+                profile.save()
+                return redirect('employee:profile_building_progress')
+            else:
+                print("VideoResume form is invalid")       
+            
+               
         else:
             pass   
         # If neither form was submitted or form validation failed, render the template again with the forms
@@ -411,6 +428,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         Card_form =CardForm()
         EWallet_form= EWalletForm()
         CheckByEmail_form=CheckByEmailForm()
+        RidePreference_form = RidePreferenceForm()
         context = {
             'basic_information_form': basic_information_form,
             'personal_form': personal_form,
@@ -425,7 +443,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'BankAccount_form':BankAccount_form,
             'Card_form':Card_form,
             'EWallet_form':EWallet_form,
-            'CheckByEmail_form':CheckByEmail_form
+            'CheckByEmail_form':CheckByEmail_form,
+            'RidePreference_form':RidePreference_form,
         }
         return render(request, self.template_name, context)
     

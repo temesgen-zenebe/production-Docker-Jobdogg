@@ -402,3 +402,22 @@ class CheckByEmailForm(forms.ModelForm):
         help_texts = {
             'poBox': 'Please enter a valid PO Box address.',
         }
+        
+        
+        
+# forms.py
+
+from django import forms
+from .models import RidePreference
+
+class RidePreferenceForm(forms.ModelForm):
+    class Meta:
+        model = RidePreference
+        fields = ['ride_preference']
+
+        widgets = {
+            'ride_preference': forms.RadioSelect(attrs={'class': 'form-check-input'}), 
+        }
+        help_texts = {
+            'ride_preference': 'Please select your ride preference.',
+        }

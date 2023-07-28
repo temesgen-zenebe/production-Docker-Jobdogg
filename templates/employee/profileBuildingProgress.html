@@ -1626,12 +1626,91 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="container parent">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div id="div_id_ride_preference" class="mb-3"> <label class="form-label requiredField">
+                             Ride preference<span class="asteriskField">*</span> </label> 
+                             <div> 
+                                <div class="form-check d-none"> 
+                                    <input type="radio" class="form-check-input" name="ride_preference" value="" id="id_ride_preference_0" required="" checked=""> 
+                                    <label for="id_ride_preference_0" class="form-check-label">------</label>
+                                 </div> 
+                                 <div class="form-check"> 
+                                    <input type="radio" class="form-check-input" name="ride_preference" value="UberRide" id="id_ride_preference_1" required=""> 
+                                    <label for="id_ride_preference_1" class="form-check-label">
+                                        Uber Ride
+                                        <img src="{% static 'images/png-transparent-uber.png' %}" alt="Image 1">
+                                        <div class="tick_container">
+                                          <div class="tick"><i class="fa fa-check"></i></div>
+                                        </div>
+                                    </label> 
+                                </div> 
+                                <div class="form-check"> 
+                                    <input type="radio" class="form-check-input" name="ride_preference" value="LyftRide" id="id_ride_preference_2" required=""> 
+                                    <label for="id_ride_preference_2" class="form-check-label">Lyft Ride</label> 
+                                </div> 
+                            </div> 
+                            <div id="hint_id_ride_preference" class="form-text">Please select your ride preference.</div> 
+                        </div>
+
+                            <button name="ridePreferenceFormSubmit" id="ridePreferenceSubmit" class="btn btn-sm btn-outline-primary" type="submit">Next</button>  
+                        </form>
+                        
+                        <div class="container parent mt-5">
+                         <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                           
+                              <div class="row">
+                                <div class='col text-center'>
+                                    <div class="form-check"> 
+                                        <input
+                                          type="radio" 
+                                          class="form-check-input d-none imgbgchk"
+                                          name="ride_preference" 
+                                          value="UberRide" 
+                                          id="id_ride_preference_1" 
+                                          required=""> 
+                                        <label 
+                                          for="id_ride_preference_1" 
+                                          class="form-check-label ">
+                                            
+                                            <img src="{% static 'images/png-transparent-uber.png' %}" alt="Image 1">
+                                            <div class="tick_container">
+                                              <div class="tick"><i class="fa fa-check"></i></div>
+                                            </div>
+                                        </label> 
+                                        
+                                    </div> 
+                                    <small>Uber Ride</small>
+                                </div>
+                                <div class='col text-center'>
+                                  <input 
+                                   type="radio" 
+                                   name="imgbackground" 
+                                   id="img2" 
+                                   class="d-none imgbgchk" 
+                                   value="">
+                                  <label for="img2">
+                                    <img src="https://dummyimage.com/600x400/000/fff" alt="Image 2">
+                                    <div class="tick_container">
+                                      <div class="tick"><i class="fa fa-check"></i></div>
+                                    </div>
+                                  </label>
+                                </div>
+                               
+                               
+                              </div>
+                           
+                         </form>
+                        </div>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                         <div class="container parent">
                             <div class="row">
                                 <div class='col text-center'>
                                 <input type="radio" name="imgbackground" id="img1" class="d-none imgbgchk" value="">
                                   <label for="img1">
-                                    <img src="https://dummyimage.com/600x400/000/fff" alt="Image 1">
+                                    <img src="{% static 'images/png-transparent-uber.png' %}" alt="Image 1">
                                     <div class="tick_container">
                                       <div class="tick"><i class="fa fa-check"></i></div>
                                     </div>
@@ -1647,9 +1726,9 @@
                                   </label>
                                 </div>
                                
-                               
                               </div>
-                            </div>
+                        </div>
+                    </form>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

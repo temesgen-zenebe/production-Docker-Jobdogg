@@ -176,3 +176,8 @@ CARD_TYPE_CHOOSE=(
     ("master-card", "Master-card"),
     ("visa", "Visa"),
 )
+
+RIDE_CHOOSE=(
+        ('UberRide', 'Uber Ride'),
+        ('LyftRide', 'Lyft Ride'),
+    )
