@@ -118,7 +118,7 @@ app_name = 'employee'
 
 urlpatterns = [
     
-    # DashboardInformation Employee
+    # DashboardInformation Employee 
     path('dashboardInformation/employee', DashboardInformation.as_view(), name='dashboard_information_employee'),
     path('profileBuildingProgress/', ProfileBuildingProgress.as_view(), name='profile_building_progress'),
     

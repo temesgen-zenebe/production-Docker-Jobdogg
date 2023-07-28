@@ -82,6 +82,7 @@
                 </li>
 
                 <!-- Nav Item - Utilities Collapse Menu of check_by_email_list-->
+                
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTreatBox"
                         aria-expanded="true" aria-controls="collapseTreatBox">
@@ -92,12 +93,24 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Payment preferences</h6>
-                            <a class="collapse-item" href="{% url 'employee:bankAccount_list' %}">bankAccount</a>
-                            <a class="collapse-item" href="{% url 'employee:check_by_email_list' %}">CheckByEmail</a>
-                            <a class="collapse-item" href="{% url 'employee:e_wallet_list' %}">eWallet</a>
-                            <a class="collapse-item" href="{% url 'employee:card_list' %}">Payment Card </a>
-                            
+                            {% if profileProgress.Treat_Box_completed %}
+                                {% if paymentPref.cardBtn_completed %}
+                                    <a class="collapse-item" href="{% url 'employee:card_list' %}">Payment Card</a>
+                                {% elif paymentPref.eWalletBtn_completed %}
+                                    <a class="collapse-item" href="{% url 'employee:e_wallet_list' %}">eWallet</a>
+                                {% elif paymentPref.bankAccountBtn_completed %}
+                                    <a class="collapse-item" href="{% url 'employee:bankAccount_list' %}">bankAccount</a>
+                                {% elif paymentPref.CheckByMailBtn_completed %}
+                                    <a class="collapse-item" href="{% url 'employee:check_by_email_list' %}">CheckByEmail</a>
+                                {% endif %}
+                            {% else %}
+                                <a class="collapse-item" href="{% url 'employee:bankAccount_list' %}">bankAccount</a>
+                                <a class="collapse-item" href="{% url 'employee:check_by_email_list' %}">CheckByEmail</a>
+                                <a class="collapse-item" href="{% url 'employee:e_wallet_list' %}">eWallet</a>
+                                <a class="collapse-item" href="{% url 'employee:card_list' %}">Payment Card</a>
+                            {% endif %}
                         </div>
+                        
                     </div>
                 </li>
 

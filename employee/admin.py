@@ -39,7 +39,10 @@ class ProfileAdmin(admin.ModelAdmin):
                 'Background_Check_completed',
                 'Treat_Box_completed',
                 'Select_Ride_completed',
-                
+                'cardBtn_completed',
+                'eWalletBtn_completed',              
+                'bankAccountBtn_completed',
+                'CheckByMailBtn_completed',  
             ]
     
 @admin.register(Policies)

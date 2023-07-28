@@ -56,6 +56,10 @@ class Profile(models.Model):
     Background_Check_completed = models.BooleanField(default=False)
     Treat_Box_completed = models.BooleanField(default=False)
     Select_Ride_completed = models.BooleanField(default=False)
+    cardBtn_completed = models.BooleanField(default=False)
+    eWalletBtn_completed = models.BooleanField(default=False)
+    bankAccountBtn_completed = models.BooleanField(default=False)
+    CheckByMailBtn_completed = models.BooleanField(default=False)
     
     def __str__(self):
         return str(self.user)
@@ -548,7 +552,7 @@ class EWallet(models.Model):
 class CheckByEmail(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     method_type = models.CharField(max_length=50, unique=True, default='checkEmail')
-    poBox = models.CharField(max_length=200)
+    poBox = models.CharField(max_length=200,null=True , blank=True)
     use_basicInfo_address = models.BooleanField(default=False)
     valid = models.BooleanField(default=True) 
     slug = models.SlugField(unique=True)

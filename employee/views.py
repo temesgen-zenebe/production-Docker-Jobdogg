@@ -42,11 +42,26 @@ from .forms import (
     CardForm,  
 )
 
-#----Policies Models ------
+#---- Models ------
 class DashboardInformation(LoginRequiredMixin, View):
     template_name = 'employee/dashboardInfo.html'
+
     def get(self, request):
-        context = {}
+        # Get the user's profile
+        profile = Profile.objects.filter(user=request.user).first()
+
+        # Prepare the payment preferences data
+        paymentPref = {
+            'cardBtn_completed': profile.cardBtn_completed,
+            'eWalletBtn_completed': profile.eWalletBtn_completed,
+            'bankAccountBtn_completed': profile.bankAccountBtn_completed,
+            'CheckByMailBtn_completed': profile.CheckByMailBtn_completed,
+        }
+
+        context = {
+            'profileProgress': profile,
+            'paymentPref': paymentPref,
+        }
         return render(request, self.template_name, context)
     
 #----Profile Models ------
@@ -324,6 +339,11 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                 bankAccount.save()
                 # Update the profile building process states
                 profile.Treat_Box_completed = True
+                profile.bankAccountBtn_completed = True
+                profile.CheckByMailBtn_completed=False
+                profile.eWalletBtn_completed=False
+                profile.cardBtn_completed=False
+                
                 profile.save()
                 return redirect('employee:profile_building_progress')
             else:
@@ -337,6 +357,10 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                cardForm.save()
                # Update the profile building process states
                profile.Treat_Box_completed = True
+               profile.cardBtn_completed=True
+               profile.CheckByMailBtn_completed=False
+               profile.eWalletBtn_completed=False
+               profile.bankAccountBtn_completed=False
                profile.save()
                return redirect('employee:profile_building_progress')
             else:
@@ -351,6 +375,10 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                eWallet.save()
                # Update the profile building process states
                profile.Treat_Box_completed = True
+               profile.eWalletBtn_completed =True
+               profile.CheckByMailBtn_completed=False
+               profile.cardBtn_completed=False
+               profile.bankAccountBtn_completed=False
                profile.save()
                return redirect('employee:profile_building_progress')
             else:
@@ -363,7 +391,11 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                checkByEmail.user = request.user
                checkByEmail.save()
                # Update the profile building process states
-               profile.Treat_Box_completed = True
+               profile.Treat_Box_completed=True
+               profile.CheckByMailBtn_completed=True
+               profile.eWalletBtn_completed=False
+               profile.cardBtn_completed=False
+               profile.bankAccountBtn_completed=False
                profile.save()
                return redirect('employee:profile_building_progress')
             else:
@@ -1336,6 +1368,10 @@ class CheckByEmailCreateView(LoginRequiredMixin, CreateView):
             return redirect('employee:background_check_list')
         
         profile.Treat_Box_completed = True
+        profile.CheckByMailBtn_completed = True
+        profile.eWalletBtn_completed=False
+        profile.cardBtn_completed=False
+        profile.bankAccountBtn_completed=False
         profile.save()
         
         return super().dispatch(request, *args, **kwargs)
@@ -1386,6 +1422,10 @@ class EWalletCreateView(LoginRequiredMixin, CreateView):
             return redirect('employee:background_check_list')
         
         profile.Treat_Box_completed = True
+        profile.eWalletBtn_completed =True
+        profile.CheckByMailBtn_completed=False
+        profile.cardBtn_completed=False
+        profile.bankAccountBtn_completed=False
         profile.save()
         
         return super().dispatch(request, *args, **kwargs)
@@ -1439,6 +1479,10 @@ class CardCreateView(LoginRequiredMixin, CreateView):
             return redirect('employee:background_check_list')
         
         profile.Treat_Box_completed = True
+        profile.cardBtn_completed=True
+        profile.CheckByMailBtn_completed=False
+        profile.eWalletBtn_completed=False
+        profile.bankAccountBtn_completed=False
         profile.save()
         
         return super().dispatch(request, *args, **kwargs)
@@ -1488,6 +1532,10 @@ class BankAccountCreateView(LoginRequiredMixin, CreateView):
             return redirect('employee:background_check_list')
         
         profile.Treat_Box_completed = True
+        profile.bankAccountBtn_completed = True
+        profile.CheckByMailBtn_completed=False
+        profile.eWalletBtn_completed=False
+        profile.cardBtn_completed=False
         profile.save()
         
         return super().dispatch(request, *args, **kwargs)
@@ -1504,3 +1552,10 @@ class BankAccountDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'employee/PaymentPreferences/bankAccount/bankAccount_confirm_delete.html'
     context_object_name = 'bankAccount'
     success_url = reverse_lazy('employee:bankAccount_list')
+    
+    
+    
+    
+    
+     
+     

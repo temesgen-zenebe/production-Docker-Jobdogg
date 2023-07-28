@@ -418,7 +418,17 @@
                                 <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
                                     <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                                 </button>
-                                <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-info"><i class="bi bi-pen"></i></a>
+                                {% if progres.cardBtn_completed %}
+                                <a href="{% url 'employee:card_list' %}" type="button" class="preview-btn  btn btn-sm btn-outline-info "><i class="bi bi-pen"></i></a>
+                                {% elif progres.eWalletBtn_completed %}
+                                <a href="{% url 'employee:e_wallet_list' %}" type="button" class="preview-btn  btn btn-sm btn-outline-info "><i class="bi bi-pen"></i></a>
+                                {% elif progres.bankAccountBtn_completed %}
+                                <a href="{% url 'employee:bankAccount_list' %}" type="button" class="preview-btn  btn btn-sm btn-outline-info "><i class="bi bi-pen"></i></a>
+                                {% elif progres.CheckByMailBtn_completed %}
+                                <a href="{% url 'employee:check_by_email_list' %}" type="button" class="preview-btn  btn btn-sm btn-outline-info "><i class="bi bi-pen"></i></a>
+                                {% else %}
+                                {% endif %}
+                                
                             </div>
                             {% else %}
                              <!-- Button trigger modal -->
@@ -1855,31 +1865,34 @@
             }
         });
     </script>
-    <!-- Treat_Box_completed -->
     <script>
-        function showModal(option) {
-          const myModal = new bootstrap.Modal(document.getElementById('myModal'));
-          console.log('Selected option:', option);
-      
-          // Hide all modal-body elements
-          const modalBodies = document.querySelectorAll('.modal-body');
-          modalBodies.forEach((body) => {
-            body.classList.remove('d-block');
-            body.classList.add('d-none');
-          });
-      
-          // Show the selected modal-body based on the option
-          const selectedModalBody = document.getElementById(option);
-          selectedModalBody.classList.remove('d-none');
-          selectedModalBody.classList.add('d-block');
+       
+          function showModal(option) {
+            const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+            console.log('Selected option:', option);
           
-          const exampleModalLabelText = document.getElementById('exampleModalLabel123');
-          exampleModalLabelText.textContent =  `To Get Paid Please enter `+ option + ` info.`;
-
-
-          myModal.show();
-        }
-    </script>
+            // Hide all modal-body elements
+            document.querySelectorAll('.modal-body').forEach((body) => {
+              body.classList.remove('d-block');
+              body.classList.add('d-none');
+            });
+      
+            // Show the selected modal-body based on the option
+            const selectedModalBody = document.getElementById(option);
+            if (selectedModalBody) {
+              selectedModalBody.classList.remove('d-none');
+              selectedModalBody.classList.add('d-block');
+            } else {
+              console.log('Modal body not found.');
+            }
+      
+            const exampleModalLabelText = document.getElementById('exampleModalLabel123');
+            exampleModalLabelText.textContent =  `To Get Paid Please enter ` + option + ` info.`;
+      
+            myModal.show();
+          }
+     
+      </script>
    
     <script type="text/javascript" src="{% static 'js/safetyTestFormscript.js' %}"></script>
     <script type="text/javascript"  src="{% static 'js/VideoResume1.js' %}"></script>
