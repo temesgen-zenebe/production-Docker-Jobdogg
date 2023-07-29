@@ -1619,73 +1619,70 @@
 
             <!-- SelectRide -->
             <div class="modal fade modalCss" id="SelectRide" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="SelectRideStaticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-dialog-scrollable  ">
                 <div class="modal-content">
                     <div class="modal-header">
+                    <div>
                     <h1 class="modal-title fs-5" id="SelectRideStaticBackdropLabel">Do you need a Ride?</h1>
+                    <div id="hint_id_ride_preference" class="form-text">Please select your ride preference.</div> 
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" enctype="multipart/form-data">
+                        <div class="container parent mb-5">
+                         <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <div id="div_id_ride_preference" class="mb-3"> <label class="form-label requiredField">
-                             Ride preference<span class="asteriskField">*</span> </label> 
-                             <div> 
-                                <div class="form-check d-none"> 
-                                    <input type="radio" class="form-check-input" name="ride_preference" value="" id="id_ride_preference_0" required="" checked=""> 
-                                    <label for="id_ride_preference_0" class="form-check-label">------</label>
-                                 </div> 
-                                 <div class="form-check"> 
-                                    <input type="radio" class="form-check-input" name="ride_preference" value="UberRide" id="id_ride_preference_1" required=""> 
-                                    <label for="id_ride_preference_1" class="form-check-label">
-                                        Uber Ride
-                                        
-                                    </label> 
-                                </div> 
-                                <div class="form-check"> 
-                                    <input type="radio" class="form-check-input" name="ride_preference" value="LyftRide" id="id_ride_preference_2" required=""> 
-                                    <label for="id_ride_preference_2" class="form-check-label">Lyft Ride</label> 
-                                </div> 
-                            </div> 
-                            <div id="hint_id_ride_preference" class="form-text">Please select your ride preference.</div> 
-                        </div>
-
-                            <button name="ridePreferenceFormSubmit" id="ridePreferenceSubmit" class="btn btn-sm btn-outline-primary" type="submit">Next</button>  
-                        </form>
-                        
-                       
-                        <form method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                         <div class="container parent">
-                            <div class="row">
-                                <div class='col text-center'>
-                                    
+                         
+                            <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 m-auto">
+                                <div class='col'>
                                   <input type="radio" name="ride_preference" id="id_ride_preference_a" class="d-none imgbgchk" value="UberRide" required="">
-                                  <label for="id_ride_preference_a">
+                                  <label for="id_ride_preference_a" class="border shadow p-2">
                                     <img src="{% static 'images/png-transparent-uber.png' %}" alt="Image 1">
                                     <div class="tick_container">
                                       <div class="tick"><i class="fa fa-check"></i></div>
                                     </div>
-                                    </label>
+                                    <hr>
                                     <small>Uber Ride</small>
+                                  </label>
+                                    
                                 </div>
-                                <div class='col text-center'>
+                                <div class='col'>
                                 <input type="radio" name="ride_preference" id="id_ride_preference_b" class="d-none imgbgchk" value="LyftRide" required="">
-                                  <label for="id_ride_preference_b">
-                                    <img src="{% static 'images/png-transparent-uber.png' %}" alt="Image 2">
+                                <label for="id_ride_preference_b" class="border shadow px-4 py-2">
+                                    <img src="{% static 'images/Lyft_logo.png' %}" alt="Image 2">
                                     <div class="tick_container">
                                       <div class="tick"><i class="fa fa-check"></i></div>
                                     </div>
-                                  </label>
+                                    <hr>
+                                    <small>Lyft Ride</small>
+                                </label>
                                 </div>
-                               
-                              </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button name="ridePreferenceFormSubmit" id="ridePreferenceSubmit" class="btn btn-sm btn-outline-primary" type="submit">Next</button>  
+                            </div>
+                          <div class="modal-footer">
+                            <button name="ridePreferenceFormSubmit" id="ridePreferenceSubmit" class="btn btn-sm btn-outline-info" type="submit">Submit</button>  
                         </div>
                        
-                    </form>
+                        </form>
+                       <div class="bd-callout bd-callout-info">
+                         <h6 id="conveying-meaning-to-assistive-technologies">
+                            Attention: Picking Ride Preference </h6>
+                          <small>
+                            <ul>
+                                <li>
+                            Please be informed that "Picking Ride Preference Das" is not a guarantee for 
+                            100% assured ride service. However, we strive to enhance your journey by offering 
+                            tailored packages to meet your unique needs. </li>
+                            <li>Our commitment to providing a reliable
+                            and comfortable experience remains unwavering.</li>
+                            <li>For further details and personalized
+                            assistance, kindly reach out to our dedicated Customer Service team. We are here to 
+                            address any queries or concerns you may have.</li>
+
+                            Customer Service: [Insert Customer Service Number]
+                           </ul>
+                          </small>
+                    </div>
+                    </div>
                     </div>
                    
                 </div>
