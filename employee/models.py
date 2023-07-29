@@ -569,7 +569,6 @@ class CheckByEmail(models.Model):
     def __str__(self):
         return f"{self.user.username}-{self.method_type}"
 
-
 #RidePreference
 class RidePreference(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
