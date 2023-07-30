@@ -315,8 +315,16 @@
                             {% else %}
                             <!-- Personal Step -->
                             <div class="btn-group gap-1">
-                                <button type="button" id="SkillSetTestStart" class="btn btn btn-sm btn-outline-secondary SkillSetTestStart" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">Start</button>
-                                <button type="button" id="SkipTest" class="btn btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkipForNowtModal">Skip</button>
+                                {% if not testList %}
+                                <form method="post" action="{% url 'employee:generate_test' %}">
+                                    {% csrf_token %}
+                                        <!-- Other form elements if any -->   
+                                    <button type="submit" class="btn btn-sm btn-outline-info ">Generate My Test</button>
+                                </form>
+                                {% else %}
+                                <button type="button" id="SkillSetTestStart" class="btn btn-sm btn-outline-secondary SkillSetTestStart" data-bs-toggle="modal" data-bs-target="#SkillSetTestModal">Start</button>
+                                <button type="button" id="SkipTest" class="btn  btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#SkipForNowtModal">Skip</button>
+                                {% endif %}
                             </div>
                             {% endif %}
                     
@@ -925,15 +933,18 @@
                         <div class="modal-body gap-3 ">
                             <div class="card my-3 shadow" style="max-width: 100%;">
                                 <div class="card-header">
-                                    <small>**To begin the SkillsTest, click the 'Start' button.
-                                         Once you've completed the test, please return to this page to update your results. Good luck!
+                                    <small>
                                          {% if not testList %}
-                                        
+                                         
                                          <form method="post" action="{% url 'employee:generate_test' %}">
                                             {% csrf_token %}
                                             <!-- Other form elements if any -->
-                                            <button type="submit" class="btn btn-sm btn-outline-info">Generate My Skill Test</button>
+                                            <span>Clicke the button to get your skill test </span>
+                                            <button type="submit" class="btn btn-sm btn-outline-info mx-5">Generate My Test</button>
                                           </form>
+                                          {% else %}
+                                          **To begin the SkillsTest, click the 'Start' button.
+                                           Once you've completed the test, please return to this page to update your results. Good luck!
                                          {% endif %}
                                    </small>
                                 </div>

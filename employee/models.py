@@ -1,4 +1,6 @@
 import re
+import secrets
+import string
 from django.conf import settings
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
@@ -364,16 +366,27 @@ class SkillSetTestResult(models.Model):
     skill_test = models.CharField(max_length=200)
     states = models.CharField(max_length=20, choices=TEST_STATES, default="started")
     result = models.DecimalField(max_digits=5, decimal_places=2, default=00)
-    conformation = models.CharField(max_length=200, default='Id12565874', null=True)
+    conformation = models.CharField(max_length=20)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    def generate_conformation_id(self):
+        # Generate a random alphanumeric string of length 9
+        characters = string.ascii_letters + string.digits
+        random_conformation = ''.join(secrets.choice(characters) for _ in range(9))
+
+        return random_conformation
+        
 
     def save(self, *args, **kwargs):
         if not self.slug:
             value = f"{self.user.username} {self.position}"
             self.slug = unique_slug(value, type(self))
             
+         # Call the generate_conformation_id function to set the conformation field
+        if not self.conformation:
+            self.conformation = self.generate_conformation_id()
 
         super().save(*args, **kwargs)
         

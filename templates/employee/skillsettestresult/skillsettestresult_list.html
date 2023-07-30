@@ -10,9 +10,17 @@
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
                     <h5>Skillset Test Result List</h5>
                     {% if not skillsettestresults %}
-                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:employee-preferences-create' %}">Go Create Preferences</a>
+                    <form method="post" action="{% url 'employee:generate_test' %}">
+                        {% csrf_token %}
+                            <!-- Other form elements if any -->   
+                        <button type="submit" class="btn btn-sm btn-outline-info ">Generate My Test</button>
+                    </form>
+                     
                     {% endif %}
-                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
+                    <div>
+                      <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:employee-preferences-create' %}">Add Preferences</a>
+                      <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
+                    </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
