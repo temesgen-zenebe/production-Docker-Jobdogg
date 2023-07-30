@@ -14,20 +14,24 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <form method="post">
-                        <input type="hidden" name="csrfmiddlewaretoken" value="Su70dGdjFjyJjOGvrnvotIXFRe9DDeFyyFayKRfrECcWPgGL0R10zJc4WiYfE3nW">
-                        
-
-<div id="div_id_ride_preference" class="mb-3"> <label class="form-label requiredField">
-                Ride preference<span class="asteriskField">*</span> </label> <div> <div class="form-check"> <input type="radio" class="form-check-input" name="ride_preference" value="" id="id_ride_preference_0" required=""> <label for="id_ride_preference_0" class="form-check-label">
-            ---------
-        </label> </div> <div class="form-check"> <input type="radio" class="form-check-input" name="ride_preference" value="UberRide" id="id_ride_preference_1" required=""> <label for="id_ride_preference_1" class="form-check-label">
-            Uber Ride
-        </label> </div> <div class="form-check"> <input type="radio" class="form-check-input" name="ride_preference" value="LyftRide" id="id_ride_preference_2" required="" checked=""> <label for="id_ride_preference_2" class="form-check-label">
-            Lyft Ride
-        </label> </div> </div> <div id="hint_id_ride_preference" class="form-text">Please select your ride preference.</div> </div>
-
-        <button class="btn btn-sm btn-outline-primary" type="submit">Update</button>
-        <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:ridePreference_list' %}">Cancel</a>
+                        {% csrf_token %}
+                        <div id="div_id_ride_preference" class="mb-3"> 
+                            <label class="form-label requiredField">Ride preference<span class="asteriskField">*</span> </label> 
+                           <div class="py-2"> 
+                                
+                                <div class="form-check"> 
+                                   <input type="radio" class="form-check-input" name="ride_preference" value="UberRide" id="id_ride_preference_1" required="">
+                                   <label for="id_ride_preference_1" class="form-check-label">Uber Ride</label> 
+                                </div> 
+                                <div class="form-check"> 
+                                    <input type="radio" class="form-check-input" name="ride_preference" value="LyftRide" id="id_ride_preference_2" required="" checked=""> 
+                                    <label for="id_ride_preference_2" class="form-check-label">Lyft Ride</label> 
+                                </div> 
+                            </div> 
+                            <div id="hint_id_ride_preference" class="form-text">Please select your ride preference.</div>
+                        </div>
+                         <button class="btn btn-sm btn-outline-primary" type="submit">Update</button>
+                         <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:ridePreference_list' %}">Cancel</a>
                     </form>
                    
                 </div>

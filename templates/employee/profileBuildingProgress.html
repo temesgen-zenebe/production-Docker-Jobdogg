@@ -17,7 +17,7 @@
     <div class="container mt-5"> 
         <div class="position-relative m-4">
            
-        <div class="progress my-3 mx-auto" style="height: 20px; width:96%;">
+        <div class="progress my-3 mx-auto" style="height: 25px; width:96%;">
             <div class="shadow text-white progress-bar 
             {% if progress_percentage < 7.14 %}bg-Eminence
             {% elif progress_percentage < 14.29 %}bg-Turquoise
@@ -922,14 +922,11 @@
                                 <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i></button>
                             </div>
                         </div>
-                        <div class="modal-body ">
-                            <!-- Example Code -->
-                            <div class="position-relative mb-4">
-                                <img src="{% static 'images/banner-skilltest.png'%}" width="100%" height="40%" class="img-fluid" alt="banner">
-                                
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table ">
+                        <div class="modal-body gap-3 ">
+                            <div class="card my-3 shadow" style="max-width: 100%;">
+                                <div class="card-body">
+                                  <div class="table-responsive mb-3">
+                                  <table class="table ">
                                     <thead>
                                         <tr>
                                         <th scope="col">No.</th>
@@ -985,30 +982,44 @@
                                             {% endfor %}
                                         {% endif %}
                                     </tbody>
-                                </table>
+                                  </table>
                              
+                                  </div>
+                                </div>
                             </div>
-                            
-                            <div class="bd-callout bd-callout-info">
+                           <!---->
+                            <div class="card mx-auto" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <div class="col-md-4 px-2  py-2 d-none d-lg-block">
+                                    <img src="{% static 'images/skillTest.png'%}" width="100%" height="200" class="img-fluid m-3 " alt="banner">
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card-body">
+                                        <div class="bd-callout bd-callout-info">
                                 
-                                <h6>Notce:</h6>
-                                <hr>
-                                      <ul class="list-unstyled list-group-flush ">
-                                        <li >
+                                          <h6>Notce:</h6>
+                                         <hr>
+                                         <ul class="list-unstyled list-group-flush ">
+                                          <li >
                                           <i class="bi bi-info-circle "></i> <small>You are not supposed to take more than two skill tests.</small>
-                                        </li>
-                                        <li>
+                                          </li>
+                                           <li>
                                           <i class="bi bi-info-circle"></i> <small> Your test results from skill tests will not be shared with anyone other than the respective employers.</small>
-                                        </li>
-                                        <li>
+                                           </li>
+                                           <li>
                                           <i class="bi bi-info-circle"></i> <small>You can retake one skill test multiple times to aim for improved results.</small>
-                                        </li>
-                                        <li>
+                                           </li>
+                                           <li>
                                           <i class="bi bi-info-circle"></i> <small> The objectives of skill tests are to elevate you as the best candidate in the eyes of employers.</small>
-                                        </li>
-                                      </ul>
+                                          </li>
+                                         </ul>
                                    
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
                             </div>
+                           
                         </div> 
                     </div>
                 </div>
