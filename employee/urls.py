@@ -2,8 +2,15 @@ from . import views
 from django.urls import path
 from employee import views
 from .views import (
-    #-------Policies------
     
+    #RidePreference
+    RidePreferenceCreateView,
+    RidePreferenceDetailView,
+    RidePreferenceListView,
+    RidePreferenceUpdateView,
+    RidePreferenceDeleteView,
+    
+    #--Policies------
     PoliciesListView,
     PoliciesDetailView,
     PoliciesAcceptView,
@@ -13,11 +20,11 @@ from .views import (
     PolicyListView,
     AcceptPoliciesView,
     
-    #
+    #Dashboard
     DashboardInformation,
     ProfileBuildingProgress,
     
-    #----BasicInformation----
+    #--BasicInformation----
     BasicInformationListView,
     BasicInformationCreateView,
     BasicInformationDetailView,
@@ -249,5 +256,12 @@ urlpatterns = [
     path('bankAccount/<slug:slug>/', views.BankAccountDetailView.as_view(), name='bankAccount_detail'),
     path('bankAccount/<slug:slug>/update/', views.BankAccountUpdateView.as_view(), name='bankAccount_update'),
     path('bankAccount/<slug:slug>/delete/', views.BankAccountDeleteView.as_view(), name='bankAccount_delete'),
-
+    
+    #RidePreference
+    path('ride_preferences/', RidePreferenceListView.as_view(), name='ridePreference_list'),
+    path('ride_preferences/create/', RidePreferenceCreateView.as_view(), name='ridePreference_create'),
+    path('ride_preferences/<slug:slug>/', RidePreferenceDetailView.as_view(), name='ridePreference_detail'),
+   
+    path('ride_preferences/<slug:slug>/update/', RidePreferenceUpdateView.as_view(), name='ridePreference_update'),
+    path('ride_preferences/<slug:slug>/delete/', RidePreferenceDeleteView.as_view(), name='ridePreference_delete'),
 ]

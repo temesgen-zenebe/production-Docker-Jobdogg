@@ -17,7 +17,7 @@
     <div class="container mt-5"> 
         <div class="position-relative m-4">
            
-        <div class="progress my-3 mx-auto" style="height: 20px; width:95%;">
+        <div class="progress my-3 mx-auto" style="height: 20px; width:96%;">
             <div class="shadow text-white progress-bar 
             {% if progress_percentage < 7.14 %}bg-Eminence
             {% elif progress_percentage < 14.29 %}bg-Turquoise
@@ -33,7 +33,7 @@
             {% elif progress_percentage < 85.71 %}bg-Peru
             {% elif progress_percentage < 92.86 %}bg-info
             {% elif progress_percentage < 100.00 %}bg-success
-            {% else %}bg-DarkOliveGreen
+            {% else %}bg-JobdoggOrnge
             {% endif %}"
                role="progressbar" 
                style="width:{{ progress_percentage }}%;" 
@@ -452,7 +452,7 @@
                 {% endif %}
                 {% if progres.Treat_Box_completed %}
                 <div class="col step-item ">
-                    <div class="card border-left-DarkOliveGreen shadow h-100 py-2">
+                    <div class="card border-left-JobdoggOrnge shadow h-100 py-2">
                         <div class="card-body">
                             <h6 class="card-text"><i class="bi bi-taxi-front-fill fs-5 px-1"></i>Select Ride</h6>
                             <small class="">Step 12: Select Ride</small>
@@ -462,7 +462,7 @@
                                 <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
                                     <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                                 </button>
-                                <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-Peru"><i class="bi bi-pen"></i></a>
+                                <a href="{% url 'employee:ridePreference_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Jobdogg"><i class="bi bi-pen"></i></a>
                             </div>
                             {% else %}
                              <!-- Button trigger modal -->
@@ -482,7 +482,7 @@
             </div>
             {% else %}
             <div class="row row-cols-1 row-cols-sm-8 row-cols-md-10">
-                <div class="card mb-4 bg-warning">
+                <div class="card mb-4 ">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">you must stere built your profile</h6>
                     </div>
@@ -1632,7 +1632,6 @@
                         <div class="container parent mb-5">
                          <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                         
                             <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 m-auto">
                                 <div class='col'>
                                   <input type="radio" name="ride_preference" id="id_ride_preference_a" class="d-none imgbgchk" value="UberRide" required="">
@@ -1658,30 +1657,25 @@
                                 </label>
                                 </div>
                             </div>
-                          <div class="modal-footer">
-                            <button name="ridePreferenceFormSubmit" id="ridePreferenceSubmit" class="btn btn-sm btn-outline-info" type="submit">Submit</button>  
-                        </div>
-                       
-                        </form>
-                       <div class="bd-callout bd-callout-info">
-                         <h6 id="conveying-meaning-to-assistive-technologies">
+                            <div class="modal-footer">
+                              <button name="ridePreferenceFormSubmit" id="ridePreferenceSubmit" class="btn btn-sm btn-outline-info" type="submit">Submit</button>  
+                            </div>
+                          </form>
+                          <div class="bd-callout bd-callout-info">
+                           <h6 id="conveying-meaning-to-assistive-technologies">
                             Attention: Picking Ride Preference </h6>
-                          <small>
+                           <small>
                             <ul>
-                                <li>
-                            Please be informed that "Picking Ride Preference Das" is not a guarantee for 
+                              <li>Please be informed that "Picking Ride Preference " is not a guarantee for 
                             100% assured ride service. However, we strive to enhance your journey by offering 
-                            tailored packages to meet your unique needs. </li>
-                            <li>Our commitment to providing a reliable
-                            and comfortable experience remains unwavering.</li>
-                            <li>For further details and personalized
-                            assistance, kindly reach out to our dedicated Customer Service team. We are here to 
+                            tailored packages to meet your unique needs.</li>
+                              <li>Our commitment to providing a reliable and comfortable experience remains unwavering.</li>
+                              <li>For further details and personalized assistance, kindly reach out to our dedicated Customer Service team. We are here to 
                             address any queries or concerns you may have.</li>
-
-                            Customer Service: [Insert Customer Service Number]
-                           </ul>
-                          </small>
-                    </div>
+                              <li>Customer Service: [Insert Customer Service Number]</li>
+                            </ul>
+                            </small>
+                        </div>
                     </div>
                     </div>
                    

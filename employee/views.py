@@ -15,7 +15,7 @@ from django.views.generic import (ListView, CreateView, UpdateView, DetailView, 
 
 from .models import (
     BankAccount, Card, Category,CertificationLicense, CheckByEmail, EWallet,Education,EmployeePreferences,Experience, 
-    Policies,Position,Profile, Skill, SkillSetTestResult,UserAcceptedPolicies,
+    Policies,Position,Profile, RidePreference, Skill, SkillSetTestResult,UserAcceptedPolicies,
     BasicInformation,Personal,Military,Safety_Video_and_Test, VideoResume, 
     Background_Check,    
 )
@@ -1565,9 +1565,52 @@ class BankAccountDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'bankAccount'
     success_url = reverse_lazy('employee:bankAccount_list')
     
+#RidePreference
+class RidePreferenceListView(LoginRequiredMixin, ListView):
+    model = RidePreference
+    template_name = 'employee/ridePreference/ridePreference_list.html'
+    context_object_name = 'ridePreference'
+    paginate_by = 10
+
+class RidePreferenceDetailView(LoginRequiredMixin, DetailView):
+    model = RidePreference
+    template_name = 'employee/ridePreference/ridePreference_detail.html'
+    context_object_name = 'ridePreference'
+
+class RidePreferenceCreateView(LoginRequiredMixin, CreateView):
+    model = RidePreference
+    form_class = RidePreferenceForm
+    template_name = 'employee/ridePreference/ridePreference_create.html'
+    success_url = reverse_lazy('employee:ridePreference_list')
     
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     
-    
-    
-     
-     
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            
+        if not profile.Background_Check_completed:
+            return redirect('employee:ridePreference_list')
+        
+        profile.Treat_Box_completed = True
+        
+        profile.save()
+        
+        return super().dispatch(request, *args, **kwargs)
+
+class RidePreferenceUpdateView(LoginRequiredMixin, UpdateView):
+    model = RidePreference
+    form_class = RidePreferenceForm
+    template_name = 'employee/ridePreference/ridePreference_update.html'
+    context_object_name = 'ridePreference'
+    success_url = reverse_lazy('employee:ridePreference_list')
+
+class RidePreferenceDeleteView(LoginRequiredMixin, DeleteView): 
+    model = RidePreference
+    template_name = 'employee/ridePreference/ridePreference_confirm_delete.html'
+    context_object_name = 'ridePreference'
+    success_url = reverse_lazy('employee:ridePreference_list')
