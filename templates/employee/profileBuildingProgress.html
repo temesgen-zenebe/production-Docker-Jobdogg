@@ -924,6 +924,19 @@
                         </div>
                         <div class="modal-body gap-3 ">
                             <div class="card my-3 shadow" style="max-width: 100%;">
+                                <div class="card-header">
+                                    <small>**To begin the SkillsTest, click the 'Start' button.
+                                         Once you've completed the test, please return to this page to update your results. Good luck!
+                                         {% if not testList %}
+                                        
+                                         <form method="post" action="{% url 'employee:generate_test' %}">
+                                            {% csrf_token %}
+                                            <!-- Other form elements if any -->
+                                            <button type="submit" class="btn btn-sm btn-outline-info">Generate My Skill Test</button>
+                                          </form>
+                                         {% endif %}
+                                   </small>
+                                </div>
                                 <div class="card-body">
                                   <div class="table-responsive mb-3">
                                   <table class="table ">
@@ -977,7 +990,7 @@
                                             <td>{{position_list.created|date:"F j, Y"}}</td>
                                             <td>{{position_list.updated|date:"F j, Y"}}</td>
                                             <td><a class="btn btn-sm btn-outline-warning"
-                                                href="{% url 'employee:skillsettestresult-update' slug=position_list.slug %}"><i class="bi bi-pencil-square"></i></a></td>
+                                                href="{% url 'employee:skillsettestresult-update' slug=position_list.slug %}"><i class="bi bi-pencil-square px-1"></i>Update</a></td>
                                             </tr>
                                             {% endfor %}
                                         {% endif %}

@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect
@@ -9,7 +9,6 @@ from employee.templatetags.mask_ssn import mask_ssn
 from django.views import View
 import logging
 logger = logging.getLogger(__name__)
-
 
 from django.views.generic import (ListView, CreateView, UpdateView, DetailView, DeleteView, FormView)
 
@@ -480,6 +479,36 @@ class OnProgressSkillTestView(LoginRequiredMixin, View):
         OnSkipSkill.save()
         messages.success(request, 'Skip SkillSet OnPrecess successfully.')
         return redirect('employee:profile_building_progress')  
+
+#generating 
+class GenerateSkillTestView(View):
+    def post(self, request, *args, **kwargs):
+        profile = get_object_or_404(Profile, user=request.user)
+        user_preferences = get_object_or_404(EmployeePreferences, user=request.user)
+        positions = user_preferences.desired_positions.all()
+
+        # Assuming you want to get the first position from the list of desired positions
+        assigned_position = positions.first()  # Update this logic if needed
+
+        assigned_test = get_object_or_404(Position, position=assigned_position.position)  # Retrieve the Position instance
+        test_link = assigned_test.skill_test_link
+
+        # Create the SkillSetTestResult object
+        SkillSetTestResult.objects.create(
+            user=request.user,
+            position=assigned_test,  # Assign the Position instance, not the position name
+            skill_test=test_link,
+            states = 'in-progress'
+        )
+        
+        profile.OnProgressSkillTest_completed = True
+        profile.Skipped_completed = False
+        profile.SkillSetTest_completed = False
+        profile.save()
+        messages.success(request, 'SkillSet created successfully.')
+        return redirect('employee:profile_building_progress')
+
+
 
 #Positions View and Dynamic dropdown views
 class PositionsView(View):

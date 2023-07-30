@@ -82,6 +82,7 @@ from .views import (
     #SkipSkillSetTestView
     SkipSkillSetTestView,
     OnProgressSkillTestView,
+    GenerateSkillTestView,
     
     #SkillSetTestResultList
     SkillSetTestResultListView, 
@@ -199,6 +200,7 @@ urlpatterns = [
     #SkipSkillSetTestView
     path('skipSkillSetTestView/', SkipSkillSetTestView.as_view(), name='SkipSkillSetTestView'),
     path('OnProgress/', OnProgressSkillTestView.as_view(), name='OnProgressSetTest'),
+    path('generateMyTest/', GenerateSkillTestView.as_view(), name='generate_test'),
     
     #SkillSetTestResultList 
     path('skillsettestresult/', SkillSetTestResultListView.as_view(), name='skillsettestresult-list'),
@@ -207,6 +209,7 @@ urlpatterns = [
 
     path('skillsettestresult/<slug:slug>/update/', SkillSetTestResultUpdateView.as_view(), name='skillsettestresult-update'),
     path('skillsettestresult/<slug:slug>/delete/', SkillSetTestResultDeleteView.as_view(), name='skillsettestresult-delete'),
+    
 
     #SafetyVideoTest
     path('safety-video-test/', SafetyVideoTestListView.as_view(), name='safetyVideoTest_list'),
@@ -264,4 +267,6 @@ urlpatterns = [
    
     path('ride_preferences/<slug:slug>/update/', RidePreferenceUpdateView.as_view(), name='ridePreference_update'),
     path('ride_preferences/<slug:slug>/delete/', RidePreferenceDeleteView.as_view(), name='ridePreference_delete'),
+
+    
 ]
