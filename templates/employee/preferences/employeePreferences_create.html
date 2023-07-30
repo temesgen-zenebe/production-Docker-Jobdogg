@@ -12,12 +12,61 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body" style="max-height: 600px; overflow-y: auto;">
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form|crispy }}
+                        <div class="form-group">
+                            {{ form.category.label_tag }}
+                            {{ form.category }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.desired_positions.label_tag }}
+                            {{ form.desired_positions }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.skills.label_tag }}
+                            {{ form.skills }}
+                        </div>
+                        <!-- Add the remaining fields in the desired order -->
+                        <div class="form-group">
+                            {{ form.minimum_salary.label_tag }}
+                            {{ form.minimum_salary }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.salary_type.label_tag }}
+                            {{ form.salary_type }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.job_type.label_tag }}
+                            {{ form.job_type }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.location.label_tag }}
+                            {{ form.location }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.work_arrangement_preference.label_tag }}
+                            {{ form.work_arrangement_preference }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.can_relocation.label_tag }}
+                            {{ form.can_relocation }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.years_of_experience.label_tag }}
+                            {{ form.years_of_experience }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.custom_positions.label_tag }}
+                            {{ form.custom_positions }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.custom_skills.label_tag }}
+                            {{ form.custom_skills }}
+                        </div>
                         <button name="preferences"  class="btn btn-sm btn-outline-primary" type="submit">Save</button>
                         <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:employee-preferences-list' %}">Cancle</a>
                     </form>
+                    
                 </div>
                
             </div>

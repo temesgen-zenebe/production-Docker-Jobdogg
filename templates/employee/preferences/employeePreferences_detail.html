@@ -2,24 +2,14 @@
 {% load user_tags %}
 {% load static %}
 {% block dashboard_employee %}
-<div class="col-xl-8 col-lg-7">
+<div class="col-xl-9 col-lg-8">
     <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Employee Preferences Detail</h6>
             <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                    aria-labelledby="dropdownMenuLink">
-                    <div class="dropdown-header">Dropdown Header:</div>
-                    <a class="dropdown-item" href="{% url 'employee:profile_building_progress' %}">profile</a>
-                    <a class="dropdown-item" href="#">update</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Back</a>
-                </div>
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:employee-preferences-list' %}">Back</a>
+                
             </div>
         </div>
         <!-- Card Body -->
@@ -45,13 +35,18 @@
                             <td>{{ preferences.location }}</td>
                         </tr>
                         <tr>
+                            <th>Relocatable</th>
+                            <td>{{ preferences.get_can_relocation_display }}</td>
+                        </tr>
+                        <tr>
+                            <th>Arrangement preference</th>
+                            <td>{{ preferences.work_arrangement_preference }}</td>
+                        </tr>
+                        <tr>
                             <th>Job Type</th>
                             <td>{{ preferences.get_job_type_display }}</td>
                         </tr>
-                        <tr>
-                            <th>Can Relocation</th>
-                            <td>{{ preferences.get_can_relocation_display }}</td>
-                        </tr>
+                        
                         <tr>
                             <th>Years of Experience</th>
                             <td>{{ preferences.years_of_experience }}</td>

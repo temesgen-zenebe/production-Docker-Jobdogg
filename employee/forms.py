@@ -12,7 +12,7 @@ from .models import (
     Education, EmployeePreferences, 
     Experience, Military, Personal, 
     Language, BasicInformation, 
-    Position, SafetyTestResult, 
+    Position, RidePreference, SafetyTestResult, 
     Skill, RettingCommenting, VideoResume,
 )
 from django.utils.safestring import mark_safe
@@ -169,16 +169,12 @@ class EmployeePreferencesForm(forms.ModelForm):
 
     class Meta:
         model = EmployeePreferences
-        fields = [
-            'minimum_salary',
-            'salary_type',
-            'location',
-            'can_relocation',
-            'job_type',
-            'years_of_experience',  
-            'custom_positions',
-            'custom_skills'
-        ]
+        
+        fields = (
+                'minimum_salary','salary_type', 'job_type', 'location',
+                'work_arrangement_preference', 'can_relocation', 
+                'years_of_experience','custom_positions','custom_skills'
+                )
         labels = {
             'can_relocation': 'Are you willing to relocate?',
             'years_of_experience': 'Years of experience'
@@ -187,9 +183,10 @@ class EmployeePreferencesForm(forms.ModelForm):
         widgets = {
             'minimum_salary': forms.NumberInput(attrs={'class': 'numberinput form-control form-control-sm', 'id': 'id_minimum_salary'}),
             'salary_type': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_salary_type'}),
-            'location': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_location'}),
-            'can_relocation': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_can_relocation','placeholder':'select'}),
             'job_type': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_job_type'}),
+            'location': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_location'}),
+            'work_arrangement_preference':forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_work_arrangement_preference'}),
+            'can_relocation': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_can_relocation','placeholder':'select'}),
             'years_of_experience': forms.NumberInput(attrs={'class': 'numberinput form-control form-control-sm', 'id': 'id_years_of_experience'}),
             'custom_positions': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_custom_positions'}),
             'custom_skills': forms.Textarea(attrs={'class': 'textarea form-control form-control-sm', 'id': 'id_custom_skills'}),
@@ -404,12 +401,6 @@ class CheckByEmailForm(forms.ModelForm):
         }
         
         
-        
-# forms.py
-
-from django import forms
-from .models import RidePreference
-
 class RidePreferenceForm(forms.ModelForm):
     class Meta:
         model = RidePreference

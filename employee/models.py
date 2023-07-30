@@ -23,7 +23,8 @@ from common.utils.chooseConstant import (
     DISCHARGE_YEAR_CHOICES, 
     BACKGROUND_CHECK_CHOOSES_STATES,
     DUTY_FLAG_CHOICES,
-    BRANCH, RANK_CHOICES, 
+    BRANCH,
+    LOCATION_CHOICES, RANK_CHOICES, 
     SCHOOL_TYPE_CHOICES,
     DEGREE_TYPE_CHOICES,
     VIDEO_STATES_CHOOSES,
@@ -34,6 +35,7 @@ from common.utils.chooseConstant import (
     TAG_CHOOSES,
     CARD_TYPE_CHOOSE,
     RIDE_CHOOSE,
+    WORK_ARRANGEMENT_CHOICES,
     )
 from multiupload.fields import MultiFileField 
 
@@ -309,15 +311,16 @@ class Skill(models.Model):
 
 class EmployeePreferences(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    minimum_salary = models.DecimalField(max_digits=10, decimal_places=2)
-    salary_type = models.CharField(max_length=20, choices=SALARY_TYPES)
-    location = models.CharField(max_length=100)
-    job_type = models.CharField(max_length=20, choices=JOB_TYPES)
-    can_relocation = models.CharField(max_length=10, choices=RELOCATION)
-    years_of_experience = models.PositiveIntegerField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     desired_positions = models.ManyToManyField(Position, related_name='employee_preferences')
     skills = models.ManyToManyField(Skill)
+    minimum_salary = models.DecimalField(max_digits=10, decimal_places=2)
+    salary_type = models.CharField(max_length=20, choices=SALARY_TYPES)
+    job_type = models.CharField(max_length=20, choices=JOB_TYPES)
+    location = models.CharField(max_length=20,choices=LOCATION_CHOICES,default='HOME_PROXIMITY')
+    work_arrangement_preference = models.CharField(max_length=10,choices=WORK_ARRANGEMENT_CHOICES,default='REMOTE')
+    can_relocation = models.CharField(max_length=10, choices=RELOCATION)
+    years_of_experience = models.PositiveIntegerField()
     custom_positions = models.CharField(max_length=200, null=True, blank=True)
     custom_skills = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True)
@@ -366,7 +369,7 @@ class SkillSetTestResult(models.Model):
     skill_test = models.CharField(max_length=200)
     states = models.CharField(max_length=20, choices=TEST_STATES, default="started")
     result = models.DecimalField(max_digits=5, decimal_places=2, default=00)
-    conformation = models.CharField(max_length=20)
+    conformation = models.CharField(max_length=20, default='')
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -139,6 +139,18 @@ JOB_TYPES = (
         ('temporary', 'Temporary'),
         ('other', 'Other'),
     )
+
+# Location preference choices
+LOCATION_CHOICES = [
+        ('home_proximity', 'Proximity to Home/Family'),
+        ('job_opportunity', 'Job Market and Opportunities'),
+    ]
+#Work arrangement choices
+WORK_ARRANGEMENT_CHOICES = [
+        ('REMOTE', 'Remote'),
+        ('ON_SITE', 'On-site'),
+        ('HYBRID', 'Hybrid'),
+    ]
 #RELOCATION
 RELOCATION = (('Yes', 'Yes'),('No', 'No'),)
 
@@ -181,3 +193,4 @@ RIDE_CHOOSE=(
         ('UberRide', 'Uber Ride'),
         ('LyftRide', 'Lyft Ride'),
     )
+
