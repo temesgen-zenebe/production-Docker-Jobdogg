@@ -269,8 +269,8 @@ urlpatterns = [
     path('ride_preferences/<slug:slug>/delete/', RidePreferenceDeleteView.as_view(), name='ridePreference_delete'),
 
     path('taxDocumentSetting/', views.TaxDocumentSettingListView.as_view(), name='tax_document_setting_list'),
-    path('taxDocumentSetting/<slug:slug>/', views.TaxDocumentSettingDetailView.as_view(), name='tax_document_setting_detail'),
     path('taxDocumentSetting/create/', views.TaxDocumentSettingCreateView.as_view(), name='tax_document_setting_create'),
+    path('taxDocumentSetting/<slug:slug>/', views.TaxDocumentSettingDetailView.as_view(), name='tax_document_setting_detail'),
     path('taxDocumentSetting/<slug:slug>/update/', views.TaxDocumentSettingUpdateView.as_view(), name='tax_document_setting_update'),
     path('taxDocumentSetting/<slug:slug>/delete/', views.TaxDocumentSettingDeleteView.as_view(), name='tax_document_setting_delete'),
 ]

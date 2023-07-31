@@ -1,0 +1,51 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Tax Documents Create{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-8 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h5>create Tax Documents  </h5>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                       
+                        <form method="POST" enctype="multipart/form-data">
+                            <div id="div_id_taxUserType" class="mb-3"> 
+                                <label for="taxUserTypeSelect" class="form-label requiredField">
+                                  TaxUserType<span class="asteriskField">*</span> </label> 
+                                <select name="taxUserType" class="form-control form-control-sm select form-select" id="taxUserTypeSelect" required=""> 
+                                   <option value="employee">Employee</option> 
+                                   <option value="contractor">Contractor/Freelancer</option>
+                               </select> 
+                            </div> 
+                            <div id="div_id_formType" class="mb-3"> 
+                                <label for="formTypeSelect" class="form-label requiredField">
+                                   FormType<span class="asteriskField">*</span> </label> 
+                                <select name="formType" class="form-control form-control-sm select form-select" id="formTypeSelect" required=""></select>
+                             </div> 
+                             <div id="div_id_uploadedDocuments" class="mb-3"> 
+                                <label for="id_uploadedDocuments" class="form-label requiredField">
+                                  UploadedDocuments<span class="asteriskField">*</span> </label> 
+                                <div> 
+                                    <input type="file" name="uploadedDocuments" class="form-control form-control-file" id="id_uploadedDocuments" required=""> 
+                                </div> 
+                            </div>
+
+                        <div class="btn-group gap-2">
+                          <button class="btn btn-sm btn-outline-primary" type="submit">Save</button>
+                          <a href="{% url 'employee:tax_document_setting_list' %}" class="btn btn-sm btn-outline-secondary" >Cancel</a>
+                        </div>
+                    </form>
+                    
+                </div>
+               
+            </div>
+        </div>
+    <!-- End Example Code -->
+{% endblock %}

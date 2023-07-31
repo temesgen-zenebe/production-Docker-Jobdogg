@@ -933,9 +933,9 @@
                                             <td>{% if progress %}
                                                     {% for progres in progress %}
                                                         {% if progres.Skipped_completed or progres.OnProgressSkillTest_completed %}
-                                                        <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Start</a>
+                                                        <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}" target="_blank">Start</a>
                                                         {% elif progres.SkillSetTest_completed  %}
-                                                        <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}"target="_blank">Retake</a>
+                                                        <a class="btn btn-sm btn-outline-success" href="{{position_list.skill_test}}" target="_blank">Retake</a>
                                                         {% endif %}
                                                     {% endfor %}
                                                 {% endif %}

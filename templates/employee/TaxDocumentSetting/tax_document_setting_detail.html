@@ -1,0 +1,33 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load user_tags %}
+{% block title %}Tax Document Detail{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+    <div class="col-xl-6 col-lg-6">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                <h6>{{tax_document_setting.user.username|capfirst}} Tax Document Detail</h6>
+                <div class="btn-group gap-2">
+                    <a href="{% url 'employee:tax_document_setting_update' slug=tax_document_setting.slug %}" class="btn btn-sm btn-outline-success">Edit</a>
+                    <a href="{% url 'employee:tax_document_setting_list' %}" class="btn btn-sm btn-outline-primary">Back</a>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">States :</dt>
+                    <dd class="col-sm-8">{{ tax_document_setting.states }}</dd>
+                    <dt class="col-sm-4">Uploaded Documents :</dt>
+                    <dd class="col-sm-8">{{ tax_document_setting.uploadedDocuments }}</dd>
+                    <dt class="col-sm-4">Form Type :</dt>
+                    <dd class="col-sm-8">{{ tax_document_setting.formType }}</dd>
+                    <dt class="col-sm-4">TaxUserType :</dt>
+                    <dd class="col-sm-8">{{ tax_document_setting.taxUserType }}</dd>
+                  </dl>
+            </div>   
+        </div>
+    </div>
+<!-- End Example Code -->
+{% endblock %}

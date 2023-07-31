@@ -1652,12 +1652,16 @@ class TaxDocumentSettingDetailView(LoginRequiredMixin, DetailView):
     model = TaxDocumentSetting
     template_name = 'employee/TaxDocumentSetting/tax_document_setting_detail.html'
     context_object_name = 'tax_document_setting'
-# CRUD views
+
 class TaxDocumentSettingCreateView(LoginRequiredMixin, CreateView):
     model = TaxDocumentSetting
     form_class = TaxDocumentSettingForm
     template_name = 'employee/TaxDocumentSetting/tax_document_setting_form.html'
     success_url = reverse_lazy('employee:tax_document_setting_list')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class TaxDocumentSettingUpdateView(LoginRequiredMixin, UpdateView):
     model = TaxDocumentSetting

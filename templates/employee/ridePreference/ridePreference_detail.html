@@ -41,11 +41,3 @@
 <!-- End Example Code -->
 {% endblock %}
 
-
-
-<div class="container">
-    <h1>{{ ridePreference }}</h1>
-    <!-- Display other details of the preference here -->
-    <a href="{% url 'employee:ridePreference_update' ridePreference.slug %}" class="btn btn-primary">Update</a>
-    <a href="{% url 'employee:ridePreference_delete' ridePreference.slug %}" class="btn btn-danger">Delete</a>
-</div>

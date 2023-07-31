@@ -473,5 +473,32 @@
       }
 </script>
 
+<!-- Your jQuery script -->
+<script>
+  $(document).ready(function () {
+      // Define the options for the formType select input based on the selected taxUserType
+      const formTypeOptions = {
+          'employee': ['w-4'],
+          'contractor': ['w-9'],
+      };
+  
+      // Function to update formType select options
+      function updateFormTypeOptions() {
+          const selectedTaxUserType = $('#taxUserTypeSelect').val();
+          const formTypeSelect = $('#formTypeSelect');
+          formTypeSelect.empty();
+  
+          const formTypes = formTypeOptions[selectedTaxUserType];
+          for (const formType of formTypes) {
+              const option = `<option value="${formType}">${formType}</option>`;
+              formTypeSelect.append(option);
+          }
+      }
+  
+      // Call the function initially and whenever taxUserType select changes
+      updateFormTypeOptions();
+      $('#taxUserTypeSelect').on('change', updateFormTypeOptions);
+  });
+</script>
 </body>
 </html>

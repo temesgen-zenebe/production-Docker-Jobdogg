@@ -1,0 +1,76 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load user_tags %}
+{% block title %}Tax documentation Information{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+    <div class="col-xl-10 col-lg-9">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                <h6>Tax documentation</h6>
+                <div class="btn-group gap-2">
+                 
+                  <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Back</a>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <ul class="list-unstyled ">
+                    {% for tax_document in tax_document_settings %}
+                    <li >
+                        <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                            <div>
+                               <!--{{ user.username }}-->
+                               {% if user.avatar and not form.avatar.errors %}
+                               <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded mr-3 align-self-center img-fluid shadow"/>
+                               {% else %}
+                               <img class="rounded mr-3 align-self-center img-fluid shadow" src="{% static 'images/userPlaceHolder.png' %}" alt="Logo" width="30" height="40"/>
+                               {% endif %}
+                               <a class="text-dark text-decoration-none" href="{% url 'employee:tax_document_setting_detail' slug=tax_document.slug %}">{{ tax_document.user.username|capfirst}}
+                                 <i class="bi bi-box-arrow-in-up-right px-1"></i>
+                               </a>
+                               
+                            </div>
+                            <div class="d-flex flex-row align-items-center justify-content-between gap-2">
+                                
+                                <a class="btn btn-sm btn-outline-warning"
+                                 href="{% url 'employee:tax_document_setting_update' slug=tax_document.slug %}"><i class="bi bi-pen"></i></a>
+                                {% if user.is_authenticated and user|is_admin %}
+                                <a class="btn btn-sm btn-outline-danger" 
+                                 href="{% url 'employee:tax_document_setting_delete' slug=tax_document.slug %}">Delete</a>
+                                {% endif %}
+                                </div>
+                        </div>
+                    </li>
+                    {% empty %}
+                   
+                        <dl class="row mb-2">
+                           <div class="col-sm-12 s1-font"><p>Please choose the right tax form, download it, fill it out, sign it, and then come back to upload it.</p></div>
+                        
+                        </dl>
+                  
+                    <div class="card-body mb-4 shadow border-left-JobdoggOrnge">
+                       <dl class="row gap-2 s1-font">
+                          <dt class="col-sm-7 ">Are you an Employee? Download the form, fill it out, sign it, and then come back and upload it. </dt>
+                          <dd class="col-sm-4 "><a class="btn btn-sm btn-outline-success" href="https://www.irs.gov/pub/irs-pdf/fw4.pdf" target="_blank">Download W-4 Form (Employee)</a></dd>
+                        </dl>
+                    </div>
+                    <div class="card-body my-2 shadow border-left-JobdoggOrnge ">
+                        <dl class="row  gap-2 s1-font" >
+                           <dt class="col-sm-7">Are you Contractor/Freelancer ? Download the form, fill it out, sign it, and then come back and upload it.</dt>
+                           <dd class="col-sm-4"><a class="btn btn-sm btn-outline-info" href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" target="_blank">Download W-9 Form(Contractor)</a></dd>
+                        </dl>
+                    </div>
+                     
+                    {% endfor %}
+                </ul>  
+            </div>
+           <div class="card-footer text-center">
+            {% if not tax_document_settings %}
+              <a class="btn btn-sm btn-outline-Jobdogg" href="{% url 'employee:tax_document_setting_create' %}">Upload your completed form here</a>
+            {% endif %}
+           </div>
+        </div>
+    </div>
+{% endblock %}
