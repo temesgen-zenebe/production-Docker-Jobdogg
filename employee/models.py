@@ -22,11 +22,14 @@ from django.utils import timezone
 from common.utils.chooseConstant import (
     DISCHARGE_YEAR_CHOICES, 
     BACKGROUND_CHECK_CHOOSES_STATES,
+    DOCUMENT_STATES_CHOICES,
     DUTY_FLAG_CHOICES,
     BRANCH,
+    FORM_TYPE_CHOICES,
     LOCATION_CHOICES, RANK_CHOICES, 
     SCHOOL_TYPE_CHOICES,
     DEGREE_TYPE_CHOICES,
+    TAX_USER_TYPE_CHOICES,
     VIDEO_STATES_CHOOSES,
     SALARY_TYPES,
     JOB_TYPES,
@@ -602,3 +605,23 @@ class RidePreference(models.Model):
 
     def __str__(self):
         return f"{self.user}-{self.ride_preference}"
+
+#TaxDocumentSetting
+class TaxDocumentSetting(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    taxUserType = models.CharField(max_length=20, choices=TAX_USER_TYPE_CHOICES)
+    formType = models.CharField(max_length=5, choices=FORM_TYPE_CHOICES)
+    uploadedDocuments = models.FileField(upload_to='taxDocuments/%Y/%m/%d')
+    states = models.CharField(max_length=10, choices=DOCUMENT_STATES_CHOICES, default='pending')
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.taxUserType} {self.formType} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.taxUserType} - {self.formType}"

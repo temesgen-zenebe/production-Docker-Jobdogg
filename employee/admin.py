@@ -3,7 +3,7 @@ from django.contrib import admin
 from common.utils.text import unique_slug
 from .models import (
     BankAccount, Education, Background_Check,CertificationLicense,CheckByEmail,EWallet, 
-    Experience, Military, Profile, Policies, RidePreference,SafetyTestResult,UserAcceptedPolicies,
+    Experience, Military, Profile, Policies, RidePreference,SafetyTestResult, TaxDocumentSetting,UserAcceptedPolicies,
     BasicInformation, SkillSetTestResult,Safety_Video_and_Test,VideoResume,
     RettingCommenting,Card,
      
@@ -181,8 +181,6 @@ class EmployeePreferencesAdmin(admin.ModelAdmin):
     list_filter = ('job_type', 'location', 'work_arrangement_preference', 'can_relocation', 'years_of_experience', 'created', 'updated')
     search_fields = ('user__username', 'category__name', 'desired_positions__name', 'skills__name')
    
-    
-
     def get_desired_positions(self, obj):
         return ", ".join([str(position) for position in obj.desired_positions.all()])
 
@@ -334,8 +332,6 @@ class BankAccountAdmin(admin.ModelAdmin):
             obj.slug = unique_slug(f"{obj.method_type} {obj.user.username}")
         super().save_model(request, obj, form, change)
 
-
-
 #RidePreference
 @admin.register(RidePreference)
 class RidePreferenceAdmin(admin.ModelAdmin):
@@ -346,3 +342,13 @@ class RidePreferenceAdmin(admin.ModelAdmin):
         if obj:  # editing an existing object
             return ('created', 'updated', 'slug')
         return ()
+
+#TaxDocumentSetting
+@admin.register(TaxDocumentSetting)
+class TaxDocumentSettingAdmin(admin.ModelAdmin):
+    model = TaxDocumentSetting
+    list_display = ('user', 'taxUserType', 'formType', 'states', 'slug', 'created','updated')
+    list_filter = ('taxUserType', 'formType', 'states', 'created', 'updated')
+    search_fields = ('user__username', 'taxUserType', 'formType')
+    readonly_fields = ['slug' , 'created', 'updated']
+

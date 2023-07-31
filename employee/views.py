@@ -14,7 +14,7 @@ from django.views.generic import (ListView, CreateView, UpdateView, DetailView, 
 
 from .models import (
     BankAccount, Card, Category,CertificationLicense, CheckByEmail, EWallet,Education,EmployeePreferences,Experience, 
-    Policies,Position,Profile, RidePreference, Skill, SkillSetTestResult,UserAcceptedPolicies,
+    Policies,Position,Profile, RidePreference, Skill, SkillSetTestResult, TaxDocumentSetting,UserAcceptedPolicies,
     BasicInformation,Personal,Military,Safety_Video_and_Test, VideoResume, 
     Background_Check,    
 )
@@ -36,6 +36,7 @@ from .forms import (
     PersonalForm,
     BasicInformationForm,
     SafetyTestResultForm,
+    TaxDocumentSettingForm,
     VideoResumeForm,
     BackgroundCheckForm,
     CardForm,  
@@ -507,8 +508,6 @@ class GenerateSkillTestView(View):
         profile.save()
         messages.success(request, 'SkillSet created successfully.')
         return redirect('employee:profile_building_progress')
-
-
 
 #Positions View and Dynamic dropdown views
 class PositionsView(View):
@@ -1430,8 +1429,6 @@ class CheckByEmailDeleteView(LoginRequiredMixin, DeleteView):
     context_object_name = 'check'
     success_url = reverse_lazy('employee:check_by_email_list')
 
-
-#EWallet
 class EWalletListView(LoginRequiredMixin, ListView):
     model = EWallet
     template_name = 'employee/PaymentPreferences/eWallet/e_wallet_list.html'
@@ -1643,3 +1640,34 @@ class RidePreferenceDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'employee/ridePreference/ridePreference_confirm_delete.html'
     context_object_name = 'ridePreference'
     success_url = reverse_lazy('employee:ridePreference_list')
+    
+#TaxDocumentSetting  
+class TaxDocumentSettingListView(LoginRequiredMixin, ListView):
+    model = TaxDocumentSetting
+    template_name = 'employee/TaxDocumentSetting/tax_document_setting_list.html'
+    context_object_name = 'tax_document_settings'
+    paginate_by = 10
+
+class TaxDocumentSettingDetailView(LoginRequiredMixin, DetailView):
+    model = TaxDocumentSetting
+    template_name = 'employee/TaxDocumentSetting/tax_document_setting_detail.html'
+    context_object_name = 'tax_document_setting'
+# CRUD views
+class TaxDocumentSettingCreateView(LoginRequiredMixin, CreateView):
+    model = TaxDocumentSetting
+    form_class = TaxDocumentSettingForm
+    template_name = 'employee/TaxDocumentSetting/tax_document_setting_form.html'
+    success_url = reverse_lazy('employee:tax_document_setting_list')
+
+class TaxDocumentSettingUpdateView(LoginRequiredMixin, UpdateView):
+    model = TaxDocumentSetting
+    form_class = TaxDocumentSettingForm
+    template_name = 'employee/TaxDocumentSetting/tax_document_setting_update.html'
+    context_object_name = 'tax_document_setting'
+    success_url = reverse_lazy('employee:tax_document_setting_list')
+
+class TaxDocumentSettingDeleteView(LoginRequiredMixin, DeleteView):
+    model = TaxDocumentSetting
+    template_name = 'employee/TaxDocumentSetting/tax_document_setting_confirm_delete.html'
+    context_object_name = 'tax_document_setting'
+    success_url = reverse_lazy('employee:tax_document_setting_list')

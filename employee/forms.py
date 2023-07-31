@@ -13,7 +13,7 @@ from .models import (
     Experience, Military, Personal, 
     Language, BasicInformation, 
     Position, RidePreference, SafetyTestResult, 
-    Skill, RettingCommenting, VideoResume,
+    Skill, RettingCommenting, TaxDocumentSetting, VideoResume,
 )
 from django.utils.safestring import mark_safe
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
@@ -411,4 +411,14 @@ class RidePreferenceForm(forms.ModelForm):
         }
         help_texts = {
             'ride_preference': 'Please select your ride preference.',
+        }
+        
+class TaxDocumentSettingForm(forms.ModelForm):
+    class Meta:
+        model = TaxDocumentSetting
+        fields = ['taxUserType', 'formType', 'uploadedDocuments']
+        widgets = {
+            'taxUserType': forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'taxUserTypeSelect'}),
+            'formType': forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'formTypeSelect'}),
+            'uploadedDocuments': forms.FileInput(attrs={'class': 'form-control-file'}),
         }

@@ -194,3 +194,21 @@ RIDE_CHOOSE=(
         ('LyftRide', 'Lyft Ride'),
     )
 
+# Choices for the 'taxUserType' field
+TAX_USER_TYPE_CHOICES = (
+    ('employee', 'Employee'),
+    ('contractor', 'Contractor/Freelancer'),
+)
+
+# Choices for the 'formType' field
+FORM_TYPE_CHOICES = (
+    ('w-4', 'W-4'),
+    ('w-9', 'W-9'),
+)
+
+# Choices for the 'states' field
+DOCUMENT_STATES_CHOICES = (
+    ('valid', 'Valid'),
+    ('invalid', 'Invalid'),
+    ('pending', 'Pending'),
+)
