@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from users.templatetags.user_tags import is_admin, is_employee, is_employer
+from django.contrib.auth.decorators import login_required
 
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
@@ -46,4 +47,31 @@ def dashboard(request):
 
 
 
-    
+@login_required
+def employee_home(request):
+    # Your code for employee homepage view
+    return render(request, 'pages/employee_home.html')
+
+@login_required
+def employer_home(request):
+    # Your code for employer homepage view
+    return render(request, 'pages/employer_home.html')
+
+@login_required
+def admin_home(request):
+    # Your code for admin homepage view
+    return render(request, 'pages/admin_home.html')
+
+
+def redirect_to_homepage(request):
+   
+    if request.user.is_authenticated:
+        if is_admin(request.user): # Admin
+            return redirect('pages:adminHomePage')
+        elif is_employee(request.user):  # Employee (Assuming you have a custom user model with an 'is_employee' field)
+            return redirect('pages:employeeHomePage')
+        elif is_employer(request.user):  # Employer (Assuming you have a custom user model with an 'is_employer' field)
+            return redirect('pages:employerHomePage')
+
+    # Default fallback if no matching role is found
+    return redirect('pages:employeeHomePage')  # You can set the default to any page you prefer

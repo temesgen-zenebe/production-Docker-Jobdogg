@@ -76,15 +76,19 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'pages:homepage' %}">Home</a>
             </li>
+            {% if user.is_authenticated and user|is_employer %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'pages:gurDoggsView' %}">Our Doggs</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'pages:getStaffView' %}">Get Staff</a>
             </li>
+            {% endif %}
+            {% if user.is_authenticated and user|is_employee %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'pages:getWorkView' %}">Get Work</a>
+              <a class="nav-link" href="{% url 'pages:employeeHomePage' %}">Get Work</a>
             </li>
+            {% endif %}
             {% if not user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account_login' %}">Login</a>

@@ -204,7 +204,7 @@ section.signup{
 .masthead-content {
     position: absolute;
     top: 50%;
-    left: 35%;
+    left: 37%;
     transform: translate(-50%, -50%);
     color: #fff;
     text-align: left;
@@ -213,8 +213,8 @@ section.signup{
 .masthead-content h3 {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
-    width: auto;
-    margin-top: 35px;
+    width: 100%;
+    margin-top: auto;
 }
 
 .masthead-content p {
