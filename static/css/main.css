@@ -204,23 +204,27 @@ section.signup{
 .masthead-content {
     position: absolute;
     top: 50%;
-    left: 40%;
+    left: 35%;
     transform: translate(-50%, -50%);
     color: #fff;
     text-align: left;
 }
 
 .masthead-content h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
+    width: auto;
+    margin-top: 35px;
 }
 
 .masthead-content p {
-    font-size: 1rem;
+    font-size: 15px;
     margin-bottom: 2rem;
+    width: 100%;
+    margin: auto;
   }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
     header.masthead {
       padding-top: 12rem;
       padding-bottom: 12rem;
@@ -228,6 +232,7 @@ section.signup{
     header.masthead h3, header.masthead .h3 {
       font-size: 1.5rem;
     }
+    
 }
 
 section.on-demand{

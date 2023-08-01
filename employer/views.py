@@ -45,8 +45,7 @@ class BeEmployerRequestView(LoginRequiredMixin, View):
         )
         return redirect('employer:vilificationSandMassage')
        
-    
-    
+   
 class ActivateEmployerView(LoginRequiredMixin, View):
     def get(self, request):
         # Update user group to "is_employer" and activate the account
