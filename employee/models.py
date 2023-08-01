@@ -42,10 +42,6 @@ from common.utils.chooseConstant import (
     )
 from multiupload.fields import MultiFileField 
 
-
-#Profile Safety_Video_and_Test, PROFILE DETAILS(Profile Photo ,Tell us all the interesting things about you, 
-# UPLOAD YOUR VIDEO(Supported Video Formats: mp4, mpg, avi, mov, mkv, wmv, ogv, webm, flv You can upload a video, however if it is longer than 2 minutes, it will be cut to 2 minutes.  Record Video or uploading)),
-# Background_Check, Treat_Box,  Select Ride
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     account_created = models.BooleanField(default=False)

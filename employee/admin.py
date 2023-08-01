@@ -5,17 +5,7 @@ from .models import (
     BankAccount, Education, Background_Check,CertificationLicense,CheckByEmail,EWallet, 
     Experience, Military, Profile, Policies, RidePreference,SafetyTestResult, TaxDocumentSetting,UserAcceptedPolicies,
     BasicInformation, SkillSetTestResult,Safety_Video_and_Test,VideoResume,
-    RettingCommenting,Card,
-     
-     #Personal
-     Personal,
-     Language,
-     
-     #preferences
-     Category, 
-     Position, 
-     Skill, 
-     EmployeePreferences, 
+    RettingCommenting,Card,Personal,Language,Category, Position, Skill, EmployeePreferences, 
 )
 
 @admin.register(Profile)
