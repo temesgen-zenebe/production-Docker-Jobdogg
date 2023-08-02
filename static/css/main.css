@@ -94,6 +94,9 @@ a{
 .s1-font{
   font-size: 14px;
 }
+.s2-font{
+  font-size: 16px;
+}
 .textFooter{
   color: #fff;
 }
@@ -200,6 +203,18 @@ section.signup{
     background-size: cover;
     background-position: center;
     margin: 10 auto;
+}
+.training {
+  position: relative;
+  height: 40vh;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  background: linear-gradient(#e06a00, rgba(0, 0, 0, 0.849)), url(/static/images/training.png);
+  background-size: cover;
+  background-position: center;
+  margin: 10 auto;
+  color: #fff;
 }
 .masthead-content {
     position: absolute;
