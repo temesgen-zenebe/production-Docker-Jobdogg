@@ -2,10 +2,10 @@
 {% load static %}
 {% block title %}Get work{% endblock %}
 {% block getWorkView %}
-<div class="container-fluid my-3">
+<div class="container-fluid my-3 getwork">
   <!--menu-->
   
-  <ul class="nav nav-tabs justify-content-center mb-3 s1-font" id="pills-tab" role="tablist">
+  <ul class="nav  nav-underline justify-content-center mb-3 s1-font" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
         <button class="nav-link active text-secondary" id="pills-HowTtWoks-tab" data-bs-toggle="pill" data-bs-target="#pills-HowTtWoks" type="button" role="tab" aria-controls="pills-HowTtWoks" aria-selected="true">
             <i class="bi bi-question-octagon px-1 fontColor-orang"></i>Why Jobdogg</button>
@@ -170,77 +170,134 @@
             <div class="container mt-4">
                 <h4 class="py-2 text-center fontColor-orang">HIRE IN MINUTES </h4>
                 <h6 class="mb-4 text-center fontColor-orang">Step by Step Process:</h6>
-                <div class="row ">
-                    <div class="col-md-6 bg-light ">
-                        <ul class="list-group gap-2  ">
-                            <li class="list-group-item shadow">
-                                <div class="d-flex fontColor-orang "><h3 class=""><i class="bi bi-1-square-fill mx-1"></i></h3><h6> THE PERKS </h6></div>
-                                <ul class="list-group ">
-                                    <li class="list-group-item ">Payroll Options</li>
-                                    <li class="list-group-item ">Ride Sharing</li>
-                                </ul>
-                            </li>
-                            <li class="list-group-item shadow">
-                                <div class="d-flex pb-3 fontColor-orang "><h3 class=""><i class="bi bi-2-square-fill mx-1"></i></h3><h6> LIVE INTERVIEWS </h6></div>
-                                <ul class="list-group ">
-                                    <li class="list-group-item ">Schedule Anytime</li>
-                                    <li class="list-group-item ">On-line live interviews</li>
-                                </ul>
-                            </li>
-                            <li class="list-group-item shadow">
-                                <div class="d-flex pb-3 fontColor-orang"><h3 class=""><i class="bi bi-3-square-fill mx-1"></i></h3><h6> STAR RATED </h6></div>
-                                <ul class="list-group">
-                                    <li class="list-group-item ">Employer Rated</li>
-                                    <li class="list-group-item ">Peer Rated</li>
-                                    <li class="list-group-item ">Community Rated</li>
-                                </ul>
-                            </li>
-                            <li class="list-group-item shadow">
-                                <div class="d-flex pb-3 fontColor-orang"><h3 class=""><i class="bi bi-4-square-fill mx-1"></i></h3><h6> VIDEO RESUME </h6></div>
-                                <ul class="list-group">
-                                    <li class="list-group-item ">Unscripted</li>
-                                    <li class="list-group-item ">Transparent</li>
-                                    <li class="list-group-item ">360° View</li>
-                                    <li class="list-group-item ">Real Identity/Visibilty</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 bg-light ">
-                        <ul class="list-group gap-2">
-                        <li class="list-group-item shadow">
-                                <div class="d-flex pb-3 fontColor-orang"><h3 class=""><i class="bi bi-5-square-fill mx-1"></i></h3><h6> SKILL-SET TESTED</h6></div>
-                                <ul class="list-group ">
-                                    <li class="list-group-item ">3000+ Skill Assessments</li>
-                                    <li class="list-group-item ">7000+ Skill-Sets</li>
-                                    <li class="list-group-item "> Build Your Own and Create for specific needs</li>
-                                </ul>
-                        </li>
-                        <li class="list-group-item shadow">
-                            <div class="d-flex pb-3 fontColor-orang "><h3 class=""><i class="bi bi-6-square-fill mx-1"></i></h3><h6> BUSINESS ANALYTICS</h6></div>
-                            <ul class="list-group ">
-                                <li class="list-group-item ">Run/Print Reports</li>
-                                <li class="list-group-item ">HR Legal/Compliance</li>
-                                <li class="list-group-item ">Calculate</li>
-                                <li class="list-group-item ">Timecards</li>
-        
+                <div class="continer ">
+                    <div class="accordion" id="accordionExample">
+                    <div class="row ">
+                     <div class="col-md-6 bg-light ">
+                      <div class="accordion-item shadow">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <div class="d-flex fontColor-orang "><h3 class=""><i class="bi bi-1-square-fill mx-1"></i></h3><h6>THE PERKS </h6></div>
+                          </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <ul class="list-group list-group-flush s2-font">
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Payroll Options</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Ride Sharing</li>
                             </ul>
-                        </li>
-                        <li class="list-group-item shadow">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item shadow">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <div class="d-flex fontColor-orang "><h3 class=""><i class="bi bi-2-square-fill mx-1"></i></h3><h6> LIVE INTERVIEWS </h6></div>
+                          </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <ul class="list-group list-group-flush s2-font">
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Schedule Anytime</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>On-line live interviews</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item shadow">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <div class="d-flex fontColor-orang"><h3 class=""><i class="bi bi-3-square-fill mx-1"></i></h3><h6> STAR RATED </h6></div>
+                          </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <ul class="list-group list-group-flush s2-font">
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Employer Rated</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Peer Rated</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Community Rated</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item shadow">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <div class="d-flex fontColor-orang"><h3 class=""><i class="bi bi-4-square-fill mx-1"></i></h3><h6> VIDEO RESUME </h6></div>
+                          </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <ul class="list-group list-group-flush s2-font">
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Unscripted</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Transparent</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>360° View</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Real Identity/Visibilty</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 bg-light">
+                    
+                      <div class="accordion-item shadow">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="true" aria-controls="collapse5">
+                            <div class="d-flex fontColor-orang"><h3 class=""><i class="bi bi-5-square-fill mx-1"></i></h3><h6> SKILL-SET TESTED</h6></div>
+                          </button>
+                        </h2>
+                        <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            
+                            <ul class="list-group list-group-flush s2-font">
+                                  <li class="list-group-item "><i class="bi bi-check2-circle px-1 fontColor-orang icon-font"></i>3000+ Skill Assessments</li>
+                                  <li class="list-group-item "><i class="bi bi-check2-circle px-1 fontColor-orang icon-font"></i>7000+ Skill-Sets</li>
+                                  <li class="list-group-item "><i class="bi bi-check2-circle px-1 fontColor-orang icon-font"></i> Build Your Own and Create for specific needs</li>
+                              </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item shadow">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                            <div class="d-flex fontColor-orang "><h3 class=""><i class="bi bi-6-square-fill mx-1"></i></h3><h6> BUSINESS ANALYTICS</h6></div>
+                          </button>
+                        </h2>
+                        <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">  
+                            <ul class="list-group list-group-flush s2-font">
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Run/Print Reports</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>HR Legal/Compliance</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Calculate</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Timecards</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item shadow">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
                             <div class="d-flex pb-3 fontColor-orang"><h3 class=""><i class="bi bi-7-square-fill mx-1"></i></h3><h6> COMPLETED BACKGOUNDS</h6></div>
-                            <ul class="list-group s1-font">
-                                <li class="list-group-item ">7 Year history</li>
-                                <li class="list-group-item ">Education</li>
-                                <li class="list-group-item ">Certifications</li>
-                                <li class="list-group-item ">Employment</li>
-                                <li class="list-group-item ">References</li>
-                                <li class="list-group-item ">E-Verified</li>
+                          </button>
+                        </h2>
+                        <div id="collapse8" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <ul class="list-group list-group-flush s2-font">
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>7 Year history</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Education</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Certifications</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Employment</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>References</li>
+                              <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>E-Verified</li>
                             </ul>
-                        </li>
-                        
-                        </ul>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div> 
+                    </div>
+                   </div>
+                </div>
+
             </div>
         </section>
         <section>
@@ -741,7 +798,7 @@
     
                     <!-- Heading -->
                     <div class="sidebar-heading">
-                        Category
+                        key
                     </div>
     
                     <!-- Nav Item - Pages Collapse Menu -->
@@ -754,11 +811,11 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Industry:</h6>
-                                <a class="collapse-item" href="">Skillset Test</a>
-                                <a class="collapse-item" href="">Safety Video Test</a>
-                                <a class="collapse-item" href="">Tell US All</a>
-                                <a class="collapse-item" href="">Background Check</a>
-                                <a class="collapse-item" href="">Select Ride</a>
+                                <a class="collapse-item" href="">accounting</a>
+                                <a class="collapse-item" href="">Retail</a>
+                                <a class="collapse-item" href="">marketing</a>
+                                <a class="collapse-item" href="">Dealer</a>
+                                <a class="collapse-item" href="">Driver</a>
     
                             </div>
                         </div>

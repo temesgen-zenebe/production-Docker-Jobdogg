@@ -126,6 +126,12 @@ li.textFooter3{
 .fontColor-orang{
   color: #e06a00;
 }
+.getwork h3,
+.getwork h4,
+.getwork h5,
+.getwork h6 {
+      font-weight: bolder;
+}
 .fontColor-blue{
   color: #123f8b;
 }
