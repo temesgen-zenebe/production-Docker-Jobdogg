@@ -77,11 +77,12 @@
             </li>
             {% if user.is_authenticated and user|is_employer %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'pages:gurDoggsView' %}">Our Doggs</a>
+              <a class="nav-link" href="{% url 'pages:employerHomePage' %}">GetStaff</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'pages:getStaffView' %}">Get Staff</a>
+              <a class="nav-link" href="{% url 'pages:gurDoggsView' %}">OurDoggs</a>
             </li>
+           
             {% endif %}
             {% if user.is_authenticated and user|is_employee %}
             <li class="nav-item">
@@ -105,7 +106,6 @@
             
             {% else %}
             <li class="nav-item dropdown">
-              
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ user.username }} |
                 {% if user.avatar and not form.avatar.errors %}
@@ -114,9 +114,9 @@
                   <i class="bi bi-person-circle"  width="30" height="30" class="rounded-circle"></i>
                 {% endif %} 
               </a>
-              <ul class="dropdown-menu dropdown-menu-lg-end">
+              <ul class="dropdown-menu">
                 {% if user.is_authenticated and user|is_employee %}
-                <li><a class="dropdown-item" href="{% url 'employee:dashboard_information_employee' %}">Dashboard</a></li>
+                <li ><a class="dropdown-item" href="{% url 'employee:dashboard_information_employee' %}">Dashboard</a></li>
                 <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
                 <li><a class="dropdown-item" href="{% url 'employee:profile_building_progress' %}">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
@@ -136,7 +136,7 @@
                 <li><a class="dropdown-item" href="#">Viewed</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
                 {% endif %}
-               
+              
                 {% if user.is_authenticated and user|is_admin %}
                 <li><a class="dropdown-item" href="{% url 'supperAdmin:dashboard_information_supperAdmin' %}">Admin Dashboard</a></li>
                 <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>

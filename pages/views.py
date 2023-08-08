@@ -26,7 +26,7 @@ class OurDoggsView(TemplateView):
     template_name = 'pages/ourDoggs.html'
     
 #GetStaffView, 
-class GetStaffView(TemplateView):
+class                 GetStaffView(TemplateView):
     template_name = 'pages/getStaff.html'
     
 #GetWorkView
@@ -43,8 +43,6 @@ def dashboard(request):
         return render(request, 'pages/employer_dashboard.html')
     else:
         return redirect('login')
-
-
 
 
 @login_required
