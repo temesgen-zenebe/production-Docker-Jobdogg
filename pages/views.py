@@ -20,6 +20,9 @@ class AboutUsView(TemplateView):
     
 class ContactUsView(TemplateView):
     template_name = 'pages/contact_us.html'
+ 
+class BlogView(TemplateView):
+    template_name = 'pages/blog.html'
     
 #OurDoggsView, 
 class OurDoggsView(TemplateView):

@@ -5,7 +5,7 @@
     <div id="page-top">
         <!-- Page Wrapper -->
         <div id="wrapper">
-
+            
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary-employer sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -26,6 +26,46 @@
                         <span>Dashboard</span></a>
                 </li>
 
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    company
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                        aria-expanded="true" aria-controls="collapsePages">
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Account Setting</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2  collapse-inner rounded" style="max-height: 200px; overflow-y: auto;">
+                            <h6 class="collapse-header">settings:</h6>
+                            <a class="collapse-item" href="login.html">Account</a>
+                            <a class="collapse-item" href="register.html">Profile</a>
+                            <a class="collapse-item" href="forgot-password.html">Subscription</a>
+                        </div>
+                    </div>
+                </li>
+                 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMessages"
+                        aria-expanded="true" aria-controls="collapseMessages">
+                        <i class="bi bi-envelope-at-fill"></i>
+                        <span>Messages</span>
+                    </a>
+                    <div id="collapseMessages" class="collapse" aria-labelledby="headingMessages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2  collapse-inner rounded" style="max-height: 200px; overflow-y: auto;">
+                            <h6 class="collapse-header">Messages:</h6>
+                            <a class="collapse-item" href="#">Inbox</a>
+                            <a class="collapse-item" href="#">Sand</a>
+                        </div>
+                    </div>
+                </li>
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
@@ -73,47 +113,19 @@
                     </div>
                 </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    company
-                </div>
-
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
-                        <i class="bi bi-gear-fill"></i>
-                        <span>Account Setting</span>
-                    </a>
-                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">settings:</h6>
-                            <a class="collapse-item" href="login.html">Account</a>
-                            <a class="collapse-item" href="register.html">Profile</a>
-                            <a class="collapse-item" href="forgot-password.html">Subscription</a>
-                            <div class="collapse-divider"></div>
-                            <h6 class="collapse-header">Messages:</h6>
-                            <a class="collapse-item" href="#">Inbox</a>
-                            <a class="collapse-item" href="#">Sand</a>
-                        </div>
-                    </div>
-                </li>
-
+                
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span></a>
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Timecard</span></a>
                 </li>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Payments</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -133,8 +145,9 @@
 
             </ul>
             <!-- End of Sidebar -->
-
+            
             <!-- Content Wrapper -->
+           
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
@@ -160,6 +173,8 @@
                                     </button>
                                     <button class="btn btn-outline-Jobdogg" type="button">
                                         <i class="fa-solid fa-sliders"></i>
+                                        <i class="bi bi-funnel"></i>
+                                        <span>Filtering</span>
                                     </button>
                                 </div>
                             </div>
@@ -350,12 +365,14 @@
 
                     </nav>
                     <!-- End of Topbar -->
-                    {% block dashboard_employer %}{% endblock %}
-                   
+                    <div class="position-sticky" style="top: 2rem;">  
+                      {% block dashboard_employer %}{% endblock %}
+                    </div>
 
                 </div>
                 <!-- End of Main Content -->
             </div>
+           
             <!-- End of Content Wrapper -->
         </div>
         <!-- End of Page Wrapper -->
