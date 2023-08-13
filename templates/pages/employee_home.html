@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Get work{% endblock %}
 {% block getWorkView %}
-<div class="container-fluid my-3 getwork">
+<div class="container my-3 getwork">
   <!--menu-->
   
   <ul class="nav  nav-underline justify-content-center mb-3 s1-font" id="pills-tab" role="tablist">
@@ -28,10 +28,10 @@
   <div class="tab-content" id="pills-tabContent">
     <!--why jobdogg?-->
     <div class="tab-pane fade show active" id="pills-HowTtWoks" role="tabpanel" aria-labelledby="pills-HowTtWoks-tab" tabindex="0">
-        <section class="text-center mb-3">
-            <div class="row py-lg-5">
-              <div class="col-lg-7 col-md-7 mx-auto">
-                <h3 class="fw-light pb-2">Wellcome to Jobdogg employee Portal</h3>
+        <section class="text-center">
+            <div class="row py-lg-5 mb-5">
+              <div class="col-lg-7 col-md-7 mx-auto py-3">
+                <h3 class="fw-light pb-2">Welcome to the Jobdogg Employee Portal</h3>
                 <p class="text-muted s3-font">
                     Explore your potential with Jobdogg's empowering features: 'Real Identity & Visibility,'
                     diverse job assignments, flexible work via Everywhere Jobs app, and endless opportunities
@@ -42,9 +42,12 @@
                   <a href="#" class="btn btn-sm btn-outline-Jobdogg my-3">Start Builte your profile</a>
                 </p>
               </div>
+              
             </div>
+            <hr class="fontColor-orang mx-3 ">
         </section>
-        <section class="on-demand">
+
+        <section class="on-demand mb-5">
             <div class="container mx-2">
                 <div class="row ">
                     <div class="col-lg-12">
@@ -106,50 +109,54 @@
                 </div>
             </div>
         </section>
-        <section class="testimonials text-center bg-light ">
-            <div class="container">
+        
+        <section class="testimonials text-center bg-light my-5 pb-4">
+            <div class="container mb-5 ">
                 <h2 class="mb-5 fw-strong fontColor-orang py-3 text-center"><i class="bi bi-quote display-4"></i> What people are saying...</h2>
                 
                 <div class="row ">
                     <div class="col-lg-4">
                         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                            <img class="img-fluid rounded-circle mb-3" src="/static/images/testimonials-1.jpg" alt="...">
+                            <img class="img-fluid rounded-circle mb-3" src="{% static 'images/testimonials-1.jpg' %}" alt="testimonial1">
                             <h5>Margaret E.</h5>
                             <i class="bi bi-chat-right-heart fs-3 px-2 fontColor-orang "></i>
                             <span class="font-weight-light mb-0 s2-font text-start">"This is fantastic! Jobdogg.com is an exceptional platform that streamlined my job search. Thanks so much guys!"
-                                <a class="fontColor-orang" href="/testimonialList"><i class="bi bi-box-arrow-in-up-right "></i></a>
+                                <a class="fontColor-orang" href="{% url 'testimonial:testimonial_list' %}"><i class="bi bi-box-arrow-in-up-right "></i></a>
                             </span>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                            <img class="img-fluid rounded-circle mb-3" src="/static/images/testimonials-2.jpg" alt="...">
+                            <img class="img-fluid rounded-circle mb-3" src="{% static 'images/testimonials-2.jpg' %}" alt="testimonials-2">
                             <h5>Fred S.</h5>
                             <i class="bi bi-chat-right-heart fs-3 px-2 fontColor-orang "></i>
                             <small class="font-weight-light mb-0  s2-font text-start">"I landed my dream job within weeks of signing up. 
                                  I highly recommend Jobdogg.com to job seekers."
-                                 <a class="fontColor-orang" href="/testimonialList"><i class="bi bi-box-arrow-in-up-right "></i></a>
+                                 <a class="fontColor-orang" href="{% url 'testimonial:testimonial_list' %}"><i class="bi bi-box-arrow-in-up-right "></i></a>
                             </small>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                            <img class="img-fluid rounded-circle mb-3" src="/static/images/testimonials-3.jpg" alt="...">
+                            <img class="img-fluid rounded-circle mb-3" src="{% static 'images/testimonials-3.jpg' %}" alt="...">
                             <h5>Sarah W.</h5>
                             <i class="bi bi-chat-right-heart fs-3 px-2 fontColor-orang "></i>
                             <small class="font-weight-light mb-0  s2-font text-start">
                                 "The website's user-friendly interface and personalized job recommendations 
                                 made it easy to find the right fit.Thanks so much for making these freeliy available to us!"
-                                <a class="fontColor-orang" href="/testimonialList"><i class="bi bi-box-arrow-in-up-right "></i></a>
+                                <a class="fontColor-orang" href="{% url 'testimonial:testimonial_list' %}"><i class="bi bi-box-arrow-in-up-right "></i></a>
                             </small>
                         </div>
                     </div>
+                    
                 </div>
-                
+               
             </div>
+            <hr class="fontColor-orang mx-2 ">
         </section>
+
         <section>
-            <div class="my-3 container">
+            <div class="container-fluid my-5 pb-5">
                 <div class="row  text-center align-items-center rounded-3 border shadow-lg">
                   <div class="col-lg-7 p-3" >
                     <h5 class="fw-bold ">Discover the Job that Finds You!</h5>
@@ -161,11 +168,13 @@
                     </div>
                   </div>
                   <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg d-none d-md-block">
-                      <img class="rounded-lg-5" src="{% static 'images/jobdoggpng.com (4).png' %}" alt="" width="720" height="300">
+                      <img class="rounded-lg-5" src="{% static 'images/jobdoggpng.com (4).png' %}" alt="jobdoggpng" width="720" height="300">
                   </div>
                 </div>
             </div>
+           
         </section>
+
         <section>    
             <div class="container mt-4">
                 <h4 class="py-2 text-center fontColor-orang">HIRE IN MINUTES </h4>
@@ -300,6 +309,7 @@
 
             </div>
         </section>
+
         <section>
             <div class="container col-xxl-8 px-4 py-5">
                 <div class="row flex-lg-row-reverse align-items-center g-4 py-4">
@@ -313,15 +323,16 @@
                         Empowering you with diverse options, convenient pay, and it's always FREE. 
                         Join Jobdogg for your ultimate career journey!.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                      <button href type="button" class="btn btn-sm btn-outline-info btn-lg px-4">JOIN NOW</button>
+                      <button href type="button" class="btn btn-sm btn-outline-Jobdogg btn-lg px-4">JOIN NOW</button>
                     </div>
                   </div>
                 </div>
               </div>
         </section>
+
         <!--JOBS ON DEMAND-->
         <section> 
-          <div class="container">
+          <div class="container py-5">
             <div class="row g-0 my-5">
             <h3 class="fontColor-orang text-center pb-3">JOBS ON DEMAND</h3>
             <div class="col-lg-6 order-lg-2 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('/static/images/pngwing.com (55).png')">
@@ -346,8 +357,10 @@
                 
             </div>
             </div>
+            
           </div>
         </section> 
+
         <!--FAQ-->
         <section> 
 
@@ -552,6 +565,7 @@
                 </div>
             </div>
         </section> 
+
     </div>
     <!--Job Search-->
     <div class="tab-pane fade  " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
