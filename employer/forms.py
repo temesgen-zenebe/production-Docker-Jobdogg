@@ -21,7 +21,7 @@ class CompanyProfileCreateForm(forms.ModelForm):
             'zip_code': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'employees': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
             'industry': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'description': forms.Textarea(attrs={'class': 'form-control form-control-sm'}),
+            'description': forms.Textarea(attrs={'class': 'form-control form-control-sm','rows': 3}),
             'representative_full_name': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'Department': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'telephone': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),

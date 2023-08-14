@@ -41,6 +41,7 @@
 <link rel="stylesheet" href="{% static 'css/slider.css' %}">
 {% block javascript %}{% endblock %}
 {% block stylesheet %}{% endblock %}
+
 <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
 <title>{% block title %}{% endblock %} | jobDoogg</title>
 </head>
@@ -284,6 +285,7 @@
 <script type="text/javascript" src="{% static 'js/sb-admin-2.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/employeeJobSearh.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/employer/employerProfileMulitipleForm.js' %}"></script>
 
 <script async>
       // Get the last checkbox element
@@ -506,5 +508,8 @@
       $('#taxUserTypeSelect').on('change', updateFormTypeOptions);
   });
 </script>
+
+
+
 </body>
 </html>

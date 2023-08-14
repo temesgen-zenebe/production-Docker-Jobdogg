@@ -3,205 +3,141 @@
 {% load crispy_forms_tags %}
 {% block title %}Create Company Profile{% endblock %}
 {% block dashboard_employer %}
-<div class="container-fluid ">
-    <!-- Content Row -->
-    <div class="row">
-        <!-- Area Chart -->
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="col-xl-5 col-lg-6">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Create Company Profile</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                            aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
+<link rel="stylesheet" href="{% static 'css/employer/employerMultiStepForm.css' %}">
+<div class="container">
+
+    <!-- MultiStep Form -->
+    <div class="row gap-2 ">
+        <div class="col-md-10 col-md-offset-5 mt-3">
+            <!-- progressbar -->
+            <ul id="progressbar">
+                <li class="active">Basic Information </li>
+                <li>Representative Information</li>
+                <li>Additional Information</li>
+            </ul>
+       </div>
+        <div class="col-md-8 col-md-offset-5">
+            
+            <form method="post" enctype="multipart/form-data" id="msform">
+                    {% csrf_token %}
+              
+                <!-- fieldsets -->
+                <fieldset>
+                    <h3 class="fs-title">Basic Information </h3>
+                    <h3 class="fs-subtitle">Tell us something more about you</h3>
+                    <div class="form-group">
+                        {{ form.company_name.label_tag }}
+                        {{ form.company_name }}
                     </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
                     
-                            <!--Basic Information Panel-->
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="flush-headingThree">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                  Basic Information Panel
-                                </button>
-                              </h2>
-                              <div id="flush-collapseThree" class="accordion-collapse collapse show" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample" style="">
-                                <div class="accordion-body">
-                                    <div class="form-group">
-                                        {{ form.company_name.label_tag }}
-                                        {{ form.company_name }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.logo.label_tag }}
-                                        {{ form.logo }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.headquarters_address.label_tag }}
-                                        {{ form.headquarters_address }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.city.label_tag }}
-                                        {{ form.city }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.state.label_tag }}
-                                        {{ form.state }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.country.label_tag }}
-                                        {{ form.country }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.zip_code.label_tag }}
-                                        {{ form.zip_code }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.employees.label_tag }}
-                                        {{ form.employees }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.industry.label_tag }}
-                                        {{ form.industry }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.description.label_tag }}
-                                        {{ form.description }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.video.label_tag }}
-                                        {{ form.video }}
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                           
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-5 col-lg-7">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Create Company Profile</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                            aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
+                    <div class="form-group">
+                        {{ form.headquarters_address.label_tag }}
+                        {{ form.headquarters_address }}
                     </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
                     
-                 
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
-                                    Representative Information Panel
-                                </button>
-                              </h2>
-                              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
-                                <div class="accordion-body">
-                                    <div class="form-group">
-                                        {{ form.representative_full_name.label_tag }}
-                                        {{ form.representative_full_name }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.Department.label_tag }}
-                                        {{ form.Department }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.telephone.label_tag }}
-                                        {{ form.telephone }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.website.label_tag }}
-                                        {{ form.website }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.email.label_tag }}
-                                        {{ form.email }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.fax.label_tag }}
-                                        {{ form.fax }}
-                                    </div>
-                                    
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <!-- Additional Information Panel -->
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="flush-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                  Additional Information
-                                </button>
-                              </h2>
-                              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample" style="">
-                                <div class="accordion-body">
-                                    <div class="form-group">
-                                        {{ form.opening_hours.label_tag }}
-                                        {{ form.opening_hours }}
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        {{ form.google_map_link.label_tag }}
-                                        {{ form.google_map_link }}
-                                    </div>
-                                </div>
-                              </div>
-                            </div> 
-                        
-                   
+                    <div class="form-group">
+                        {{ form.city.label_tag }}
+                        {{ form.city }}
+                    </div>
                     
-                </div>
-            </div>
+                    <div class="form-group">
+                        {{ form.state.label_tag }}
+                        {{ form.state }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.country.label_tag }}
+                        {{ form.country }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.zip_code.label_tag }}
+                        {{ form.zip_code }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.logo.label_tag }}
+                        {{ form.logo }}
+                    </div>
+                    
+                    
+                    <input type="button" name="next" class="next action-button" value="Next"/>
+                </fieldset>
+                <fieldset>
+                    <h3 class="fs-title">Representative Information</h3>
+                    <h3 class="fs-subtitle">Your Representative Information</h3>
+                    <div class="form-group">
+                        {{ form.representative_full_name.label_tag }}
+                        {{ form.representative_full_name }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.Department.label_tag }}
+                        {{ form.Department }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.telephone.label_tag }}
+                        {{ form.telephone }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.website.label_tag }}
+                        {{ form.website }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.fax.label_tag }}
+                        {{ form.fax }}
+                    </div>
+                    <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                    <input type="button" name="next" class="next action-button" value="Next"/>
+                </fieldset>
+                <fieldset>
+                    <h3 class="fs-title">Additional Information</h3>
+                    <h3 class="fs-subtitle">Tell More About you</h3>
+                    <div class="form-group">
+                        {{ form.employees.label_tag }}
+                        {{ form.employees }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.industry.label_tag }}
+                        {{ form.industry }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.video.label_tag }}
+                        {{ form.video }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.opening_hours.label_tag }}
+                        {{ form.opening_hours }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.google_map_link.label_tag }}
+                        {{ form.google_map_link }}
+                    </div>
+                    <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                    <!--<input type="submit" name="submit" class="submit action-button" value="Submit"/>-->
+                    <button type="submit" class="action-button">Submit</button>
+                </fieldset>
+            </form>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
-    </div>
-   
+    <!-- /.MultiStep Form -->
+    
 </div>
+
 {% endblock %}
