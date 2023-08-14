@@ -35,23 +35,52 @@
                     company
                 </div>
 
-                <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Nav Item - Pages Collapse Menu Key Policies and Agreements -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                         aria-expanded="true" aria-controls="collapsePages">
                         <i class="bi bi-gear-fill"></i>
-                        <span>Account Setting</span>
+                        <span>Profile Setting</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2  collapse-inner rounded" style="max-height: 200px; overflow-y: auto;">
                             <h6 class="collapse-header">settings:</h6>
                             <a class="collapse-item" href="login.html">Account</a>
-                            <a class="collapse-item" href="register.html">Profile</a>
+                            <a class="collapse-item" href="{% url 'employer:company-profile-list' %}">Profile</a>
                             <a class="collapse-item" href="forgot-password.html">Subscription</a>
                         </div>
                     </div>
                 </li>
-                 
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#PoliciesPages"
+                        aria-expanded="true" aria-controls="PoliciesPages">
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Key Policies & Terms</span>
+                    </a>
+                    <div id="PoliciesPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2  collapse-inner rounded" style="max-height: 200px; overflow-y: auto;">
+                            <h6 class="collapse-header">Policies and Terms :</h6>
+                            <a class="collapse-item" href="">sign & Accept</a>
+                            <a class="collapse-item" href="">Viewe & Read</a>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#AgreementsPages"
+                        aria-expanded="true" aria-controls="AgreementsPages">
+                        <i class="bi bi-gear-fill"></i>
+                        <span>MS Agreenent</span>
+                    </a>
+                    <div id="AgreementsPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2  collapse-inner rounded" style="max-height: 200px; overflow-y: auto;">
+                            <p class="collapse-header">MASTER SERVICES AGREEMENT</p>
+                            <a class="collapse-item" href="">sign & Accept</a>
+                            <a class="collapse-item" href="">Viewe & Read</a>
+                            <a class="collapse-item" href="">Expiration Status</a>
+                        </div>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMessages"
                         aria-expanded="true" aria-controls="collapseMessages">
