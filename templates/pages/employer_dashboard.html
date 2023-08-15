@@ -37,17 +37,31 @@
 
                 <!-- Nav Item - Pages Collapse Menu Key Policies and Agreements -->
                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accountPages"
+                        aria-expanded="true" aria-controls="accountPages">
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Account setting</span>
+                    </a>
+                    <div id="accountPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2  collapse-inner rounded" style="max-height: 200px; overflow-y: auto;">
+                            <h6 class="collapse-header">Account:</h6>
+                            <a class="collapse-item" href="{% url 'my-account' %}">Account Update</a>
+                            <a class="collapse-item" href="forgot-password.html">Subscription</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                         aria-expanded="true" aria-controls="collapsePages">
                         <i class="bi bi-gear-fill"></i>
-                        <span>Profile Setting</span>
+                        <span>Profile setting</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2  collapse-inner rounded" style="max-height: 200px; overflow-y: auto;">
-                            <h6 class="collapse-header">settings:</h6>
-                            <a class="collapse-item" href="login.html">Account</a>
+                            <h6 class="collapse-header">profile:</h6>
+                            <a class="collapse-item" href="{% url 'employer:profile_building_progress_controller' %}">Building progress</a>
                             <a class="collapse-item" href="{% url 'employer:company-profile-list' %}">Profile</a>
-                            <a class="collapse-item" href="forgot-password.html">Subscription</a>
+                            
                         </div>
                     </div>
                 </li>

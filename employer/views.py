@@ -3,7 +3,7 @@ from django.views.generic import CreateView, TemplateView, ListView
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django import forms
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 from django.contrib.auth.models import Group
 from django.conf import settings
@@ -13,7 +13,7 @@ from common.utils.email import send_email
 from django.core.mail import send_mail
 import uuid
 from employer.forms import CompanyProfileCreateForm
-from employer.models import CompanyProfile
+from employer.models import CompanyProfile,ProfileBuildingController
 
 User = settings.AUTH_USER_MODEL
 
@@ -77,7 +77,9 @@ class CompanyProfileListView(LoginRequiredMixin, ListView):
     model = CompanyProfile
     template_name = 'employer/companyProfile/company_profile_list.html'  # Use your actual template name
     context_object_name = 'company_profiles'
-    ordering = ['-created']  # Ordering the list by 'created' field (descending)
+    
+    def get_queryset(self):
+        return CompanyProfile.objects.filter(user=self.request.user)
 
     
 class CompanyProfileCreateView(LoginRequiredMixin, CreateView):
@@ -89,3 +91,46 @@ class CompanyProfileCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+    
+#----Profile Models ------
+class ProfileBuildingProgressController(LoginRequiredMixin, View):
+    template_name = 'employer/companyProfile/profileBuildingController.html'
+    
+    def get_progress_percentage_controller(self, profile):
+        total_steps = 7  # Total number of steps in the profile
+        completed_steps = sum(
+            [
+                profile.is_account_created,
+                profile.is_company_profile_created,
+                profile.is_payment_information_created,
+                profile.is_police_accepted_created,
+                profile.is_contract_signed_created,
+                profile.is_payment_plan_validated,
+                profile.is_billing_information_created,
+            ]
+        )
+        progress_percentage = (completed_steps / total_steps) * 100
+        return progress_percentage
+ 
+    
+    def get(self, request):
+        try:
+            profile = ProfileBuildingController.objects.get(user=request.user)
+            progress_percentage = self.get_progress_percentage_controller(profile)
+            userProfileProgress = profile
+            
+        except ProfileBuildingController.DoesNotExist:
+            # If the profile doesn't exist, create it
+            profile = ProfileBuildingController.objects.create(user=request.user)
+            userProfileProgress = get_object_or_404(ProfileBuildingController, user=request.user)
+            progress_percentage = self.get_progress_percentage_controller(userProfileProgress)
+          
+
+        context = {
+            'progress': userProfileProgress,
+            'progress_percentage': progress_percentage,      
+        }
+
+        return render(request, self.template_name, context)
+        

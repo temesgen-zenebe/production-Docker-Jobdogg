@@ -106,7 +106,7 @@ body {
 
 /*headings*/
 .fs-title {
-    font-size: 16px;
+    font-size: 14px;
     text-transform: uppercase;
     color: #2C3E50;
     margin-bottom: 10px;
@@ -117,7 +117,7 @@ body {
 
 .fs-subtitle {
     font-weight: normal;
-    font-size: 13px;
+    font-size: 12px;
     color: #666;
     margin-bottom: 20px;
     text-align: center;
@@ -127,6 +127,7 @@ body {
 #progressbar {
     margin-bottom: 30px;
     overflow: hidden;
+    text-align: center;
     /*CSS counters to number the steps*/
     counter-reset: step;
 }

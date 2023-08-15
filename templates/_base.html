@@ -130,7 +130,7 @@
                 {% if user.is_authenticated and user|is_employer %}
                 <li><a class="dropdown-item" href="{% url 'employer:dashboard_information_employer' %}">Dashboard</a></li>
                 <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'employer:company-profile-list' %}">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Calculate</a></li>
                 <li><a class="dropdown-item" href="#">Payment</a></li>
                 <li><a class="dropdown-item" href="#">Timecard</a></li>

@@ -2,17 +2,30 @@ from django.contrib import admin
 from common.utils.text import unique_slug
 from .models import CompanyProfile, ProfileBuildingController
 
+from django.contrib import admin
+from .models import ProfileBuildingController
+
 @admin.register(ProfileBuildingController)
 class ProfileBuildingControllerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'is_account_created', 'is_company_profile_created', 'created', 'updated')
-    list_filter = ('is_account_created', 'is_company_profile_created', 'created', 'updated')
+    list_display = ('user', 
+                    'is_account_created', 'is_company_profile_created', 
+                    'is_payment_information_created', 'is_police_accepted_created', 
+                    'is_contract_signed_created', 'is_payment_plan_validated',
+                    'is_billing_information_created', 'created', 'updated')
+    
+    list_filter = ('is_account_created', 'is_company_profile_created',
+                   'is_payment_information_created', 'is_police_accepted_created',
+                   'is_contract_signed_created', 'is_payment_plan_validated',
+                   'is_billing_information_created', 'created', 'updated')
+    
     search_fields = ('user__username',)
-    prepopulated_fields = {'slug': ('user',)}
+    
 
     def save_model(self, request, obj, form, change):
         if not obj.slug:
-            obj.slug = unique_slug(obj.user.username, ProfileBuildingController)
+            obj.slug = unique_slug(f"{obj.user.username}", ProfileBuildingController)
         super().save_model(request, obj, form, change)
+
 
 
 @admin.register(CompanyProfile)

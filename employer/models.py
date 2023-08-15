@@ -7,7 +7,7 @@ from localflavor.us.models import USStateField
 # Create your models here.
 class ProfileBuildingController(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    is_account_created = models.BooleanField(default=False)
+    is_account_created = models.BooleanField(default=True)
     is_company_profile_created = models.BooleanField(default=False)
     is_payment_information_created = models.BooleanField(default=False)
     is_police_accepted_created = models.BooleanField(default=False)
