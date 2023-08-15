@@ -31,5 +31,7 @@ class CompanyProfileCreateForm(forms.ModelForm):
             'opening_hours': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'google_map_link': forms.URLInput(attrs={'class': 'form-control form-control-sm'}),
         }
-
+        help_texts = {
+             'opening_hours':'eg. Weekend Hours (Mon-Fri 9:00 AM - 5:00 PM) & Weekday Hours (Sat-Sun 3:00 AM - 2:00 PM).'
+        }
    

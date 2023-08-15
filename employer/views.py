@@ -92,6 +92,19 @@ class CompanyProfileCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            BuildingController = ProfileBuildingController.objects.get(user=request.user)
+        except BuildingController.DoesNotExist:
+            BuildingController = ProfileBuildingController(user=request.user)
+            
+        if not BuildingController.is_account_created:
+            BuildingController.is_account_created = True
+            
+        BuildingController.is_company_profile_created= True
+        BuildingController.save()
+        
+        return super().dispatch(request, *args, **kwargs)
     
 #----Profile Models ------
 class ProfileBuildingProgressController(LoginRequiredMixin, View):
@@ -111,7 +124,7 @@ class ProfileBuildingProgressController(LoginRequiredMixin, View):
             ]
         )
         progress_percentage = (completed_steps / total_steps) * 100
-        return progress_percentage
+        return int(progress_percentage)
  
     
     def get(self, request):
