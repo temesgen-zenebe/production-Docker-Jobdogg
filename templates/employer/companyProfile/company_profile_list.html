@@ -38,8 +38,6 @@
     </div>
     <!-- Area Address -->
     <div class="row">
-
-        <!-- Area Chart -->
         <div class="col-xl-8 col-lg-7 ">
             <div class="card shadow mb-4 border-left-info">
                 <!-- Card Header - Dropdown -->
@@ -133,8 +131,6 @@
     </div>
     <!-- Area Address -->
     <div class="row">
-
-        <!-- Area Chart -->
         <div class="col-xl-8 col-lg-7 ">
             <div class="card shadow mb-4 border-left-info">
                 <!-- Card Header - Dropdown -->
@@ -190,9 +186,19 @@
         </div>
     </div>
     {% empty %}
-    <li class="list-group-item">oops!! Your company profiles not yet created!!.
-      <a class="btn btn-sm btn-outline-Jobdogg my-2 px-2" href="{% url 'employer:create-company-profile' %}">Start To Create Your Profile</a>
-    </li>
+    <div class="row ">
+        <div class="col-lg-12">
+            <div class="card bg-light text-primary font-weight-bold  shadow ">
+                <div class="card-body p">
+                      Oops!! Your company profiles not yet created!!.
+                    <div class="text-black-50 small py-2">
+                        <a class="btn btn-sm btn-outline-Jobdogg my-2 px-2" href="{% url 'employer:create-company-profile' %}">Start To Create Your Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
     {% endfor %}
 </div>
 {% endblock %}
