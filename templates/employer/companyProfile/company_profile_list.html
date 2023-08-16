@@ -6,94 +6,78 @@
 
 <div class="container-fluid ">
     {% for profile in company_profiles %}
+     <!-- Area logo -->
     <div class="row">
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow " style="width: 100%;">
-               {% if profile.logo %}
-                <img class="bd-placeholder-img card-img-top" width="100%" height="100" src="{{ profile.logo.url }}" alt="..." ></img>
-               {% else %}
-                <svg class="bd-placeholder-img bd-placeholder-img-lg img-fluid" width="100%" height="100"  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Responsive image" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Responsive image</text></svg>
-                {% endif %}
-            </div>
-        </div>
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-9 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                payout (Annual)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300" aria-hidden="true"></i>
-                        </div>
+       <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4 border-left-primary">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <div class="d-flex gap4"> 
+                    <img src="{{ profile.logo.url }}" alt="mdo" width="40" height="40" class="rounded-circle">
+                    
+                    <h6 class="m-2 font-weight-bold text-warning">
+                        {{profile.company_name|upper}}
+                    </h6>
                     </div>
+                    <div class="dropdown">
+                        <button class="btn btn-light border-0 ropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" type="button" href="" >Update</a></li>
+                        <li><a class="dropdown-item" type="button" href="">Delete</a></li>
+                        <li><a class="dropdown-item" type="button" href="{% url 'employer:profile_building_progress_controller' %}">Back</a></li>
+                        </ul>
+                    </div>
+                
                 </div>
+                <!-- Card Body -->
+                
             </div>
-        </div>
-
-       
+       </div>
     </div>
-
+    <!-- Area Address -->
     <div class="row">
 
         <!-- Area Chart -->
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
+        <div class="col-xl-8 col-lg-7 ">
+            <div class="card shadow mb-4 border-left-info">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400" aria-hidden="true"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+                    <h6 class="m-0 font-weight-bold text-primary">Headquarters  Location</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas id="myAreaChart" style="display: block; width: 235px; height: 160px;" width="470" height="320" class="chartjs-render-monitor"></canvas>
-                    </div>
+                    <h4 class="small font-weight-bold mb-2">Address :<span class="small px-3">{{ profile.headquarters_address}}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">City : <span class="small px-3">{{ profile.city}}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">State : <span class="small px-3">{{ profile.state}}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Country :  <span class="small px-3">{{ profile.country}}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Zip code :<span class="small px-3">{{ profile.zip_code}}</span></h4>
+                  
                 </div>
             </div>
         </div>
 
         <!-- Pie Chart -->
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
+        <div class="col-xl-4 col-lg-5 ">
+            <div class="card shadow mb-4 border-left-success">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400" aria-hidden="true"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+                    <p class="m-0 small font-weight-bold text-primary">Discover Our Identity: Video Presentation</p>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas id="myPieChart" width="470" height="416" style="display: block; width: 235px; height: 208px;" class="chartjs-render-monitor"></canvas>
-                    </div>
+                <div class="card-body py-4 ">
+                    <div class="ratio ratio-16x9">
+                        <div class="embed-responsive-item">
+                          <video controls class="embed-responsive">
+                            <source src="{{ profile.video.url }}" type="{{ profile.video.content_type }}" allowfullscreen>
+                          </video>
+                        </div>
+                      </div>
                     <div class="mt-4 text-center small">
                         <span class="mr-2">
                             <i class="fas fa-circle text-primary" aria-hidden="true"></i> Direct
@@ -109,46 +93,101 @@
             </div>
         </div>
     </div>
-     <!-- Content Row -->
+     <!-- Content Description-->
      <div class="row">
         <!-- Area Chart -->
-        <div class="col-xl-9 col-lg-8">
-            <div class="card shadow mb-4">
+        <div class="col-xl-8 col-lg-5">
+            <div class="card shadow mb-4 border-left-info">
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Company Profiles</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                            aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+                    <h6 class="m-0 font-weight-bold text-primary">Description</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <ul class="list-group">
-                      
-                          <li class="list-group-item">
-                            <h6>{{ profile.company_name }}</h6>
-                            <p>{{ profile.industry }}</p>
-                            <p>Representative: {{ profile.representative_full_name }}</p>
-                            <!-- Add more fields as needed -->
-                          </li>
-                        
-                      </ul>
+                    <p class="small">{{ profile.description }}</p>  
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5">
+            <div class="row gap-1">
+                <div class="col-lg-12">
+                    <div class="card bg-light text-primary font-weight-bold  shadow border-left-info">
+                        <div class="card-body">
+                            Industry Catagory
+                            <div class="text-black-50 small">{{profile.industry}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 ">
+                    <div class="card bg-light text-primary font-weight-bold shadow border-left-info">
+                        <div class="card-body">
+                            Numberes of Employee
+                            <div class="text-black-50 small">{{profile.employees}}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
+    </div>
+    <!-- Area Address -->
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7 ">
+            <div class="card shadow mb-4 border-left-info">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Representative Full Name </h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <h4 class="small font-weight-bold mb-2">Full Name  :<span class="small px-3">{{ profile.representative_full_name }}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Department : <span class="small px-3">{{ profile.Department}}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Telephone : <span class="small px-3">{{ profile.telephone}}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Website :  <span class="small px-3">{{ profile.website}}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Email :<span class="small px-3">{{ profile.email}}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Fax :<span class="small px-3">{{ profile.fax}}</span></h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5 ">
+            <div class="card shadow mb-4 border-left-success">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Accessibility</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body py-4 ">
+                    <div class="row gap-1">
+                        <div class="col-lg-12">
+                            <div class="card bg-light text-primary font-weight-bold  shadow ">
+                                <div class="card-body p">
+                                    Opening hours
+                                    <div class="text-black-50 small py-2">{{profile.opening_hours}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 ">
+                            <div class="card bg-light text-primary font-weight-bold shadow ">
+                                <div class="card-body">
+                                    Google Maps Location
+                                    <div class="text-black-50 small py-2"><a href="{{profile.google_map_link}}">{{profile.google_map_link}}</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     {% empty %}
     <li class="list-group-item">oops!! Your company profiles not yet created!!.
