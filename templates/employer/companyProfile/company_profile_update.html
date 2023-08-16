@@ -1,0 +1,28 @@
+{% extends 'pages/employer_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Update Company Profile{% endblock %}
+{% block dashboard_employer %}
+<link rel="stylesheet" href="{% static 'css/employer/employerMultiStepForm.css' %}">
+<div class="container">
+    <div class="row">
+        <div class="col-xl-8 col-lg-7 ">
+            <div class="card shadow mb-4 border-left-info">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Update Company Profile</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Update</button>
+                        <a href="{% url 'employer:company-profile-list' %}" type="submit" class="btn btn-sm btn-outline-secondary">Back</a>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

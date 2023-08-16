@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import CreateView, TemplateView, ListView
+from django.views.generic import CreateView, UpdateView, DeleteView,TemplateView,ListView
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django import forms
@@ -105,7 +105,31 @@ class CompanyProfileCreateView(LoginRequiredMixin, CreateView):
         BuildingController.save()
         
         return super().dispatch(request, *args, **kwargs)
+  
     
+class CompanyProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = CompanyProfile
+    form_class = CompanyProfileCreateForm
+    template_name = 'employer/companyProfile/company_profile_update.html'
+    success_url = reverse_lazy('employer:company-profile-list')
+
+
+class CompanyProfileDeleteView(LoginRequiredMixin, DeleteView):
+    model = CompanyProfile
+    template_name = 'employer/companyProfile/company_profile_delete.html'
+    success_url = reverse_lazy('employer:company-profile-list')
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            BuildingController = ProfileBuildingController.objects.get(user=request.user)
+        except BuildingController.DoesNotExist:
+            BuildingController = ProfileBuildingController(user=request.user)
+               
+        BuildingController.is_company_profile_created= False
+        BuildingController.save()
+        
+        return super().dispatch(request, *args, **kwargs)
+        
 #----Profile Models ------
 class ProfileBuildingProgressController(LoginRequiredMixin, View):
     template_name = 'employer/companyProfile/profileBuildingController.html'

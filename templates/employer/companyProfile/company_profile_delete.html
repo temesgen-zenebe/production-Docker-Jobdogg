@@ -1,0 +1,30 @@
+{% extends 'pages/employer_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Update Company Profile{% endblock %}
+{% block dashboard_employer %}
+<link rel="stylesheet" href="{% static 'css/employer/employerMultiStepForm.css' %}">
+<div class="container">
+    <div class="row">
+        <div class="col-xl-8 col-lg-7 ">
+            <div class="card shadow mb-4 border-left-danger">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Delete Company Profile</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    
+                    <p>Are you sure you want to delete the company profile for "{{ object.company_name }}"?</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                        <a href="{% url 'employer:company-profile-list' %}" type="submit" class="btn btn-sm btn-outline-secondary">Cancel</a>
+                    </form>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

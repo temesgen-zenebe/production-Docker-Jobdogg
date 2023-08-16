@@ -1,9 +1,15 @@
 from django.urls import path
 
 from .views import (
-    ProfileBuildingProgressController,
+    #company-profile
+    CompanyProfileDeleteView,
+    CompanyProfileUpdateView,
     CompanyProfileCreateView,
     CompanyProfileListView,
+    
+    #ProfileBuildingProgressController
+    ProfileBuildingProgressController,
+    
     DashboardInformation,
     BeEmployerRequestView, 
     #StartTrialView, 
@@ -21,8 +27,11 @@ urlpatterns = [
     # URL for activating the employer account
     path('dashboardInformation/activate_employer/', ActivateEmployerView.as_view(), name='activate_employer'), 
     path('dashboardInformation/employer/', DashboardInformation.as_view(), name='dashboard_information_employer'),
+    
+    #company-profile
     path('company-profile-list/', CompanyProfileListView.as_view(), name='company-profile-list'),
     path('company-profile/create/', CompanyProfileCreateView.as_view(), name='create-company-profile'),
-
+    path('company-profile/<slug:slug>/update', CompanyProfileUpdateView.as_view(), name='company-profile-update'),
+    path('company-profile/<slug:slug>/delete', CompanyProfileDeleteView.as_view(), name='company-profile-delete'),
 ]
 
