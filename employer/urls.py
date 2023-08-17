@@ -6,6 +6,7 @@ from .views import (
     CompanyProfileUpdateView,
     CompanyProfileCreateView,
     CompanyProfileListView,
+    EmployerPolicyListView,
     
     #ProfileBuildingProgressController
     ProfileBuildingProgressController,
@@ -28,6 +29,7 @@ urlpatterns = [
     path('dashboardInformation/activate_employer/', ActivateEmployerView.as_view(), name='activate_employer'), 
     path('dashboardInformation/employer/', DashboardInformation.as_view(), name='dashboard_information_employer'),
     
+    path('company-policies/list/', EmployerPolicyListView.as_view(), name='company_policies_list'),
     #company-profile
     path('company-profile-list/', CompanyProfileListView.as_view(), name='company-profile-list'),
     path('company-profile/create/', CompanyProfileCreateView.as_view(), name='create-company-profile'),

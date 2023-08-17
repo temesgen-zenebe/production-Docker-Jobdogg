@@ -1,0 +1,163 @@
+{% extends 'pages/employer_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load user_tags %}
+{% block title %}Create Company Profile{% endblock %}
+{% block dashboard_employer %}
+<div class="container ">
+    <!-- Example Code -->
+    <div class="col-xl-12 col-lg-10">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                {% if all_policies_accepted %}
+                 <h6 class="m-0 font-weight-bold text-success">Review the policies </h6>
+                {% else %}
+                 <h6 class="m-0 font-weight-bold text-primary">Read and accepted </h6>
+                {% endif %}
+                <div class="dropdown no-arrow">
+                    {% if all_policies_accepted %}   
+                    <div class="d-flex flex-row align-items-center justify-content-between gap-1">            
+                        <a class="btn btn-sm btn-outline-success text-decoration-none" data-bs-toggle="collapse" 
+                            href="#multiCollapseExample2" role="button" aria-expanded="true" aria-controls="multiCollapseExample2">
+                             Read
+                        </a>
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'employer:profile_building_progress_controller' %}">Back</a>
+                    </div>
+                    {% else %}
+                        <a class="btn btn-sm btn-outline-primary text-decoration-none" data-bs-toggle="collapse" 
+                            href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">
+                            <i class="bi bi-arrows-fullscreen text-white-600"></i> Start
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body shadow">
+                <div class="">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="multi-collapse collapsing show" id="multiCollapseExample1" style="">
+                                {% if all_policies_accepted %}
+                                <p>All policies have been accepted.</p>
+                                {% else %}
+                                <form id="policy-form-employer"  method="POST" action="{% url 'employer:company_policies_list' %}" class="needs-validation was-validated" novalidate="">
+                                    {% csrf_token %}
+                                    <div class="card card-body">
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                        
+                                                {% for policy in policies %}
+                                                    <div class="accordion-item ">
+                                                        <h2 class="accordion-header" id="flush-heading{{policy.id}}">
+                                                            <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
+                                                                {{ policy.title }} *
+                                                            </button>
+                                                        </h2>
+                                                        <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
+                                                            <div class="accordion-body " style="overflow: auto; height: 300px;">
+                                                                <div>
+                                                                    <h6 class="card-title">{{ policy.title }}</h6>
+                                                                    <hr>
+                                                                    <hr>
+                                                                    <p class="card-text">
+                                                                        {{ policy.description|safe }}
+                                                                    </p>
+                                                                    {% if user.is_authenticated %}
+                                                                        {% if policy.id not in accepted_policies_ids %}
+                                                                        <!--<input type="radio" name="policy_{{ policy.id }}">-->
+                                                                        <div class="col-12">
+                                                                            <div class="form-check">
+                                                                              <input class="form-check-input" name="policy_{{ policy.id }}" type="checkbox" id="invalidCheck{{ policy.id }}" required="">
+                                                                              <label class="form-check-label" for="invalidCheck">
+                                                                                Agree to terms and conditions
+                                                                              </label>
+                                                                              <div class="invalid-feedback">
+                                                                                You must agree before submitting.
+                                                                              </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {% endif %}
+                                                                            
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row row-cols-lg-auto g-1 align-items-center border-0 ">
+                                            <div class="col-8 text-start px-1 py-1 border-0">
+                                                <div class="form-check ">
+                                                    <input class="form-check-input" type="checkbox" id="inlineFormCheckMane">
+                                                    <label class="form-check-label" for="inlineFormCheckMane">
+                                                    I Read and Accept all.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="col-4 text-end  px-1 py-1 border-none">
+                                                <button class=" btn btn-sm btn-outline-primary" type="submit">I Accept</button>
+                                            </div>
+                                    </div>
+                                    
+                                </form>
+                                {% endif %}
+                                {% if all_policies_accepted %}
+                                <script>
+                                document.getElementById("policy-form-employer").style.display = "none";
+                                </script>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <div class="multi-collapse collapsing show" id="multiCollapseExample2" style="">
+                                <div class="card card-body">
+                                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                                        {% if all_policies_accepted %}
+                                            <p>All policies have been accepted.</p>
+                                            {% for policy in policies %}
+                                                <div class="accordion-item ">
+                                                    <h2 class="accordion-header" id="flush-heading{{policy.id}}">
+                                                        <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
+                                                            {{ policy.title }}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
+                                                        <div class="accordion-body " style="overflow: auto; height: 300px;">
+                                                            <div>
+                                                                <h6 class="card-title">{{ policy.title }}</h6>
+                                                                <hr>
+                                                                <p class="card-text">
+                                                                    {{ policy.description|safe }}
+                                                                </p>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if all_policies_accepted %}
+                <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                    <p>Congratulations! You have successfully accepted all the policies. You can access them at any time by simply clicking the "Read" button.</p>
+                    
+                </div>
+                {% endif %}
+            </div>
+           
+        </div>
+    </div>
+<!-- End Example Code -->
+</div>
+{% endblock %}

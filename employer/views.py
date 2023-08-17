@@ -13,7 +13,7 @@ from common.utils.email import send_email
 from django.core.mail import send_mail
 import uuid
 from employer.forms import CompanyProfileCreateForm
-from employer.models import CompanyProfile,ProfileBuildingController
+from employer.models import CompanyProfile, EmployerAcceptedPolicies, EmployerPoliciesAndTerms,ProfileBuildingController
 
 User = settings.AUTH_USER_MODEL
 
@@ -72,7 +72,48 @@ class ActivateEmployerView(LoginRequiredMixin, View):
 class VilificationSandMassage(TemplateView):
     template_name = 'employer/verification.html'
     
+#----Profile Models ------
+class ProfileBuildingProgressController(LoginRequiredMixin, View):
+    template_name = 'employer/companyProfile/profileBuildingController.html'
+    
+    def get_progress_percentage_controller(self, profile):
+        total_steps = 4  # Total number of steps in the profile
+        completed_steps = sum(
+            [
+                profile.is_account_created,
+                profile.is_company_profile_created,
+                profile.is_payment_information_created,
+                profile.is_police_accepted_created,
+                #profile.is_contract_signed_created,
+                #profile.is_payment_plan_validated,
+                #profile.is_billing_information_created,
+            ]
+        )
+        progress_percentage = (completed_steps / total_steps) * 100
+        return int(progress_percentage)
+ 
+    
+    def get(self, request):
+        try:
+            profile = ProfileBuildingController.objects.get(user=request.user)
+            progress_percentage = self.get_progress_percentage_controller(profile)
+            userProfileProgress = profile
+            
+        except ProfileBuildingController.DoesNotExist:
+            # If the profile doesn't exist, create it
+            profile = ProfileBuildingController.objects.create(user=request.user)
+            userProfileProgress = get_object_or_404(ProfileBuildingController, user=request.user)
+            progress_percentage = self.get_progress_percentage_controller(userProfileProgress)
+          
 
+        context = {
+            'progress': userProfileProgress,
+            'progress_percentage': progress_percentage,      
+        }
+
+        return render(request, self.template_name, context)
+
+#CompanyProfile CRUD
 class CompanyProfileListView(LoginRequiredMixin, ListView):
     model = CompanyProfile
     template_name = 'employer/companyProfile/company_profile_list.html'  # Use your actual template name
@@ -130,44 +171,61 @@ class CompanyProfileDeleteView(LoginRequiredMixin, DeleteView):
         
         return super().dispatch(request, *args, **kwargs)
         
-#----Profile Models ------
-class ProfileBuildingProgressController(LoginRequiredMixin, View):
-    template_name = 'employer/companyProfile/profileBuildingController.html'
-    
-    def get_progress_percentage_controller(self, profile):
-        total_steps = 7  # Total number of steps in the profile
-        completed_steps = sum(
-            [
-                profile.is_account_created,
-                profile.is_company_profile_created,
-                profile.is_payment_information_created,
-                profile.is_police_accepted_created,
-                profile.is_contract_signed_created,
-                profile.is_payment_plan_validated,
-                profile.is_billing_information_created,
-            ]
-        )
-        progress_percentage = (completed_steps / total_steps) * 100
-        return int(progress_percentage)
- 
+
+class EmployerPolicyListView(LoginRequiredMixin, View):
+    template_name = 'employer/policy/policy_list.html'
+    context_object_name = 'policies'
+    acceptedAll = False
     
     def get(self, request):
-        try:
-            profile = ProfileBuildingController.objects.get(user=request.user)
-            progress_percentage = self.get_progress_percentage_controller(profile)
-            userProfileProgress = profile
-            
-        except ProfileBuildingController.DoesNotExist:
-            # If the profile doesn't exist, create it
-            profile = ProfileBuildingController.objects.create(user=request.user)
-            userProfileProgress = get_object_or_404(ProfileBuildingController, user=request.user)
-            progress_percentage = self.get_progress_percentage_controller(userProfileProgress)
-          
+        policies = EmployerPoliciesAndTerms.objects.all()
+        accepted_policies = EmployerAcceptedPolicies.objects.filter(user=request.user)
+        accepted_policies_ids = [policy.policies_id for policy in accepted_policies]
+        total_policies_count = policies.count()
+        accepted_policies_count = len(accepted_policies_ids)
+        all_policies_accepted = accepted_policies_count == total_policies_count
 
         context = {
-            'progress': userProfileProgress,
-            'progress_percentage': progress_percentage,      
+             self.context_object_name: policies,
+            'accepted_policies':accepted_policies,
+            'accepted_policies_ids': accepted_policies_ids,
+            'all_policies_accepted': all_policies_accepted,
         }
-
+       
         return render(request, self.template_name, context)
         
+
+    def post(self, request):
+        
+        policies = EmployerPoliciesAndTerms.objects.all()
+        accepted_policies = []
+
+        for policy in policies:
+            accepted = request.POST.get(f'policy_{policy.id}')
+            if accepted == 'on':
+                accepted_policies.append(EmployerAcceptedPolicies(user=request.user, policies=policy, accepted=True))
+
+        EmployerAcceptedPolicies.objects.bulk_create(accepted_policies)
+        
+        # Retrieve the user's profile
+        
+        accepted_policies = EmployerAcceptedPolicies.objects.filter(user=request.user)
+        accepted_policies_ids = [policy.policies_id for policy in accepted_policies]
+        total_policies_count = policies.count()
+        accepted_policies_count = len(accepted_policies_ids)
+        all_policies_accepted = accepted_policies_count == total_policies_count
+        
+        if all_policies_accepted == True:
+            # Retrieve the user's profile
+            profile, created = ProfileBuildingController.objects.get_or_create(user=request.user)
+            #profile = Profile.objects.get(user=request.user)
+            
+            # Update the  companyPolices_completed field to True
+            profile.is_police_accepted_created = True
+            profile.save()
+            
+        # Update is_accepted context states to True    
+        request.session['is_accepted'] = True
+
+        messages.success(request, 'Policies accepted successfully.')
+        return redirect('employer:profile_building_progress_controller')       

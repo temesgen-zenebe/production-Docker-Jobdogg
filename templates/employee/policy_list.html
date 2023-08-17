@@ -53,9 +53,10 @@
                                                             <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
                                                                 <div class="accordion-body " style="overflow: auto; height: 300px;">
                                                                     <div>
-                                                                        <h5 class="card-title">Special title treatment</h5>
+                                                                        <h6 class="card-title">{{ policy.title}}</h6>
+                                                                        <hr>
                                                                         <p class="card-text">
-                                                                            {{ policy.description }}
+                                                                            {{ policy.description|safe }}
                                                                         </p>
                                                                         {% if user.is_authenticated %}
                                                                             {% if policy.id not in accepted_policies_ids %}
@@ -124,9 +125,10 @@
                                                         <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
                                                             <div class="accordion-body " style="overflow: auto; height: 300px;">
                                                                 <div>
-                                                                    <h5 class="card-title">Special title treatment</h5>
+                                                                    <h5 class="card-title">{{ policy.title }}</h5>
+                                                                    <hr>
                                                                     <p class="card-text">
-                                                                        {{ policy.description }}
+                                                                        {{ policy.description|safe }}
                                                                     </p>
                                                                     
                                                                 </div>

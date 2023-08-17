@@ -1,6 +1,6 @@
 from django.contrib import admin
 from common.utils.text import unique_slug
-from .models import CompanyProfile, ProfileBuildingController
+from .models import CompanyProfile, EmployerAcceptedPolicies, EmployerPoliciesAndTerms, ProfileBuildingController
 
 from django.contrib import admin
 from .models import ProfileBuildingController
@@ -54,3 +54,23 @@ class CompanyProfileAdmin(admin.ModelAdmin):
             obj.slug = unique_slug(f"{obj.company_name} {obj.user.username}", CompanyProfile)
         super().save_model(request, obj, form, change)
 
+
+@admin.register(EmployerPoliciesAndTerms)
+class EmployerPoliciesAndTermsAdmin(admin.ModelAdmin):
+    model = EmployerPoliciesAndTerms
+    list_display = ['title','created','updated','slug']
+   
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('created','updated','slug')
+        return ()
+    
+@admin.register(EmployerAcceptedPolicies)
+class EmployerAcceptedPoliciesAdmin(admin.ModelAdmin):
+    model = EmployerAcceptedPolicies
+    list_display = ['user', 'policies', 'accepted','created','updated','slug']
+   
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('policies', 'accepted','created','updated','slug')
+        return ()  

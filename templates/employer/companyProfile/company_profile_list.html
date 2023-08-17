@@ -4,7 +4,6 @@
 {% load user_tags %}
 {% block title %}Create Company Profile{% endblock %}
 {% block dashboard_employer %}
-
 <div class="container ">
     {% for profile in company_profiles %}
      <!-- Area logo -->
@@ -49,7 +48,7 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <h4 class="small font-weight-bold mb-2">Address :<span class="small px-3">{{ profile.headquarters_address}}</span></h4>
+                    <p class="small font-weight-bold mb-2">Address :<span class="small px-3">{{ profile.headquarters_address|safe}}</span></p>
                     <hr class="small font-weight-light text-warning">
                     <h4 class="small font-weight-bold mb-2">City : <span class="small px-3">{{ profile.city}}</span></h4>
                     <hr class="small font-weight-light text-warning">

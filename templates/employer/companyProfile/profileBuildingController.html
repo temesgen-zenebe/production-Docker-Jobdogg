@@ -4,7 +4,7 @@
 {% block title %}Create Company Profile{% endblock %}
 {% block dashboard_employer %}
 <div class="container-fluid ">
-    {{progress}}
+   <!--{{progress}}
     {{progress_percentage}}
     {{progress.is_account_created}}
     {{progress.is_company_profile_created}}
@@ -16,7 +16,7 @@
     {{progress.is_police_accepted_created}}
     {{progress.is_contract_signed_created}}
     
-    {{progress.is_billing_information_created}}
+    {{progress.is_billing_information_created}}-->
 
     <div class="row no-gutters align-items-center my-5 mx-3">
         <div class="col-auto">
@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Account
                             </div>
                             
@@ -101,7 +101,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 payment 
                             </div>
                             {% if progress.is_payment_information_created %}
@@ -120,35 +120,6 @@
             </div>
         </div>
 
-        <!-- contract_signed Card  -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            {% if progress.is_contract_signed_created %}
-            <div class="card border-left-JobdoggOrnge shadow h-100 py-2">
-            {% else %}
-            <div class="card border-left-warning shadow h-100 py-2">
-            {% endif %}
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                               MS Agreement
-                            </div>
-                            {% if  progress.is_contract_signed_created %}
-                            <small class="fontColor-orang"><i class="bi bi-check2-circle"></i>Completed</small>
-                            <a href="" class="text-decoration-none">
-                                <i class="bi bi-pencil-square  mx-2 fs-6"></i></a>
-                            {% else %}
-                            <div class="font-weight-bold btn btn-sm btn-outline-Jobdogg"><a href="" class="text-decoration-none text-warning ">Sign</a></div>
-                            {% endif %}
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-         
         <!-- police_accepted Card  -->
         <div class="col-xl-3 col-md-6 mb-4">
             {% if progress.is_police_accepted_created %}
@@ -160,18 +131,18 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 polices & Terms</div>
                             {% if progress.is_police_accepted_created  %}
                             <small class="fontColor-orang"><i class="bi bi-check2-circle"></i>Completed</small>
-                            <a href="" class="text-decoration-none">
+                            <a href="{% url 'employer:company_policies_list' %}" class="text-decoration-none">
                                 <i class="bi bi-pencil-square  mx-2 fs-6"></i></a>
                             {% else %}
                             <div class="btn btn-sm btn-outline-Jobdogg"><a href="" class="text-decoration-none">Accept Polices</a></div>
                             {% endif %}
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300" aria-hidden="true"></i>
+                            <i class="bi bi-journals fa-2x text-gray-300" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
