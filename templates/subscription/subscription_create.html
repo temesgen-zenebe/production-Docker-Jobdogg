@@ -1,0 +1,24 @@
+{% extends 'pages/employer_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load user_tags %}
+{% block title %}Create Company Profile{% endblock %}
+{% block dashboard_employer %}
+<div class="container ">
+    <h2>Choose a Subscription Plan</h2>
+    <form method="post">
+      {% csrf_token %}
+      <ul>
+        {% for plan in subscription_plans %}
+          <li>
+            <label>
+              <input type="radio" name="plan_id" value="{{ plan.id }}" required>
+              {{ plan.name }} - ${{ plan.price }} ({{ plan.duration_days }} days)
+            </label>
+          </li>
+        {% endfor %}
+      </ul>
+      <button type="submit">Select Plan</button>
+    </form>
+</div>
+{% endblock %}

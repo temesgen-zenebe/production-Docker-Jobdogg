@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'employee.apps.EmployeeConfig', 
     'employer.apps.EmployerConfig', 
     'supperAdmin.apps.SupperadminConfig', 
+    'subscription.apps.SubscriptionConfig',
     
 ]
 SITE_ID = 1

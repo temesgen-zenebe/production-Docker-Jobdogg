@@ -68,7 +68,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#PoliciesPages"
                         aria-expanded="true" aria-controls="PoliciesPages">
-                        <i class="bi bi-gear-fill"></i>
+                        <i class="bi bi-file-earmark-text-fill"></i>
                         <span>Policies & Terms</span>
                     </a>
                     <div id="PoliciesPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -81,17 +81,33 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#BillingPages"
+                        aria-expanded="true" aria-controls="BillingPages">
+                        <i class="bi bi-credit-card"></i>
+                        <span>Billing</span>
+                    </a>
+                    <div id="BillingPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2  collapse-inner rounded" style="max-height: 200px; overflow-y: auto;">
+                            <p class="collapse-header">Billing</p>
+                            <a class="collapse-item" href="">Outstanding Bill</a>
+                            <a class="collapse-item" href="">Billing status</a>
+                            <a class="collapse-item" href="">Billing terms</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#AgreementsPages"
                         aria-expanded="true" aria-controls="AgreementsPages">
-                        <i class="bi bi-gear-fill"></i>
-                        <span>MS Agreenent</span>
+                        <i class="bi bi-credit-card"></i>
+                        <span>Payments</span>
                     </a>
                     <div id="AgreementsPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2  collapse-inner rounded" style="max-height: 200px; overflow-y: auto;">
-                            <p class="collapse-header">MASTER SERVICES AGREEMENT</p>
-                            <a class="collapse-item" href="">sign & Accept</a>
-                            <a class="collapse-item" href="">Viewe & Read</a>
-                            <a class="collapse-item" href="">Expiration Status</a>
+                            <p class="collapse-header">Manage Payments</p>
+                            <a class="collapse-item" href="{% url 'subscription:user_dashboard' %}">Payments</a>
+                            <a class="collapse-item" href="">Payments terms</a>
+                            <a class="collapse-item" href="{% url 'subscription:subscription_create' %}">payment histories</a>
+                            <a class="collapse-item" href="">reconciling payments</a>
                         </div>
                     </div>
                 </li>
@@ -164,12 +180,12 @@
                         <span>Timecard</span></a>
                 </li>
 
-                <!-- Nav Item - Tables -->
+                <!-- Calculater Tables-->
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Payments</span></a>
-                </li>
+                        <i class="bi bi-calculator-fill"></i></i>
+                        <span>Cost Calculater</span></a>
+                </li> 
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
