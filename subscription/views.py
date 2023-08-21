@@ -21,9 +21,11 @@ class UserDashboardView(View):
 @method_decorator(login_required, name='dispatch')
 class SubscriptionCreateView(View):
     def get(self, request):
-        subscription_plans = SubscriptionPlan.objects.all()
+        subscription_plans = SubscriptionPlan.objects.all() 
+        Billing_creation = Billing.objects.all() 
         context = {
             'subscription_plans': subscription_plans,
+            'Billing_creation':Billing_creation
         }
         return render(request, 'subscription/subscription_create.html', context)
     
@@ -43,15 +45,21 @@ class SubscriptionCreateView(View):
                     end_date=end_date,
                     is_active=True
                 )
+                billing = Billing.objects.create(
+                    customer=request.user,
+                    amount=selected_plan.price,
+                    due_date = end_date,
+                    is_paid = False,
+                    
+                    
+                )
                 # You can add further logic like sending confirmation emails, etc.
-        
-        
                 return redirect('subscription:user_dashboard')  # Redirect to user dashboard
     
 @method_decorator(login_required, name='dispatch')
 class PaymentProcessView(View):
-    def get(self, request, billing_id):
-        billing = Billing.objects.get(id=billing_id)
+    def get(self, request, slug):
+        billing = Billing.objects.get(slug=slug)
         payment_statuses = PaymentStatus.objects.all()
         context = {
             'billing': billing,
@@ -59,8 +67,8 @@ class PaymentProcessView(View):
         }
         return render(request, 'subscription/payment_process.html', context)
 
-    def post(self, request, billing_id):
-        billing = Billing.objects.get(id=billing_id)
+    def post(self, request, slug):
+        billing = Billing.objects.get(slug=slug)
         payment_status_id = request.POST.get('payment_status_id')  # Get selected payment status ID
         payment_status = PaymentStatus.objects.get(id=payment_status_id)
         

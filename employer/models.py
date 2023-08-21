@@ -1,8 +1,15 @@
 from django.db import models
 from django.utils.timezone import datetime
 from django.conf import settings
+from common.utils.chooseConstant import (
+    ACTION_TYPES, DEGREE_TYPE_CHOICES, 
+    JOB_TYPES, RELOCATION, SALARY_TYPES, 
+    WORK_ARRANGEMENT_CHOICES
+)
 from common.utils.text import unique_slug
-from localflavor.us.models import USStateField 
+from localflavor.us.models import USStateField
+
+from employee.models import Category, Position, Skill 
 
 # Create your models here.
 class ProfileBuildingController(models.Model):
@@ -96,3 +103,84 @@ class EmployerAcceptedPolicies(models.Model):
             value = str(self)
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)    
+        
+class SocCode(models.Model):
+    soc_code = models.CharField(max_length=200)
+    position = models.ManyToManyField(Position, related_name='soc_code')
+    
+    def __str__(self):
+        return f'{self.soc_code}'
+     
+class JobRequisition(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='industry')
+    job_title= models.ManyToManyField(Position, related_name='job_title') 
+    custom_job_title = models.CharField(max_length=200, null=True, blank=True)
+    skills = models.ManyToManyField(Skill)
+    required_skills = models.TextField()
+    soc_code = models.CharField(default="1234")
+    department = models.CharField(max_length=255)
+    required_skills = models.TextField()
+    min_experience = models.PositiveIntegerField()
+    min_degree_requirements = models.CharField(max_length=100 , choices=DEGREE_TYPE_CHOICES)
+    job_type = models.CharField(max_length=20, choices=JOB_TYPES)
+    salary_type = models.CharField(max_length=20, choices=SALARY_TYPES)
+    min_salary_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    max_salary_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    work_arrangement_preference = models.CharField(
+        max_length=10,choices=WORK_ARRANGEMENT_CHOICES,default='REMOTE')
+    relocatable = models.CharField(max_length=10, choices=RELOCATION)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2)
+    zip_code = models.CharField(max_length=10)
+    address1 = models.CharField(max_length=255)
+    certifications_required = models.TextField(blank=True)
+    star_rating = models.PositiveIntegerField()
+    contact_person = models.CharField(max_length=255)
+    contact_email = models.EmailField()
+    from_date = models.DateField()
+    to_date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    job_description = models.TextField()
+    number_views = models.PositiveIntegerField(default=1)
+    preference_action = models.CharField(max_length=20, choices=ACTION_TYPES, default="ALL")
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.job_type} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
+
+        super().save(*args, **kwargs)  # Save the object
+        
+    def __str__(self):
+        return f"{self.user.username}-{ self.job_title}'s Preferences"
+
+class TimeCard(models.Model):
+    employer=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    employee=models.CharField(max_length=100)
+    date=models.DateTimeField()
+    start_time=models.DateTimeField()
+    end_time=models.DateTimeField()
+    task=models.CharField(max_length=100)
+    slug=models.SlugField(unique=True)
+    spacial_discretion = models.TextField(max_length=200)
+    incentive = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.employee}"
+            self.slug = unique_slug(value, type(self))
+
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.employee}'s Preferences"

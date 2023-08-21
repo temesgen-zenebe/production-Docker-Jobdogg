@@ -81,9 +81,6 @@ class Billing(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
-
-    def __str__(self):
         return f"{self.customer.username} - {self.amount}"
     
 class CustomerBillingInfo(models.Model):

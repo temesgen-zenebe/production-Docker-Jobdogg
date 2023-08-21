@@ -229,3 +229,36 @@ class EmployerPolicyListView(LoginRequiredMixin, View):
 
         messages.success(request, 'Policies accepted successfully.')
         return redirect('employer:profile_building_progress_controller')       
+
+
+
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import JobRequisition
+from .forms import JobRequisitionForm
+# Your other imports
+
+#JobRequisition
+class JobRequisitionListView(ListView):
+    model = JobRequisition
+    template_name = 'employer/jobRequisition/job_requisition_list.html'
+    context_object_name = 'job_requisitions'
+
+class JobRequisitionDetailView(DetailView):
+    model = JobRequisition
+    template_name = 'employer/jobRequisition/job_requisition_detail.html'
+    context_object_name = 'job_requisition'
+
+class JobRequisitionCreateView(CreateView):
+    model = JobRequisition
+    form_class = JobRequisitionForm
+    template_name = 'employer/jobRequisition/job_requisition_create.html'
+
+class JobRequisitionUpdateView(UpdateView):
+    model = JobRequisition
+    form_class = JobRequisitionForm
+    template_name = 'employer/jobRequisition/job_requisition_update.html'
+
+class JobRequisitionDeleteView(DeleteView):
+    model = JobRequisition
+    success_url = reverse_lazy('employer:job_requisition_list')
+    template_name = 'employer/jobRequisition/job_requisition_confirm_delete.html'

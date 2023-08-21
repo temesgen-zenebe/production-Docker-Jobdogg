@@ -16,6 +16,13 @@ from .views import (
     #StartTrialView, 
     ActivateEmployerView,
     VilificationSandMassage,
+    
+    #JobRequisition
+    JobRequisitionListView, 
+    JobRequisitionDetailView, 
+    JobRequisitionCreateView, 
+    JobRequisitionUpdateView, 
+    JobRequisitionDeleteView,
 )
 
 app_name = 'employer'
@@ -35,5 +42,14 @@ urlpatterns = [
     path('company-profile/create/', CompanyProfileCreateView.as_view(), name='create-company-profile'),
     path('company-profile/<slug:slug>/update', CompanyProfileUpdateView.as_view(), name='company-profile-update'),
     path('company-profile/<slug:slug>/delete', CompanyProfileDeleteView.as_view(), name='company-profile-delete'),
+
+    #JobRequisition
+    path('jobRequisition/', JobRequisitionListView.as_view(), name='job_requisition_list'),
+    path('jobRequisition/create/', JobRequisitionCreateView.as_view(), name='job_requisition_create'),
+    path('jobRequisition/<slug:slug>/', JobRequisitionDetailView.as_view(), name='job_requisition_detail'),
+    path('jobRequisition/<slug:slug>/update/', JobRequisitionUpdateView.as_view(), name='job_requisition_update'),
+    path('jobRequisition/<slug:slug>/delete/', JobRequisitionDeleteView.as_view(), name='job_requisition_delete'),
+    
+
 ]
 

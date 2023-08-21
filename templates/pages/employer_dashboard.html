@@ -1,13 +1,15 @@
 {% extends 'pages/dashboard.html' %}
 {% load user_tags %}
 {% load static %}
-{% block employer %}
+{% block employer %}  
     <div id="page-top">
         <!-- Page Wrapper -->
-        <div id="wrapper">
+        <div id="wrapper" >
             
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary-employer sidebar sidebar-dark accordion" id="accordionSidebar">
+        
+            <ul class="navbar-nav bg-gradient-primary-employer sidebar sidebar-dark accordion " 
+            id="accordionSidebar" >
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'employer:dashboard_information_employer' %}">
@@ -146,7 +148,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Job:</h6>
                             <a class="collapse-item" href="#">Post Job</a>
-                            <a class="collapse-item" href="#">Listed Jobs</a>
+                            <a class="collapse-item" href="{% url 'employer:job_requisition_list' %}">Listed Jobs</a>
                         </div>
                     </div>
                 </li>
@@ -203,6 +205,7 @@
                 </div>
 
             </ul>
+         
             <!-- End of Sidebar -->
             
             <!-- Content Wrapper -->

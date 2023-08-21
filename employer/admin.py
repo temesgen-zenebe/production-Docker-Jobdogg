@@ -1,6 +1,6 @@
 from django.contrib import admin
 from common.utils.text import unique_slug
-from .models import CompanyProfile, EmployerAcceptedPolicies, EmployerPoliciesAndTerms, ProfileBuildingController
+from .models import CompanyProfile, EmployerAcceptedPolicies, EmployerPoliciesAndTerms, JobRequisition, ProfileBuildingController, SocCode
 
 from django.contrib import admin
 from .models import ProfileBuildingController
@@ -74,3 +74,33 @@ class EmployerAcceptedPoliciesAdmin(admin.ModelAdmin):
         if obj: # editing an existing object
             return ('policies', 'accepted','created','updated','slug')
         return ()  
+    
+@admin.register(SocCode)
+class SocCodeAdmin(admin.ModelAdmin):
+    model=SocCode
+    list_display = ('soc_code',)   
+
+
+@admin.register(JobRequisition)
+class JobRequisitionAdmin(admin.ModelAdmin):
+    model=JobRequisition
+    list_display = ('user', 'category', 'min_salary_amount', 'job_type', 'city', 'state', 'zip_code', 'preference_action','created', 'updated')
+    list_filter = ('category','job_type', 'city', 'state', 'created', 'updated')
+    search_fields = ('user__username', 'category__name', 'job_type',  'department', 'city', 'state', 'zip_code')
+
+    def get_job_title(self, obj):
+        return ", ".join([str(position) for position in obj.job_title.all()])
+
+    get_job_title.short_description = 'Job Titles'
+
+    def get_skills(self, obj):
+        return ", ".join([str(skill) for skill in obj.skills.all()])
+
+    get_skills.short_description = 'Skills'
+
+    def get_soc_codes(self, obj):
+        return ", ".join([str(soc_code) for soc_code in obj.soc_code.all()])
+
+    get_soc_codes.short_description = 'SOC Codes'
+
+

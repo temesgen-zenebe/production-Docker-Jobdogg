@@ -20,7 +20,7 @@
       <li>
         {{ invoice.due_date }} - Amount: ${{ invoice.amount }}
         {% if not invoice.is_paid %}
-          <a href="{% url 'subscription:payment_process' billing_id=invoice.id %}" class="btn btn-primary">Pay Now</a>
+          <a href="{% url 'subscription:payment_process'  slug=invoice.slug %}" class="btn btn-primary">Pay Now</a>
         {% endif %}
       </li>
     {% endfor %}

@@ -88,6 +88,8 @@ RANK_CHOICES = [
     ('Other', 'Other'),
 ]
 
+
+
 #school_type
 SCHOOL_TYPE_CHOICES = (
     ('elementary', 'Elementary School'),
@@ -123,9 +125,9 @@ SALARY_TYPES = (
 
 #JOB_TYPES
 JOB_TYPES = (
-        ('temp', 'Temp'),
-        ('temp-Perm', 'Temp-Perm'),
-        ('perm', 'Perm'),
+        ('Temp', 'Temporary'),
+        ('Temp-Perm', 'Temporary to Permanent'),
+        ('Perm', 'Permanent'),
         ('full-time', 'Full-time'),
         ('part-time', 'Part-time'),
         ('contract', 'Contract/Freelance'),
@@ -133,10 +135,7 @@ JOB_TYPES = (
         ('apprenticeship', 'Apprenticeship'),
         ('remote', 'Remote/Telecommute'),
         ('shift-based', 'Shift-based'),
-        ('volunteer', 'Volunteer'),
         ('consultant', 'Consultant'),
-        ('permanent', 'Permanent'),
-        ('temporary', 'Temporary'),
         ('other', 'Other'),
     )
 
@@ -154,7 +153,7 @@ WORK_ARRANGEMENT_CHOICES = [
 #RELOCATION
 RELOCATION = (('Yes', 'Yes'),('No', 'No'),)
 
-
+#skill
 TEST_STATES = (
         ('in-progress', 'In Progress'),
         ('pending', 'Pending'),
@@ -163,6 +162,8 @@ TEST_STATES = (
         ('started', 'Started'),
         
     )
+
+#retting
 TAG_CHOOSES = (
         ('like', 'like'),
         ('dislike', 'dislike'),
@@ -171,12 +172,13 @@ TAG_CHOOSES = (
         ('qualified', 'qualified'),
         
     )
+
+#VIDEO 
 VIDEO_STATES_CHOOSES=(
     ('InProgress', 'InProgress'),
     ('pending', 'pending'),
     ('activated', 'activated'),
 )
-
 
 BACKGROUND_CHECK_CHOOSES_STATES = (
         ("pending", "Pending"),
@@ -212,3 +214,11 @@ DOCUMENT_STATES_CHOICES = (
     ('invalid', 'Invalid'),
     ('pending', 'Pending'),
 )
+
+#JobRequisition
+ACTION_TYPES = (
+        ('SAVE', 'Save'),
+        ('ALERT', 'Alert'),
+        ('POST', 'Post'),
+        ('ALL', 'All'),
+    )
