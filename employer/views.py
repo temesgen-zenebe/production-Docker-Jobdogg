@@ -1,5 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import CreateView, UpdateView, DeleteView,TemplateView,ListView
+from django.http import JsonResponse
+from django.views.generic import CreateView, UpdateView, DeleteView,TemplateView,ListView, DetailView
+
+# Your other imports
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django import forms
@@ -12,8 +15,16 @@ import paypalrestsdk
 from common.utils.email import send_email
 from django.core.mail import send_mail
 import uuid
-from employer.forms import CompanyProfileCreateForm
-from employer.models import CompanyProfile, EmployerAcceptedPolicies, EmployerPoliciesAndTerms,ProfileBuildingController
+from employee.models import Position, Skill
+from employer.forms import CompanyProfileCreateForm, JobRequisitionForm 
+from employer.models import(
+    CompanyProfile,
+    EmployerAcceptedPolicies, 
+    EmployerPoliciesAndTerms,
+    ProfileBuildingController, 
+    JobRequisition,
+    SocCode,
+)
 
 User = settings.AUTH_USER_MODEL
 
@@ -22,8 +33,7 @@ class DashboardInformation(LoginRequiredMixin, View):
     def get(self, request):
         context = {}
         return render(request, self.template_name, context)
-    
-
+   
 class BeEmployerRequestView(LoginRequiredMixin, View):
     
     
@@ -46,8 +56,7 @@ class BeEmployerRequestView(LoginRequiredMixin, View):
             fail_silently=False,
         )
         return redirect('employer:vilificationSandMassage')
-       
-   
+         
 class ActivateEmployerView(LoginRequiredMixin, View):
     def get(self, request):
         # Update user group to "is_employer" and activate the account
@@ -68,10 +77,8 @@ class ActivateEmployerView(LoginRequiredMixin, View):
            
         return redirect('employer:dashboard_information_employer')  # Replace 'dashboard' with the actual URL name of the user's dashboard
 
-
 class VilificationSandMassage(TemplateView):
-    template_name = 'employer/verification.html'
-    
+    template_name = 'employer/verification.html'  
 #----Profile Models ------
 class ProfileBuildingProgressController(LoginRequiredMixin, View):
     template_name = 'employer/companyProfile/profileBuildingController.html'
@@ -121,8 +128,7 @@ class CompanyProfileListView(LoginRequiredMixin, ListView):
     
     def get_queryset(self):
         return CompanyProfile.objects.filter(user=self.request.user)
-
-    
+   
 class CompanyProfileCreateView(LoginRequiredMixin, CreateView):
     model = CompanyProfile
     form_class = CompanyProfileCreateForm
@@ -146,14 +152,12 @@ class CompanyProfileCreateView(LoginRequiredMixin, CreateView):
         BuildingController.save()
         
         return super().dispatch(request, *args, **kwargs)
-  
     
 class CompanyProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = CompanyProfile
     form_class = CompanyProfileCreateForm
     template_name = 'employer/companyProfile/company_profile_update.html'
     success_url = reverse_lazy('employer:company-profile-list')
-
 
 class CompanyProfileDeleteView(LoginRequiredMixin, DeleteView):
     model = CompanyProfile
@@ -171,7 +175,6 @@ class CompanyProfileDeleteView(LoginRequiredMixin, DeleteView):
         
         return super().dispatch(request, *args, **kwargs)
         
-
 class EmployerPolicyListView(LoginRequiredMixin, View):
     template_name = 'employer/policy/policy_list.html'
     context_object_name = 'policies'
@@ -232,33 +235,81 @@ class EmployerPolicyListView(LoginRequiredMixin, View):
 
 
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import JobRequisition
-from .forms import JobRequisitionForm
-# Your other imports
+#job_title View and Dynamic dropdown views
+class JobTitleView(View):
+    def get(self, request):
+        industry_id = request.GET.get('industry_Id')
+        #print(industry_id)
+        job_titles = Position.objects.filter(category_id=industry_id).values('id', 'position')
+        #print(list(job_titles))
+        return JsonResponse({'job_titles': list(job_titles)})
+    
+#requiredSkills View
+class RequiredSkillsView(View):
+    def get(self, request):
+        position_id = request.GET.get('positionId')
+        skills = Skill.objects.filter(position__id=position_id)
+        skills_data = [{'id': skill.id, 'skill': skill.skill} for skill in skills]
+        return JsonResponse({'skills': skills_data})
+    
+class socCodeView(View):
+    def get(self, request):
+        position_id = request.GET.get('positionId')
+        #print(position_id)
+        soc_code = SocCode.objects.filter(position__id=position_id)
+        #print(soc_code)
+        soc_code_data = [{'id': soc.id, 'soc': soc.soc_code} for soc in soc_code]  
+        #print(soc_code_data)
+        return JsonResponse({'socs': soc_code_data})
+
 
 #JobRequisition
-class JobRequisitionListView(ListView):
+class JobRequisitionListView(LoginRequiredMixin, ListView):
     model = JobRequisition
     template_name = 'employer/jobRequisition/job_requisition_list.html'
     context_object_name = 'job_requisitions'
 
-class JobRequisitionDetailView(DetailView):
+class JobRequisitionDetailView(LoginRequiredMixin, DetailView):
     model = JobRequisition
     template_name = 'employer/jobRequisition/job_requisition_detail.html'
     context_object_name = 'job_requisition'
 
-class JobRequisitionCreateView(CreateView):
+class JobRequisitionCreateView(LoginRequiredMixin, CreateView):
     model = JobRequisition
     form_class = JobRequisitionForm
     template_name = 'employer/jobRequisition/job_requisition_create.html'
+    success_url = reverse_lazy('employer:job_requisition_list')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.id_industry = form.cleaned_data['industry'].id  # Assign the id_industry ID
+        
+        # Save the instance to the database
+        self.object = form.save()
+        
+        # Get the selected positions and skills from the form data
+        job_title = self.request.POST.getlist('job_title')
+        required_skills = self.request.POST.getlist('required_skills')
+        soc_code = self.request.POST.getlist('soc_code')
 
-class JobRequisitionUpdateView(UpdateView):
+        # Set the many-to-many relationships
+        self.object.job_title.set(job_title)
+        self.object.required_skills.set(required_skills)
+        self.object.soc_code.set(soc_code)
+
+        return super().form_valid(form)
+
+class JobRequisitionUpdateView(LoginRequiredMixin, UpdateView):
     model = JobRequisition
     form_class = JobRequisitionForm
     template_name = 'employer/jobRequisition/job_requisition_update.html'
+    success_url = reverse_lazy('employer:job_requisition_list')
 
-class JobRequisitionDeleteView(DeleteView):
+
+class JobRequisitionDeleteView(LoginRequiredMixin, DeleteView):
     model = JobRequisition
     success_url = reverse_lazy('employer:job_requisition_list')
     template_name = 'employer/jobRequisition/job_requisition_confirm_delete.html'
+
+
+

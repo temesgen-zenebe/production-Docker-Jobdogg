@@ -7,6 +7,7 @@ from .views import (
     CompanyProfileCreateView,
     CompanyProfileListView,
     EmployerPolicyListView,
+    JobTitleView,
     
     #ProfileBuildingProgressController
     ProfileBuildingProgressController,
@@ -15,6 +16,7 @@ from .views import (
     BeEmployerRequestView, 
     #StartTrialView, 
     ActivateEmployerView,
+    RequiredSkillsView,
     VilificationSandMassage,
     
     #JobRequisition
@@ -23,6 +25,7 @@ from .views import (
     JobRequisitionCreateView, 
     JobRequisitionUpdateView, 
     JobRequisitionDeleteView,
+    socCodeView,
 )
 
 app_name = 'employer'
@@ -43,6 +46,11 @@ urlpatterns = [
     path('company-profile/<slug:slug>/update', CompanyProfileUpdateView.as_view(), name='company-profile-update'),
     path('company-profile/<slug:slug>/delete', CompanyProfileDeleteView.as_view(), name='company-profile-delete'),
 
+    #Positions
+    path('jobTitle/', JobTitleView.as_view(), name='jobTitle'),
+    path('requiredSkills/', RequiredSkillsView.as_view(), name='required_skills'),
+    path('socCode/', socCodeView.as_view(), name='soc_code_data'),
+    
     #JobRequisition
     path('jobRequisition/', JobRequisitionListView.as_view(), name='job_requisition_list'),
     path('jobRequisition/create/', JobRequisitionCreateView.as_view(), name='job_requisition_create'),

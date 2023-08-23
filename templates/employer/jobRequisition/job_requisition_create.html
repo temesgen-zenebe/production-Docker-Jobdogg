@@ -13,8 +13,8 @@
                 
                 <h3 class="fs-subtitle">Create Job Requisition</h3>
                 <div class="form-group">
-                    {{ form.category.label_tag }}
-                    {{ form.category }}
+                    {{ form.industry.label_tag }}
+                    {{ form.industry }}
                 </div>
                 <div class="form-group">
                     {{ form.job_title.label_tag }}
@@ -25,12 +25,12 @@
                     {{ form.custom_job_title }}
                 </div>
                 <div class="form-group">
-                    {{ form.skills.label_tag }}
-                    {{ form.skills }}
-                </div>
-                <div class="form-group">
                     {{ form.required_skills.label_tag }}
                     {{ form.required_skills }}
+                </div>
+                <div class="form-group">
+                    {{ form.custom_required_skills.label_tag }}
+                    {{ form.custom_required_skills }}
                 </div>
                 <div class="form-group">
                     {{ form.soc_code.label_tag }}
@@ -136,4 +136,5 @@
         </form>
     </div>
 </div>
+
 {% endblock %}

@@ -40,48 +40,50 @@ class CompanyProfileCreateForm(forms.ModelForm):
    
 
 class JobRequisitionForm(forms.ModelForm):
-    category = forms.ModelChoiceField(
+    industry = forms.ModelChoiceField(
         queryset=Category.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_category'})
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_industry'})
     )
     job_title = forms.ModelChoiceField(
         queryset=Position.objects.none(),
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_desired_positions'})
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_job_title'})
     )
-    skills = forms.ModelMultipleChoiceField(
+    required_skills = forms.ModelMultipleChoiceField(
         queryset=Skill.objects.none(),
-        widget=forms.SelectMultiple(attrs={'class': 'form-control form-control-sm', 'id': 'id_skills'}),
+        widget=forms.SelectMultiple(attrs={'class': 'form-control form-control-sm', 'id': 'id_required_skills'}),
         help_text="Select multiple options by holding down the Ctrl key (or Command key on Mac)."
     )
     
-    
+    soc_code = forms.ModelChoiceField(
+       queryset=SocCode.objects.none(),
+       widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_soc_code'})
+        
+    )
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
-        if 'category' in self.data:
+        
+        if 'industry' in self.data:
             try:
-                category_id = int(self.data.get('category'))
-                self.fields['job_title'].queryset = Position.objects.filter(category_id=category_id)
+                industry_id = int(self.data.get('industry'))
+                self.fields['job_title'].queryset = Position.objects.filter(category_id=industry_id)
             except (ValueError, TypeError):
                 pass
 
         if 'job_title' in self.data:
             try:
                 job_title_ids = map(int, self.data.getlist('job_title'))
-               
-                self.fields['skills'].queryset = Skill.objects.filter(position__in=job_title_ids)
-               
+                self.fields['required_skills'].queryset = Skill.objects.filter(position__in=job_title_ids)
+                self.fields['soc_code'].queryset = SocCode.objects.filter(position__in=job_title_ids)
             except (ValueError, TypeError):
                 pass
+
             
-        
-
-
     class Meta:
         model = JobRequisition
-        fields = (
-            'category', 'job_title', 'custom_job_title', 'skills', 'required_skills',
+        fields = ('job_title',
+            'custom_job_title','required_skills','custom_required_skills',
             'soc_code', 'department','min_experience', 'min_degree_requirements', 
             'job_type', 'salary_type','min_salary_amount', 'max_salary_amount', 
             'work_arrangement_preference','relocatable', 'city', 'state', 'zip_code', 
@@ -90,7 +92,7 @@ class JobRequisitionForm(forms.ModelForm):
             'number_views','preference_action',
         )
         labels = {
-            'required_skills':'Additional required skills',
+            'custom_required_skills':'Additional required skills',
             'relocatable': 'Are you willing to relocate?',
             'min_experience': 'Minimum Experience',
             'preference_action':'Select Your Preference Action',
@@ -99,7 +101,7 @@ class JobRequisitionForm(forms.ModelForm):
         widgets = {
             'custom_job_title': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'department': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'required_skills': forms.Textarea(attrs={'class': 'form-control form-control-sm','rows': 3}),
+            'custom_required_skills': forms.Textarea(attrs={'class': 'form-control form-control-sm','rows': 3}),
             'job_type':forms.Select(attrs={'class': 'form-control form-control-sm'}),
             'salary_type':forms.Select(attrs={'class': 'form-control form-control-sm'}),
             'min_degree_requirements':forms.Select(attrs={'class': 'form-control form-control-sm'}),
@@ -128,7 +130,7 @@ class JobRequisitionForm(forms.ModelForm):
         }
         help_texts = {
             'custom_job_title':"If the job title you're looking for isn't found in the options, input your own custom job title.",
-            'required_skills':"you can add more custom skills ",
+            'custom_required_skills':"you can add more custom skills ",
             'certifications_required':"If any listed out the required Certification",
         }
    

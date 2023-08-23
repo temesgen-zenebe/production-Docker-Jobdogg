@@ -1,4 +1,6 @@
+from audioop import reverse
 from django.db import models
+from django.core.cache import cache
 from django.utils.timezone import datetime
 from django.conf import settings
 from common.utils.chooseConstant import (
@@ -108,19 +110,19 @@ class SocCode(models.Model):
     soc_code = models.CharField(max_length=200)
     position = models.ManyToManyField(Position, related_name='soc_code')
     
+    
     def __str__(self):
         return f'{self.soc_code}'
      
 class JobRequisition(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='industry')
+    industry = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='industry')
     job_title= models.ManyToManyField(Position, related_name='job_title') 
     custom_job_title = models.CharField(max_length=200, null=True, blank=True)
-    skills = models.ManyToManyField(Skill)
-    required_skills = models.TextField()
-    soc_code = models.CharField(default="1234")
+    required_skills = models.ManyToManyField(Skill)
+    custom_required_skills = models.TextField(max_length=200, null=True, blank=True)
+    soc_code = models.ManyToManyField(SocCode, related_name='job_requisitions' ,default='8564')
     department = models.CharField(max_length=255)
-    required_skills = models.TextField()
     min_experience = models.PositiveIntegerField()
     min_degree_requirements = models.CharField(max_length=100 , choices=DEGREE_TYPE_CHOICES)
     job_type = models.CharField(max_length=20, choices=JOB_TYPES)
@@ -160,6 +162,31 @@ class JobRequisition(models.Model):
         
     def __str__(self):
         return f"{self.user.username}-{ self.job_title}'s Preferences"
+    
+    def get_absolute_url(self):
+        return reverse('employer:job_requisition_detail', kwargs={'slug': self.slug})
+
+    @property
+    def job_title_cache_key(self):
+        return f"employer_job_title_{self.industry_id}"
+
+    @property
+    def required_skills_cache_key(self):
+        return f"employer_required_skills_{self.job_title.values_list('id', flat=True)}"
+
+    def get_job_title(self):
+        positions = cache.get(self.job_title_cache_key)
+        if not positions:
+            positions = Position.objects.filter(category=self.industry)
+            cache.set(self.job_title_cache_key, positions)
+        return positions
+
+    def get_skills(self):
+        skills = cache.get(self.required_skills_cache_key)
+        if not skills:
+            skills = Skill.objects.filter(position__in=self.job_title.all())
+            cache.set(self.required_skills_cache_key, skills)
+        return skills
 
 class TimeCard(models.Model):
     employer=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -167,7 +194,14 @@ class TimeCard(models.Model):
     date=models.DateTimeField()
     start_time=models.DateTimeField()
     end_time=models.DateTimeField()
-    task=models.CharField(max_length=100)
+    massage = models.TextField(max_length=200,null=True, blank=True)
+    google_map_link = models.URLField(
+        max_length=200,null=True, blank=True,
+        help_text="Enter the Google Maps link for your location."
+    )
+    task=models.CharField(max_length=100,null=True, blank=True)
+    employee_conformation=models.BooleanField(default=False)
+    employer_conformation=models.BooleanField(default=False)
     slug=models.SlugField(unique=True)
     spacial_discretion = models.TextField(max_length=200)
     incentive = models.CharField(max_length=100)

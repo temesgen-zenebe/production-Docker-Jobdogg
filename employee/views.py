@@ -8,6 +8,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from employee.templatetags.mask_ssn import mask_ssn
 from django.views import View
 import logging
+
+from employer.models import SocCode
 logger = logging.getLogger(__name__)
 
 from django.views.generic import (ListView, CreateView, UpdateView, DetailView, DeleteView, FormView)
@@ -522,7 +524,9 @@ class SkillsView(View):
         position_id = request.GET.get('position_id')
         skills = Skill.objects.filter(position__id=position_id)
         skills_data = [{'id': skill.id, 'skill': skill.skill} for skill in skills]
+      
         return JsonResponse({'skills': skills_data})
+
     
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'

@@ -84,9 +84,11 @@ class SocCodeAdmin(admin.ModelAdmin):
 @admin.register(JobRequisition)
 class JobRequisitionAdmin(admin.ModelAdmin):
     model=JobRequisition
-    list_display = ('user', 'category', 'min_salary_amount', 'job_type', 'city', 'state', 'zip_code', 'preference_action','created', 'updated')
-    list_filter = ('category','job_type', 'city', 'state', 'created', 'updated')
-    search_fields = ('user__username', 'category__name', 'job_type',  'department', 'city', 'state', 'zip_code')
+    list_display = ('user', 'industry', 
+                    'min_salary_amount', 'job_type', 'city', 'state', 'zip_code',
+                    'preference_action','created', 'updated')
+    list_filter = ('industry','job_type', 'city', 'state', 'created', 'updated')
+    search_fields = ('user__username', 'industry__name', 'job_type',  'department', 'city', 'state', 'zip_code')
 
     def get_job_title(self, obj):
         return ", ".join([str(position) for position in obj.job_title.all()])

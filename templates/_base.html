@@ -285,6 +285,7 @@
 <script type="text/javascript" src="{% static 'js/sb-admin-2.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/employeeJobSearh.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/dynamic_fields.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/employer/employerProfileMulitipleForm.js' %}"></script>
 
 <script async>
@@ -338,10 +339,12 @@
 </script>
 
 <script async>
+ 
   $(document).ready(function() {
     // Update positions dropdown based on selected category
     $('#id_category').on('change', function() {
         var categoryId = $(this).val();
+        
         $.ajax({
         url: "{% url 'employee:positions' %}",
         data: { category_id: categoryId },
@@ -370,15 +373,85 @@
             var skills = response.skills;
             var skillsSelect = $('#id_skills');
             skillsSelect.empty();
-            
+          
             $.each(skills, function(index, skill) {
             skillsSelect.append('<option value="' + skill.id + '">' + skill.skill + '</option>');
             });
         }
         });
     });
+
+  });
+</script> 
+
+<script async>
+  $(document).ready(function() {
+    // Function to update positions dropdown based on selected industry
+    $('#id_industry').on('change', function() {
+        var industryID = $(this).val();
+        $.ajax({
+            url: "{% url 'employer:jobTitle' %}",
+            data: { industry_Id: industryID },
+            success: function(response) {
+                var jobTitles = response.job_titles;
+              //  alert(job)
+                var jobTitlesSelect = $('#id_job_title');
+                jobTitlesSelect.empty();
+                
+                // Add default option for positions dropdown
+                jobTitlesSelect.append('<option value="" selected="">---------</option>');
+                
+                // Loop through job titles and add options to the select element
+                for (var i = 0; i < jobTitles.length; i++) {
+                  var title = jobTitles[i];
+                  jobTitlesSelect.append('<option value="' + title.id + '">' + title.position + '</option>');
+              }
+            }
+        });
     });
-</script>                              
+
+    // Function to update skills dropdown based on selected position
+    $('#id_job_title').on('change', function() {
+        var position_Id = $(this).val();
+        
+        $.ajax({
+            url: "{% url 'employer:required_skills' %}",
+            data: { positionId: position_Id },
+            success: function(response) {
+                var skills = response.skills;
+                var skillsSelect = $('#id_required_skills');
+                skillsSelect.empty();
+                
+                $.each(skills, function(index, skill) {
+                    skillsSelect.append('<option value="' + skill.id + '">' + skill.skill + '</option>');
+                });
+            }
+        });
+    });
+
+    // Function to update skills dropdown based on selected soc_code_data
+    // Function to update skills dropdown based on selected soc_code_data
+    $('#id_job_title').on('change', function() {
+      var position_Id = $('#id_job_title').val();
+      
+      $.ajax({
+          url: "{% url 'employer:soc_code_data' %}",
+          data: { positionId: position_Id },
+          success: function(response) {
+              var socs = response.socs;  // Use 'socs' instead of 'soc_code_data'
+              var socSelect = $('#id_soc_code');
+              socSelect.empty();
+
+              $.each(socs, function(index, soc) {
+                  socSelect.append('<option value="' + soc.id + '">' + soc.soc + '</option>');
+              });
+          }
+      });
+    });
+
+});
+
+</script>                          
 <script >
   var multipleCardCarousel = document.querySelector("#carouselExampleControls");
       if (window.matchMedia("(min-width: 576px)").matches) {
