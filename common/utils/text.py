@@ -1,6 +1,5 @@
 import random
 import string
-
 from django.utils.text import slugify
 
 def unique_slug(s, model, num_chars=50):
