@@ -255,11 +255,8 @@ class RequiredSkillsView(View):
 class socCodeView(View):
     def get(self, request):
         position_id = request.GET.get('positionId')
-        #print(position_id)
-        soc_code = SocCode.objects.filter(position__id=position_id)
-        #print(soc_code)
-        soc_code_data = [{'id': soc.id, 'soc': soc.soc_code} for soc in soc_code]  
-        #print(soc_code_data)
+        soc_codes = SocCode.objects.filter(position__id=position_id)
+        soc_code_data = [{'id': soc.id, 'soc': soc.soc_code} for soc in soc_codes]
         return JsonResponse({'socs': soc_code_data})
 
 
@@ -280,24 +277,24 @@ class JobRequisitionCreateView(LoginRequiredMixin, CreateView):
     template_name = 'employer/jobRequisition/job_requisition_create.html'
     success_url = reverse_lazy('employer:job_requisition_list')
     
+    
+    
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.id_industry = form.cleaned_data['industry'].id  # Assign the id_industry ID
-        
-        # Save the instance to the database
-        self.object = form.save()
-        
-        # Get the selected positions and skills from the form data
-        job_title = self.request.POST.getlist('job_title')
-        required_skills = self.request.POST.getlist('required_skills')
-        soc_code = self.request.POST.getlist('soc_code')
+        form.instance.industry_id = form.cleaned_data['industry'].id
 
-        # Set the many-to-many relationships
-        self.object.job_title.set(job_title)
-        self.object.required_skills.set(required_skills)
-        self.object.soc_code.set(soc_code)
+        self.object = form.save()
+
+        job_title_ids = self.request.POST.getlist('job_title')
+        required_skills_ids = self.request.POST.getlist('required_skills')
+        soc_code_id = self.request.POST.get('soc_code')  # Get the selected soc_code ID
+
+        self.object.job_title.set(job_title_ids)
+        self.object.required_skills.set(required_skills_ids)
+        self.object.soc_code_id = soc_code_id  # Set the soc_code relationship
 
         return super().form_valid(form)
+
 
 class JobRequisitionUpdateView(LoginRequiredMixin, UpdateView):
     model = JobRequisition

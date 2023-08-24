@@ -55,10 +55,10 @@ class JobRequisitionForm(forms.ModelForm):
     )
     
     soc_code = forms.ModelChoiceField(
-       queryset=SocCode.objects.none(),
-       widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_soc_code'})
-        
+        queryset=SocCode.objects.none(),
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_soc_code'})
     )
+
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -75,16 +75,22 @@ class JobRequisitionForm(forms.ModelForm):
             try:
                 job_title_ids = map(int, self.data.getlist('job_title'))
                 self.fields['required_skills'].queryset = Skill.objects.filter(position__in=job_title_ids)
-                self.fields['soc_code'].queryset = SocCode.objects.filter(position__in=job_title_ids)
+                
+            except (ValueError, TypeError):
+                pass
+        if 'job_title' in self.data:
+            try:
+                job_title_ids = map(int, self.data.getlist('job_title'))
+                self.fields['soc_code'].queryset = SocCode.objects.filter(position__id__in=job_title_ids)
             except (ValueError, TypeError):
                 pass
 
-            
+
     class Meta:
         model = JobRequisition
         fields = ('job_title',
-            'custom_job_title','required_skills','custom_required_skills',
-            'soc_code', 'department','min_experience', 'min_degree_requirements', 
+            'custom_job_title','required_skills','custom_required_skills','soc_code',
+            'department','min_experience', 'min_degree_requirements', 
             'job_type', 'salary_type','min_salary_amount', 'max_salary_amount', 
             'work_arrangement_preference','relocatable', 'city', 'state', 'zip_code', 
             'address1', 'certifications_required','star_rating', 'contact_person', 

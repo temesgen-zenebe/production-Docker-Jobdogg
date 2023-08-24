@@ -432,23 +432,23 @@
     // Function to update skills dropdown based on selected soc_code_data
     // Function to update skills dropdown based on selected soc_code_data
     $('#id_job_title').on('change', function() {
-      var position_Id = $('#id_job_title').val();
+      var positionId = $(this).val();  // Use 'this' to refer to the changed element
       
       $.ajax({
           url: "{% url 'employer:soc_code_data' %}",
-          data: { positionId: position_Id },
+          data: { positionId: positionId },
           success: function(response) {
-              var socs = response.socs;  // Use 'socs' instead of 'soc_code_data'
+              var socs = response.socs;
               var socSelect = $('#id_soc_code');
               socSelect.empty();
-
+  
               $.each(socs, function(index, soc) {
                   socSelect.append('<option value="' + soc.id + '">' + soc.soc + '</option>');
               });
-          }
-      });
+            }
+        });
     });
-
+  
 });
 
 </script>                          

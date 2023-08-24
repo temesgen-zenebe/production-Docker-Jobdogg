@@ -108,8 +108,7 @@ class EmployerAcceptedPolicies(models.Model):
         
 class SocCode(models.Model):
     soc_code = models.CharField(max_length=200)
-    position = models.ManyToManyField(Position, related_name='soc_code')
-    
+    position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='soc_code')
     
     def __str__(self):
         return f'{self.soc_code}'
@@ -117,11 +116,11 @@ class SocCode(models.Model):
 class JobRequisition(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     industry = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='industry')
-    job_title= models.ManyToManyField(Position, related_name='job_title') 
+    job_title= models.ManyToManyField(Position, related_name='jobTitle') 
     custom_job_title = models.CharField(max_length=200, null=True, blank=True)
     required_skills = models.ManyToManyField(Skill)
     custom_required_skills = models.TextField(max_length=200, null=True, blank=True)
-    soc_code = models.ManyToManyField(SocCode, related_name='job_requisitions' ,default='8564')
+    soc_code = models.ForeignKey(SocCode,on_delete=models.CASCADE, related_name='job_SocCode')
     department = models.CharField(max_length=255)
     min_experience = models.PositiveIntegerField()
     min_degree_requirements = models.CharField(max_length=100 , choices=DEGREE_TYPE_CHOICES)
@@ -165,7 +164,7 @@ class JobRequisition(models.Model):
     
     def get_absolute_url(self):
         return reverse('employer:job_requisition_detail', kwargs={'slug': self.slug})
-
+"""
     @property
     def job_title_cache_key(self):
         return f"employer_job_title_{self.industry_id}"
@@ -173,7 +172,11 @@ class JobRequisition(models.Model):
     @property
     def required_skills_cache_key(self):
         return f"employer_required_skills_{self.job_title.values_list('id', flat=True)}"
-
+    
+    @property
+    def soc_codes_cache_key(self):
+         return f"employer_soc_codes_{self.job_title.values_list('id', flat=True)}"
+    
     def get_job_title(self):
         positions = cache.get(self.job_title_cache_key)
         if not positions:
@@ -187,6 +190,13 @@ class JobRequisition(models.Model):
             skills = Skill.objects.filter(position__in=self.job_title.all())
             cache.set(self.required_skills_cache_key, skills)
         return skills
+    
+    def get_soc_code(self):
+        soc_code = cache.get(self.soc_codes_cache_key)
+        if not soc_code:
+            soc_code = SocCode.objects.filter(position__in=self.job_title.all())
+            cache.set(self.soc_codes_cache_key, soc_code)
+        return soc_code"""
 
 class TimeCard(models.Model):
     employer=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

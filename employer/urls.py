@@ -17,6 +17,7 @@ from .views import (
     #StartTrialView, 
     ActivateEmployerView,
     RequiredSkillsView,
+    socCodeView,
     VilificationSandMassage,
     
     #JobRequisition
@@ -25,7 +26,7 @@ from .views import (
     JobRequisitionCreateView, 
     JobRequisitionUpdateView, 
     JobRequisitionDeleteView,
-    socCodeView,
+    
 )
 
 app_name = 'employer'
