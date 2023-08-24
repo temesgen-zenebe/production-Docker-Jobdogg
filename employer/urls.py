@@ -17,7 +17,6 @@ from .views import (
     #StartTrialView, 
     ActivateEmployerView,
     RequiredSkillsView,
-    socCodeView,
     VilificationSandMassage,
     
     #JobRequisition
@@ -50,7 +49,7 @@ urlpatterns = [
     #Positions
     path('jobTitle/', JobTitleView.as_view(), name='jobTitle'),
     path('requiredSkills/', RequiredSkillsView.as_view(), name='required_skills'),
-    path('socCode/', socCodeView.as_view(), name='soc_code_data'),
+    
     
     #JobRequisition
     path('jobRequisition/', JobRequisitionListView.as_view(), name='job_requisition_list'),

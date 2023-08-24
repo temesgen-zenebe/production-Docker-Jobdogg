@@ -1,7 +1,7 @@
 from django import forms
 from .models import JobRequisition
 from employee.models import Category, Position, Skill  # Make sure to import these models
-from .models import CompanyProfile, SocCode
+from .models import CompanyProfile
 
 
 class CompanyProfileCreateForm(forms.ModelForm):
@@ -54,12 +54,7 @@ class JobRequisitionForm(forms.ModelForm):
         help_text="Select multiple options by holding down the Ctrl key (or Command key on Mac)."
     )
     
-    soc_code = forms.ModelChoiceField(
-        queryset=SocCode.objects.none(),
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_soc_code'})
-    )
-
-
+   
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
@@ -78,18 +73,11 @@ class JobRequisitionForm(forms.ModelForm):
                 
             except (ValueError, TypeError):
                 pass
-        if 'job_title' in self.data:
-            try:
-                job_title_ids = map(int, self.data.getlist('job_title'))
-                self.fields['soc_code'].queryset = SocCode.objects.filter(position__id__in=job_title_ids)
-            except (ValueError, TypeError):
-                pass
-
-
+        
     class Meta:
         model = JobRequisition
-        fields = ('job_title',
-            'custom_job_title','required_skills','custom_required_skills','soc_code',
+        fields = (
+            'custom_job_title','custom_required_skills',
             'department','min_experience', 'min_degree_requirements', 
             'job_type', 'salary_type','min_salary_amount', 'max_salary_amount', 
             'work_arrangement_preference','relocatable', 'city', 'state', 'zip_code', 

@@ -23,7 +23,7 @@ from employer.models import(
     EmployerPoliciesAndTerms,
     ProfileBuildingController, 
     JobRequisition,
-    SocCode,
+    
 )
 
 User = settings.AUTH_USER_MODEL
@@ -252,13 +252,6 @@ class RequiredSkillsView(View):
         skills_data = [{'id': skill.id, 'skill': skill.skill} for skill in skills]
         return JsonResponse({'skills': skills_data})
     
-class socCodeView(View):
-    def get(self, request):
-        position_id = request.GET.get('positionId')
-        soc_codes = SocCode.objects.filter(position__id=position_id)
-        soc_code_data = [{'id': soc.id, 'soc': soc.soc_code} for soc in soc_codes]
-        return JsonResponse({'socs': soc_code_data})
-
 
 #JobRequisition
 class JobRequisitionListView(LoginRequiredMixin, ListView):
@@ -277,25 +270,23 @@ class JobRequisitionCreateView(LoginRequiredMixin, CreateView):
     template_name = 'employer/jobRequisition/job_requisition_create.html'
     success_url = reverse_lazy('employer:job_requisition_list')
     
-    
-    
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.industry_id = form.cleaned_data['industry'].id
-
+        form.instance.industry_id = form.cleaned_data['industry'].id  # Assign the category ID
+        
+        # Save the instance to the database
         self.object = form.save()
+        
+        # Get the selected positions and skills from the form data
+        job_title = self.request.POST.getlist('job_title')
+        required_skills = self.request.POST.getlist('required_skills')
 
-        job_title_ids = self.request.POST.getlist('job_title')
-        required_skills_ids = self.request.POST.getlist('required_skills')
-        soc_code_id = self.request.POST.get('soc_code')  # Get the selected soc_code ID
-
-        self.object.job_title.set(job_title_ids)
-        self.object.required_skills.set(required_skills_ids)
-        self.object.soc_code_id = soc_code_id  # Set the soc_code relationship
+        # Set the many-to-many relationships
+        self.object.job_title.set(job_title)
+        self.object.required_skills.set(required_skills)
 
         return super().form_valid(form)
-
-
+    
 class JobRequisitionUpdateView(LoginRequiredMixin, UpdateView):
     model = JobRequisition
     form_class = JobRequisitionForm

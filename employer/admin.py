@@ -84,25 +84,22 @@ class SocCodeAdmin(admin.ModelAdmin):
 @admin.register(JobRequisition)
 class JobRequisitionAdmin(admin.ModelAdmin):
     model=JobRequisition
-    list_display = ('user', 'industry', 
-                    'min_salary_amount', 'job_type', 'city', 'state', 'zip_code',
+    list_display = ('user', 'industry', 'get_job_titles', 'get_required_skills',
+                    'min_salary_amount', 'job_type', 'soc_code','city', 'state', 'zip_code',
                     'preference_action','created', 'updated')
     list_filter = ('industry','job_type', 'city', 'state', 'created', 'updated')
     search_fields = ('user__username', 'industry__name', 'job_type',  'department', 'city', 'state', 'zip_code')
 
-    def get_job_title(self, obj):
+    def get_job_titles(self, obj):
         return ", ".join([str(position) for position in obj.job_title.all()])
 
-    get_job_title.short_description = 'Job Titles'
+    get_job_titles.short_description = 'Job Titles'
 
-    def get_skills(self, obj):
-        return ", ".join([str(skill) for skill in obj.skills.all()])
+    def get_required_skills(self, obj):
+        return ", ".join([str(skill) for skill in obj.required_skills.all()])
 
-    get_skills.short_description = 'Skills'
+    get_required_skills.short_description = 'required skills'
 
-    def get_soc_codes(self, obj):
-        return ", ".join([str(soc_code) for soc_code in obj.soc_code.all()])
-
-    get_soc_codes.short_description = 'SOC Codes'
+    
 
 
