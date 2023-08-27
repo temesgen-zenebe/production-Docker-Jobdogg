@@ -1,0 +1,119 @@
+{% extends 'pages/employer_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load user_tags %}
+{% block title %}Job Requisitions List{% endblock %}
+{% block dashboard_employer %}
+<div class="container">
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h6 class="font-weight-bold">Job Requisition Details</h6>
+                </div>
+                <div class="card-body">
+                    <h4 class="small font-weight-bold mb-2">Industry: <span class="small px-3">{{ object.industry }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Job Title: 
+                        <span class="small px-3">
+                            {% for position in object.job_title.all %}
+                                 {{ position.position }}
+                            {% endfor %},
+                           
+                        </span>
+                    </h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Required Skills: 
+                        <span class="small px-3">
+                            {% for skill in object.get_skills %}
+                                {{ skill.skill }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %} ,
+                            {{ object.custom_required_skills }}
+                        </span>
+                        
+                    </h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Department: <span class="small px-3">{{ object.department }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Minimum Experience: <span class="small px-3">{{ object.min_experience }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Job Type: <span class="small px-3">{{ object.get_job_type_display }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Salary Type: <span class="small px-3">{{ object.get_salary_type_display }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Min Salary Amount: <span class="small px-3">{{ object.min_salary_amount }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Max Salary Amount: <span class="small px-3">{{ object.max_salary_amount }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Work Arrangement Preference: <span class="small px-3">{{ object.work_arrangement_preference }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Relocatable: <span class="small px-3">{{ object.get_relocatable_display }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">City: <span class="small px-3">{{ object.city }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">State: <span class="small px-3">{{ object.state }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Zip Code: <span class="small px-3">{{ object.zip_code }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Address: <span class="small px-3">{{ object.address1 }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Certifications Required: <span class="small px-3">{{ object.certifications_required }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Star Rating: <span class="small px-3">{{ object.star_rating }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Contact Person: <span class="small px-3">{{ object.contact_person }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Contact Email: <span class="small px-3">{{ object.contact_email }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">From Date: <span class="small px-3">{{ object.from_date }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">To Date: <span class="small px-3">{{ object.to_date }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Start Time: <span class="small px-3">{{ object.start_time }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">End Time: <span class="small px-3">{{ object.end_time }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Job Description: <span class="small px-3">{{ object.job_description }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <!-- Add any other remaining fields -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-jobdogg">Manage</h6>
+                    <div class="dropdown">
+                        <button class="btn btn-light border-0 ropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" type="button" href="{% url 'employer:job_requisition_update' slug=object.slug %}" >Update</a></li>
+                        {% if user.is_authenticated and user|is_admin %}
+                        <li><a class="dropdown-item" type="button" href="{% url 'employer:job_requisition_delete' slug=object.slug %}">Delete</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" type="button" href="{% url 'employer:job_requisition_list' %}">Back</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <h4 class="small font-weight-bold mb-2">Number of Views: <span class="small px-3">{{ object.number_views }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <h4 class="small font-weight-bold mb-2">Preference Action: <span class="small px-3">{{ object.preference_action }}</span></h4>
+                    <hr class="small font-weight-light text-jobdogg">
+                    <a href="{% url 'employer:job_requisition_list' %}" class="btn btn-sm btn-outline-Jobdogg">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+{% endblock %}

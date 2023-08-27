@@ -1,165 +1,170 @@
 {% extends 'pages/employer_dashboard.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block title %}Create Company Profile{% endblock %}
+{% block title %}Create new job requisition {% endblock %}
 {% block dashboard_employer %}
 <div class="container">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            
+                <fieldset>
+                    <div class="card border-left-JobdoggOrnge shadow mb-4">
+                        <div class="card-header">
+                            <h6 class="font-weight-bold fs-subtitl">Create Job Requisition</h6>
+                        </div>
+                        <div class="card-body mx-1 my-1">
+                            <div class="row g-1">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.industry }}
+                                        <label for="industry">Industry</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.job_title }}
+                                        <label for="job_title">Job Title</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.required_skills }}
+                                        <label for="required_skills">Required Skills</label>
+                                        <small class="form-text text-muted s0-font">{{ form.required_skills.help_text }}</small>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.custom_job_title }}
+                                        <label for="custom_job_title">Custom Job Title</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.department }}
+                                        <label for="department">Department</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.min_experience }}
+                                        <label for="min_experience">Minimum Experience</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.min_degree_requirements }}
+                                        <label for="min_degree_requirements">Minimum Degree Requirements</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.job_type }}
+                                        <label for="job_type">Job Type</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.salary_type }}
+                                        <label for="salary_type">Salary Type</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.min_salary_amount }}
+                                        <label for="min_salary_amount">Minimum Salary Amount</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.max_salary_amount }}
+                                        <label for="max_salary_amount">Maximum Salary Amount</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.work_arrangement_preference }}
+                                        <label for="work_arrangement_preference">Work Arrangement Preference</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.relocatable }}
+                                        <label for="relocatable">Are you willing to relocate?</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.city }}
+                                        <label for="city">City</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.state }}
+                                        <label for="state">State</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.zip_code }}
+                                        <label for="zip_code">ZIP Code</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.address1 }}
+                                        <label for="address1">Address Line 1</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.certifications_required }}
+                                        <label for="certifications_required">Required Certifications</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.star_rating }}
+                                        <label for="star_rating">Star Rating</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.contact_person }}
+                                        <label for="contact_person">Contact Person</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.contact_email }}
+                                        <label for="contact_email">Contact Email</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.from_date }}
+                                        <label for="from_date">Start Date</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.to_date }}
+                                        <label for="to_date">End Date</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.start_time }}
+                                        <label for="start_time">Start Time</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.end_time }}
+                                        <label for="end_time">End Time</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.job_description }}
+                                        <label for="job_description">Job Description</label>
+                                    </div>
+                                    
+                                    <div class="form-floating">
+                                        {{ form.preference_action }}
+                                        <label for="preference_action">Preference Action</label>
+                                    </div>
+                                </div>
+                        </div>       
+                    </div>
+                    <div class="card-footer text-center ">
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
 
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <!--{{ form|crispy }}
-            <button class="btn btn-sm btn-outline-primary" type="submit">Save</button>-->
-            <!-- Job Requisition Fieldset job_title, required_skills, and soc_code) -->
-            <fieldset>
-                
-                <h3 class="fs-subtitle">Create Job Requisition</h3>
-                <div class="form-group">
-                    {{ form.industry.label_tag }}
-                    {{ form.industry }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.job_title.label_tag }}
-                    {{ form.job_title }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.required_skills.label_tag }}
-                    {{ form.required_skills }}
-                    <small class="form-text text-muted">{{ form.required_skills.help_text }}</small>
-                </div>
-                
-                <div class="form-group">
-                    {{ form.custom_job_title.label_tag }}
-                    {{ form.custom_job_title }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.department.label_tag }}
-                    {{ form.department }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.min_experience.label_tag }}
-                    {{ form.min_experience }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.min_degree_requirements.label_tag }}
-                    {{ form.min_degree_requirements }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.job_type.label_tag }}
-                    {{ form.job_type }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.salary_type.label_tag }}
-                    {{ form.salary_type }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.min_salary_amount.label_tag }}
-                    {{ form.min_salary_amount }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.max_salary_amount.label_tag }}
-                    {{ form.max_salary_amount }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.work_arrangement_preference.label_tag }}
-                    {{ form.work_arrangement_preference }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.relocatable.label_tag }}
-                    {{ form.relocatable }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.city.label_tag }}
-                    {{ form.city }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.state.label_tag }}
-                    {{ form.state }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.zip_code.label_tag }}
-                    {{ form.zip_code }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.address1.label_tag }}
-                    {{ form.address1 }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.certifications_required.label_tag }}
-                    {{ form.certifications_required }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.star_rating.label_tag }}
-                    {{ form.star_rating }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.contact_person.label_tag }}
-                    {{ form.contact_person }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.contact_email.label_tag }}
-                    {{ form.contact_email }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.from_date.label_tag }}
-                    {{ form.from_date }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.to_date.label_tag }}
-                    {{ form.to_date }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.start_time.label_tag }}
-                    {{ form.start_time }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.end_time.label_tag }}
-                    {{ form.end_time }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.job_description.label_tag }}
-                    {{ form.job_description }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.number_views.label_tag }}
-                    {{ form.number_views }}
-                </div>
-                
-                <div class="form-group">
-                    {{ form.preference_action.label_tag }}
-                    {{ form.preference_action }}
-                </div>
-                
-                
-                <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Submit</button>
-            </fieldset>
-
-        </form>
+            </form>   
+        </div>
     </div>
 </div>
 

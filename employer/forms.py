@@ -42,15 +42,15 @@ class CompanyProfileCreateForm(forms.ModelForm):
 class JobRequisitionForm(forms.ModelForm):
     industry = forms.ModelChoiceField(
         queryset=Category.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_industry'})
+        widget=forms.Select(attrs={'class': 'form-select form-control form-control-sm my-2', 'id': 'id_industry' })
     )
     job_title = forms.ModelChoiceField(
         queryset=Position.objects.none(),
-        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id': 'id_job_title'})
+        widget=forms.Select(attrs={'class': 'form-select form-control form-control-sm my-2', 'id': 'id_job_title'})
     )
     required_skills = forms.ModelMultipleChoiceField(
         queryset=Skill.objects.none(),
-        widget=forms.SelectMultiple(attrs={'class': 'form-control form-control-sm', 'id': 'id_required_skills'}),
+        widget=forms.SelectMultiple(attrs={'class': 'form-select form-control form-control-sm my-2', 'id': 'id_required_skills'}),
         help_text="Select multiple options by holding down the Ctrl key (or Command key on Mac)."
     )
     
@@ -83,48 +83,74 @@ class JobRequisitionForm(forms.ModelForm):
             'work_arrangement_preference','relocatable', 'city', 'state', 'zip_code', 
             'address1', 'certifications_required','star_rating', 'contact_person', 
             'contact_email','from_date','to_date','start_time', 'end_time','job_description',
-            'number_views','preference_action',
+           'preference_action',
         )
         labels = {
-            'custom_required_skills':'Additional required skills',
+            'custom_required_skills': 'Additional Required Skills',
             'relocatable': 'Are you willing to relocate?',
             'min_experience': 'Minimum Experience',
-            'preference_action':'Select Your Preference Action',
+            'preference_action': 'Preference Action',
+            'custom_job_title': 'Custom Job Title',
+            'department': 'Department',
+            'min_experience': 'Minimum Experience',
+            'min_degree_requirements': 'Minimum Degree Requirements',
+            'job_type': 'Job Type',
+            'salary_type': 'Salary Type',
+            'min_salary_amount': 'Minimum Salary Amount',
+            'max_salary_amount': 'Maximum Salary Amount',
+            'work_arrangement_preference': 'Work Arrangement Preference',
+            'relocatable': 'Relocatable',
+            'city': 'City',
+            'state': 'State',
+            'zip_code': 'ZIP Code',
+            'address1': 'Address Line 1',
+            'certifications_required': 'Required Certifications',
+            'star_rating': 'Star Rating',
+            'contact_person': 'Contact Person',
+            'contact_email': 'Contact Email',
+            'from_date': 'Start Date',
+            'to_date': 'End Date',
+            'start_time': 'Start Time',
+            'end_time': 'End Time',
+            'job_description': 'Job Description',
+            'preference_action': 'Preference Action',
             # Add labels for other fields here
         }
+
         widgets = {
-            'custom_job_title': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'department': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'custom_required_skills': forms.Textarea(attrs={'class': 'form-control form-control-sm','rows': 3}),
-            'job_type':forms.Select(attrs={'class': 'form-control form-control-sm'}),
-            'salary_type':forms.Select(attrs={'class': 'form-control form-control-sm'}),
-            'min_degree_requirements':forms.Select(attrs={'class': 'form-control form-control-sm'}),
-            'min_experience':forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
-            'job_description': forms.Textarea(attrs={'class': 'form-control form-control-sm','rows': 3}),
-            'city': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'state': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'zip_code': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'address1': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'certifications_required': forms.Textarea(attrs={'class': 'form-control form-control-sm','rows': 3}),
-            'contact_person': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
-            'contact_email': forms.EmailInput(attrs={'class': 'form-control form-control-sm'}),
-            'from_date': forms.DateInput(attrs={'class': 'form-control form-control-sm', 'type': 'date'}),
-            'to_date': forms.DateInput(attrs={'class': 'form-control form-control-sm', 'type': 'date'}),
-            'start_time': forms.TimeInput(attrs={'class': 'form-control form-control-sm', 'type': 'time'}),
-            'end_time': forms.TimeInput(attrs={'class': 'form-control form-control-sm', 'type': 'time'}),
-            'min_salary_amount': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
-            'max_salary_amount': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
-            'work_arrangement_preference':forms.Select(attrs={'class': 'form-control form-control-sm'}),
-            'relocatable':forms.Select(attrs={'class': 'form-control form-control-sm'}),
-            'star_rating': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
-            'number_views': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
-            'preference_action': forms.Select(attrs={'class': 'form-control form-control-sm'}),
+            'custom_job_title': forms.TextInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'department': forms.TextInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'custom_required_skills': forms.Textarea(attrs={'class': 'form-control form-control-sm my-2', 'rows': 2}),
+            'job_type': forms.Select(attrs={'class': 'form-control form-control-sm my-2'}),
+            'salary_type': forms.Select(attrs={'class': 'form-control form-control-sm my-2'}),
+            'min_degree_requirements': forms.Select(attrs={'class': 'form-control form-control-sm my-2'}),
+            'min_experience': forms.NumberInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'job_description': forms.Textarea(attrs={'class': 'form-control form-control-sm my-2', 'rows': 3}),
+            'city': forms.TextInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'state': forms.TextInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'zip_code': forms.TextInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'address1': forms.TextInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'certifications_required': forms.Textarea(attrs={'class': 'form-control form-control-sm my-2', 'rows': 3}),
+            'contact_person': forms.TextInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'contact_email': forms.EmailInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'from_date': forms.DateInput(attrs={'class': 'form-control form-control-sm my-2', 'type': 'date'}),
+            'to_date': forms.DateInput(attrs={'class': 'form-control form-control-sm my-2', 'type': 'date'}),
+            'start_time': forms.TimeInput(attrs={'class': 'form-control form-control-sm my-2', 'type': 'time'}),
+            'end_time': forms.TimeInput(attrs={'class': 'form-control form-control-sm my-2', 'type': 'time'}),
+            'min_salary_amount': forms.NumberInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'max_salary_amount': forms.NumberInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'work_arrangement_preference': forms.Select(attrs={'class': 'form-control form-control-sm my-2'}),
+            'relocatable': forms.Select(attrs={'class': 'form-control form-control-sm my-2'}),
+            'star_rating': forms.NumberInput(attrs={'class': 'form-control form-control-sm my-2'}),
+            'preference_action': forms.Select(attrs={'class': 'form-control form-control-sm my-2'}),
 
             # Customize other widgets as needed
         }
+
         help_texts = {
             'custom_job_title':"If the job title you're looking for isn't found in the options, input your own custom job title.",
             'custom_required_skills':"you can add more custom skills ",
             'certifications_required':"If any listed out the required Certification",
         }
+   
    

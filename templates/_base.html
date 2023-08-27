@@ -131,12 +131,12 @@
                 <li><a class="dropdown-item" href="{% url 'employer:dashboard_information_employer' %}">Dashboard</a></li>
                 <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
                 <li><a class="dropdown-item" href="{% url 'employer:company-profile-list' %}">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'employer:job_requisition_list' %}">PostJob</a></li>
+                <li><a class="dropdown-item" href="#">Get emplyee</a></li>
+                <li><a class="dropdown-item" href="#">InCartCandidate</a></li>
                 <li><a class="dropdown-item" href="#">Calculate</a></li>
                 <li><a class="dropdown-item" href="#">Payment</a></li>
                 <li><a class="dropdown-item" href="#">Timecard</a></li>
-                <li><a class="dropdown-item" href="#">InCartCandidate</a></li>
-                <li><a class="dropdown-item" href="#">Search emplyee</a></li>
-                <li><a class="dropdown-item" href="#">PostJob</a></li>
                 <li><a class="dropdown-item" href="#">Viewed</a></li>
                 <li><a class="dropdown-item" href="#">Messages</a></li>
                 {% endif %}
@@ -429,7 +429,7 @@
         });
     });
   
-});
+ });
 
 </script>                          
 <script >
@@ -561,8 +561,6 @@
       $('#taxUserTypeSelect').on('change', updateFormTypeOptions);
   });
 </script>
-
-
 
 </body>
 </html>
