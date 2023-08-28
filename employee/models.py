@@ -40,7 +40,7 @@ from common.utils.chooseConstant import (
     RIDE_CHOOSE,
     WORK_ARRANGEMENT_CHOICES,
     )
-from multiupload.fields import MultiFileField 
+from multiupload.fields import MultiFileField
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -621,3 +621,6 @@ class TaxDocumentSetting(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.taxUserType} - {self.formType}"
+
+
+

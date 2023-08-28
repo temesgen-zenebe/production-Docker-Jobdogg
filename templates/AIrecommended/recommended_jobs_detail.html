@@ -1,0 +1,54 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load user_tags %}
+{% block title %}Recommended Jobs List{% endblock %}
+{% block dashboard_employee %}
+<div class="container">
+   <div class='row'>
+        <div class="col-xl-10 col-lg-10">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-jobdogg">Job Details</h6>
+                    
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-white border-0 ropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" type="button" href="{% url 'employer:job_requisition_update' slug=object.slug %}" >Update</a></li>
+                        {% if user.is_authenticated and user|is_admin %}
+                        <li><a class="dropdown-item" type="button" href="{% url 'employer:job_requisition_delete' slug=object.slug %}">Delete</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" type="button" href="{% url 'recommendedByAI:job-recommended-list' %}">Back</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <h4 class="small font-weight-bold mb-2">User: <span class="text-muted px-3">{{ recommended_job.user.username }}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Job Requisition: <span class="text-muted  px-3">{{ recommended_job.job_requisition.industry }}</span></h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Job Title:
+                        <span class="text-muted  px-3">
+                            {% for title in recommended_job.job_requisition.job_title.all %}
+                            {{ title.position }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                        </span>
+                    </h4>
+                    <hr class="small font-weight-light text-warning">
+                    <h4 class="small font-weight-bold mb-2">Required Skills: 
+                        <span class="text-muted  px-3">
+                            {% for title in recommended_job.job_requisition.required_skills.all %}
+                            {{ title.skill }}{% if not forloop.last %}, {% endif %}{% endfor %},{{ recommended_job.job_requisition.custom_required_skills }}
+                        </span>
+                    </h4>
+                    <hr class="small font-weight-light text-warning">
+                    <a href="{% url 'recommendedByAI:job-recommended-list' %} " class="btn btn-sm btn-outline-Jobdogg">Applay Now</a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

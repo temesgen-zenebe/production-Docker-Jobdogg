@@ -8,8 +8,11 @@ from django.shortcuts import get_object_or_404, render, redirect
 from employee.templatetags.mask_ssn import mask_ssn
 from django.views import View
 import logging
-
-from employer.models import SocCode
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from recommendedByAI.models import RecommendedJobs
+from django.views.generic.edit import CreateView
+from employer.models import JobRequisition, SocCode
 logger = logging.getLogger(__name__)
 
 from django.views.generic import (ListView, CreateView, UpdateView, DetailView, DeleteView, FormView)
@@ -1123,7 +1126,53 @@ class EmployeePreferencesCreateView(LoginRequiredMixin, CreateView):
 
         profile.Preferences_completed = True
         profile.save()
-        return super().dispatch(request, *args, **kwargs)
+        #return super().dispatch(request, *args, **kwargs)
+
+        response = super().dispatch(request, *args, **kwargs)
+        
+        # After the instance has been created, generate recommended jobs
+        if self.object:
+            self.generate_recommended_jobs()
+        
+        return response
+    
+    def generate_recommended_jobs(self):
+        positions = self.object.get_positions()
+        skills = self.object.get_skills()
+
+        # Get relevant job requisitions based on positions and skills
+        relevant_jobs = JobRequisition.objects.filter(
+            job_title__in=positions,
+            required_skills__in=skills
+        ).distinct()
+
+        # Save the relevant jobs to RecommendedJobs
+        for job in relevant_jobs:
+            RecommendedJobs.objects.create(
+                employee_preferences=self.object,
+                job_requisition=job
+            )
+
+# Signal for generating recommended jobs
+@receiver(post_save, sender=EmployeePreferences)
+def generate_recommended_jobs(sender, instance, created, **kwargs):
+    if created:
+        positions = instance.get_positions()
+        skills = instance.get_skills()
+
+        # Get relevant job requisitions based on positions and skills
+        relevant_jobs = JobRequisition.objects.filter(
+            job_title__in=positions,
+            required_skills__in=skills
+        ).distinct()
+
+        # Save the relevant jobs to RecommendedJobs
+        for job in relevant_jobs:
+            RecommendedJobs.objects.create(
+                employee_preferences=instance,
+                job_requisition=job
+            )
+
 
 class EmployeePreferencesUpdateView(LoginRequiredMixin, UpdateView):
     model = EmployeePreferences

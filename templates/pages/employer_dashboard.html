@@ -28,6 +28,68 @@
                 </li>
 
 
+                
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Interface
+                </div>
+
+                <!-- Nav Item - Job Posting Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <span class="display-1">
+                            <i class="bi bi-briefcase-fill"></i>
+                        </span>
+                        <span class="text-bold">Job Posting</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Job:</h6>
+                            <a class="collapse-item" href="{% url 'employer:job_requisition_create' %}">Post Job</a>
+                            <a class="collapse-item" href="{% url 'employer:job_requisition_list' %}">Listed Jobs</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Staffing Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Get Staff</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded"  style="max-height: 200px; overflow-y: auto;">
+                            <h6 class="collapse-header">Staffing:</h6>
+                            <a class="collapse-item" href="#">Get Staffes</a>
+                            <a class="collapse-item" href="#">Calculate Staff Cost</a>
+                            <a class="collapse-item" href="#">recommend Staff</a>
+                            <a class="collapse-item" href="#">Candidates Cart</a>
+                            <a class="collapse-item" href="#">Higher Staff</a>
+                            <a class="collapse-item" href="#">Staffing Report</a>
+                        </div>
+                    </div>
+                </li>
+
+                
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Timecard</span></a>
+                </li>
+
+                <!-- Calculater Tables-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-calculator-fill"></i></i>
+                        <span>Cost Calculater</span></a>
+                </li> 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
@@ -126,68 +188,6 @@
                         </div>
                     </div>
                 </li>
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
-                </div>
-
-                <!-- Nav Item - Job Posting Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <span class="display-1">
-                            <i class="bi bi-briefcase-fill"></i>
-                        </span>
-                        <span class="text-bold">Job Posting</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Job:</h6>
-                            <a class="collapse-item" href="{% url 'employer:job_requisition_create' %}">Post Job</a>
-                            <a class="collapse-item" href="{% url 'employer:job_requisition_list' %}">Listed Jobs</a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Nav Item - Staffing Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="bi bi-people-fill"></i>
-                        <span>Get Staff</span>
-                    </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded"  style="max-height: 200px; overflow-y: auto;">
-                            <h6 class="collapse-header">Staffing:</h6>
-                            <a class="collapse-item" href="#">Get Staffes</a>
-                            <a class="collapse-item" href="#">Calculate Staff Cost</a>
-                            <a class="collapse-item" href="#">recommend Staff</a>
-                            <a class="collapse-item" href="#">Candidates Cart</a>
-                            <a class="collapse-item" href="#">Higher Staff</a>
-                            <a class="collapse-item" href="#">Staffing Report</a>
-                        </div>
-                    </div>
-                </li>
-
-                
-                <!-- Nav Item - Charts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Timecard</span></a>
-                </li>
-
-                <!-- Calculater Tables-->
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="bi bi-calculator-fill"></i></i>
-                        <span>Cost Calculater</span></a>
-                </li> 
-
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
