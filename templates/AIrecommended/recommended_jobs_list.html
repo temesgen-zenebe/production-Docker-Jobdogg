@@ -7,17 +7,30 @@
 <div class="container">
   <!-- Content Row -->
     <div class="row">
-        <h1>Recommended Jobs List</h1>
+        
+        <h6 class=" card-header pb-2  mb-4 font-weight-bold text-gray-800">Recommended Jobs List For You</h6>
         <!-- Earnings (Monthly) Card Example -->
         {% for job in recommended_jobs %}
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card border-left-JobdoggOrnge shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                {{ job.employee_preferences.category }}</div>
-                            <div class="btn btn-sm btn-outline-Jobdogg mb-0 "><a  href="{% url 'recommendedByAI:job-recommended-detail' slug=job.slug%}">Detail</a></div>
+                                {{ job.employee_preferences.category }}
+                            </div>
+                            <div  class="btn-grup gap-2">
+                                {% for applied_job in applied_jobs %}
+                                {% if applied_job.job == job and applied_job.status == 'applied' %}
+                                    <span class="badge bg-success"><i class="bi bi-check2-circle"></i> Applied</span>
+                                {% endif %}
+                                {% endfor %}
+                                <a class="btn btn-sm btn-outline-Jobdogg mb-0 " 
+                                href="{% url 'recommendedByAI:job-recommended-detail' slug=job.slug%}">
+                                Detail
+                                </a>
+                                
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -28,19 +41,22 @@
         </div>
         {% endfor %}
     </div>
-    
-    <div class="my-3 p-3 bg-body rounded shadow">
-        <h6 class="border-bottom pb-2  mb-0 font-weight-bold text-gray-800">Suggestions</h6>
-        {% for job in recommended_jobs %}
-        <div class="d-flex text-muted pt-3">
-            <i class="fas fa-calendar fa-2x text-gray-300 mx-2"></i>
+    <hr>
+    <div class="my-5 p-2 bg-body rounded shadow border-left-JobdoggOrnge ">
+        <div class="d-flex justify-content-between border-bottom gap-3">
+        <h6 class="m-2 p-2 font-weight-bold text-gray-600">Applayed History and status</h6>
+        <h6 class="m-2 p-2 font-weight-bold text-gray-600">Status</h6>
+        </div>
+        {% for job in applied_jobs %}
+        <div class="d-flex text-muted pt-3 px-3">
+            <i class="fas fa-calendar fa-2x text-gray-300 mx-3"></i>
                                    
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-            <div class="d-flex justify-content-between">
-              <strong class="text-gray-dark">{{ job.employee_preferences.category }}</strong>
-              <a href="{% url 'recommendedByAI:job-recommended-detail' slug=job.slug%}">applay</a>
+            <div class="d-flex justify-content-between ">
+              <strong class="text-gray-dark">{{ job.job.employee_preferences.category}}</strong>
+              <a href=""><span>{{job.status|upper}}</span></a>
             </div>
-            <span class="d-block">{{ job.employee_preferences.created|date}}</span>
+            <span class="d-block">{{ job.job.employee_preferences.created|date}}</span>
           </div>
         </div>
         {% endfor %}

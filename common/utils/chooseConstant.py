@@ -222,3 +222,14 @@ ACTION_TYPES = (
         ('POST', 'Post'),
         ('ALL', 'All'),
     )
+
+#AppliedJobHistory
+STATUS_CHOICES = [
+        ('applied', 'Applied'),
+        ('viewed', 'Viewed'),
+        ('in_cart', 'In Cart'),
+        ('message', 'Message'),
+        ('interview', 'Interview'),
+        ('rejected', 'Rejected'),
+        ('hired', 'Hired'),
+    ]
