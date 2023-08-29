@@ -1,0 +1,146 @@
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load user_tags %}
+{% load crispy_forms_tags %}
+{% block title %}Apply Filters List{% endblock %}
+{% block dashboard_employee %}
+<div class="container">
+
+  <!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Job Search | Filter </button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Applayed Status</button>
+  </li>
+ 
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+      <div class="row my-3">
+          <div class="col-xl-12 col-lg-12">
+              <div class="card shadow ">
+                  
+                  <div class="row mb-4 pt-3 mx-1 gap-2" >
+                    <div class="col-xl-12 col-lg-12">
+                      <div class="card">
+                        <div class="d-flex card-header pb-2  mb-3font-weight-bold text-gray-800">
+                          <form class="form-inline mr-auto ml-md-3 my-2 my-md-0 mw-200 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append gap-2">
+                                    <button class="btn btn-sm btn-outline-Jobdogg" type="button">
+                                        <i class="fas fa-search fa-sm" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-Jobdogg" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Advance Filter</button>
+                                </div>
+                            </div>
+                          </form>
+                          
+                        </div>
+                       
+                      </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12">
+                      <div class="card">
+                          <h6 class=" card-header pb-2  mb-3font-weight-bold text-gray-800"> Job Filter Reasulte({{jobs|length}})</h6>
+                          <div class="card-body">
+                            <ul>
+                              {% for job in jobs %}
+                                <li>
+                                  {{ job.title }} - {{ job.description }}
+                                
+                                  <form action="{% url 'JobFilter:apply-search-job' slug=job.slug %}" method="post">
+                                      {% csrf_token %}
+                                      <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Apply Now</button>
+                                  </form>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                        
+                            <div class="pagination">
+                              <span class="step-links">
+                                {% if jobs.has_previous %}
+                                  <a href="?page=1">&laquo; first</a>
+                                  <a href="?page={{ jobs.previous_page_number }}">previous</a>
+                                {% endif %}
+                          
+                                <span class="current-page">
+                                  Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
+                                </span>
+                          
+                                {% if jobs.has_next %}
+                                  <a href="?page={{ jobs.next_page_number }}">next</a>
+                                  <a href="?page={{ jobs.paginator.num_pages }}">last &raquo;</a>
+                                {% endif %}
+                              </span>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+      <div class="my-3 p-2 bg-body rounded shadow border-left-JobdoggOrnge ">
+          <div class="d-flex justify-content-between border-bottom gap-3">
+          <p class="m-2 p-2 font-weight-bold text-gray-600">Applayed History and status</p>
+          <p class="m-2 p-2 font-weight-bold text-gray-600">Status</p>
+          </div>
+          {% for job in applied_jobs %}
+          <div class="d-flex text-muted pt-3 px-1">
+              <i class="fas fa-calendar fa-2x text-gray-300 mx-3"></i>
+                                     
+            <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+              <div class="d-flex justify-content-between ">
+                <strong class="text-gray-dark">{{ job.job.employee_preferences.category}}</strong>
+                <a href=""><span id="statesApplication" >{{job.status|upper}}</span></a>
+              </div>
+              <span class="d-block">{{ job.job.employee_preferences.created|date}}</span>
+            </div>
+          </div>
+          {% endfor %}
+          <small class="d-block text-end mt-3">
+            <a href="#">All suggestions</a>
+          </small>
+        </div>
+    </div>
+  
+  </div>
+<!-- Example Code -->
+    
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New message to @getbootstrap</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form method="get">
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Filters</button>
+          </form>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End Example Code -->
+
+
+</div>
+
+{% endblock %}

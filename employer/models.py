@@ -190,8 +190,6 @@ class JobRequisition(models.Model):
             print(skills)
         return skills
     
-   
-
 class TimeCard(models.Model):
     employer=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     employee=models.CharField(max_length=100)

@@ -87,7 +87,7 @@ class JobRequisitionAdmin(admin.ModelAdmin):
     list_display = (
         'user', 'industry', 'get_job_titles', 'get_required_skills',
         'min_salary_amount', 'job_type', 'soc_code','city', 'state', 
-        'zip_code','preference_action','created', 'updated'
+        'zip_code','preference_action','created', 'updated', 'slug'
     )
     list_filter = ('industry','job_type', 'city', 'state', 'created', 'updated')
     search_fields = ('user__username', 'industry__name', 'job_type',  'department', 'city', 'state', 'zip_code')

@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django import forms
 from django.shortcuts import get_object_or_404, render, redirect
+from common.utils.text import unique_slug
 from employee.templatetags.mask_ssn import mask_ssn
 from django.views import View
 import logging
@@ -47,7 +48,7 @@ from .forms import (
     BackgroundCheckForm,
     CardForm,  
     RidePreferenceForm, 
-    JobFilterForm,
+   
 )
 
 #---- Models ------
@@ -1732,62 +1733,5 @@ class TaxDocumentSettingDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('employee:tax_document_setting_list')
     
     
-class FilteredJobListView(TemplateView):
-    template_name = 'employee/jobFiltered/jobFiltered_list.html'
-    paginate_by = 10  # Number of jobs per page
-
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        form = JobFilterForm(self.request.GET)
-        filtered_jobs = JobRequisition.objects.all()
-
-        if form.is_valid():
-            industry = form.cleaned_data['industry']
-            job_title = form.cleaned_data['job_title']
-            city = form.cleaned_data['city']
-            state = form.cleaned_data['state']
-            min_experience = form.cleaned_data['min_experience']
-            # Process other form fields to filter jobs
-
-            if industry:
-                filtered_jobs = filtered_jobs.filter(industry=industry)
-            if job_title:
-                filtered_jobs = filtered_jobs.filter(job_title=job_title)
-            if city:
-                filtered_jobs = filtered_jobs.filter(city__icontains=city)
-            if state:
-                filtered_jobs = filtered_jobs.filter(state__iexact=state)
-            if min_experience:
-                filtered_jobs = filtered_jobs.filter(min_experience__gte=min_experience)
-            # Apply more filters
-
-        paginator = Paginator(filtered_jobs, self.paginate_by)
-        page_number = self.request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
-
-        context['jobs'] = page_obj
-        context['form'] = form
-        return context
-
-    
-class ApplyJobFromSearchView(LoginRequiredMixin, View):
-
-    def post(self, request, slug):
-        _job = RecommendedJobs.objects.filter(slug=slug).first()
-        
-        if _job:
-            existing_application = AppliedJobHistory.objects.filter(user=request.user, job=_job).first()
-            
-            if existing_application:
-                pass  # messages.warning(request, "You have already applied for this job.")
-            else:
-                AppliedJobHistory.objects.create(user=request.user, job=_job, status='applied')
-                # messages.success(request, "You have successfully applied for the job.")
-        else:
-            raise Exception("Job not found.")  # Handle this case based on your application's logic
-            
-        return redirect('employee:filtered-job-list')
-
 
 
