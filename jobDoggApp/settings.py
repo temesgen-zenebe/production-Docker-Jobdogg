@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'supperAdmin.apps.SupperadminConfig', 
     'subscription.apps.SubscriptionConfig',
     'recommendedByAI.apps.RecommendedbyaiConfig',
+    'JobFilter.apps.JobfilterConfig',
     
 ]
 SITE_ID = 1

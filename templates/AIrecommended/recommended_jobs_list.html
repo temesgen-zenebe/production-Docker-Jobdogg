@@ -5,64 +5,90 @@
 {% block title %}Recommended Jobs List{% endblock %}
 {% block dashboard_employee %}
 <div class="container">
-  <!-- Content Row -->
-    <div class="row">
-        
-        <h6 class=" card-header pb-2  mb-4 font-weight-bold text-gray-800">Recommended Jobs List For You</h6>
-        <!-- Earnings (Monthly) Card Example -->
-        {% for job in recommended_jobs %}
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-JobdoggOrnge shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                {{ job.employee_preferences.category }}
-                            </div>
-                            <div  class="btn-grup gap-2">
-                                {% for applied_job in applied_jobs %}
-                                {% if applied_job.job == job and applied_job.status == 'applied' %}
-                                    <span class="badge bg-success"><i class="bi bi-check2-circle"></i> Applied</span>
-                                {% endif %}
-                                {% endfor %}
-                                <a class="btn btn-sm btn-outline-Jobdogg mb-0 " 
-                                href="{% url 'recommendedByAI:job-recommended-detail' slug=job.slug%}">
-                                Detail
-                                </a>
-                                
+
+    <!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Recommended Jobs</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Applayed Status</button>
+    </li>
+   
+  </ul>
+  
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div class="row my-3">
+            <div class="col-xl-12 col-lg-12">
+                <div class="card shadow ">
+                    <h6 class=" card-header pb-2  mb-3font-weight-bold text-gray-800">Recommended Jobs List For You</h6>
+                    <div class="row mb-4 pt-3 mx-2 gap-3" >
+                        {% for job in recommended_jobs %}
+                        <div class="col-xl-3 col-md-6 ">
+                            <div class="card border-left-JobdoggOrnge shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                {{ job.employee_preferences.category }}
+                                            </div>
+                                            <div  class="btn-grup gap-2">
+                                                {% for applied_job in applied_jobs %}
+                                                {% if applied_job.job == job and applied_job.status == 'applied' %}
+                                                    <span class="badge bg-success"><i class="bi bi-check2-circle"></i> Applied</span>
+                                                {% endif %}
+                                                {% endfor %}
+                                                <a class="btn btn-sm btn-outline-Jobdogg mb-0 " 
+                                                href="{% url 'recommendedByAI:job-recommended-detail' slug=job.slug%}">
+                                                Detail
+                                                </a>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
-    <hr>
-    <div class="my-5 p-2 bg-body rounded shadow border-left-JobdoggOrnge ">
-        <div class="d-flex justify-content-between border-bottom gap-3">
-        <h6 class="m-2 p-2 font-weight-bold text-gray-600">Applayed History and status</h6>
-        <h6 class="m-2 p-2 font-weight-bold text-gray-600">Status</h6>
-        </div>
-        {% for job in applied_jobs %}
-        <div class="d-flex text-muted pt-3 px-3">
-            <i class="fas fa-calendar fa-2x text-gray-300 mx-3"></i>
-                                   
-          <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-            <div class="d-flex justify-content-between ">
-              <strong class="text-gray-dark">{{ job.job.employee_preferences.category}}</strong>
-              <a href=""><span>{{job.status|upper}}</span></a>
+    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="my-3 p-2 bg-body rounded shadow border-left-JobdoggOrnge ">
+            <div class="d-flex justify-content-between border-bottom gap-3">
+            <p class="m-2 p-2 font-weight-bold text-gray-600">Applayed History and status</p>
+            <p class="m-2 p-2 font-weight-bold text-gray-600">Status</p>
             </div>
-            <span class="d-block">{{ job.job.employee_preferences.created|date}}</span>
+            {% for job in applied_jobs %}
+            <div class="d-flex text-muted pt-3 px-1">
+                <i class="fas fa-calendar fa-2x text-gray-300 mx-3"></i>
+                                       
+              <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                <div class="d-flex justify-content-between ">
+                  <strong class="text-gray-dark">{{ job.job.employee_preferences.category}}</strong>
+                  <a href=""><span id="statesApplication" >{{job.status|upper}}</span></a>
+                </div>
+                <span class="d-block">{{ job.job.employee_preferences.created|date}}</span>
+              </div>
+            </div>
+            {% endfor %}
+            <small class="d-block text-end mt-3">
+              <a href="#">All suggestions</a>
+            </small>
           </div>
-        </div>
-        {% endfor %}
-        <small class="d-block text-end mt-3">
-          <a href="#">All suggestions</a>
-        </small>
-      </div>
+    </div>
+    
+  </div>
+  <!-- Content Row -->
+  
+    
+   
 </div>
 {% endblock %}

@@ -60,3 +60,4 @@ class ApplyJobView(LoginRequiredMixin, View):
                 #messages.success(request, "You have successfully applied for the job.")
             
             return redirect('recommendedByAI:job-recommended-detail', slug=slug)
+

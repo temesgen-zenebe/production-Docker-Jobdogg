@@ -4,6 +4,8 @@ from employee import views
 from .views import (
     
     #RidePreference
+    ApplyJobFromSearchView,
+    FilteredJobListView,
     RidePreferenceCreateView,
     RidePreferenceDetailView,
     RidePreferenceListView,
@@ -274,4 +276,6 @@ urlpatterns = [
     path('taxDocumentSetting/<slug:slug>/', views.TaxDocumentSettingDetailView.as_view(), name='tax_document_setting_detail'),
     path('taxDocumentSetting/<slug:slug>/update/', views.TaxDocumentSettingUpdateView.as_view(), name='tax_document_setting_update'),
     path('taxDocumentSetting/<slug:slug>/delete/', views.TaxDocumentSettingDeleteView.as_view(), name='tax_document_setting_delete'),
+    path('jobs/', FilteredJobListView.as_view(), name='filtered-job-list'),
+    path('ApplySearchJobView/<slug:slug>/apply/', ApplyJobFromSearchView.as_view(), name='apply-search-job'),
 ]

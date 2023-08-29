@@ -5,7 +5,7 @@ from employee.models import EmployeePreferences
 from employer.models import JobRequisition
 from jobDoggApp import settings
 
-#RecommendedJobs
+#RecommendedJobs employee
 class RecommendedJobs(models.Model):
     employee_preferences = models.ForeignKey(EmployeePreferences, on_delete=models.CASCADE)
     job_requisition = models.ForeignKey(JobRequisition, on_delete=models.CASCADE)
@@ -24,7 +24,7 @@ class RecommendedJobs(models.Model):
 
     def __str__(self):
         return f"{self.employee_preferences.user.username}"
-    
+#AppliedJobHistory
 class AppliedJobHistory(models.Model):
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

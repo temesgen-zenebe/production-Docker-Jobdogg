@@ -10,12 +10,13 @@ from django.views import View
 import logging
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from recommendedByAI.models import RecommendedJobs
+from recommendedByAI.models import AppliedJobHistory, RecommendedJobs
 from django.views.generic.edit import CreateView
 from employer.models import JobRequisition, SocCode
+from django.core.paginator import Paginator
 logger = logging.getLogger(__name__)
 
-from django.views.generic import (ListView, CreateView, UpdateView, DetailView, DeleteView, FormView)
+from django.views.generic import (TemplateView,ListView, CreateView, UpdateView, DetailView, DeleteView, FormView)
 
 from .models import (
     BankAccount, Card, Category,CertificationLicense, CheckByEmail, EWallet,Education,EmployeePreferences,Experience, 
@@ -46,6 +47,7 @@ from .forms import (
     BackgroundCheckForm,
     CardForm,  
     RidePreferenceForm, 
+    JobFilterForm,
 )
 
 #---- Models ------
@@ -1728,3 +1730,64 @@ class TaxDocumentSettingDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'employee/TaxDocumentSetting/tax_document_setting_confirm_delete.html'
     context_object_name = 'tax_document_setting'
     success_url = reverse_lazy('employee:tax_document_setting_list')
+    
+    
+class FilteredJobListView(TemplateView):
+    template_name = 'employee/jobFiltered/jobFiltered_list.html'
+    paginate_by = 10  # Number of jobs per page
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        form = JobFilterForm(self.request.GET)
+        filtered_jobs = JobRequisition.objects.all()
+
+        if form.is_valid():
+            industry = form.cleaned_data['industry']
+            job_title = form.cleaned_data['job_title']
+            city = form.cleaned_data['city']
+            state = form.cleaned_data['state']
+            min_experience = form.cleaned_data['min_experience']
+            # Process other form fields to filter jobs
+
+            if industry:
+                filtered_jobs = filtered_jobs.filter(industry=industry)
+            if job_title:
+                filtered_jobs = filtered_jobs.filter(job_title=job_title)
+            if city:
+                filtered_jobs = filtered_jobs.filter(city__icontains=city)
+            if state:
+                filtered_jobs = filtered_jobs.filter(state__iexact=state)
+            if min_experience:
+                filtered_jobs = filtered_jobs.filter(min_experience__gte=min_experience)
+            # Apply more filters
+
+        paginator = Paginator(filtered_jobs, self.paginate_by)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context['jobs'] = page_obj
+        context['form'] = form
+        return context
+
+    
+class ApplyJobFromSearchView(LoginRequiredMixin, View):
+
+    def post(self, request, slug):
+        _job = RecommendedJobs.objects.filter(slug=slug).first()
+        
+        if _job:
+            existing_application = AppliedJobHistory.objects.filter(user=request.user, job=_job).first()
+            
+            if existing_application:
+                pass  # messages.warning(request, "You have already applied for this job.")
+            else:
+                AppliedJobHistory.objects.create(user=request.user, job=_job, status='applied')
+                # messages.success(request, "You have successfully applied for the job.")
+        else:
+            raise Exception("Job not found.")  # Handle this case based on your application's logic
+            
+        return redirect('employee:filtered-job-list')
+
+
+

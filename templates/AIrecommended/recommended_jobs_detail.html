@@ -49,15 +49,17 @@
                     
                     <div class="btn-group text-muted pt-3 gap-2">
                         {% if not recommended_job|has_applied:request.user %}
-                        <form action="{% url 'recommendedByAI:apply-job' slug=recommended_job.slug %}" method="post">
-                          {% csrf_token %}
-                          <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Apply Now</button>
-                        </form>
-                        
-                        <!-- Button trigger modal <a href="{% url 'recommendedByAI:job-recommended-delete' slug=recommended_job.slug %} " class="btn btn-sm btn-outline-danger">Delete</a>-->
-                        <button type="button"class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            Delete
-                        </button>
+                        <div id="isAplied" class="d-block">
+                            <form action="{% url 'recommendedByAI:apply-job' slug=recommended_job.slug %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Apply Now</button>
+                            </form>
+                            
+                            <!-- Button trigger modal <a href="{% url 'recommendedByAI:job-recommended-delete' slug=recommended_job.slug %} " class="btn btn-sm btn-outline-danger">Delete</a>-->
+                            <button type="button"class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Delete
+                            </button>
+                        </div>
                         {% endif %}
                         <a href="{% url 'recommendedByAI:job-recommended-list' %} " class="btn btn-sm btn-outline-Jobdogg">Back</a>
                       </div>
@@ -65,37 +67,36 @@
             </div>
         </div>
     </div>
-
-</div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Recommended Job</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <p class="pt-3">Are you sure you want to delete the following job?</p>
-            <div class="d-flex text-muted">
-                <p class="pb-1 mb-0 small lh-sm ">
-                    <strong class="d-block text-gray-dark">User: {{ recommended_job.user.username }}</strong>
-                    <strong class="d-block">Job Requisition:  {% for title in recommended_job.job_requisition.job_title.all %}
-                        {{ title.position }}{% if not forloop.last %}, {% endif %}{% endfor %}</strong>
-                </p>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Recommended Job</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="pt-3">Are you sure you want to delete the following job?</p>
+                <div class="d-flex text-muted">
+                    <p class="pb-1 mb-0 small lh-sm ">
+                        <strong class="d-block text-gray-dark">User: {{ recommended_job.user.username }}</strong>
+                        <strong class="d-block">Job Requisition:  {% for title in recommended_job.job_requisition.job_title.all %}
+                            {{ title.position }}{% if not forloop.last %}, {% endif %}{% endfor %}</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form action="{% url 'recommendedByAI:job-recommended-delete' slug=recommended_job.slug%}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+                <a href="{% url 'recommendedByAI:job-recommended-list' %}" class="btn btn-sm btn-outline-info">Back</a>
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                
             </div>
         </div>
-        <div class="modal-footer">
-            <form action="{% url 'recommendedByAI:job-recommended-delete' slug=recommended_job.slug%}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-              </form>
-            <a href="{% url 'recommendedByAI:job-recommended-list' %}" class="btn btn-sm btn-outline-info">Back</a>
-            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-            
         </div>
-      </div>
     </div>
-  </div>
+</div>
 {% endblock %}
