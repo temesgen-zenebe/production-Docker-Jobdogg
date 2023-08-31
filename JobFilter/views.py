@@ -6,22 +6,21 @@ from django.views import View
 from django.contrib import messages
 from django.core.paginator import Paginator
 from JobFilter.forms import JobFilterForm
-from employer.models import JobRequisition
+from employer.models import CompanyProfile, JobRequisition
 from JobFilter.models import AppliedSearchJobHistory
 
-
-
-class FilteredJobListView(TemplateView):
+class FilteredJobListView(LoginRequiredMixin, TemplateView):
     template_name = 'JobFilter/jobFiltered/jobFiltered_list.html'
     paginate_by = 5  # Number of jobs per page
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         form = JobFilterForm(self.request.GET)
         filtered_jobs = JobRequisition.objects.all()
-        # Fetch AppliedJobHistory entries for the current user
         applied_jobs = AppliedSearchJobHistory.objects.filter(user=self.request.user)
+        
+        for job in filtered_jobs:
+            job.company_profile = CompanyProfile.objects.filter(user=job.user).first()
 
         if form.is_valid():
             industry = form.cleaned_data['industry']
@@ -51,6 +50,13 @@ class FilteredJobListView(TemplateView):
         context['form'] = form
         context['applied_jobs'] = applied_jobs
         return context
+
+
+class FilteredJobDetailView(LoginRequiredMixin, DetailView):
+    model = JobRequisition
+    context_object_name = 'job' 
+    template_name = 'JobFilter/jobFiltered/jobFiltered_detail.html'
+    
 
 class ApplyJobFromSearchView(LoginRequiredMixin, View):
     def post(self, request, slug):

@@ -120,7 +120,7 @@ class JobRequisition(models.Model):
     custom_job_title = models.CharField(max_length=200, null=True, blank=True)
     required_skills = models.ManyToManyField(Skill)
     custom_required_skills = models.TextField(max_length=200, null=True, blank=True)
-    soc_code = models.CharField(default='0000', null=True, blank=True)
+    soc_code = models.CharField(max_length=100, default='0000', null=True, blank=True)
     department = models.CharField(max_length=255)
     min_experience = models.PositiveIntegerField()
     min_degree_requirements = models.CharField(max_length=100 , choices=DEGREE_TYPE_CHOICES)

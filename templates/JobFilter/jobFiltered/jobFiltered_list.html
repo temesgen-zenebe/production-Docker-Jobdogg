@@ -46,47 +46,60 @@
                     </div>
                     <div class="col-xl-12 col-lg-12">
                       <div class="card">
-                          <h6 class=" card-header pb-2  mb-3font-weight-bold text-gray-800"> Job Filter Reasulte({{jobs|length}})</h6>
+                          <h6 class="card-header pb-2  mb-3font-weight-bold text-gray-800"> Job Filter Reasulte({{jobs|length}})</h6>
                           <div class="card-body">
-
-                              <div class="row">
-                                {% for job in jobs %}
-                                  <!-- Job posted Card Example -->
-                                  <div class="col-xl-3 col-md-6 mb-4">
-                                      <div class="card border-left-primary shadow h-100 py-2">
-                                          <div class="card-body">
-                                              <div class="row no-gutters align-items-center">
-                                                  <div class="col mr-2">
-                                                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                        {{ job.industry }}</div>
-                                                      <div class="mb-0 text-gray-800 btn-group gap-1">
-                                                        <form action="{% url 'JobFilter:apply-search-job' slug=job.slug %}" method="post">
-                                                          {% csrf_token %}
-                                                          <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Apply Now</button>
-                                                      </form>
-                                                      <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Detail</button>
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-auto">
-                                                      <i class="fas fa-calendar fa-2x text-gray-300" aria-hidden="true"></i>
+                            <div class="row py-3">
+                              {% for job in jobs %}
+                                <!-- Job posted Card Example -->
+                                <div class="col-xl-4 col-md-6 mb-4">
+                                  <div class="card border-left-JobdoggOrnge shadow h-100 ">
+                                    <div class="card-body">
+                                      <div class="row no-gutters align-items-center">
+                                        <div class="col ">
+                                          <div class="d-flex text-muted gap-3">
+                                              <div>
+                                                {% if job.company_profile.logo %}
+                                                  <img src="{{ job.company_profile.logo.url }}"
+                                                  data-bs-toggle="modal" data-bs-target="#DetailModal"
+                                                   alt="{{ job.company_profile.company_name }}" width="20" height="20" 
+                                                  class="rounded-circle d-none d-sm-inline-block">
+                                                {% else %}
+                                                <i class="fa-solid fa-briefcase fa-2x text-gray-300 mx-3 d-none d-sm-inline-block"></i>
+                                                {% endif %}
+                                              </div>
+                                              <div>
+                                                  <strong class="d-block text-gray-dark"><h6 class="text-xs font-weight-bold text-primary text-uppercase mb-0">{{ job.industry }}</h6></strong>
+                                                  {% if job.company_profile %}
+                                                    <small class="mb-0 opacity-75">{{ job.company_profile.company_name }}</small>
+                                                  {% endif %}
+                                                  <small class="d-block mb-0 opacity-75">Post: {{ job.created|date }}</small>
+                                                  <div class="mt-1 text-gray-800 btn-group gap-1">
+                                                    <form action="{% url 'JobFilter:apply-search-job' slug=job.slug %}" method="post">
+                                                      {% csrf_token %}
+                                                      <button type="submit" class="btn btn-sm btn-outline-Jobdogg"><small>Apply</small></button>
+                                                    </form>
+                                                    <a href="{% url 'JobFilter:job_jobFilter_detail' slug=job.slug%}" type="submit" 
+                                                    class="btn btn-sm btn-outline-Jobdogg"><small>Detail</small></a>
                                                   </div>
                                               </div>
                                           </div>
+                                        </div>
                                       </div>
+                                    </div>
                                   </div>
-                                {% endfor %}
-                              </div>
+                                </div>
+                              {% endfor %}
+                            </div>
+                            <!-- Pagination -->
                             <div class="pagination">
                               <span class="step-links">
                                 {% if jobs.has_previous %}
                                   <a href="?page=1">&laquo; first</a>
                                   <a href="?page={{ jobs.previous_page_number }}">previous</a>
                                 {% endif %}
-                          
                                 <span class="current-page">
                                   Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
                                 </span>
-                          
                                 {% if jobs.has_next %}
                                   <a href="?page={{ jobs.next_page_number }}">next</a>
                                   <a href="?page={{ jobs.paginator.num_pages }}">last &raquo;</a>
@@ -94,6 +107,7 @@
                               </span>
                             </div>
                           </div>
+                          
                       </div>
                     </div>
                   </div>
@@ -107,16 +121,17 @@
           <p class="m-2 p-2 font-weight-bold text-gray-600">Applayed History and status</p>
           <p class="m-2 p-2 font-weight-bold text-gray-600">Status</p>
           </div>
+          
           {% for job in applied_jobs %}
           <div class="d-flex text-muted pt-3 px-1">
-              <i class="fas fa-calendar fa-2x text-gray-300 mx-3"></i>
-                                     
+              
+              <i class="fa-solid fa-briefcase fa-2x text-gray-300 mx-3"></i>                    
             <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
               <div class="d-flex justify-content-between ">
-                <strong class="text-gray-dark">{{ job.job.employee_preferences.category}}</strong>
+                <strong class="text-gray-dark">{{ job.Search_job.industry}}</strong>
                 <a href=""><span id="statesApplication" >{{job.status|upper}}</span></a>
               </div>
-              <span class="d-block">{{ job.job.employee_preferences.created|date}}</span>
+              <span class="d-block">{{ job.applied_date|date}}</span>
             </div>
           </div>
           {% endfor %}
@@ -131,30 +146,50 @@
     
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">New message to @getbootstrap</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Advance Filtering form</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="card-body">
-          <form method="get">
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Filters</button>
-          </form>
-       </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
+       
+          <div class="modal-body">
+            <form method="get">
+              <div class="card-body">
+                  {{ form|crispy }}
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-outline-Jobdogg">Filter</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+              </form>
+          </div>
+            
     </div>
   </div>
 </div>
 
 <!-- End Example Code -->
 
+
+<!-- Modal -->
+<div class="modal fade" id="DetailModal" tabindex="-1" aria-labelledby="DetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="DetailModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
