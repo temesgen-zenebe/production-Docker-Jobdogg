@@ -49,10 +49,10 @@
 <header>
   <nav class="fixed-top navbar  navbar-expand-lg  navbar-dark navHeader" aria-label="Dark offcanvas navbar">
     <div class="container-fluid">
-      <a class="navbar-brand px-3" href="{% url 'pages:homepage' %}">
+     <a class="navbar-brand px-3" href="{% url 'pages:homepage' %}">
         <img src="{% static 'images/12-jobdogg.png' %}" alt="Logo" class="img-fluid" width="130" height="40"/>
       </a>
-   
+      <!-- <div class="jobdogg-logo"><a href=""><h1></h1></a></div>-->
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark"aria-controls="offcanvasNavbarDark">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -100,14 +100,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
             </li>
-            <!--<li class="nav-item">
-              <a class="nav-link" href="{% url 'account_signup' %}" value="employee" id="employee">Signup as Employee</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'account_signup' %}" value="employer" id="employer" >Signup as Employer</a>
-            </li>-->
-            
-            
+
             {% else %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

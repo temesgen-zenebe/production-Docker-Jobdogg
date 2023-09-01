@@ -5,43 +5,37 @@
 {% block title %}Apply Filters List{% endblock %}
 {% block dashboard_employee %}
 <div class="container">
-    <style>
-        .scrollspy-job {
-            height: 400px;
-            margin-top: 0.5rem;
-            overflow: auto;
-        }
-    </style>
+    
     <div class="row">
         <!-- Area Chart -->
         <div class="col-xl-12 col-lg-10">
             <div class="card shadow mb-1">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        <i class="bi bi-front bd-placeholder-img flex-shrink-0 me-2 rounded fs-5 text-info" 
-                        width="32" height="32"></i> {{ job.industry|title }} Detail 
-                    </h6>
-                    <div class="d-flex text-muted justify-content-between gap-2">
-                        <i class="bi bi-align-end bd-placeholder-img flex-shrink-0 me-2 rounded fs-5 text-info"></i>
-                        <p class="mb-0 py-2 small lh-sm">
-                            <strong class="d-block text-gray-dark">
-                            [ {{ job.number_views }} ] Applayed</strong>
-                        </p> 
+                    <h6 class="m-0 font-weight-bold text-primary ">
                         
-                        <p class="mb-0 py-2 small lh-sm">
-                            <strong class="d-block text-gray-dark">
-                            [ {{ job.number_views }} ] Viewers</strong>
-                        </p>
-                        <a href="{% url 'JobFilter:filtered-job-list' %}" class="btn btn-sm btn-outline-secondary">Back</a>
-                    </div>
+                        {% if  job.status == True %}
+                        <span class="px-2 text-success"> Status:</span> <span class="badge bg-success small ">Active</span>
+                        {% else %}
+                        <span class="px-3 text-warning"> Status:</span> <span class="badge bg-warning small">Inactive</span>
+                        {% endif %}
+                        </span>
+                    </h6>
                     
+                    <div class="btn-group gap-1">
+                        <a href="{% url 'JobFilter:filtered-job-list' %}" class="btn btn-sm btn-outline-secondary">Back</a>
+                        <form action="{% url 'JobFilter:apply-search-job' slug=job.slug %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-Jobdogg"><small>Apply</small></button>
+                        </form>
+                    </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-10">
                           <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-job" tabindex="0">
+                            
                             <!--<h4 id="list-item-1">Job Description</h4>-->
                             <div id="list-item-1" class="py-1  border-bottom card-header">
                                 <h6>Job Description</h6></div>
@@ -61,6 +55,20 @@
                                 <p class="pb-3 mb-0 small lh-sm">
                                     <strong class="d-block text-gray-dark">Job Description</strong>
                                     {{ job.job_description }}
+                                </p>
+                            </div>
+                            <div class="border-bottom d-flex text-muted py-3">
+                                <i class="bi bi-align-end bd-placeholder-img flex-shrink-0 me-2 rounded fs-5 text-info"></i>
+                                <p class="pb-3 mb-0 small lh-sm">
+                                    <strong class="d-block text-gray-dark"> Job Catagory </strong>
+                                    {{ job.industry|title }} 
+                                </p>
+                            </div>
+                            <div class="border-bottom d-flex text-muted py-3">
+                                <i class="bi bi-align-end bd-placeholder-img flex-shrink-0 me-2 rounded fs-5 text-info"></i>
+                                <p class="pb-3 mb-0 small lh-sm">
+                                    <strong class="d-block text-gray-dark"> Job Type </strong>
+                                    {{ job.job_type}} 
                                 </p>
                             </div>
                             {% comment %} <h4 id="list-item-2">Location</h4> {% endcomment %}
@@ -139,20 +147,20 @@
                                         {{ job.get_min_degree_requirements_display }}
                                     </p>
                                 </div>
-                            <div class="border-bottom d-flex text-muted pt-3">
-                                <i class="bi bi-align-end bd-placeholder-img flex-shrink-0 me-2 rounded fs-5 text-info"></i>
-                                <p class="pb-3 mb-0 small lh-sm">
-                                    <strong class="d-block text-gray-dark">Certifications Required</strong>
-                                    {{ job.certifications_required }}
-                                </p>
-                            </div>
-                            <div class="border-bottom d-flex text-muted pt-3">
-                                <i class="bi bi-align-end bd-placeholder-img flex-shrink-0 me-2 rounded fs-5 text-info"></i>
-                                <p class="pb-3 mb-0 small lh-sm">
-                                    <strong class="d-block text-gray-dark">Star Rating</strong>
-                                    {{ job.star_rating }}
-                                </p>
-                            </div>
+                                <div class="border-bottom d-flex text-muted pt-3">
+                                    <i class="bi bi-align-end bd-placeholder-img flex-shrink-0 me-2 rounded fs-5 text-info"></i>
+                                    <p class="pb-3 mb-0 small lh-sm">
+                                        <strong class="d-block text-gray-dark">Certifications Required</strong>
+                                        {{ job.certifications_required }}
+                                    </p>
+                                </div>
+                                <div class="border-bottom d-flex text-muted pt-3">
+                                    <i class="bi bi-align-end bd-placeholder-img flex-shrink-0 me-2 rounded fs-5 text-info"></i>
+                                    <p class="pb-3 mb-0 small lh-sm">
+                                        <strong class="d-block text-gray-dark">Star Rating</strong>
+                                        {{ job.star_rating }}
+                                    </p>
+                                </div>
                            
                             {% comment %} <h4 id="list-item-3">Salary</h4> {% endcomment %}
                             <div id="list-item-4" class="py-1  border-bottom card-header">
@@ -237,6 +245,25 @@
                         </div>
                       </div>
                  
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex text-muted justify-content-between small">
+                       <div class="d-flex gap-2">
+                            <p class="mb-0 py-1 small lh-sm">
+                                <strong class="d-block text-gray-dark">
+                                    # Applayed [ {{ job.number_views }} ] 
+                                </strong>
+                            </p> 
+                            
+                            <p class="mb-0 py-1 small lh-sm">
+                                <strong class="d-block text-gray-dark">
+                                    # Viewers [ {{ job.number_views }} ] 
+                                </strong>
+                            </p>
+                        </div>
+                        <small>Posted By : {{job.user}}</small>
+                        <small>Posted: {{job.created|date}}</small>
+                    </div>
                 </div>
             </div>
         </div>

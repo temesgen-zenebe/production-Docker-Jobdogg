@@ -64,15 +64,31 @@ def admin_home(request):
     return render(request, 'pages/admin_home.html')
 
 
-def redirect_to_homepage(request):
+# def redirect_to_homepage(request):
    
+#     if request.user.is_authenticated:
+#         if is_admin(request.user): # Admin
+#             return redirect('pages:adminHomePage')
+#         elif is_employee(request.user):  # Employee (Assuming you have a custom user model with an 'is_employee' field)
+#             return redirect('pages:employeeHomePage')
+#         elif is_employer(request.user):  # Employer (Assuming you have a custom user model with an 'is_employer' field)
+#             return redirect('pages:employerHomePage')
+
+#     # Default fallback if no matching role is found
+#     return redirect('pages:employeeHomePage')  # You can set the default to any page you prefer
+import logging
+
+def redirect_to_homepage(request):
     if request.user.is_authenticated:
-        if is_admin(request.user): # Admin
+        if is_admin(request.user):
+            logging.info("User is an admin")
             return redirect('pages:adminHomePage')
-        elif is_employee(request.user):  # Employee (Assuming you have a custom user model with an 'is_employee' field)
+        elif is_employee(request.user):
+            logging.info("User is an employee")
             return redirect('pages:employeeHomePage')
-        elif is_employer(request.user):  # Employer (Assuming you have a custom user model with an 'is_employer' field)
+        elif is_employer(request.user):
+            logging.info("User is an employer")
             return redirect('pages:employerHomePage')
 
-    # Default fallback if no matching role is found
-    return redirect('pages:employeeHomePage')  # You can set the default to any page you prefer
+    logging.warning("No matching role found, defaulting to employeeHomePage")
+    return redirect('pages:employeeHomePage')

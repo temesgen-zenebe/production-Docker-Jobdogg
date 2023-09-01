@@ -28,18 +28,19 @@
                     <div class="col-xl-12 col-lg-12">
                       <div class="card">
                         <div class="d-flex card-header pb-2  mb-3font-weight-bold text-gray-800">
-                          <form class="form-inline mr-auto ml-md-3 my-2 my-md-0 mw-200 navbar-search">
+                          <form method="get" action="{% url 'JobFilter:filtered-job-list' %}" class="form-inline mr-auto ml-md-3 my-2 my-md-0 mw-200 navbar-search">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-sm bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                              
+                                <input type="text" name="search"  class="form-control form-control-sm bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append gap-2">
-                                    <button class="btn btn-sm btn-outline-Jobdogg" type="button">
+                                    <button class="btn btn-sm btn-outline-Jobdogg" type="submit">
                                         <i class="fas fa-search fa-sm" aria-hidden="true"></i>
                                     </button>
                                     <button type="button" class="btn btn-sm btn-outline-Jobdogg" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Advance Filter</button>
                                 </div>
                             </div>
                           </form>
-                          
+                          <a class="btn btn-sm btn-outline-Jobdogg" href="{% url 'JobFilter:filtered-job-list' %}">All</a>
                         </div>
                        
                       </div>

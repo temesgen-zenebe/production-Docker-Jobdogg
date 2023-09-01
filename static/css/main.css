@@ -15,6 +15,14 @@ body
 a{ 
     text-decoration: none;
 }
+
+.jobdogg-logo {
+  width: 100px;
+  height: 50px;
+  margin-top: 10px;
+  background: url(/static/images/jobdogg_logo.png) no-repeat left top;
+  background-size: 89%;
+}
 .bg-jobdogg{
   background-color: rgb(247,247,247); /*company color*/ 
  

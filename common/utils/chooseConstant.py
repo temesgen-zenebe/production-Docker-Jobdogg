@@ -125,20 +125,26 @@ SALARY_TYPES = (
 
 #JOB_TYPES
 JOB_TYPES = (
+        ('', 'Select Job Type'),  # Provide an empty option
         ('Temp', 'Temporary'),
         ('Temp-Perm', 'Temporary to Permanent'),
         ('Perm', 'Permanent'),
-        ('full-time', 'Full-time'),
-        ('part-time', 'Part-time'),
-        ('contract', 'Contract/Freelance'),
-        ('internship', 'Internship'),
-        ('apprenticeship', 'Apprenticeship'),
-        ('remote', 'Remote/Telecommute'),
-        ('shift-based', 'Shift-based'),
-        ('consultant', 'Consultant'),
-        ('other', 'Other'),
-    )
+        # ('full-time', 'Full-time'),
+        # ('part-time', 'Part-time'),
+        # ('contract', 'Contract/Freelance'),
+        # ('internship', 'Internship'),
+        # ('apprenticeship', 'Apprenticeship'),
+        # ('remote', 'Remote/Telecommute'),
+        # ('shift-based', 'Shift-based'),
+        # ('consultant', 'Consultant'),
+        # ('other', 'Other'),
+)
 
+SORT_CHOICES = (
+        ('', 'Sort by'),
+        ('newest', 'Newly Posted'),
+        # Add more sorting choices here as needed
+)
 # Location preference choices
 LOCATION_CHOICES = [
         ('home_proximity', 'Proximity to Home/Family'),
@@ -146,6 +152,7 @@ LOCATION_CHOICES = [
     ]
 #Work arrangement choices
 WORK_ARRANGEMENT_CHOICES = [
+        ('', 'Select Work Arrangement Preference'),  # Provide an empty option
         ('REMOTE', 'Remote'),
         ('ON_SITE', 'On-site'),
         ('HYBRID', 'Hybrid'),

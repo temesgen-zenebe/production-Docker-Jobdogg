@@ -145,6 +145,7 @@ class JobRequisition(models.Model):
     end_time = models.TimeField()
     job_description = models.TextField()
     number_views = models.PositiveIntegerField(default=1)
+    status = models.BooleanField(default=True)
     preference_action = models.CharField(max_length=20, choices=ACTION_TYPES, default="ALL")
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)

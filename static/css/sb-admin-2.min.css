@@ -116,6 +116,15 @@
     .btn-outline-DarkOliveGreen:hover {color: #fff; background-color: #556B2F; border-color: #556B2F}
     .btn-outline-CornflowerBlue:hover {color: #fff; background-color: #6495ED; border-color: #6495ED}
     .btn-outline-Jobdogg:hover {color: #fff; background-color: #e06a00; border-color: #e06a00}
+    .scrollspy-job {height: 500px; overflow: auto;}
+    .list-group-item-job.active { z-index: 2; color: #fff; background-color: #e06a00; border-color: #e06a00;}
+    .list-group-item-job {
+        position: relative;
+        display: block;
+        padding: 0.75rem 1.25rem;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,.125);
+    }
     /*----------------------------------------------------------*/
     .bg-Eminence {background-color: #6C3082!important} 
     .bg-Indigo {background-color: #e74a3b!important} 
