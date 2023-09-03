@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='personal',
             name='languages',
-            field=models.CharField(choices=[('en', 'English'), ('es', 'Spanish'), ('zh', 'Chinese'), ('hi', 'Hindi'), ('vi', 'Vietnamese'), ('ko', 'Korean'), ('fr', 'French'), ('de', 'German'), ('ar', 'Arabic'), ('ru', 'Russian'), ('ja', 'Japanese'), ('pt', 'Portuguese'), ('it', 'Italian'), ('pl', 'Polish'), ('uk', 'Ukrainian'), ('tl', 'Tagalog'), ('fa', 'Persian'), ('gu', 'Gujarati'), ('bn', 'Bengali'), ('he', 'Hebrew'), ('pa', 'Punjabi'), ('ta', 'Tamil'), ('mr', 'Marathi'), ('tr', 'Turkish'), ('th', 'Thai'), ('ne', 'Nepali'), ('sw', 'Swahili'), ('am', 'Amharic'), ('el', 'Greek'), ('nl', 'Dutch'), ('cs', 'Czech'), ('sv', 'Swedish'), ('da', 'Danish'), ('no', 'Norwegian'), ('fi', 'Finnish'), ('hu', 'Hungarian'), ('ro', 'Romanian')], default=django.utils.timezone.now, max_length=20),
+            field=models.CharField(choices=[('en', 'English'), ('es', 'Spanish'), ('zh', 'Chinese'), ('hi', 'Hindi'), ('vi', 'Vietnamese'), ('ko', 'Korean'), ('fr', 'French'), ('de', 'German'), ('ar', 'Arabic'), ('ru', 'Russian'), ('ja', 'Japanese'), ('pt', 'Portuguese'), ('it', 'Italian'), ('pl', 'Polish'), ('uk', 'Ukrainian'), ('tl', 'Tagalog'), ('fa', 'Persian'), ('gu', 'Gujarati'), ('bn', 'Bengali'), ('he', 'Hebrew'), ('pa', 'Punjabi'), ('ta', 'Tamil'), ('mr', 'Marathi'), ('tr', 'Turkish'), ('th', 'Thai'), ('ne', 'Nepali'), ('sw', 'Swahili'), ('am', 'Amharic'), ('el', 'Greek'), ('nl', 'Dutch'), ('cs', 'Czech'), ('sv', 'Swedish'), ('da', 'Danish'), ('no', 'Norwegian'), ('fi', 'Finnish'), ('hu', 'Hungarian'), ('ro', 'Romanian')], default=django.utils.timezone.now, max_length=100),
             preserve_default=False,
         ),
     ]
