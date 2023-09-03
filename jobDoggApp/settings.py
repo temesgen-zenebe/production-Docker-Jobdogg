@@ -18,7 +18,7 @@ import stripe
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEBUG=False
+
 ALLOWED_HOSTS = ['*']
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -120,10 +120,10 @@ DATABASES = {
 #     'PORT': 8067
 #     }
 # }
-DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-}
-# DATABASES = {'default': dj_database_url.config()}
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+# }
+DATABASES = {'default': dj_database_url.config()}
 
 # EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -135,15 +135,15 @@ EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY')
 DEFAULT_FROM_EMAIL = 'temf2006@gmail.com'
 
 
-# Stripe Configuration
-stripe.api_key = os.environ.get('STRIPE_API_KEY')
+# # Stripe Configuration
+# stripe.api_key = os.environ.get('STRIPE_API_KEY')
 
-# PayPal Configuration
-paypalrestsdk.configure({
-    'mode': os.environ.get('PAYPAL_MODE', 'sandbox'),  # Set to 'live' for production environment
-    'client_id': os.environ.get('PAYPAL_CLIENT_ID'),
-    'client_secret': os.environ.get('PAYPAL_CLIENT_SECRET'),
-})
+# # PayPal Configuration
+# paypalrestsdk.configure({
+#     'mode': os.environ.get('PAYPAL_MODE', 'sandbox'),  # Set to 'live' for production environment
+#     'client_id': os.environ.get('PAYPAL_CLIENT_ID'),
+#     'client_secret': os.environ.get('PAYPAL_CLIENT_SECRET'),
+# })
 
 AUTHENTICATION_BACKENDS = (
 # Needed to login by username in Django admin, even w/o `allauth`
