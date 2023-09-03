@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 import dj_database_url  
 import paypalrestsdk
 import stripe
@@ -24,12 +25,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: don't run with debug turned on in production!
-#SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = 'django-insecure-_8gr_a6@+wv)r97z)8ty-%((#v_gkl4z)!%%+cui4^uvyawqpj'
-# Application definition
+SECRET_KEY = config('SECRET_KEY')
+
 
 INSTALLED_APPS = [
     # Built-in Django apps
@@ -114,20 +112,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }"""
-# DATABASES = {
-#     'default': {
-#     'ENGINE': 'django.db.backends.postgresql',
-#     'NAME': 'railway',
-#     'USER': 'postgres',
-#     'PASSWORD': 'RMwtxRrgpU3mtY34oT8e',
-#     'HOST': 'containers-us-west-191.railway.app',
-#     'PORT': 8067
-#     }
-# }
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': {
+        'ENGINE': config('DATABASE_ENGINE'),
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT'),
+    }
 }
-#DATABASES = {'default': dj_database_url.config()}
 
 # EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
