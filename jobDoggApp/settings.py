@@ -16,15 +16,19 @@ import paypalrestsdk
 import stripe
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+#SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-_8gr_a6@+wv)r97z)8ty-%((#v_gkl4z)!%%+cui4^uvyawqpj'
 # Application definition
 
 INSTALLED_APPS = [
@@ -120,10 +124,10 @@ DATABASES = {
 #     'PORT': 8067
 #     }
 # }
-# DATABASES = {
-#     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-# }
-DATABASES = {'default': dj_database_url.config()}
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+}
+#DATABASES = {'default': dj_database_url.config()}
 
 # EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -223,6 +227,6 @@ MAX_VIDEO_DURATION = 60  # 1 minutes in seconds
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # BOTTOM OF settings.py
 
-if os.environ.get('ENVIRONMENT') != 'production':
-    from .local_settings import *
-# DON'T PUT ANYTHING BELOW THIS
+# if os.environ.get('ENVIRONMENT') != 'production':
+#     from .local_settings import *
+# # DON'T PUT ANYTHING BELOW THIS
