@@ -1,1 +1,1 @@
-web: gunicorn jobDoggApp.wsgi
+web: gunicorn jobDoggApp.wsgi --log-file -
