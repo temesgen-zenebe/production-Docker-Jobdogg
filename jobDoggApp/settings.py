@@ -24,7 +24,7 @@ ALLOWED_HOSTS = ['*']
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # Application definition
 
 INSTALLED_APPS = [
@@ -110,11 +110,20 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }"""
-
 # DATABASES = {
-#     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+#     'default': {
+#     'ENGINE': 'django.db.backends.postgresql',
+#     'NAME': 'railway',
+#     'USER': 'postgres',
+#     'PASSWORD': 'RMwtxRrgpU3mtY34oT8e',
+#     'HOST': 'containers-us-west-191.railway.app',
+#     'PORT': 8067
+#     }
 # }
-DATABASES = {'default': dj_database_url.config()}
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+}
+# DATABASES = {'default': dj_database_url.config()}
 
 # EMAIL
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
