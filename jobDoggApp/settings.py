@@ -230,3 +230,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # if os.environ.get('ENVIRONMENT') != 'production':
 #     from .local_settings import *
 # # DON'T PUT ANYTHING BELOW THIS
+# The following lines are correct for production deployment on Railway
