@@ -9,7 +9,7 @@ import stripe
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Debug mode
-DEBUG = True
+DEBUG = False
 
 # Allowed Hosts
 ALLOWED_HOSTS = [
@@ -85,6 +85,10 @@ SESSION_COOKIE_SECURE = True
 
 # Enforce secure CSRF cookies (only send over HTTPS)
 CSRF_COOKIE_SECURE = True
+
+# Define the view or URL to handle CSRF failure errors
+CSRF_FAILURE_VIEW = 'common.views.csrf_failure_view'  # Replace 'yourapp.views.csrf_failure_view' with the actual view or URL you want to use.
+
 
 # Root URL Configuration
 ROOT_URLCONF = 'jobDoggApp.urls'
