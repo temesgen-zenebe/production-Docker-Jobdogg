@@ -11,9 +11,16 @@ import stripe
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['web-production-d90f.up.railway.app', '127.0.0.1']
+# settings.py
+
+ALLOWED_HOSTS = [
+    'web-production-d90f.up.railway.app',  # Add your production domain/host here
+    '127.0.0.1',  # Add your local development server IP or hostname here
+]
+
+
 
 # Quick-start development settings - unsuitable for production
 
