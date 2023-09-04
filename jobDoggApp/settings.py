@@ -173,12 +173,12 @@ USE_I18N = True
 USE_TZ = True
 
 # Static and Media File Settings
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/'),
 ]
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 ALLOWED_VIDEO_EXTENSIONS = ['.mp4', '.mpg', '.avi', '.mov', '.mkv', '.wmv', '.ogv', '.webm', '.flv']
