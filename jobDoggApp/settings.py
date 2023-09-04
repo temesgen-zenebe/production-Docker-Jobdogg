@@ -9,12 +9,12 @@ import stripe
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Debug mode
-DEBUG = True
+DEBUG = False
 
 # Allowed Hosts
 ALLOWED_HOSTS = [
-    'web-production-d90f.up.railway.app',  # Add your production domain/host here
-    '127.0.0.1',  # Add your local development server IP or hostname here
+    'https://web-production-d90f.up.railway.app',
+    'http://127.0.0.1:8000',
 ]
 
 # Secret Key and SendGrid API Key
@@ -74,8 +74,8 @@ MIDDLEWARE = [
 
 # CORS Allowed Origins
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8000',
     'https://web-production-d90f.up.railway.app',
+    'http://127.0.0.1:8000',
 ]
 
 # Root URL Configuration
