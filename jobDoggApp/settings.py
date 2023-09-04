@@ -12,10 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = False
 
 # Allowed Hosts
-ALLOWED_HOSTS = [
-    'https://web-production-d90f.up.railway.app',
-    'http://127.0.0.1:8000',
-]
+ALLOWED_HOSTS = ['*']
 
 # Secret Key and SendGrid API Key
 SECRET_KEY = config('SECRET_KEY')
