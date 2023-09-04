@@ -13,7 +13,7 @@ DEBUG = True
 
 # Allowed Hosts
 ALLOWED_HOSTS = [
-    'web-production-d90f.up.railway.app',  # Add your production domain/host here
+    'web-jobdogg-com.up.railway.app',  # Add your production domain/host here
     '127.0.0.1',  # Add your local development server IP or hostname here
 ]
 
@@ -73,12 +73,18 @@ MIDDLEWARE = [
 ]
 
 if not DEBUG:
-    CSRF_TRUSTED_ORIGINS = ['https://web-production-d90f.up.railway.app/']
+    CSRF_TRUSTED_ORIGINS = ['https://web-jobdogg-com.up.railway.app/']
 
 
 # CORS Allowed Origins
 if DEBUG:
     CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:8000']
+    
+# Enforce secure session cookies (only send over HTTPS)
+SESSION_COOKIE_SECURE = True
+
+# Enforce secure CSRF cookies (only send over HTTPS)
+CSRF_COOKIE_SECURE = True
 
 # Root URL Configuration
 ROOT_URLCONF = 'jobDoggApp.urls'
