@@ -12,7 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 # Allowed Hosts
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'web-production-d90f.up.railway.app',  # Add your production domain/host here
+    '127.0.0.1',  # Add your local development server IP or hostname here
+]
 
 # Secret Key and SendGrid API Key
 SECRET_KEY = config('SECRET_KEY')
@@ -60,20 +63,22 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = ['https://web-production-d90f.up.railway.app/']
+
+
 # CORS Allowed Origins
-CORS_ALLOWED_ORIGINS = [
-    'https://web-production-d90f.up.railway.app',
-    'http://127.0.0.1:8000',
-]
+if DEBUG:
+    CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:8000']
 
 # Root URL Configuration
 ROOT_URLCONF = 'jobDoggApp.urls'
@@ -161,7 +166,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static/'),
 ]
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
