@@ -14,7 +14,7 @@
         <img src="{{ user.avatar.url }}" alt="Avatar"
           class="d-block shadow rounded-circle mx-auto" width="55" height="55"/>
         {% endif %}
-        <form method="post" enctype="multipart/form-data" class="m-auto" novalidate>
+        <form method="POST" enctype="multipart/form-data" class="m-auto" novalidate>
           {% csrf_token %}
           {{ form|crispy }}
           <button class="form-control btn btn-sm btn-outline-primary">UPDATE</button>

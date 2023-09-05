@@ -8,7 +8,7 @@
   <div class="card border-warning1 m-auto my-5 mb-3 shadow" style="max-width: 30rem;">
     <div class="card-header text-center "><h6 class="fontColor-orang">Log in</h6></div>
     <div class="card-body ">
-      <form method="post" class="m-auto">
+      <form method="POST" class="m-auto" enctype="multipart/form-data">
         {% csrf_token %}
         {{form|crispy}}
         

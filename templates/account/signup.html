@@ -9,7 +9,7 @@
   <div class="card border-warning1 m-auto mb-3 my-5 shadow-lg  rounded " style="max-width: 30rem">
     <div class="card-header text-center">Register</div>
     <div class="card-body">
-      <form method="post" class="m-auto mb-2" >
+      <form method="POST" class="m-auto mb-2" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
         <button class="form-control form-control-sm btn-booster-orang">REGISTER</button>
