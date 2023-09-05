@@ -9,7 +9,7 @@ import stripe
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Debug mode
-DEBUG = False
+DEBUG = True
 
 # Allowed Hosts
 ALLOWED_HOSTS = [
@@ -87,7 +87,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 # Define the view or URL to handle CSRF failure errors
-CSRF_FAILURE_VIEW = 'common.views.csrf_failure_view'  # Replace 'yourapp.views.csrf_failure_view' with the actual view or URL you want to use.
+#CSRF_FAILURE_VIEW = 'common.views.csrf_failure_view'  # Replace 'yourapp.views.csrf_failure_view' with the actual view or URL you want to use.
 
 
 # Root URL Configuration
