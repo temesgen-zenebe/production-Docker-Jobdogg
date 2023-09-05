@@ -9,8 +9,10 @@
 <div class="my-4 py-4" >
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mx-3 mb-3">
-        <h5 class="mx-3 mb-0 text-gray-800"><span id="user-name">{{ user.username }} </span>Profile Buiding Lookup  </h5>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        <h6 class="px-5 mb-0 text-gray-900">
+            <span class="badge rounded-pill text-bg-info px-2">{{ user.username|title|first }} </span>
+            <span id="user-name">{{ user.username|title }} </span>Profile Buiding Lookup  </h6>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50 px-3"></i> Generate Report</a>
     </div>
    <!-- progress bar -->

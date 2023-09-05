@@ -23,7 +23,9 @@
         <div class="row my-3">
             <div class="col-xl-12 col-lg-12">
                 <div class="card shadow ">
+                  {% if recommended_jobs %}
                     <h6 class=" card-header pb-2  mb-3font-weight-bold text-gray-800">Recommended Jobs List For You</h6>
+                    
                     <div class="row mb-4 pt-3 mx-2 gap-3" >
                         {% for job in recommended_jobs %}
                         <div class="col-xl-3 col-md-6 ">
@@ -56,6 +58,9 @@
                         </div>
                         {% endfor %}
                     </div>
+                  {% else %}
+                  <h6 class=" card-header pb-2  mb-3font-weight-bold text-gray-800">Not fund a Recommended Jobs List For You</h6>
+                  {% endif %}
                 </div>
             </div>
         </div>
@@ -66,22 +71,29 @@
             <p class="m-2 p-2 font-weight-bold text-gray-600">Applayed History and status</p>
             <p class="m-2 p-2 font-weight-bold text-gray-600">Status</p>
             </div>
-            {% for job in applied_jobs %}
-            <div class="d-flex text-muted pt-3 px-1">
-                <i class="fas fa-calendar fa-2x text-gray-300 mx-3"></i>
-                                       
-              <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                <div class="d-flex justify-content-between ">
-                  <strong class="text-gray-dark">{{ job.job.employee_preferences.category}}</strong>
-                  <a href=""><span id="statesApplication" >{{job.status|upper}}</span></a>
+            {% if applied_jobs %}
+              {% for job in applied_jobs %}
+              <div class="d-flex text-muted pt-3 px-1">
+                  <i class="fas fa-calendar fa-2x text-gray-300 mx-3"></i>
+                                        
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                  <div class="d-flex justify-content-between ">
+                    <strong class="text-gray-dark">{{ job.job.employee_preferences.category}}</strong>
+                    <a href=""><span id="statesApplication" >{{job.status|upper}}</span></a>
+                  </div>
+                  <span class="d-block">{{ job.job.employee_preferences.created|date}}</span>
                 </div>
-                <span class="d-block">{{ job.job.employee_preferences.created|date}}</span>
               </div>
+              {% endfor %}
+              
+              <small class="d-block text-end mt-3">
+                <a href="#">All suggestions</a>
+              </small>
+            {% else %}
+            <div class="d-flex text-muted pt-3 px-1">
+              <p class="m-2 p-2 font-weight-bold text-gray-600">oops you not Applayed yet !!</p>
             </div>
-            {% endfor %}
-            <small class="d-block text-end mt-3">
-              <a href="#">All suggestions</a>
-            </small>
+            {% endif %}
           </div>
     </div>
     

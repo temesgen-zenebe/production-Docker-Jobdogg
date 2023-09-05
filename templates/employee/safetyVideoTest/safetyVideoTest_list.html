@@ -1,14 +1,14 @@
-extends 'pages/employee_dashboard.html' %}
+{%extends 'pages/employee_dashboard.html' %}
 {% load static %}
 {% load user_tags %}
-{% block title %}Experience Information {% endblock %}
+{% block title %}safety Video Test {% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
         <div class="col-xl-8 col-lg-6">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
-                    <h6>Experience List</h6>
+                    <h6>safetyVideo Test</h6>
                     <div class="btn-group gap-1">
                     {% if not safetyVideoTest %}
                      <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:profile_building_progress' %}">Create</a>
