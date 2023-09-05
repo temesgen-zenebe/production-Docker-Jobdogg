@@ -13,7 +13,7 @@ DEBUG = True
 
 # Allowed Hosts
 ALLOWED_HOSTS = [
-    'web-jobdogg-com.up.railway.app',  # Add your production domain/host here
+    'jobdogg-com.up.railway.app',  # Add your production domain/host here
     '127.0.0.1',  # Add your local development server IP or hostname here
 ]
 
@@ -71,13 +71,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-#CSRF_TRUSTED_ORIGINS = ['https://*web-jobdogg-com.up.railway.app','http://*.127.0.0.1:8000']
 
-CSRF_TRUSTED_ORIGINS = ['https://web-jobdogg-com.up.railway.app', 'http://127.0.0.1:8000']
+
+CSRF_TRUSTED_ORIGINS = ['https://jobdogg-com.up.railway.app', 'http://127.0.0.1:8000']
 
 
 if not DEBUG:
-    CSRF_TRUSTED_ORIGINS = ['https://web-jobdogg-com.up.railway.app']
+    CSRF_TRUSTED_ORIGINS = ['https://jobdogg-com.up.railway.app']
 
 
 # CORS Allowed Origins
