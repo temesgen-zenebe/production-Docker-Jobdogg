@@ -71,9 +71,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+#CSRF_TRUSTED_ORIGINS = ['https://*web-jobdogg-com.up.railway.app','http://*.127.0.0.1:8000']
+
+CSRF_TRUSTED_ORIGINS = ['https://web-jobdogg-com.up.railway.app', 'http://127.0.0.1:8000']
+
 
 if not DEBUG:
-    CSRF_TRUSTED_ORIGINS = ['https://web-jobdogg-com.up.railway.app/']
+    CSRF_TRUSTED_ORIGINS = ['https://web-jobdogg-com.up.railway.app']
 
 
 # CORS Allowed Origins
