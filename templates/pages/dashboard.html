@@ -2,7 +2,7 @@
 {% load user_tags %}
 {% load static %}
 {% block title %}Dashboard{% endblock %}
-{% block javascript %}
+{% comment %} {% block javascript %}
     <!-- Core plugin JavaScript-->
     <script src="{% static 'js/vendor/jquery-easing/jquery.easing.min.js' %}" async></script>
     <script src="{% static 'js/vendor/jquery/jquery.min.js' %}" async></script>
@@ -20,7 +20,7 @@
  <!-- Custom styles for this template-->
  <link href="{% static 'css/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
  <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet" type="text/css">
-{% endblock %}
+{% endblock %} {% endcomment %}
 
 {% block main %}
 <div class="mt-4 py-4" >

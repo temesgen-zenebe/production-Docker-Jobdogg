@@ -101,7 +101,7 @@ class UserAcceptedPolicies(models.Model):
 class BasicInformation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     address = models.CharField(max_length=200)
-    apartment = models.CharField(max_length=50)
+    apartment = models.CharField(max_length=50, null=True, blank=True)
     city = models.CharField(max_length=100)
     state =  USStateField()
     zip_code = models.CharField(max_length=10)

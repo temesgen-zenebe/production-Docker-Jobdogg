@@ -6,17 +6,17 @@
 
 {% block dashboard_employee %}
 <!-- Code -->
-<div class="my-4 py-4" >
+<div class="container-field my-4 py-4" >
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mx-3 mb-3">
-        <h6 class="px-5 mb-0 text-gray-900">
+    <div class="d-sm-flex align-items-center justify-content-between mx-2 mb-3">
+        <h6 class="px-3 mb-0 text-gray-900">
             <span class="badge rounded-pill text-bg-info px-2">{{ user.username|title|first }} </span>
             <span id="user-name">{{ user.username|title }} </span>Profile Buiding Lookup  </h6>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50 px-3"></i> Generate Report</a>
     </div>
    <!-- progress bar -->
-    <div class="container mt-5"> 
+    <div class="container-field mt-5"> 
         <div class="position-relative m-4">
            
         <div class="progress my-3 mx-auto" style="height: 25px; width:96%;">
@@ -514,7 +514,7 @@
 
             <!-- Policies Modal -->
             <div class="modal fade" id="policiesModal" tabindex="-1" aria-labelledby="policiesModalLabel" aria-hidden="true">
-                <div class="modal-dialog  modal-lg modal-dialog-scrollable">
+                <div class="modal-dialog  modal-xl modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                     <h5 class="modal-title" id="policiesModalLabel">Accept Policies</h5>
@@ -561,7 +561,7 @@
                                                                     <div class="accordion-item ">
                                                                         <h2 class="accordion-header" id="flush-heading{{policy.id}}">
                                                                             <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
-                                                                                {{ policy.title }} *
+                                                                                {{ policy.title|safe }} *
                                                                             </button>
                                                                         </h2>
                                                                         <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
@@ -569,7 +569,7 @@
                                                                                 <div>
                                                                                     <h5 class="card-title">Special title treatment</h5>
                                                                                     <p class="card-text">
-                                                                                        {{ policy.description }}
+                                                                                        {{ policy.description|safe }}
                                                                                     </p>
                                                                                     {% if user.is_authenticated %}
                                                                                         {% if policy.id not in accepted_policies_ids %}
@@ -632,7 +632,7 @@
                                                                 <div class="accordion-item ">
                                                                     <h2 class="accordion-header" id="flush-heading{{policy.id}}">
                                                                         <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
-                                                                            {{ policy.title }}
+                                                                            {{ policy.title|safe }}
                                                                         </button>
                                                                     </h2>
                                                                     <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
@@ -640,7 +640,7 @@
                                                                             <div>
                                                                                 <h5 class="card-title">Special title treatment</h5>
                                                                                 <p class="card-text">
-                                                                                    {{ policy.description }}
+                                                                                    {{ policy.description|safe }}
                                                                                 </p>
                                                                                 
                                                                             </div>

@@ -47,7 +47,7 @@
                                                         <div class="accordion-item ">
                                                             <h2 class="accordion-header" id="flush-heading{{policy.id}}">
                                                                 <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
-                                                                    {{ policy.title }} *
+                                                                    {{ policy.title|safe }} *
                                                                 </button>
                                                             </h2>
                                                             <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
@@ -119,13 +119,13 @@
                                                     <div class="accordion-item ">
                                                         <h2 class="accordion-header" id="flush-heading{{policy.id}}">
                                                             <button class="accordion-button collapsed text-s" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{policy.id}}" aria-expanded="false" aria-controls="flush-collapse{{policy.id}}">
-                                                                {{ policy.title }}
+                                                                {{ policy.title|safe }}
                                                             </button>
                                                         </h2>
                                                         <div id="flush-collapse{{policy.id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{policy.id}}" data-bs-parent="#accordionFlushExample">
                                                             <div class="accordion-body " style="overflow: auto; height: 300px;">
                                                                 <div>
-                                                                    <h5 class="card-title">{{ policy.title }}</h5>
+                                                                    <h5 class="card-title">{{ policy.title|safe }}</h5>
                                                                     <hr>
                                                                     <p class="card-text">
                                                                         {{ policy.description|safe }}
