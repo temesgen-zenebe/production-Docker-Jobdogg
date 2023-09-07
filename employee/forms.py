@@ -151,7 +151,7 @@ class EmployeePreferencesForm(forms.ModelForm):
     )
     skills = forms.ModelMultipleChoiceField(
         queryset=Skill.objects.none(),
-        widget=forms.SelectMultiple(attrs={'class': 'form-control form-control-sm', 'id': 'id_skills'}),
+        widget=forms.SelectMultiple(attrs={'class': 'form-control form-control-sm overflow-x-auto', 'id': 'id_skills'}),
         help_text="Select multiple options by holding down the Ctrl key (or Command key on Mac)."
     )
   
@@ -194,7 +194,7 @@ class EmployeePreferencesForm(forms.ModelForm):
             'can_relocation': forms.Select(attrs={'class': 'select form-select form-select-sm', 'id': 'id_can_relocation','placeholder':'select'}),
             'years_of_experience': forms.NumberInput(attrs={'class': 'numberinput form-control form-control-sm', 'id': 'id_years_of_experience'}),
             'custom_positions': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm', 'id': 'id_custom_positions'}),
-            'custom_skills': forms.Textarea(attrs={'class': 'textarea form-control form-control-sm', 'id': 'id_custom_skills'}),
+            'custom_skills': forms.Textarea(attrs={'class': 'textarea form-control form-control-sm', 'id': 'id_custom_skills','rows': 3}),
         }
         
 #SafetyTestResultForm      

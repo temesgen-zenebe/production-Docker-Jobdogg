@@ -8,12 +8,13 @@
 <!-- Code -->
 <div class="container-field my-4 py-4" >
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mx-2 mb-3">
+    <div class="container-field d-sm-flex align-items-center justify-content-between mx-2 mb-3">
         <h6 class="px-3 mb-0 text-gray-900">
             <span class="badge rounded-pill text-bg-info px-2">{{ user.username|title|first }} </span>
-            <span id="user-name">{{ user.username|title }} </span>Profile Buiding Lookup  </h6>
+            <span id="user-name">{{ user.username|title }} </span>Profile Buiding Lookup  
+        </h6>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50 px-3"></i> Generate Report</a>
+                class="fas fa-download fa-sm text-white-50 px-1"></i>Report</a>
     </div>
    <!-- progress bar -->
     <div class="container-field mt-5"> 
@@ -197,7 +198,7 @@
                             <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                           </button>
                           <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#educationModal">
-                            <small>Add</small>
+                            <i class="bi bi-plus-circle"></i>
                          </button>
                           {% comment %} <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
                             <i class="fa-solid fa-upload"></i>
@@ -236,6 +237,9 @@
                             <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                                 <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                             </button>
+                            <button type="button" class="prev-btn  btn btn-sm btn-outline-Goldenrod" data-bs-toggle="modal" data-bs-target="#experienceFormModal">
+                                <i class="bi bi-plus-square"></i>
+                            </button>
                            <a href="{% url 'employee:experience_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Goldenrod"><i class="bi bi-pen"></i></a>
                         </div>
                         {% else %}
@@ -267,6 +271,9 @@
                             <div class="btn-group gap-1">
                                 <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                                     <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                                </button>
+                                <button type="button"  class="prev-btn  btn btn-sm btn-outline-Coral" data-bs-toggle="modal" data-bs-target="#preferencesModal">
+                                    <i class="bi bi-plus-square"></i>
                                 </button>
                                 <a href="{% url 'employee:employee-preferences-list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Coral"><i class="bi bi-pen"></i></a>
                             
