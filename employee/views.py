@@ -533,6 +533,9 @@ class SkillsView(View):
       
         return JsonResponse({'skills': skills_data})
 
+#testComingSoon
+class SkillsTestComingSoon(TemplateView):
+     template_name = 'employee/skillsettestresult/skillsTestComingSoon.html'
     
 class PolicyListView(LoginRequiredMixin, View):
     template_name = 'employee/policy_list.html'

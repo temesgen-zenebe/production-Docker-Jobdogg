@@ -72,6 +72,7 @@ from .views import (
     NoExperienceView,
     PositionsView,
     SkillsView,
+    SkillsTestComingSoon,
      
     #Preferences
     EmployeePreferencesListView,
@@ -138,6 +139,7 @@ urlpatterns = [
     #Positions
     path('positions/', PositionsView.as_view(), name='positions'),
     path('skills/', SkillsView.as_view(), name='skills'),
+    path('testComingSoon/', SkillsTestComingSoon.as_view(), name='testComingSoon'),
     #-----policies-----------
     path('policies/list/', PolicyListView.as_view(), name='policies_list'),
     path('policies/accept/', AcceptPoliciesView.as_view(), name='accept_policies'),

@@ -1,0 +1,25 @@
+
+{% extends 'pages/employee_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}skills Test Coming Soon</p>{% endblock %}
+{% block dashboard_employee %}
+    <!-- Example Code -->
+        <div class="col-xl-8 col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                    <h5>you do not have skillset Test For now</h5>
+                   <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:profile_building_progress' %}">Back</a>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="bd-callout bd-callout-warning">
+                        <p>It's seemis like you do not have skills Test for now but skills Test Coming Soon</p>
+                    </div>  
+                </div>
+               
+            </div>
+        </div>
+    <!-- End Example Code -->
+{% endblock %}

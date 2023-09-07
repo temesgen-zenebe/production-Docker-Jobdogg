@@ -136,7 +136,7 @@
                                         <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                                     </button>
                                     <a href="{% url 'employee:personal_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Turquoise"><i class="bi bi-pen"></i></a>
-
+                                    
                                 </div>
                             {% else %}
                                 <!-- Personal Step -->
@@ -196,9 +196,12 @@
                           <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
                             <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                           </button>
-                          <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
-                            <i class="fa-solid fa-upload"></i>
+                          <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#educationModal">
+                            <small>Add</small>
                          </button>
+                          {% comment %} <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
+                            <i class="fa-solid fa-upload"></i>
+                         </button> {% endcomment %}
                           <a class="btn btn-sm btn-outline-Crimson" href="{% url 'employee:education_list' %}"><i class="bi bi-pen"></i></a>
                         </div>
                         {% else %}

@@ -63,6 +63,11 @@ class PersonalForm(forms.ModelForm):
             'gender': forms.Select(attrs={'class': 'select form-select form-control form-control-sm'}),
             'date_of_birth': forms.DateInput(attrs={'type': 'date','style': 'width: 100%; font-size:13px;'}), 
         }
+        help_texts = {
+            'social_security_number': 'Enter in this format XXX-XX-XXXX',
+        }
+
+        
         
 class BasicInformationForm(forms.ModelForm):
     class Meta:
