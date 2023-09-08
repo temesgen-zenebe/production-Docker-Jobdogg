@@ -357,7 +357,7 @@
                                 <button type="button" class="prev-btn btn btn-sm btn-success shadow" id="completed">
                                     <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
                                 </button>
-                                <a href="" type="button" class="prev-btn  btn btn-sm btn-outline-SlateBlue"><i class="bi bi-stars"></i></a>
+                                <a href="{% url 'employee:safetyVideoTest_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-SlateBlue"><i class="bi bi-stars"></i></a>
                             </div>
                             {% else %}
                             <div class="btn-group">
@@ -376,8 +376,8 @@
                     <div class="card border-left-info shadow h-100 py-2">
                     <div class="card-body">
                         
-                        <h6 class="card-text"><i class="bi bi-camera-video-fill fs-5 px-1"></i>Video Resume</h6>
-                        <small class="">Step 10: Video Resume </small>
+                        <h6 class="card-text"><i class="bi bi-camera-video-fill fs-5 px-1"></i>Introduction Video</h6>
+                        <small class="">Step 10: Introduction Video  </small>
                         <div class="d-flex justify-content-between align-items-center">
                         {% if progres.VideoResume_completed %}
                         <div class="btn-group gap-1">
@@ -1775,183 +1775,5 @@
         </div>     
     </div>  
 </div> 
-{% block scripts %}
-    <script>
-        $(document).ready(function() {
-        // Open Basic Information Modal
-        $('#basicInformationModalButton').click(function() {
-            $('#basicInformationModal').modal('show');
-        });
-
-        // Open Personal Modal
-        $('#personalModalButton').click(function() {
-            $('#personalModal').modal('show');
-        });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const progress = document.querySelector(".progress-bar1");
-            const steps = Array.from(document.querySelectorAll(".step-item"));
-            const stepCount = steps.length;
-            let currentStep = 1;
-        
-            function updateProgressBar() {
-                const percent = (currentStep - 1) / (stepCount - 1) * 100;
-                progress.style.width = percent + "%";
-                progress.setAttribute("aria-valuenow", percent);
-            }
-        
-            function setActiveStep() {
-                steps.forEach((step, index) => {
-                if (index === currentStep - 1) {
-                    step.classList.add("active");
-                } else {
-                    step.classList.remove("active");
-                }
-                });
-            }
-    
-            function goToNextStep() {
-                if (currentStep < stepCount) {
-                currentStep++;
-                updateProgressBar();
-                setActiveStep();
-                }
-            }
-        
-            function goToPreviousStep() {
-                if (currentStep > 1) {
-                currentStep--;
-                updateProgressBar();
-                setActiveStep();
-                }
-            }
-        
-            // Event listeners for next and previous buttons
-            const nextBtns = document.getElementsByClassName("next-btn");
-            const prevBtns = document.getElementsByClassName("prev-btn");
-        
-            for (let i = 0; i < nextBtns.length; i++) {
-                nextBtns[i].addEventListener("click", goToNextStep);
-            }
-    
-        for (let i = 0; i < prevBtns.length; i++) {
-            prevBtns[i].addEventListener("click", goToPreviousStep);
-        }
-    
-        updateProgressBar();
-        setActiveStep();
-        });
-    </script> 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var checkbox = document.getElementById('flexCheckDefault');
-            var skipButton = document.getElementById('skillsTestSkipButton');
-        
-            checkbox.addEventListener('change', function() {
-                if (checkbox.checked) {
-                    skipButton.classList.add('d-block');
-                } else {
-                    skipButton.classList.remove('d-block');
-                    skipButton.classList.add('d-none');
-                }
-            });
-        });
-        
-    </script>
-    <script>
-        $(document).ready(function() {
-            var modal = document.getElementById('SkillSetTestModal');
-            var closeButton = modal.querySelector('.btn-close');
-            // Add event listener to both the close button and the modal itself
-            var refreshPage = function() {
-                // Refresh the page
-                window.location.href = "{% url 'employee:profile_building_progress' %}";
-                window.location.href = url;
-            };
-            $('.SkillSetTestStart').on('click', function(event) {
-                event.preventDefault(); // Prevent the default behavior of the link
-                var url = $(this).attr('href'); // Retrieve the URL from the href attribute
-    
-                // Perform AJAX request to execute the server-side code
-                $.ajax({
-                    url: '{% url 'employee:OnProgressSetTest' %}',
-                    type: 'POST',
-                    dataType: 'json',
-                    beforeSend: function(xhr) {
-                        xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
-                    },
-                    success: function(response) {
-                        // Display success message or perform any other actions
-                        console.log(response.message);
-    
-                        // Redirect to the URL after the AJAX request is complete
-                       
-                        refreshPage();
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.log('Error occurred during the AJAX request: ' + errorThrown);
-                    }
-                });
-            });
-    
-            closeButton.addEventListener('click', function() {
-                refreshPage();
-            });
-            modal.addEventListener('hidden.bs.modal', function() {
-                refreshPage();
-            });
-    
-            // Function to retrieve the value of a cookie by name
-            function getCookie(name) {
-                var cookieValue = null;
-                if (document.cookie && document.cookie !== '') {
-                    var cookies = document.cookie.split(';');
-                    for (var i = 0; i < cookies.length; i++) {
-                        var cookie = cookies[i].trim();
-                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
-                    }
-                }
-                return cookieValue;
-            }
-        });
-    </script>
-    <script>
-       
-          function showModal(option) {
-            const myModal = new bootstrap.Modal(document.getElementById('myModal'));
-            console.log('Selected option:', option);
-          
-            // Hide all modal-body elements
-            document.querySelectorAll('.modal-body').forEach((body) => {
-              body.classList.remove('d-block');
-              body.classList.add('d-none');
-            });
-      
-            // Show the selected modal-body based on the option
-            const selectedModalBody = document.getElementById(option);
-            if (selectedModalBody) {
-              selectedModalBody.classList.remove('d-none');
-              selectedModalBody.classList.add('d-block');
-            } else {
-              console.log('Modal body not found.');
-            }
-      
-            const exampleModalLabelText = document.getElementById('exampleModalLabel123');
-            exampleModalLabelText.textContent =  `To Get Paid Please enter ` + option + ` info.`;
-      
-            myModal.show();
-          }
-     
-      </script>
-   
-    <script type="text/javascript" src="{% static 'js/safetyTestFormscript.js' %}"></script>
-    <script type="text/javascript"  src="{% static 'js/VideoResume1.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/recodingVido.js' %}"></script>  
-{% endblock %} 
 
 {% endblock %}

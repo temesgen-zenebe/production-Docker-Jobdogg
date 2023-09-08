@@ -597,16 +597,14 @@
          <hr>
         <!-- Call to Action-->
         <section class="text-white my-2 mx-auto" id="signup">
-            
-           {% block form-subscribe %}{% endblock  %} 
            <div class="container">
                 <div class="row text-center m-auto justify-center">
                     <div class="col-xl-10 fontColor-blue">
                         <h5 class="mb-4 fontColor-blue">{% if not user.is_authenticated %}
                             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center py-2">
-                               <h5> Ready to get started?  <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a> or subscribe  for our newslette</h5>
+                                Ready to get started? or <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a> 
                             </div>
-                            {% endif %}
+                            {% endif %}subscribe  for our newslette</h5>
                             <form method="POST" action="{% url 'pages:homepage' %}" class="form-subscribe" id="contactFormFooter">
                                     {% csrf_token %} 
                                 <div class="row">

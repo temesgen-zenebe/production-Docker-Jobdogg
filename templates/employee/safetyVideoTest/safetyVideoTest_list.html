@@ -26,14 +26,14 @@
                                 <div>
                                    <img class="rounded mr-3 align-self-center" src="https://www.gravatar.com/avatar?d=mp&s=50" />
                                    <a href="{% url 'employee:safetyVideoTest_detail' pk=safetTest.id %}">
-                                    <i class="bi bi-arrows-fullscreen px-1"></i>
+                                    {{safetTest.title}}<i class="bi bi-arrows-fullscreen px-1"></i>
                                    </a>
                                    
                                 </div>
                                 <div class="d-flex flex-row align-items-center justify-content-between gap-2">
                                    
                                     <a class="btn btn-sm btn-outline-warning"
-                                     href="{% url 'employee:safetyVideoTest_detail' pk=safetTest.id %}"><i class="bi bi-pen"></i> </a>
+                                     href="{% url 'employee:safetyVideoTest_detail' pk=safetTest.id %}"><i class="bi bi-arrows-fullscreen px-1"></i></a>
                                      {% if user.is_authenticated and user|is_admin %}
                                      <a class="btn btn-sm btn-outline-danger" 
                                         href="{% url 'employee:safetyVideoTest_delete' pk=safetTest.id %}">Delete</a>

@@ -111,6 +111,7 @@ $(document).ready(function() {
     }
     return null;
   }
+  
   function autofill(states, score) {
     // Set the value of the 'states' field
     document.getElementById('id_states').value = states;

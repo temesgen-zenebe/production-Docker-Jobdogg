@@ -2,33 +2,47 @@
 {% load static %}
 {% load humanize %}
 {% load mask_ssn %}
-{% block title %}Education Detail{% endblock %}
+{% block title %}safety Video Test Detail{% endblock %}
 {% block dashboard_employee %}
+<div class="container-field">
     <!-- Example Code -->
-        <div class="col-xl-6 col-lg-6">
+        <div class="col-xl-10 col-lg-10">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
-                    <h5>Education Profile</h5>
+                    <h6>Safety Video Test</h6>
                     <div>
                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:safetyVideoTest_list' %}">Back</a>
                     </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <ul class="list-unstyled list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          Name: 
-                          <span class="">{{ safetyVideoTestDetailView.user.username|capfirst }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            description : 
-                          <span class="">{{ safetyVideoTestDetailView.description}}</span>
-                        </li>
-                    </ul>  
+                    <div class="m-2">
+                                            
+                        {% if safetyVideoTestDetailView %}
+                    
+                        <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                            
+                            <iframe width="800" height="400" src="{{ safetyVideoTestDetailView.video_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        {% else %}
+                            <img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="{{ safetyVideoTestDetailView.title}}" />
+                        {% endif %}
+                
+                    </div>
+                    <hr>
+                    <div class="m-2">
+                        <div class="card-header d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="">Description</h6> 
+                        <h6>Viewers:<span>({{safetyVideoTestDetailView.view_count}})</span></h6>
+                        </div>
+                        <p class="small p-2 ">{{ safetyVideoTestDetailView.description}}</p>
+                    </div>
+                     
                 </div>
                    
             </div>
         </div>
     <!-- End Example Code -->
+</div>
 {% endblock %}

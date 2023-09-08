@@ -424,7 +424,8 @@ class SafetyTestResult(models.Model):
         if not self.slug:
             value = f"{self.user.username} {self.states}"
             self.slug = unique_slug(value, type(self))
-    
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return f"Test Result for {self.user.username}"
 
