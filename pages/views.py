@@ -1,11 +1,33 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView,ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from users.templatetags.user_tags import is_admin, is_employee, is_employer
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from .models import Subscriber
+from .forms import SubscribeForm
 
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
+    
+    def get(self, request):
+        context={ 'form':SubscribeForm() }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        if 'subscribe' in request.POST:
+            sub_form = SubscribeForm(request.POST)
+            if sub_form .is_valid():
+               experience = sub_form .save(commit=False)
+               experience.save()
+               messages.success(self.request, 'Thank you for subscribing!')
+               return redirect('pages:homepage')
+            else:
+              print("Subscribe Form email form is invalid")
+              
+        context={ 'form':SubscribeForm() }
+        return render(request, self.template_name, context)
 
 class AboutUsView(TemplateView):
     template_name = 'pages/about_us.html'
@@ -92,3 +114,31 @@ def redirect_to_homepage(request):
 
     logging.warning("No matching role found, defaulting to employeeHomePage")
     return redirect('pages:employeeHomePage')
+
+
+
+
+class SubscriberListView(ListView):
+    model = Subscriber
+    template_name = 'pages/home.html'
+    context_object_name = 'subscribers'
+
+class SubscriberCreateView(CreateView):
+    model = Subscriber
+    form_class = SubscribeForm
+    template_name = 'subscriptingForNewsLetter/subscriber_form.html'
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Thank you for subscribing!')
+        return response
+
+class SubscriberUpdateView(UpdateView):
+    model = Subscriber
+    form_class = SubscribeForm
+    template_name = 'subscriptingForNewsLetter/subscriber_form.html'
+
+class SubscriberDeleteView(DeleteView):
+    model = Subscriber
+    template_name = 'subscriptingForNewsLetter/subscriber_confirm_delete.html'
+    success_url = reverse_lazy('subscriber_list')

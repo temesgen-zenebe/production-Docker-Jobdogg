@@ -1,4 +1,5 @@
 from django.urls import path
+from .views import SubscriberListView, SubscriberCreateView, SubscriberUpdateView, SubscriberDeleteView
 from .views import (AboutUsView, HomePageView ,ContactUsView, BlogView, OurDoggsView, GetStaffView, GetWorkView)
 from . import views
 
@@ -17,4 +18,11 @@ urlpatterns = [
     path('Our-Dogs/', OurDoggsView.as_view(), name='gurDoggsView'),
     path('get-Staff/', GetStaffView.as_view(), name='getStaffView'),
     path('get-Work/', GetWorkView.as_view(), name='getWorkView'),
+
+
+    #newsletter'
+    path('list/', SubscriberListView.as_view(), name='subscriber_list'),
+    path('add/', SubscriberCreateView.as_view(), name='subscriber_create'),
+    path('<int:pk>/edit/', SubscriberUpdateView.as_view(), name='subscriber_edit'),
+    path('<int:pk>/delete/', SubscriberDeleteView.as_view(), name='subscriber_delete'),
 ]

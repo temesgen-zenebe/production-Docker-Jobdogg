@@ -1,5 +1,7 @@
 {% extends "_base.html" %}
 {% load static %}
+
+{% load crispy_forms_tags %}
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
 {% endblock %}
@@ -10,7 +12,25 @@
 {% block main %}
 
 <div class="mt-5 mb-3 mx-1">
-
+    {% if messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            
+                <ul class="messages">
+                    {% for message in messages %}
+                    <div class="m-3 fontColor-orang" id="submitSuccessMessage">
+                        <div class="text-center fontColor-orang mb-3">
+                            <div class="fw-bolder">Form submission successful!</div>
+                            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                            <a class="btn-booster-orang text-decoration-none" href="{% url 'account_signup' %}">Signup</a>
+                        </div>
+                    </div>
+                        
+                    {% endfor %}
+                </ul>
+            
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+     {% endif %}
         <!-- Masthead-->
         <header>
             <section class="masthead" >
@@ -19,11 +39,11 @@
                     
                     <div class="col-lg-8 offset-lg-0 ">
                         <div class="text-light py-5">
-                            <h4>“ Elevating Hiring Experiences through Video Resumes ”</h4>
+                            <h4>“ Elevating Hiring Experiences through Video Introduction ”</h4>
                             <p>
                                 Jobdogg tackles resume overload for employers who face unqualified, 
                                 untested & unvetted candidates and lack of identity & visibility for job seekers.
-                                Employers now have access to already vetted candidates with video resumes while 
+                                Employers now have access to already vetted candidates with video Introduction while 
                                 jobseekers have real identity and visibility and are not just words on a resume.
                             </p>
                         </div>
@@ -35,25 +55,7 @@
             </section>
         </header>
           <!-- Page heading-->
-        <!--<section>
-            <header class="masthead">
-                <div class="container position-relative">
-                    <div class="row justify-content-start">
-                        <div class="col-xl-6">
-                            <div class="text-Start text-white">
-                                
-                                <h3 class="mb-3">UNVEILING THE</h3>
-                                <h3 class="mb-3"> UNSTAFFING</h1>
-                                <p class="mb-3"> We're redefining how people work and get hired and how employers recruit and hire staff around the world. Contingent workforce made simply, empowering both the employer and job seeker with transparency and visibility to achieve a 90% faster hire armed with all the tools necessary to hire the right fit and get the right job.
-                                Job Assignments not Job Matches, it’s the Future. </p>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </section>-->
-            
+          
         <section>
             
             <div class="card border-0">
@@ -144,8 +146,7 @@
                 </div>
             </div>
         </section>
-        <!-- Icons Grid-->
-    
+       
         <!-- Image Showcases-->
         <hr class="fontColor-orang">
         <section class="showcase my-3">
@@ -596,41 +597,41 @@
          <hr>
         <!-- Call to Action-->
         <section class="text-white my-2 mx-auto" id="signup">
-            <div class="container">
+            
+           {% block form-subscribe %}{% endblock  %} 
+           <div class="container">
                 <div class="row text-center m-auto justify-center">
                     <div class="col-xl-10 fontColor-blue">
-                        <h5 class="mb-4 fontColor-blue">Ready to get started? Sign up now!</h5>
-                        <form class="form-subscribe" id="contactFormFooter" data-sb-form-api-token="API_TOKEN">
-                            <!-- Email address input-->
-                            <div class="row">
-                                <div class="col">
-                                    <input class="form-control form-control-sm " id="emailAddressBelow" type="email" placeholder="Email Address" data-sb-validations="required,email" />
-                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:required">Email Address is required.</div>
-                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:email">Email Address Email is not valid.</div>
-                                </div>
-                                <div class="col-auto"><button class="btn-booster-orang" id="submitButton" type="submit">Submit</button></div>
+                        <h5 class="mb-4 fontColor-blue">{% if not user.is_authenticated %}
+                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center py-2">
+                               <h5> Ready to get started?  <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a> or subscribe  for our newslette</h5>
                             </div>
-                            
-                            <div class="d-none m-3 fontColor-orang" id="submitSuccessMessage">
-                                <div class="text-center fontColor-orang mb-3">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    <p class="">To activate this form, sign up at</p>
-                                    <a class="btn-booster-orang text-decoration-none" href="{% url 'pages:homepage' %}">jobdogg.com/singup</a>
+                            {% endif %}
+                            <form method="POST" action="{% url 'pages:homepage' %}" class="form-subscribe" id="contactFormFooter">
+                                    {% csrf_token %} 
+                                <div class="row">
+                                    <div class="col">
+                                        <div id="div_id_email" class="mb-3"> 
+                                           <input type="email" name="email" class="form-control form-control-sm emailinput" id="emailAddressBelow" placeholder="Email Address" data-sb-validations="required" required="">
+                                         </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn-booster-orang" name="subscribe" id="submitButton" type="submit">subscribe</button>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                            </form>
                             
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                        </form>
                     </div>                 
                 </div>
-            </div>
+            </div> 
         </section>
 
         <section class="call-to-action-this text-white text-start my-2 " >
             <div class="container position-relative">
                 <div class="row justify-content-between">
                     <div class="col-lg-12">
-                        
+                    
                     </div>               
                 </div>
             </div>

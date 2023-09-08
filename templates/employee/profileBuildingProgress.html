@@ -3,11 +3,11 @@
 {% load crispy_forms_tags %}
 {% load user_tags %}
 {% block title %}Basic Information List{% endblock %}
-
 {% block dashboard_employee %}
 <!-- Code -->
-<div class="container-field my-4 py-4" >
+<div class="container-field my-3 py-2" >
     <!-- Page Heading -->
+   
     <div class="container-field d-sm-flex align-items-center justify-content-between mx-2 mb-3">
         <h6 class="px-3 mb-0 text-gray-900">
             <span class="badge rounded-pill text-bg-info px-2">{{ user.username|title|first }} </span>
@@ -1774,6 +1774,7 @@
                 
         </div>     
     </div>  
+</div> 
 {% block scripts %}
     <script>
         $(document).ready(function() {
