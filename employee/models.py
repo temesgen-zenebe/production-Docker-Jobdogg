@@ -306,7 +306,7 @@ class Position(models.Model):
         return self.position
 
 class Skill(models.Model):
-    skill = models.CharField(max_length=200)
+    skill = models.CharField(max_length=1000)
     position = models.ManyToManyField(Position, related_name='skills')
 
     def __str__(self):

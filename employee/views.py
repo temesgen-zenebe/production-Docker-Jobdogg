@@ -250,6 +250,16 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                profile.Education_completed = True
                profile.save()
                return redirect('employee:profile_building_progress')
+           
+        elif 'education_more' in request.POST:
+            education_form = EducationForm(request.POST)
+            
+            if education_form.is_valid():
+               education = education_form.save(commit=False)
+               education.user = request.user
+               education.save()
+                
+               return redirect('employee:education_create')
         
         elif 'certificationLicense' in request.POST:
              form = CertificationLicenseForm(request.POST, request.FILES)
@@ -263,6 +273,18 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
              else:
                 print("Certification License form is invalid")
                 
+        elif 'certificationLicense_more' in request.POST:
+             form = CertificationLicenseForm(request.POST, request.FILES)
+             if form.is_valid():
+                certification_license = form.save(commit=False)
+                education = Education.objects.filter(user=self.request.user).first()
+                #print("Education object retrieved:", education)
+                certification_license.education = education
+                certification_license.save()
+                return redirect('employee:certification_license_create')
+             else:
+                print("Certification License form is invalid")
+                
         elif 'experience' in request.POST:
             experience_form = ExperienceForm(request.POST)
             if experience_form.is_valid():
@@ -273,6 +295,17 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                profile.Experience_completed = True
                profile.save()
                return redirect('employee:profile_building_progress')
+            else:
+              print("Certification License form is invalid")
+              
+        elif 'experience_more' in request.POST:
+            experience_form = ExperienceForm(request.POST)
+            if experience_form.is_valid():
+               experience = experience_form.save(commit=False)
+               experience.user = request.user
+               experience.save()
+               
+               return redirect('employee:experience_create')
             else:
               print("Certification License form is invalid")
               
@@ -1075,33 +1108,6 @@ class ExperienceListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Experience.objects.filter(user=self.request.user)
     
-# class ExperienceCreateView(LoginRequiredMixin, CreateView):
-#     model = Experience
-#     form_class = ExperienceForm
-#     template_name = 'employee/experience_create.html'
-#     success_url = reverse_lazy('employee:experience_list')
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
-    
-#     def get_success_url(self):
-#         return reverse('employee:experience_list')
-
-#     def dispatch(self, request, *args, **kwargs):
-#         try:
-#             profile = Profile.objects.get(user=request.user)
-#         except Profile.DoesNotExist:
-#             profile = Profile(user=request.user)
-            
-#         if not profile.Education_completed:
-#             return redirect('employee:education_list')
-        
-#         profile.Experience_completed = True
-#         profile.save()
-        
-#         return super().dispatch(request, *args, **kwargs)
-
 class ExperienceCreateView(LoginRequiredMixin, View):
     model = Experience
     form_class = ExperienceForm

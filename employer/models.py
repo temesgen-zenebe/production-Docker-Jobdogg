@@ -1,4 +1,5 @@
 from audioop import reverse
+from datetime import timezone
 from django.db import models
 from django.core.cache import cache
 from django.utils.timezone import datetime
@@ -221,3 +222,5 @@ class TimeCard(models.Model):
     
     def __str__(self):
         return f"{self.employee}'s Preferences"
+    
+

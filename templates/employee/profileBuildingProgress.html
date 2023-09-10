@@ -228,7 +228,7 @@
                                 </button>
                             
                                 <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
-                                    Add <i class="fa-solid fa-upload"></i>
+                                    <i class="bi bi-plus-circle mx-1"></i><i class="fa-solid fa-upload"></i>
                                 </button> 
                                 <a class="btn btn-sm btn-outline-Crimson" href="{% url 'employee:education_list' %}"><i class="bi bi-pen"></i></a>
                             {% else %}
@@ -792,7 +792,11 @@
                                 {% csrf_token %}
                                 {{ education_form|crispy}}
                                 <!-- Include other fields of the EducationForm -->
-                                <button type="submit" name="education" class="btn btn-primary">Save</button>
+                                <div class="btn-group gap-2">
+                                    <button type="submit" name="education" class="btn btn-sm btn-outline-Jobdogg" id="moreEducation">Save</button>
+                                    <button type="submit" name="education_more" class="btn btn-sm btn-outline-success" id="moreEducation_more">Add More</button>     
+                                </div>
+                                
                             </form>
                         </div>
                     </div>
@@ -800,7 +804,7 @@
             </div>
              <!-- Education Modal -->
             <div class="modal fade" id="CertificationLicenseModal" tabindex="-1" aria-labelledby="CertificationLicenseModalModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
+                <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="CertificationLicenseModalModalLabel">Education</h5>
@@ -811,7 +815,10 @@
                                 {% csrf_token %}
                                 {{ CertificationLicense_form|crispy}}
                                 <!-- Include other fields of the EducationForm -->
-                                <button type="submit" name="certificationLicense" class="btn btn-sm btn-outline-success">Save</button>
+                                <div class="btn-group gap-2">
+                                    <button type="submit" name="certificationLicense" class="btn btn-sm btn-outline-Jobdogg" id="certificationLicense_more">Save</button>
+                                    <button type="submit" name="certificationLicense_more" class="btn btn-sm btn-outline-success" id="certificationLicense_more">Add More</button>     
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -830,7 +837,11 @@
                                 {% csrf_token %}
                                 {{ experienceForm_form|crispy }}
                                 <div class="modal-footer">
-                                    <button type="submit" name="experience" class="btn btn-sm btn-outline-success">Save</button>
+                                    <div class="btn-group gap-2">
+                                        <button type="submit" name="experience" class="btn btn-sm btn-outline-Jobdogg" id="experience">Save</button>
+                                        <button type="submit" name="experience_more" class="btn btn-sm btn-outline-success" id="experience_more">Add More</button>     
+                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>

@@ -67,7 +67,7 @@
                     <!-- Card Header - Dropdown -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 text-primary">Certification | Licenses</h6>
+                        <h6 class="m-0 text-primary ">Certification | Licenses</h6>
                         <div class="text-center small">
                         
                             <span class=""><a  href="{% url 'employee:certification_license_create' %}">
@@ -81,14 +81,14 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <div class="">
-                            <div class="card-header">CERTIFICATION</div>
+                        <div class="m-0">
+                            <div class="card-header small">CERTIFICATION</div>
                             {% for certification in certification_licenses %}
                             {% if certification.document_type == 'CERTIFICATION' %}
                             <p class=""><i class="bi bi-award-fill fs-5 px-2 text-jobdogg"></i><a href="{{certification.certification_file.url}}">{{certification.document_name|truncatewords:3}}</a></p>
                             {% endif %}
                             {% endfor %}
-                            <div class="card-header">LICENSES</div>
+                            <div class="card-header small">LICENSES</div>
                             {% for certification in certification_licenses %}
                             {% if certification.document_type == 'LICENSES' %}
                             <p class=""><i class="bi bi-award-fill fs-5 px-2 text-jobdogg"></i><a href="{{certification.certification_file.url}}">{{certification.document_name|truncatewords:3}}</a></p>
