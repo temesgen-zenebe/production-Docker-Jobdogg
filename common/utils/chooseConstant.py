@@ -109,6 +109,11 @@ DEGREE_TYPE_CHOICES = (
     ('certificate', 'Certificate'),
     ('other', 'Other'),
 )
+#CERTIFICATION_LICENSES
+CERTIFICATION_LICENSES=(
+    ('CERTIFICATION', 'CERTIFICATION'),
+    ('LICENSES', 'LICENSES'),
+)
 #SALARY_TYPES
 SALARY_TYPES = (
         ('annual', 'Annual Salary'),

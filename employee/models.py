@@ -39,6 +39,7 @@ from common.utils.chooseConstant import (
     CARD_TYPE_CHOOSE,
     RIDE_CHOOSE,
     WORK_ARRANGEMENT_CHOICES,
+    CERTIFICATION_LICENSES,
     )
 from multiupload.fields import MultiFileField
 
@@ -225,6 +226,7 @@ class Education(models.Model):
     state = models.CharField(max_length=100)
     graduated = models.BooleanField(default=False)
     graduation_date = models.DateField(null=True, blank=True)
+    documentation = models.BooleanField(default=False)
     degree_type = models.CharField(max_length=100, choices=DEGREE_TYPE_CHOICES)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -238,9 +240,11 @@ class Education(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Education: {self.degree_type} from {self.school_name}"  
-     
+
+#CertificationLicense
 class CertificationLicense(models.Model):
     education = models.ForeignKey(Education, on_delete=models.CASCADE)
+    document_type = models.CharField(max_length=100,choices=CERTIFICATION_LICENSES, default='certification')
     document_name = models.CharField(max_length=100)
     certification_file = models.FileField(upload_to='certificationsEducation/')
     slug = models.SlugField(unique=True)

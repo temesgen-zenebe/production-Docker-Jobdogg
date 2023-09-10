@@ -10,7 +10,7 @@
    
     <div class="container-field d-sm-flex align-items-center justify-content-between mx-2 mb-3">
         <h6 class="px-3 mb-0 text-gray-900">
-            <span class="badge rounded-pill text-bg-info px-2">{{ user.username|title|first }} </span>
+            <span class="badge  bg-ornge px-2 mr-1 align-self-center fs-6">{{ user.username|title|first }} </span>
             <span id="user-name">{{ user.username|title }} </span>Profile Buiding Lookup  
         </h6>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
@@ -190,25 +190,53 @@
                     <div class="card border-left-Crimson shadow h-100 py-2">
                     <div class="card-body">
                     <h6 class="card-text"><i class="fa-solid fa-user-graduate"></i> Education</h6>
-                    <small class="">Step 5: Education & upload files</small>
+                    <small class="">Step 5: Education </small>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if progres.Education_completed  %}
+                            <div class="btn-group gap-1">
+                            <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#educationModal">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
+                           
+                            <a class="btn btn-sm btn-outline-Crimson" href="{% url 'employee:education_list' %}"><i class="bi bi-pen"></i></a>
+                            </div>
+                            {% else %}
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#educationModal">
+                                Create
+                            </button>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                 </div>
+                </div>
+                {% if educations.documentation %}
+                <div class="col step-item ">
+                    <div class="card border-left-Crimson shadow h-100 py-2">
+                    <div class="card-body">
+                    <h6 class="card-text"><i class="fa-solid fa-user-graduate"></i> Certification | Licenses</h6>
+                    <small class="">Step 5+: Upload files</small>
                     <div class="d-flex justify-content-between align-items-center">
                         {% if progres.Education_completed  %}
                         <div class="btn-group gap-1">
-                          <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
-                            <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
-                          </button>
-                          <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#educationModal">
-                            <i class="bi bi-plus-circle"></i>
-                         </button>
-                          {% comment %} <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
-                            <i class="fa-solid fa-upload"></i>
-                         </button> {% endcomment %}
-                          <a class="btn btn-sm btn-outline-Crimson" href="{% url 'employee:education_list' %}"><i class="bi bi-pen"></i></a>
+                            {% if certification_licenses %}
+                                <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                    <i class="bi bi-check2-circle px-1"></i><small></small>
+                                </button>
+                            
+                                <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
+                                    Add <i class="fa-solid fa-upload"></i>
+                                </button> 
+                                <a class="btn btn-sm btn-outline-Crimson" href="{% url 'employee:education_list' %}"><i class="bi bi-pen"></i></a>
+                            {% else %}
+                                <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
+                                    <i class="fa-solid fa-upload"></i>
+                                </button>
+                            {% endif %}
                         </div>
-                        {% else %}
-                         <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#educationModal">
-                            Create
-                         </button>
                         {% endif %}
 
                     </div>
@@ -219,43 +247,46 @@
                     {% endfor %}
                     </ul>
                     {% endif %}
-                   
+                
                     </div>
-                 </div>
                 </div>
+                </div>
+                {% endif %}   
+                        
+                    
                 {% endif %}
                 <!--Experience-->
                 {% if progres.Education_completed %}
                 <div class="col step-item ">
                     <div class="card border-left-Goldenrod shadow h-100 py-2">
-                    <div class="card-body">
-                    <h6 class="card-text"><i class="fa-sharp fa-solid fa-trophy"></i>  Experience</h6>
-                    <small class="">Step 6: Experience </small>
-                    <div class="d-flex justify-content-between align-items-center">
-                        {% if progres.Experience_completed %}
-                        <div class="btn-group gap-1">
-                            <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
-                                <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
-                            </button>
-                            <button type="button" class="prev-btn  btn btn-sm btn-outline-Goldenrod" data-bs-toggle="modal" data-bs-target="#experienceFormModal">
-                                <i class="bi bi-plus-square"></i>
-                            </button>
-                           <a href="{% url 'employee:experience_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Goldenrod"><i class="bi bi-pen"></i></a>
+                        <div class="card-body">
+                            <h6 class="card-text"><i class="fa-sharp fa-solid fa-trophy"></i>  Experience</h6>
+                            <small class="">Step 6: Experience </small>
+                            <div class="d-flex justify-content-between align-items-center">
+                                {% if progres.Experience_completed %}
+                                <div class="btn-group gap-1">
+                                    <button type="button" class="prev-btn  btn btn-sm btn-success shadow">
+                                        <i class="bi bi-check2-circle px-1"></i><small>Completed!</small>
+                                    </button>
+                                    <button type="button" class="prev-btn  btn btn-sm btn-outline-Goldenrod" data-bs-toggle="modal" data-bs-target="#experienceFormModal">
+                                        <i class="bi bi-plus-square"></i>
+                                    </button>
+                                <a href="{% url 'employee:experience_list' %}" type="button" class="prev-btn  btn btn-sm btn-outline-Goldenrod"><i class="bi bi-pen"></i></a>
+                                </div>
+                                {% else %}
+                                <div class="btn-group gap-1">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#experienceFormModal">
+                                        Create
+                                    </button>
+                                    <form action="{% url 'employee:no_Experience' %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="next-btn btn btn-sm btn-outline-secondary">No experience</button>
+                                    </form>
+                                </div>
+                                {% endif %}
+                            </div>
                         </div>
-                        {% else %}
-                        <div class="btn-group gap-1">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#experienceFormModal">
-                                Create
-                            </button>
-                            <form action="{% url 'employee:no_Experience' %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="next-btn btn btn-sm btn-outline-secondary">No experience</button>
-                            </form>
-                        </div>
-                        {% endif %}
                     </div>
-                    </div>
-                </div>
                 </div>
                 {% endif %}
                 <!--Preferences-->

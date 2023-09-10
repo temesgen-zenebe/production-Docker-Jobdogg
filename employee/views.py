@@ -1,4 +1,6 @@
-from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
+from typing import Any
+from django.db.models import Q
+from django.http import HttpRequest, HttpResponse, HttpResponseNotAllowed, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect
@@ -126,6 +128,8 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
         skills = Skill.objects.all()
         safetyVideo = Safety_Video_and_Test.objects.all()
         testList = SkillSetTestResult.objects.filter(user=self.request.user)
+        education = Education.objects.filter(Q(user=self.request.user) & Q(documentation=True)).distinct().first()
+
         # Filter positions based on the logged-in user's preferences
         employee_preferences = EmployeePreferences.objects.filter(user=self.request.user).first()
         if employee_preferences:
@@ -147,6 +151,7 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             'policies': policies,
             'accepted_policies_ids': accepted_policies_ids,
             'all_policies_accepted': all_policies_accepted,
+            'educations':education,
             'certification_licenses':certification_licenses,
             'documents_uploaded': True,  # Set the flag to True if there are uploaded documents
             'categories': categories,
@@ -931,30 +936,66 @@ class EducationDetailView(LoginRequiredMixin, DetailView):
         return super().get_queryset().filter(user=self.request.user)
 
 class EducationCreateView(LoginRequiredMixin, CreateView):
-    model = Education
     form_class = EducationForm
     template_name = 'employee/education_create.html'
+    
+    def get(self, request):
+        context={ 'form':EducationForm() }  
+        return render(request, self.template_name, context)
+    
+    def post(self, request):
+        profile = get_object_or_404(Profile, user=request.user)  # Retrieve the Profile object
+        
+        if 'education' in request.POST:
+            education_form = EducationForm(request.POST)
+            
+            if education_form.is_valid():
+               education = education_form.save(commit=False)
+               education.user = request.user
+               education.save()
+                # Update the corresponding profile completion field if needed
+               profile.Education_completed = True
+               profile.save()
+               return redirect('employee:profile_building_progress')
+           
+        elif 'education_more' in request.POST:
+            education_form = EducationForm(request.POST)
+            
+            if education_form.is_valid():
+               education = education_form.save(commit=False)
+               education.user = request.user
+               education.save()
+               return redirect('employee:education_create')
+           
+        context={ 'form':EducationForm()}
+           
+        return render(request, self.template_name, context)
+    
+# class EducationCreateView(LoginRequiredMixin, CreateView):
+#     model = Education
+#     form_class = EducationForm
+#     template_name = 'employee/education_create.html'
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse('employee:education_list')
+#     def get_success_url(self):
+#         return reverse('employee:education_list')
 
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            profile = Profile.objects.get(user=request.user)
-        except Profile.DoesNotExist:
-            profile = Profile(user=request.user)
+#     def dispatch(self, request, *args, **kwargs):
+#         try:
+#             profile = Profile.objects.get(user=request.user)
+#         except Profile.DoesNotExist:
+#             profile = Profile(user=request.user)
 
-        if not profile.Military_completed:
-            return redirect('employee:military_list')
+#         if not profile.Military_completed:
+#             return redirect('employee:military_list')
 
-        profile.Education_completed = True
-        profile.save()
+#         profile.Education_completed = True
+#         profile.save()
 
-        return super().dispatch(request, *args, **kwargs)
+#         return super().dispatch(request, *args, **kwargs)
        
 class EducationUpdateView(LoginRequiredMixin, UpdateView):
     model = Education
@@ -990,7 +1031,7 @@ class CertificationLicenseCreateView(LoginRequiredMixin, CreateView):
     model = CertificationLicense
     form_class = CertificationLicenseForm
     template_name = 'employee/certification_license_create.html'
-    success_url = reverse_lazy('employee:certification_license_list')
+    success_url = reverse_lazy('employee:education_list')
 
     def form_valid(self, form):
         education = Education.objects.filter(user=self.request.user).first()
@@ -1023,33 +1064,76 @@ class ExperienceListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Experience.objects.filter(user=self.request.user)
     
-class ExperienceCreateView(LoginRequiredMixin, CreateView):
+# class ExperienceCreateView(LoginRequiredMixin, CreateView):
+#     model = Experience
+#     form_class = ExperienceForm
+#     template_name = 'employee/experience_create.html'
+#     success_url = reverse_lazy('employee:experience_list')
+
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
+    
+#     def get_success_url(self):
+#         return reverse('employee:experience_list')
+
+#     def dispatch(self, request, *args, **kwargs):
+#         try:
+#             profile = Profile.objects.get(user=request.user)
+#         except Profile.DoesNotExist:
+#             profile = Profile(user=request.user)
+            
+#         if not profile.Education_completed:
+#             return redirect('employee:education_list')
+        
+#         profile.Experience_completed = True
+#         profile.save()
+        
+#         return super().dispatch(request, *args, **kwargs)
+
+class ExperienceCreateView(LoginRequiredMixin, View):
     model = Experience
     form_class = ExperienceForm
     template_name = 'employee/experience_create.html'
-    success_url = reverse_lazy('employee:experience_list')
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-    
-    def get_success_url(self):
-        return reverse('employee:experience_list')
-
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            profile = Profile.objects.get(user=request.user)
-        except Profile.DoesNotExist:
-            profile = Profile(user=request.user)
-            
-        if not profile.Education_completed:
-            return redirect('employee:education_list')
+    # success_url = reverse_lazy('employee:experience_list')
+    def get(self, request):
         
-        profile.Experience_completed = True
-        profile.save()
+        context={ 'form':ExperienceForm()}
+           
+        return render(request, self.template_name, context)
         
-        return super().dispatch(request, *args, **kwargs)
-    
+    def post(self, request):
+        profile = get_object_or_404(Profile, user=request.user)  # Retrieve the Profile object
+        if 'experience' in request.POST:
+            experience_form = ExperienceForm(request.POST)
+            if experience_form.is_valid():
+               experience = experience_form.save(commit=False)
+               experience.user = request.user
+               experience.save()
+               # Update the corresponding profile completion field if needed
+               profile.Experience_completed = True
+               profile.save()
+               return redirect('employee:profile_building_progress')
+            else:
+                print("Certification License form is invalid")
+         
+        elif 'experience_more' in request.POST:
+            experience_form = ExperienceForm(request.POST)
+            if experience_form.is_valid():
+               experience = experience_form.save(commit=False)
+               experience.user = request.user
+               experience.save()
+               # Update the corresponding profile completion field if needed
+            #    profile.Experience_completed = True
+            #    profile.save()
+               return redirect('employee:experience_create')
+            else:
+              print("Certification License form is invalid")  
+              
+        context={'ExperienceForm':ExperienceForm()}       
+           
+        return render(request, self.template_name, context)  
+
 class ExperienceUpdateView(LoginRequiredMixin, UpdateView):
     model = Experience
     form_class = ExperienceForm

@@ -22,17 +22,20 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .models import VideoResume
 
+#UserAcceptedPoliciesForm
 class UserAcceptedPoliciesForm(forms.ModelForm):
     class Meta:
         model = UserAcceptedPolicies
         fields = ['policies']
-        
+   
+#MultiSelectDropdown     
 class MultiSelectDropdown(forms.SelectMultiple):
     def value_from_datadict(self, data, files, name):
         if isinstance(data, (list, tuple)):
             return [int(value) for value in data]
         return [int(value) for value in data.getlist(name, [])]
 
+#PersonalForm
 class PersonalForm(forms.ModelForm):
     languages = forms.ModelMultipleChoiceField(
         queryset=Language.objects.all(),
@@ -66,9 +69,8 @@ class PersonalForm(forms.ModelForm):
         help_texts = {
             'social_security_number': 'Enter in this format XXX-XX-XXXX',
         }
-
-        
-        
+       
+#BasicInformationForm    
 class BasicInformationForm(forms.ModelForm):
     class Meta:
         model = BasicInformation
@@ -98,7 +100,8 @@ class BasicInformationForm(forms.ModelForm):
             'emergency_contact_number': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm'}),
             'emergency_contact_name': forms.TextInput(attrs={'class': 'textinput form-control form-control-sm'}),
         }
-             
+     
+#MilitaryForm        
 class MilitaryForm(forms.ModelForm):
     certification_license = forms.FileField(
         required=False,  # Make the field optional
@@ -116,20 +119,35 @@ class MilitaryForm(forms.ModelForm):
             #'certification_license': forms.ClearableFileInput(attrs={'multiple': True}),
         
         }
-               
+
+#EducationForm               
 class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
-        fields = ('school_type', 'school_name', 'country', 'city', 'state', 'graduated', 'graduation_date', 'degree_type')
-        widgets = {
-            'graduation_date': forms.DateInput(attrs={'type': 'date','style': 'width: 100%; font-size:13px;'})
+        fields = ('school_type', 'school_name', 'country', 'city', 'state', 'graduated', 'graduation_date', 'documentation', 'degree_type')
+        labels = {
+            'documentation': 'Do You have CERTIFICATION or LICENSES ?',
         }
-
+        widgets = {
+            'graduation_date': forms.DateInput(attrs={'type': 'date','style': 'width: 100%; font-size:13px;'}),
+        }
+        help_texts = {
+            'social_security_number': 'Enter in this format XXX-XX-XXXX',
+        }
+       
+#CertificationLicenseForm    
 class CertificationLicenseForm(forms.ModelForm):
     class Meta:
         model = CertificationLicense
-        fields = ['document_name', 'certification_file']
-        
+        fields = ['document_type','document_name', 'certification_file']
+        widgets = {
+            'document_type': forms.Select(attrs={'class': 'select form-select form-control form-control-sm'}),
+        }
+        help_texts = {
+            'document_type': 'select document type CERTIFICATION or LICENSES ?',
+        }
+   
+#ExperienceForm  
 class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
@@ -140,6 +158,7 @@ class ExperienceForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'rows': 3}),
         }
 
+#EmployeePreferencesForm
 class EmployeePreferencesForm(forms.ModelForm):
     category = forms.ModelChoiceField(
         queryset=Category.objects.all(),
@@ -404,8 +423,7 @@ class CheckByEmailForm(forms.ModelForm):
         help_texts = {
             'poBox': 'Please enter a valid PO Box address.',
         }
-        
-        
+              
 class RidePreferenceForm(forms.ModelForm):
     class Meta:
         model = RidePreference

@@ -3,92 +3,106 @@
 {% load user_tags %}
 {% block title %}Education ListView Information {% endblock %}
 {% block dashboard_employee %}
-  <!-- Education -->
-  <div class="row">
-    <!-- Education  -->
-    <div class="col-xl-8 col-lg-7">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Education List</h6>
-                <div class="btn-group gap-1">
-                    {% if education_list %}
-                     <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:education_create' %}">Add</a>
-                    {% else %}
-                    <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:education_create' %}">Create</a>
-                    {% endif %}
-                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
+<div class="container-field">
+    <!-- Education -->
+    <div class="row mx-1">
+        <!-- Education  -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Education List</h6>
+                    <div class="btn-group gap-1">
+                        {% if education_list %}
+                        <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:education_create' %}">Add</a>
+                        {% else %}
+                        <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:education_create' %}">Create</a>
+                        {% endif %}
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:profile_building_progress' %}">Profile</a>
+                    </div>
+                
                 </div>
-              
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="">
-                    <ul class="list-unstyled ">
-                        {% for education in education_list %}
-                        <li >
-                            <div class="py-3 d-flex flex-row align-items-center justify-content-between">
-                                <div>
-                                   <!--{{ user.username }}-->
-                                   {% if user.avatar and not form.avatar.errors %}
-                                   <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded mr-3 align-self-center img-fluid shadow"/>
-                                   {% else %}
-                                   <img class="rounded mr-3 align-self-center img-fluid shadow" src="{% static 'images/userPlaceHolder.png' %}" alt="Logo" width="30" height="40"/>
-                                   {% endif %}
-                                   <a href="{% url 'employee:education_detail' slug=education.slug %}">{{ education.user.username|capfirst}}
-                                    <i class="bi bi-box-arrow-in-up-right px-1"></i>
-                                   </a>
-                                   
-                                </div>
-                                <div class="d-flex flex-row align-items-center justify-content-between gap-2">
-                                   
-                                    <a class="btn btn-sm btn-outline-warning"
-                                     href="{% url 'employee:education_update' slug=education.slug %}"><i class="bi bi-pen"></i></a>
-                                     {% if user.is_authenticated and user|is_admin %}
-                                     <a class="btn btn-sm btn-outline-danger" 
-                                        href="{% url 'employee:education_delete' slug=education.slug %}">Delete</a>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="">
+                        <ul class="list-unstyled ">
+                            {% for education in education_list %}
+                            <li >
+                                <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <div>
+                                    <!--{{ user.username }}-->
+                                    {% if user.avatar and not form.avatar.errors %}
+                                    <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded mr-3 align-self-center img-fluid shadow"/>
+                                    {% else %}
+                                    <img class="rounded mr-3 align-self-center img-fluid shadow" src="{% static 'images/userPlaceHolder.png' %}" alt="Logo" width="30" height="40"/>
                                     {% endif %}
+                                    <a href="{% url 'employee:education_detail' slug=education.slug %}">{{ education.user.username|capfirst}}
+                                        <i class="bi bi-box-arrow-in-up-right px-1"></i>
+                                    </a>
+                                    
                                     </div>
-                            </div>
-                        </li>
-                        {% empty %}
-                        <li>No personal profiles found.</li>
-                        {% endfor %}
-                    </ul> 
+                                    <div class="d-flex flex-row align-items-center justify-content-between gap-2">
+                                    
+                                        <a class="btn btn-sm btn-outline-warning"
+                                        href="{% url 'employee:education_update' slug=education.slug %}"><i class="bi bi-pen"></i></a>
+                                        {% if user.is_authenticated and user|is_admin %}
+                                        <a class="btn btn-sm btn-outline-danger" 
+                                            href="{% url 'employee:education_delete' slug=education.slug %}">Delete</a>
+                                        {% endif %}
+                                        </div>
+                                </div>
+                            </li>
+                            {% empty %}
+                            <li>No personal profiles found.</li>
+                            {% endfor %}
+                        </ul> 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Certification -->
-    <div class="col-xl-4 col-lg-5">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div
-                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Certification-licenses</h6>
-                <div class="text-center small">
-                   
-                    <span class=""><a  href="{% url 'employee:certification_license_create' %}">
-                        Uplode</a>
-                    </span> |
-                    <span class=""><a href="{% url 'employee:certification_license_list' %}">
-                        More</a>
-                    </span>
+        <!-- Certification -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Certification | Licenses</h6>
+                    <div class="text-center small">
+                    
+                        <span class=""><a  href="{% url 'employee:certification_license_create' %}">
+                            Uplode</a>
+                        </span> |
+                        <span class=""><a href="{% url 'employee:certification_license_list' %}">
+                            More</a>
+                        </span>
+                        
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="">
+                        <div class="card-header">CERTIFICATION</div>
+                        {% for certification in certification_licenses %}
+                        {% if certification.document_type == 'CERTIFICATION' %}
+                         <p class=""><i class="bi bi-award-fill fs-5 px-2 text-jobdogg"></i><a href="{{certification.certification_file.url}}">{{certification.document_name|truncatewords:3}}</a></p>
+                        {% endif %}
+                        {% endfor %}
+                        <div class="card-header">LICENSES</div>
+                        {% for certification in certification_licenses %}
+                        {% if certification.document_type == 'LICENSES' %}
+                        <p class=""><i class="bi bi-award-fill fs-5 px-2 text-jobdogg"></i><a href="{{certification.certification_file.url}}">{{certification.document_name|truncatewords:3}}</a></p>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                     
                 </div>
             </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class=" pt-4 pb-2">
-                    {% for certification in certification_licenses %}
-                    <ul><li><small><a href="{{certification.certification_file.url}}">{{certification.document_name|truncatewords:3}}</a></small></li></ul>
-                    {% endfor %}
-                </div>
-                
-            </div>
         </div>
+        
+
+            
+                
     </div>
-</div>
-<!-- End Example Code -->  
-       
+    <!-- End Example Code -->  
+</div>     
 {% endblock %}

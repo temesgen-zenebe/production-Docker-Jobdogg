@@ -125,7 +125,7 @@ class MilitaryAdmin(admin.ModelAdmin):
 @admin.register(Education)
 class EducationAdmin(admin.ModelAdmin):
     model = Education
-    list_display = ['user', 'school_name', 'degree_type', 'graduated','created','updated']
+    list_display = ['user', 'school_name', 'degree_type', 'graduated', 'documentation','created','updated']
     list_filter = ('graduated',)
     search_fields = ('user__username', 'school_name', 'degree_type')
     
@@ -137,7 +137,7 @@ class EducationAdmin(admin.ModelAdmin):
 @admin.register(CertificationLicense)
 class CertificationLicenseAdmin(admin.ModelAdmin):
     model = CertificationLicense
-    list_display = ['document_name', 'education', 'created', 'updated']
+    list_display = ['document_name','document_type','education', 'created', 'updated']
     prepopulated_fields = {'slug': ['document_name']}
   
     

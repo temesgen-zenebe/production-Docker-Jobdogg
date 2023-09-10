@@ -12,11 +12,14 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <form method="post">
+                    <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button class="btn btn-sm btn-outline-primary" type="submit">Save</button>
-                        <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:experience_list' %}">Cancel</a>
+                        <div class="btn-group gap-2">
+                            <button class="btn btn-sm btn-outline-Jobdogg" type="submit" name="experience">Save</button>
+                            <button class="btn btn-sm btn-outline-primary" type="submit" name="experience_more">Add More</button>
+                            <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:experience_list' %}">Cancel</a>
+                        </div>
                     </form>
                 </div>
                
