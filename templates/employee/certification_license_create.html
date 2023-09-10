@@ -3,12 +3,13 @@
 {% load crispy_forms_tags %}
 {% block title %}certification_license Uplode{% endblock %}
 {% block dashboard_employee %}
+<div class="container-field">
     <!-- Example Code -->
-        <div class="col-xl-8 col-lg-6">
+        <div class="col-xl-8 col-lg-8">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
-                    <h5>Uplode certification_license fill</h5>
+                    <h6>Uplode certification | License </h6>
                     <a class="btn btn-sm btn-outline-secondary" href="{% url 'employee:education_list' %}">Back</a>
                 </div>
                 <!-- Card Body -->
@@ -16,11 +17,15 @@
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button class="btn btn-sm btn-outline-primary" type="submit">Save</button>
+                        <div class="btn-group gap-3">
+                            <button class="btn btn-sm btn-outline-Jobdogg" type="submit" name="certification">Save</button>
+                            <button class="btn btn-sm btn-outline-primary" type="submit" name="certification_more">Add More</button>
+                        </div>
                     </form>
                 </div>
                
             </div>
         </div>
     <!-- End Example Code -->
+</div>
 {% endblock %}

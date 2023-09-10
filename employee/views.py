@@ -924,6 +924,11 @@ class EducationListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         certification_licenses = CertificationLicense.objects.filter(education__user=self.request.user)
         context['certification_licenses'] = certification_licenses
+        
+        # Find the first education instance with documentation=True
+        first_documented_education = self.get_queryset().filter(documentation=True).first()
+        context['first_documented_education'] = first_documented_education
+        
         return context
 
 class EducationDetailView(LoginRequiredMixin, DetailView):
@@ -970,33 +975,7 @@ class EducationCreateView(LoginRequiredMixin, CreateView):
         context={ 'form':EducationForm()}
            
         return render(request, self.template_name, context)
-    
-# class EducationCreateView(LoginRequiredMixin, CreateView):
-#     model = Education
-#     form_class = EducationForm
-#     template_name = 'employee/education_create.html'
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
-
-#     def get_success_url(self):
-#         return reverse('employee:education_list')
-
-#     def dispatch(self, request, *args, **kwargs):
-#         try:
-#             profile = Profile.objects.get(user=request.user)
-#         except Profile.DoesNotExist:
-#             profile = Profile(user=request.user)
-
-#         if not profile.Military_completed:
-#             return redirect('employee:military_list')
-
-#         profile.Education_completed = True
-#         profile.save()
-
-#         return super().dispatch(request, *args, **kwargs)
-       
+     
 class EducationUpdateView(LoginRequiredMixin, UpdateView):
     model = Education
     form_class = EducationForm
@@ -1028,15 +1007,47 @@ class CertificationLicenseListView(LoginRequiredMixin, ListView):
         return super().get_queryset().filter(education__user=self.request.user)
 
 class CertificationLicenseCreateView(LoginRequiredMixin, CreateView):
-    model = CertificationLicense
+    # model = CertificationLicense
+    # success_url = reverse_lazy('employee:education_list')
+    
     form_class = CertificationLicenseForm
     template_name = 'employee/certification_license_create.html'
-    success_url = reverse_lazy('employee:education_list')
+    def get(self, request):
+        context={ 'form':CertificationLicenseForm()}  
+        return render(request, self.template_name, context)
+    
+    def post(self, request):
+        
+        if 'certification_more' in request.POST:
+                form = CertificationLicenseForm(request.POST, request.FILES)
+                if form.is_valid():
+                    certification_license = form.save(commit=False)
+                    education = Education.objects.filter(user=self.request.user).first()
+                    #print("Education object retrieved:", education)
+                    certification_license.education = education
+                    certification_license.save()
+                    return redirect('employee:certification_license_create')
+                else:
+                    print("Certification License form is invalid")
+        elif 'certification' in request.POST:
+                form = CertificationLicenseForm(request.POST, request.FILES)
+                if form.is_valid():
+                    certification_license = form.save(commit=False)
+                    education = Education.objects.filter(user=self.request.user).first()
+                    #print("Education object retrieved:", education)
+                    certification_license.education = education
+                    certification_license.save()
+                    return redirect('employee:profile_building_progress')
+                else:
+                    print("Certification License form is invalid")
+                    
+        context={ 'form':CertificationLicenseForm()}  
+        return render(request, self.template_name, context)
 
-    def form_valid(self, form):
-        education = Education.objects.filter(user=self.request.user).first()
-        form.instance.education = education
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     education = Education.objects.filter(user=self.request.user).first()
+    #     form.instance.education = education
+    #     return super().form_valid(form)
 
 class CertificationLicenseUpdateView(LoginRequiredMixin, UpdateView):
     model = CertificationLicense

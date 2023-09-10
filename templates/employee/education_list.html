@@ -11,7 +11,7 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Education List</h6>
+                    <h6 class="m-0  text-primary">Education List</h6>
                     <div class="btn-group gap-1">
                         {% if education_list %}
                         <a class="btn btn-sm btn-outline-primary" href="{% url 'employee:education_create' %}">Add</a>
@@ -61,47 +61,46 @@
             </div>
         </div>
         <!-- Certification -->
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Certification | Licenses</h6>
-                    <div class="text-center small">
-                    
-                        <span class=""><a  href="{% url 'employee:certification_license_create' %}">
-                            Uplode</a>
-                        </span> |
-                        <span class=""><a href="{% url 'employee:certification_license_list' %}">
-                            More</a>
-                        </span>
+        {% if first_documented_education %}
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div
+                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 text-primary">Certification | Licenses</h6>
+                        <div class="text-center small">
+                        
+                            <span class=""><a  href="{% url 'employee:certification_license_create' %}">
+                                Uplode</a>
+                            </span> |
+                            <span class=""><a href="{% url 'employee:certification_license_list' %}">
+                                More</a>
+                            </span>
+                            
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="">
+                            <div class="card-header">CERTIFICATION</div>
+                            {% for certification in certification_licenses %}
+                            {% if certification.document_type == 'CERTIFICATION' %}
+                            <p class=""><i class="bi bi-award-fill fs-5 px-2 text-jobdogg"></i><a href="{{certification.certification_file.url}}">{{certification.document_name|truncatewords:3}}</a></p>
+                            {% endif %}
+                            {% endfor %}
+                            <div class="card-header">LICENSES</div>
+                            {% for certification in certification_licenses %}
+                            {% if certification.document_type == 'LICENSES' %}
+                            <p class=""><i class="bi bi-award-fill fs-5 px-2 text-jobdogg"></i><a href="{{certification.certification_file.url}}">{{certification.document_name|truncatewords:3}}</a></p>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
                         
                     </div>
                 </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="">
-                        <div class="card-header">CERTIFICATION</div>
-                        {% for certification in certification_licenses %}
-                        {% if certification.document_type == 'CERTIFICATION' %}
-                         <p class=""><i class="bi bi-award-fill fs-5 px-2 text-jobdogg"></i><a href="{{certification.certification_file.url}}">{{certification.document_name|truncatewords:3}}</a></p>
-                        {% endif %}
-                        {% endfor %}
-                        <div class="card-header">LICENSES</div>
-                        {% for certification in certification_licenses %}
-                        {% if certification.document_type == 'LICENSES' %}
-                        <p class=""><i class="bi bi-award-fill fs-5 px-2 text-jobdogg"></i><a href="{{certification.certification_file.url}}">{{certification.document_name|truncatewords:3}}</a></p>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        
-
-            
-                
+            </div>  
+        {% endif %}
+                 
     </div>
     <!-- End Example Code -->  
 </div>     
