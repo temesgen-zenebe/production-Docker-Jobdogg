@@ -23,7 +23,7 @@ from django.views.generic import (TemplateView,ListView, CreateView, UpdateView,
 
 from .models import (
     BankAccount, Card, Category,CertificationLicense, CheckByEmail, EWallet,Education,EmployeePreferences,Experience, 
-    Policies,Position,Profile, RidePreference, Skill, SkillSetTestResult, TaxDocumentSetting,UserAcceptedPolicies,
+    Policies,Position,Profile, RidePreference, SchoolName, Skill, SkillSetTestResult, TaxDocumentSetting,UserAcceptedPolicies,
     BasicInformation,Personal,Military,Safety_Video_and_Test, VideoResume, 
     Background_Check,    
 )
@@ -245,7 +245,14 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             if education_form.is_valid():
                education = education_form.save(commit=False)
                education.user = request.user
+               education.type_of_school_id = request.POST.get('type_of_school') 
                education.save()
+               # Get the selected positions and skills from the form data
+               name_school = request.POST.getlist('school_name')
+               # Clear existing desired_positions and skills and set the new values
+               education.school_name.clear()
+               education.school_name.set(name_school)
+                
                 # Update the corresponding profile completion field if needed
                profile.Education_completed = True
                profile.save()
@@ -257,7 +264,13 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
             if education_form.is_valid():
                education = education_form.save(commit=False)
                education.user = request.user
+               education.type_of_school_id = request.POST.get('type_of_school') 
                education.save()
+               # Get the selected positions and skills from the form data
+               name_school = request.POST.getlist('school_name')
+               # Clear existing desired_positions and skills and set the new values
+               education.school_name.clear()
+               education.school_name.set(name_school)
                 
                return redirect('employee:education_create')
         
@@ -942,6 +955,12 @@ class MilitaryDeleteView(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
 
+#school_names View and Dynamic dropdown 
+class Get_school_names(View):
+    def get(self, request):
+        type_of_school_id = request.GET.get('type_of_school_id')
+        school_names = SchoolName.objects.filter(type_of_school_id=type_of_school_id).values('id', 'name')
+        return JsonResponse({'school_names': list(school_names)})
 
 #Education
 class EducationListView(LoginRequiredMixin, ListView):
@@ -1019,6 +1038,28 @@ class EducationUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('employee:education_list')
     
+    def get_queryset(self):
+        return Education.objects.filter(user=self.request.user)
+    
+    def post(self, request, *args, **kwargs):
+        
+        if 'education' in request.POST:
+            education_form = EducationForm(request.POST, instance=self.get_object())
+            
+            if education_form.is_valid():
+               education = education_form.save(commit=False)
+               education.user = request.user
+               education.type_of_school_id = request.POST.get('type_of_school') 
+               education.save()
+               # Get the selected positions and skills from the form data
+               name_school = request.POST.getlist('school_name')
+               # Clear existing desired_positions and skills and set the new values
+               education.school_name.clear()
+               education.school_name.set(name_school)
+               messages.success(self.request, 'education info successfully updated!') 
+               return redirect('employee:education_list')
+            
+        return super().post(request, *args, **kwargs)
 class EducationDeleteView(LoginRequiredMixin, DeleteView):
     model = Education
     template_name = 'employee/education_confirm_delete.html'

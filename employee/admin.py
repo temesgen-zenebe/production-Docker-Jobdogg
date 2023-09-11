@@ -3,7 +3,7 @@ from django.contrib import admin
 from common.utils.text import unique_slug
 from .models import (
     BankAccount, Education, Background_Check,CertificationLicense,CheckByEmail,EWallet, 
-    Experience, Military, Profile, Policies, RidePreference,SafetyTestResult, TaxDocumentSetting,UserAcceptedPolicies,
+    Experience, Military, Profile, Policies, RidePreference,SafetyTestResult, SchoolName, TaxDocumentSetting, TypeOfSchool,UserAcceptedPolicies,
     BasicInformation, SkillSetTestResult,Safety_Video_and_Test,VideoResume,
     RettingCommenting,Card,Personal,Language,Category, Position, Skill, EmployeePreferences, 
 )
@@ -122,12 +122,20 @@ class MilitaryAdmin(admin.ModelAdmin):
             return ('created', 'updated', 'slug')
         return ()
     
+@admin.register(TypeOfSchool)
+class TypeOfSchoolAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+@admin.register(SchoolName)
+class SchoolNameAdmin(admin.ModelAdmin):
+    list_display = ('name','type_of_school')
+    
 @admin.register(Education)
 class EducationAdmin(admin.ModelAdmin):
     model = Education
-    list_display = ['user', 'school_name', 'degree_type', 'graduated', 'documentation','created','updated']
+    list_display = ['user', 'type_of_school', 'custem_school_type', 'custem_school_name','degree_type', 'graduated', 'documentation','created','updated']
     list_filter = ('graduated',)
-    search_fields = ('user__username', 'school_name', 'degree_type')
+    search_fields = ('user__username', 'custem_school_name', 'degree_type')
     
     def get_readonly_fields(self, request, obj=None):
         if obj:  # editing an existing object

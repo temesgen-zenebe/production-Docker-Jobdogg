@@ -5,6 +5,7 @@ from .views import (
     
     #RidePreference
    
+    Get_school_names,
     RidePreferenceCreateView,
     RidePreferenceDetailView,
     RidePreferenceListView,
@@ -172,6 +173,8 @@ urlpatterns = [
     path('military/<slug:slug>/update/', MilitaryUpdateView.as_view(), name='military_update'),
     path('military/<slug:slug>/delete/', MilitaryDeleteView.as_view(), name='military_delete'),
     
+    #Get_school_names
+    path('get_school_names/', Get_school_names.as_view(), name='get_school_names'),
     #Education
     path('education/list/', EducationListView.as_view(), name='education_list'),
     path('education/create/',EducationCreateView.as_view(), name='education_create'),

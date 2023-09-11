@@ -217,10 +217,25 @@ class Military(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Military Information"
     
+class TypeOfSchool(models.Model):
+    name = models.CharField(max_length=200,default='one')
+
+    def __str__(self):
+        return self.name
+
+class SchoolName(models.Model):
+    name = models.CharField(max_length=100, default='two')
+    type_of_school = models.ForeignKey(TypeOfSchool, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name   
+    
 class Education(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    school_type = models.CharField(max_length=20, choices=SCHOOL_TYPE_CHOICES)
-    school_name = models.CharField(max_length=100)
+    type_of_school = models.ForeignKey(TypeOfSchool, on_delete=models.CASCADE,default=1)
+    school_name = models.ManyToManyField(SchoolName, related_name='school_name')
+    custem_school_type = models.CharField(max_length=200, null=True, blank=True)
+    custem_school_name = models.CharField(max_length=200,null=True, blank=True)
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
@@ -239,7 +254,7 @@ class Education(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.user.username}'s Education: {self.degree_type} from {self.school_name}"  
+        return f"{self.user.username}'s Education: {self.degree_type} from {self.custem_school_name}"  
 
 #CertificationLicense
 class CertificationLicense(models.Model):
@@ -298,7 +313,7 @@ class Position(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            value = f"{self.position} {self.user.username}"
+            value = f"{self.position}"
             self.slug = unique_slug(value, type(self))
         super().save(*args, **kwargs)
 

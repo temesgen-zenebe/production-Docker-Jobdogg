@@ -215,9 +215,9 @@
                 </div>
                 {% if educations.documentation %}
                 <div class="col step-item ">
-                    <div class="card border-left-Crimson shadow h-100 py-2">
+                    <div class="card border-left-info shadow h-100 py-2">
                     <div class="card-body">
-                    <h6 class="card-text"><i class="fa-solid fa-user-graduate"></i> Certification | Licenses</h6>
+                    <h6 class="card-text small"><i class="fa-solid fa-user-graduate"></i> Certification | Licenses</h6>
                     <small class="">Step 5+: Upload files</small>
                     <div class="d-flex justify-content-between align-items-center">
                         {% if progres.Education_completed  %}
@@ -227,12 +227,12 @@
                                     <i class="bi bi-check2-circle px-1"></i><small></small>
                                 </button>
                             
-                                <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
-                                    <i class="bi bi-plus-circle mx-1"></i><i class="fa-solid fa-upload"></i>
+                                <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
+                                    <i class="bi bi-file-earmark-arrow-up"></i>
                                 </button> 
-                                <a class="btn btn-sm btn-outline-Crimson" href="{% url 'employee:education_list' %}"><i class="bi bi-pen"></i></a>
+                                <a class="btn btn-sm btn-outline-info" href="{% url 'employee:education_list' %}"><i class="bi bi-pen"></i></a>
                             {% else %}
-                                <button type="button" class="btn btn-sm btn-outline-Crimson" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
+                                <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#CertificationLicenseModal">
                                     <i class="fa-solid fa-upload"></i>
                                 </button>
                             {% endif %}
@@ -242,8 +242,8 @@
                     </div>
                     {% if certification_licenses %}
                     <ul class="list-unstyled list-group-flush">
-                    {% for certification in certification_licenses|slice:":2" %}
-                        <li class="list-item"><small class=""><a href="{{ certification.certification_file.url}}"><i class="bi bi-files px-1"></i>{{ certification.document_name|truncatewords:2 }}</a></small></li>
+                    {% for certification in certification_licenses|slice:":1" %}
+                        <li class="list-item"><small class=""><a href="{{ certification.certification_file.url}}"><i class="bi bi-files px-1"></i>{{ certification.document_name|truncatewords:2 }}... more</a></small></li>
                     {% endfor %}
                     </ul>
                     {% endif %}
@@ -764,7 +764,7 @@
                 <div class="modal-dialog modal-md modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="militaryModalLabel">Military Information</h5>
+                            <h6 class="modal-title" id="militaryModalLabel">Military Information</h6>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -807,7 +807,7 @@
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="CertificationLicenseModalModalLabel">Education</h5>
+                            <h6 class="modal-title" id="CertificationLicenseModalModalLabel">Certification | License</h6>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

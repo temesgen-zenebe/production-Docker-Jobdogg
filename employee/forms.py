@@ -12,8 +12,8 @@ from .models import (
     Education, EmployeePreferences, 
     Experience, Military, Personal, 
     Language, BasicInformation, 
-    Position, RidePreference, SafetyTestResult, 
-    Skill, RettingCommenting, TaxDocumentSetting, VideoResume,
+    Position, RidePreference, SafetyTestResult, SchoolName, 
+    Skill, RettingCommenting, TaxDocumentSetting, TypeOfSchool, VideoResume,
 )
 from django.utils.safestring import mark_safe
 from common.utils.chooseConstant import DISCHARGE_YEAR_CHOICES
@@ -122,18 +122,42 @@ class MilitaryForm(forms.ModelForm):
 
 #EducationForm               
 class EducationForm(forms.ModelForm):
+    
+    type_of_school = forms.ModelChoiceField(
+        queryset=TypeOfSchool.objects.all(), 
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm','id':'id_type_of_school'}),
+        
+    )
+    school_name = forms.ModelChoiceField(
+        queryset=SchoolName.objects.none(), 
+        widget=forms.Select(attrs={'class': 'form-control form-control-sm', 'id':'id_school_name'}),
+        
+    )
+    
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)  # Remove the 'user' argument from kwargs
+        super().__init__(*args, **kwargs)
+        if 'type_of_school' in self.data:
+            try:
+                type_of_school_id = int(self.data.get('type_of_school'))
+                self.fields['school_name'].queryset = SchoolName.objects.filter(type_of_school_id=type_of_school_id)
+            except (ValueError, TypeError):
+                pass  # Invalid category ID, handle it accordingly
+            
     class Meta:
         model = Education
-        fields = ('school_type', 'school_name', 'country', 'city', 'state', 'graduated', 'graduation_date', 'documentation', 'degree_type')
+        fields = ('custem_school_type', 'custem_school_name', 'country', 'city', 'state', 'graduated', 'graduation_date', 'documentation', 'degree_type')
         labels = {
             'documentation': 'Do You have CERTIFICATION or LICENSES ?',
         }
         widgets = {
             'graduation_date': forms.DateInput(attrs={'type': 'date','style': 'width: 100%; font-size:13px;'}),
         }
-        help_texts = {
-            'social_security_number': 'Enter in this format XXX-XX-XXXX',
-        }
+        help_texts = {}
+        
+        # def __init__(self, *args, **kwargs):
+        #     super(EducationForm, self).__init__(*args, **kwargs)
+        #     self.fields['school_name'].queryset = EducationForm.objects.none()
        
 #CertificationLicenseForm    
 class CertificationLicenseForm(forms.ModelForm):
