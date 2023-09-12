@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('subscription.urls')),
     path('', include('recommendedByAI.urls')),
     path('', include('JobFilter.urls')),
+    path('', include('timeCard.urls'))
    
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -159,9 +159,9 @@ SALARY_TYPES = (
 #JOB_TYPES
 JOB_TYPES = (
         ('', 'Select Job Type'),  # Provide an empty option
-        ('Temp', 'Temporary'),
+        ('Temporary', 'Temporary'),
         ('Temp-Perm', 'Temporary to Permanent'),
-        ('Perm', 'Permanent'),
+        ('Permanent', 'Permanent'),
         # ('full-time', 'Full-time'),
         # ('part-time', 'Part-time'),
         # ('contract', 'Contract/Freelance'),
@@ -273,3 +273,14 @@ STATUS_CHOICES = [
         ('rejected', 'Rejected'),
         ('hired', 'Hired'),
     ]
+#TIME_CARD_DATE_ASSIGN
+DATE_ASSIGN = [
+    ('Sunday', 'Sunday'),
+    ('Monday', 'Monday'),
+    ('Tuesday', 'Tuesday'),
+    ('Wednesday', 'Wednesday'),
+    ('Thursday', 'Thursday'),
+    ('Friday', 'Friday'),
+    ('Saturday', 'Saturday')
+]
+

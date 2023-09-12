@@ -192,35 +192,6 @@ class JobRequisition(models.Model):
             print(skills)
         return skills
     
-class TimeCard(models.Model):
-    employer=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    employee=models.CharField(max_length=100)
-    date=models.DateTimeField()
-    start_time=models.DateTimeField()
-    end_time=models.DateTimeField()
-    massage = models.TextField(max_length=200,null=True, blank=True)
-    google_map_link = models.URLField(
-        max_length=200,null=True, blank=True,
-        help_text="Enter the Google Maps link for your location."
-    )
-    task=models.CharField(max_length=100,null=True, blank=True)
-    employee_conformation=models.BooleanField(default=False)
-    employer_conformation=models.BooleanField(default=False)
-    slug=models.SlugField(unique=True)
-    spacial_discretion = models.TextField(max_length=200)
-    incentive = models.CharField(max_length=100)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    
-    
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            value = f"{self.employee}"
-            self.slug = unique_slug(value, type(self))
 
-        super().save(*args, **kwargs)
-    
-    def __str__(self):
-        return f"{self.employee}'s Preferences"
     
 

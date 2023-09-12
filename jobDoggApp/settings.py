@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'subscription.apps.SubscriptionConfig',
     'recommendedByAI.apps.RecommendedbyaiConfig',
     'JobFilter.apps.JobfilterConfig',
+    'timeCard.apps.TimecardConfig',
 ]
 
 SITE_ID = 1
