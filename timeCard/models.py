@@ -63,15 +63,12 @@ class TimeCard(models.Model):
     employer=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     employee = models.CharField(max_length=100, default='Temesgen')
     date_assigned = models.ForeignKey(DateAssigned, on_delete=models.CASCADE)
-    sick = models.BooleanField(default=False)
-    no_show = models.BooleanField(default=False)
     job_type = models.CharField(default='Temporary')
     location_URL = models.URLField(
         max_length=200, null=True, blank=True, 
         help_text='Enter the google maps link for the business location'
     )
-    employee_conformation=models.BooleanField(default=False)
-    employer_conformation=models.BooleanField(default=False)
+    
     special_task = models.TextField(max_length=200, null=True, blank=True)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -85,3 +82,36 @@ class TimeCard(models.Model):
     
     def __str__(self):
         return f"From {self.employer}-to-{self.employee}'s timeCards"
+    
+    
+class ClockOutClockInManagement(models.Model):
+    time_card = models.ForeignKey(TimeCard, on_delete=models.CASCADE)
+    
+    employee_in=models.BooleanField(default=False)
+    employee_in_time = models.DateTimeField()
+    
+    employee_out=models.BooleanField(default=False)
+    employee_out_time = models.DateTimeField(auto_now=True)
+    
+    employee_conformation=models.BooleanField(default=False)
+    employer_conformation=models.BooleanField(default=False)
+    sick = models.BooleanField(default=False)
+    no_show = models.BooleanField(default=False)
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.time_card.employee}-{self.time_card.employer}"
+            self.slug = unique_slug(value, type(self))
+        if  self.employee_in :
+            self.employee_in_time = timezone.now()
+        if self.employee_out :
+            self.employee_out_time = timezone.now()   
+            
+        super().save(*args, **kwargs)
+        
+    def __str__(self):
+        return f"{self.time_card.employee}-{self.time_card.employer}-clock-out-clock-in-management"

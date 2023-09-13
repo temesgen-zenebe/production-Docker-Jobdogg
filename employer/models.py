@@ -1,5 +1,6 @@
 from audioop import reverse
 from datetime import timezone
+import random
 from django.db import models
 from django.core.cache import cache
 from django.utils.timezone import datetime
@@ -192,6 +193,31 @@ class JobRequisition(models.Model):
             print(skills)
         return skills
     
-
+#generate_employee_id
+def generate_employee_id(username):
+        username_part = username[:2].upper()
+        random_part = str(random.randint(100, 999))
+        return f"{username_part}{random_part}"
     
+class HiredEmployeeList(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    employee_name = models.CharField(max_length=100)
+    employee_ID = models.CharField(max_length=6, unique=True)
+    hired_date = models.DateField()
+    slug = models.SlugField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+  
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = f"{self.employee_name} {self.user.username}"
+            self.slug = unique_slug(value, type(self))
 
+        if not self.employee_ID:
+            self.employee_ID = generate_employee_id(self.user.username)
+
+        super().save(*args, **kwargs)  # Save the object
+    
+    def __str__(self):
+        return f"employer: {self.user.username}-employee:{self.employee_name}"

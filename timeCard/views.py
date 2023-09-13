@@ -1,9 +1,23 @@
 from django.contrib.auth.decorators import login_required  # Import the decorator
 from django.shortcuts import render, redirect
+from django.views import View
 from .forms import TimeAssignedForm, DateAssignedForm, TimeCardForm
-
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import TimeCard
+
+class TimeCardManagement(LoginRequiredMixin, View):
+    
+    
+    def get(self, request):
+        context = {}
+        return render(request, 'timeCard/timeCardManagement.html', context)
+    
+    def post(self, request):
+        
+        context = {}
+        #return redirect('employer:vilificationSandMassage')
+        return render(request, 'timeCard/timeCardManagement.html', context)
 
 class TimeCardListView(ListView):
     model = TimeCard

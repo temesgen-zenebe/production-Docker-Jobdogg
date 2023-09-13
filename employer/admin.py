@@ -1,6 +1,6 @@
 from django.contrib import admin
 from common.utils.text import unique_slug
-from .models import CompanyProfile, EmployerAcceptedPolicies, EmployerPoliciesAndTerms, JobRequisition, ProfileBuildingController, SocCode
+from .models import CompanyProfile, EmployerAcceptedPolicies, EmployerPoliciesAndTerms, HiredEmployeeList, JobRequisition, ProfileBuildingController, SocCode
 
 from django.contrib import admin
 from .models import ProfileBuildingController
@@ -103,5 +103,15 @@ class JobRequisitionAdmin(admin.ModelAdmin):
     get_required_skills.short_description = 'required skills'
 
     
+@admin.register(HiredEmployeeList)
+class HiredEmployeeListAdmin(admin.ModelAdmin):
+    model = HiredEmployeeList
+    list_display = ('user', 'employee_name', 'employee_ID', 'hired_date', 'created', 'updated')
+    search_fields = ['user__username', 'employee_name', 'employee_ID']
+    list_filter = ['hired_date']
 
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return ('created','updated','slug')
+        return ()    

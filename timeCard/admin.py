@@ -33,7 +33,7 @@ class DateAssignedAdmin(admin.ModelAdmin):
 @admin.register(TimeCard)
 class TimeCardAdmin(admin.ModelAdmin):
     model=TimeCard
-    list_display = ('employer', 'employee', 'date_assigned', 'sick', 'no_show', 'job_type', 'location_URL', 'employee_conformation', 'employer_conformation', 'slug', 'created', 'updated')
+    list_display = ('employer', 'employee', 'date_assigned', 'job_type', 'location_URL', 'slug', 'created', 'updated')
     search_fields = ['employer', 'employee', 'slug']
     list_filter = ['created', 'updated']
 

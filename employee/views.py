@@ -271,7 +271,10 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                # Clear existing desired_positions and skills and set the new values
                education.school_name.clear()
                education.school_name.set(name_school)
-                
+               
+               # Update the corresponding profile completion field if needed
+               profile.Education_completed = True
+               profile.save()
                return redirect('employee:education_create')
         
         elif 'certificationLicense' in request.POST:
@@ -317,7 +320,9 @@ class ProfileBuildingProgress(LoginRequiredMixin, View):
                experience = experience_form.save(commit=False)
                experience.user = request.user
                experience.save()
-               
+                # Update the corresponding profile completion field if needed
+               profile.Experience_completed = True
+               profile.save()
                return redirect('employee:experience_create')
             else:
               print("Certification License form is invalid")
@@ -1022,6 +1027,9 @@ class EducationCreateView(LoginRequiredMixin, CreateView):
                education = education_form.save(commit=False)
                education.user = request.user
                education.save()
+               #Update the profile
+               profile.Education_completed = True
+               profile.save()
                return redirect('employee:education_create')
            
         context={ 'form':EducationForm()}
@@ -1181,9 +1189,9 @@ class ExperienceCreateView(LoginRequiredMixin, View):
                experience = experience_form.save(commit=False)
                experience.user = request.user
                experience.save()
-               # Update the corresponding profile completion field if needed
-            #    profile.Experience_completed = True
-            #    profile.save()
+               #Update the corresponding profile completion field if needed
+               profile.Experience_completed = True
+               profile.save()
                return redirect('employee:experience_create')
             else:
               print("Certification License form is invalid")  
