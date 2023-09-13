@@ -1,0 +1,47 @@
+{% extends 'pages/employer_dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load user_tags %}
+{% block title %}Job Requisitions List{% endblock %}
+{% block dashboard_employer %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-6 ">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ timecard }}</h5>
+                        <p class="card-text">Employer: {{ timecard.employer }}</p>
+                        <p class="card-text">Employee: {{ timecard.employee }}</p>
+                        <p class="card-text">Date Assigned: {{ timecard.date_assigned }}</p>
+                        <p>Sick: {{ timecard.sick }}</p>
+                        <p>No Show: {{ timecard.no_show }}</p>
+                        <p>Job Type: {{ timecard.job_type }}</p>
+                        <p>Location URL: {{ timecard.location_URL }}</p>
+                        <p>Employee Confirmation: {{ timecard.employee_conformation }}</p>
+                        <p>Employer Confirmation: {{ timecard.employer_conformation }}</p>
+                        <p>Special Task: {{ timecard.special_task }}</p>
+                    
+                        <h6>Date Assigned Details:</h6>
+                        <p>Date Assigned: {{ timecard.date_assigned.date_assign }}</p>
+                        <p>Time Assigned: {{ timecard.date_assigned.time_assign.start_time }} - {{ timecard.date_assigned.time_assign.end_time }}</p>
+                    
+                        <h6>Time Assigned Details:</h6>
+                        <p>Start Time: {{ timecard.date_assigned.time_assign.start_time }}</p>
+                        <p>End Time: {{ timecard.date_assigned.time_assign.end_time }}</p>
+                        <p>Lunch Time: {{ timecard.date_assigned.time_assign.lunch_time }}</p>
+                        <p>Over Start Time: {{ timecard.date_assigned.time_assign.over_start_time }}</p>
+                        <p>Over End Time: {{ timecard.date_assigned.time_assign.over_end_time }}</p>
+                        <p>Total Over Time: {{ timecard.date_assigned.time_assign.total_over_time }}</p>
+                        <p>Double Over Time: {{ timecard.date_assigned.time_assign.double_over_time }}</p>
+                        <p>Total Hours: {{ timecard.date_assigned.time_assign.total_hours }}</p>
+                        <p class="card-text">
+                            Time Assigned: 
+                            {{ timecard.date_assigned.time_assign.start_time }} - {{ timecard.date_assigned.time_assign.end_time }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

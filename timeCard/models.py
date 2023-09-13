@@ -7,6 +7,7 @@ from datetime import datetime
 from django.utils import timezone
 
 class TimeAssigned(models.Model):
+    title = models.CharField(max_length=200, null=True, blank=True)
     start_time = models.TimeField(default=timezone.now)
     end_time = models.TimeField(default=timezone.now)
     lunch_time = models.TimeField(null=True, blank=True)
@@ -40,7 +41,7 @@ class TimeAssigned(models.Model):
         super().save(*args, **kwargs)
     
     def __str__(self):
-        return f"{self.start_time}"
+        return f"{self.title}-start:{self.start_time}-end:{self.end_time}"
   
 class DateAssigned(models.Model):
     date_assign = models.CharField(choices=DATE_ASSIGN)
@@ -56,7 +57,7 @@ class DateAssigned(models.Model):
         super().save(*args, **kwargs)
     
     def __str__(self):
-        return f"{self.date_assign}"
+        return f"{self.date_assign}-{self.time_assign}"
     
 class TimeCard(models.Model):
     employer=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

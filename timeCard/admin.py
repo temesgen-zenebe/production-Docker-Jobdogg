@@ -8,7 +8,7 @@ from .models import DateAssigned, TimeAssigned, TimeCard
 @admin.register(TimeAssigned)
 class TimeAssignedAdmin(admin.ModelAdmin):
     model = TimeAssigned
-    list_display = ('start_time', 'end_time', 'total_hours', 'slug', 'created', 'updated')
+    list_display = ('title','start_time', 'end_time', 'total_hours', 'slug', 'created', 'updated')
     search_fields = ['start_time', 'end_time', 'slug']
     list_filter = ['created', 'updated']
     
