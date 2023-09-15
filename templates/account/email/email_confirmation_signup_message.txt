@@ -1,7 +1,8 @@
 Hello!
 
-You are receiving this email because someone (hopefully you) has registered you for {{ current_site.name }} using this email address.
-
+You are receiving this email because someone (hopefully you) has registered you for jobdogg.com using this email address.
+{% comment %} {{ current_site.name }} {% endcomment %}
 To confirm this is correct, go to {{ activate_url }}
 
 Thank you!
+

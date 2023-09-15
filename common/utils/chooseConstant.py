@@ -284,3 +284,10 @@ DATE_ASSIGN = [
     ('Saturday', 'Saturday')
 ]
 
+#TimeCard
+TIME_CARD_STATUS =[
+    ('accepted','accepted'),
+    ('rejected','rejected'),
+    ('panging','panging'),
+    ('complete','complete'),
+]

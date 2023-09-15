@@ -1,10 +1,10 @@
-
 from django.db import models
-from common.utils.chooseConstant import DATE_ASSIGN
+from common.utils.chooseConstant import DATE_ASSIGN, TIME_CARD_STATUS
 from common.utils.text import unique_slug
 from jobDoggApp import settings
 from datetime import datetime
 from django.utils import timezone
+
 
 class TimeAssigned(models.Model):
     title = models.CharField(max_length=200, null=True, blank=True)
@@ -68,7 +68,7 @@ class TimeCard(models.Model):
         max_length=200, null=True, blank=True, 
         help_text='Enter the google maps link for the business location'
     )
-    
+    status = models.CharField(choices=TIME_CARD_STATUS, default="panging")
     special_task = models.TextField(max_length=200, null=True, blank=True)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -86,32 +86,68 @@ class TimeCard(models.Model):
     
 class ClockOutClockInManagement(models.Model):
     time_card = models.ForeignKey(TimeCard, on_delete=models.CASCADE)
-    
-    employee_in=models.BooleanField(default=False)
-    employee_in_time = models.DateTimeField()
-    
-    employee_out=models.BooleanField(default=False)
-    employee_out_time = models.DateTimeField(auto_now=True)
-    
-    employee_conformation=models.BooleanField(default=False)
-    employer_conformation=models.BooleanField(default=False)
+
+    clock_in = models.BooleanField(default=False)
+    clock_in_time = models.DateTimeField(default=timezone.now)
+    clock_out = models.BooleanField(default=False)
+    clock_out_time = models.DateTimeField(default=timezone.now)
+    total_clock_in_out_hours = models.DurationField(default=timezone.timedelta)
+
+    over_time_clock_in = models.BooleanField(default=False)
+    over_time_clock_in_time = models.DateTimeField(default=timezone.now)
+    over_time_clock_out = models.BooleanField(default=False)
+    over_time_clock_out_time = models.DateTimeField(default=timezone.now)
+    over_time_cycle = models.PositiveSmallIntegerField(default=1)
+    total_over_time_clock_in_out_hours = models.DurationField(default=timezone.timedelta)
+
+    break_in = models.BooleanField(default=False)
+    break_in_time = models.DateTimeField(default=timezone.now)
+    break_out = models.BooleanField(default=False)
+    break_out_time = models.DateTimeField(default=timezone.now)
+    break_in_out_time_cycle = models.PositiveSmallIntegerField(default=1)
+    total_break_in_out_hours = models.DurationField(default=timezone.timedelta)
+
     sick = models.BooleanField(default=False)
     no_show = models.BooleanField(default=False)
+    net_working_hour = models.DurationField(default=timezone.timedelta)
+    employee_conformation = models.BooleanField(default=False)
+    employer_conformation = models.BooleanField(default=False)
+
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    
-    
+
     def save(self, *args, **kwargs):
         if not self.slug:
             value = f"{self.time_card.employee}-{self.time_card.employer}"
             self.slug = unique_slug(value, type(self))
-        if  self.employee_in :
-            self.employee_in_time = timezone.now()
-        if self.employee_out :
-            self.employee_out_time = timezone.now()   
-            
-        super().save(*args, **kwargs)
         
+        if self.clock_in:
+            self.clock_in_time = timezone.now()
+
+        if self.clock_out:
+            self.clock_out_time = timezone.now()
+
+        if self.break_in:
+            self.break_in_time = timezone.now()
+
+        if self.break_out:
+            self.break_out_time = timezone.now()
+
+        # Calculate durations
+        if self.clock_in and self.clock_out:
+            self.total_clock_in_out_hours = self.clock_out_time - self.clock_in_time
+
+        if self.break_in and self.break_out:
+            self.total_break_in_out_hours = self.break_out_time - self.break_in_time
+
+        if self.over_time_clock_in and self.over_time_clock_out:
+            self.total_over_time_clock_in_out_hours = self.over_time_clock_out_time - self.over_time_clock_in_time
+
+        if self.clock_in and self.clock_out and self.break_in and self.break_out:
+            self.net_working_hour = (self.clock_out_time - self.clock_in_time) - (self.break_out_time - self.break_in_time)
+
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.time_card.employee}-{self.time_card.employer}-clock-out-clock-in-management"

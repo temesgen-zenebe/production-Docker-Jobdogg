@@ -1,6 +1,6 @@
 from . import views
 from django.urls import path
-from employee import views
+from employee import views 
 from .views import (
     
     #RidePreference
@@ -24,6 +24,7 @@ from .views import (
     
     #Dashboard
     DashboardInformation,
+    ProfilePreview,
     ProfileBuildingProgress,
     
     #--BasicInformation----
@@ -131,6 +132,7 @@ urlpatterns = [
     
     # DashboardInformation Employee 
     path('dashboardInformation/employee', DashboardInformation.as_view(), name='dashboard_information_employee'),
+    path('profilePreview/', ProfilePreview.as_view(), name='profile_preview'),
     path('profileBuildingProgress/', ProfileBuildingProgress.as_view(), name='profile_building_progress'),
     
     #skip Military

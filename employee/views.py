@@ -60,12 +60,27 @@ class DashboardInformation(LoginRequiredMixin, View):
     def get(self, request):
         # Get the user's profile
         profiles = Profile.objects.filter(user=request.user).first()
-        
         context = {
             'paymentPref': profiles,
         }
         return render(request, self.template_name, context)
     
+class ProfilePreview(LoginRequiredMixin, View):
+    template_name = 'employee/profile_preview.html'
+    
+    def get(self, request):
+        # Get the user's profile
+        profiles = Profile.objects.filter(user=request.user).first()
+        context = {
+            'paymentPref': profiles,
+        }
+        return render(request, self.template_name, context)
+    
+    def post(self, request): 
+        profile = get_object_or_404(Profile, user=request.user)
+        context = {}
+        return render(request, self.template_name, context)
+        
 #----Profile Models ------
 class ProfileBuildingProgress(LoginRequiredMixin, View):
     template_name = 'employee/profileBuildingProgress.html'
