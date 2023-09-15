@@ -5,7 +5,7 @@
 {% block title %}Experience Detail{% endblock %}
 {% block dashboard_employee %}
     <!-- Example Code -->
-        <div class="col-xl-6 col-lg-6">
+        <div class="col-xl-10 col-lg-8">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
@@ -17,52 +17,49 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <ul class="list-unstyled list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          Name: 
-                          <span class="">{{ object.user.username|capfirst }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          Company name : 
-                          <span class="">{{ object.company_name}}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          Company Phone :
-                          <span class="">{{ object.company_phone|format_phone_number }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                         Job Title :
-                          <span class="">{{ object.job_title}}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                         Start Date :
-                          <span class="">{{ object.start_date|date }}</span>
-                        </li>
-                        {% if object.end_date %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            End Date :
-                          <span class="">{{ object.end_date|date }}</span>
-                        </li>
-                        {% else %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Is current ? :
-                          <span class="">{{ object.is_current }}</span>
-                        </li>
-                        {% endif %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Description :
-                          <span class="">{{ object.description }}</span>
-                        </li>
-                        
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            created: 
-                            <span class="">{{ object.created|date }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                           
-                        </li>
-                      </ul>
-                      
+                      <div class="table-responsive">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ object.user.username|capfirst }}</td>
+                            </tr>
+                            <tr>
+                                <th>Company Name</th>
+                                <td>{{ object.company_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Company Phone</th>
+                                <td>{{ object.company_phone|format_phone_number }}</td>
+                            </tr>
+                            <tr>
+                                <th>Job Title</th>
+                                <td>{{ object.job_title }}</td>
+                            </tr>
+                            <tr>
+                                <th>Start Date</th>
+                                <td>{{ object.start_date|date }}</td>
+                            </tr>
+                            {% if object.end_date %}
+                            <tr>
+                                <th>End Date</th>
+                                <td>{{ object.end_date|date }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <th>Is Current?</th>
+                                <td>{{ object.is_current }}</td>
+                            </tr>
+                            {% endif %}
+                            <tr>
+                                <th>Description</th>
+                                <td>{{ object.description }}</td>
+                            </tr>
+                            <tr>
+                                <th>Created</th>
+                                <td>{{ object.created|date }}</td>
+                            </tr>
+                        </table>
+                    </div>
                     
                 </div>
                    

@@ -38,9 +38,9 @@
                             <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                                 <div>
                                     {% if user.avatar and not form.avatar.errors %}
-                                    <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded mr-3 align-self-center"/>
+                                    <img src="{{ user.avatar.url }}" alt="Avatar" width="40" height="40" class="rounded mr-3 align-self-center"/>
                                     {% else %}
-                                    <i class="bi bi-person-circle"  width="30" height="30" class="rounded-circle"></i>
+                                    <img class="rounded mr-3 align-self-center img-fluid shadow" src="{% static 'images/userPlaceHolder.png' %}" alt="Logo" width="30" height="40"/>
                                     {% endif %} 
                                     <a href="{% url 'employee:employee-preferences-detail' slug=preferences.slug %}">{{ preferences.user.username }}</a>
                                 </div>

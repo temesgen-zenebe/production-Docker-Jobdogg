@@ -17,52 +17,58 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <ul class="list-unstyled list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          Name: 
-                          <span class="">{{ object.user.username|capfirst }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            School Type : 
-                          <span class="">{{ object.school_type}}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            School Name :
-                          <span class="">{{ object.school_name }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Country :
-                          <span class="">{{ object.country }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            City :
-                          <span class="">{{ object.city }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            State :
-                          <span class="">{{ object.state }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Graduated :
-                          <span class="">{{ object.graduated }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Graduation Date :
-                            <span class="">{{ object.graduation_date|date }}</span>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            degree Type :
-                            <span class="">{{ object.degree_type }}</span>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            created: 
-                            <span class="">{{ object.created|date }}</span>
-                          </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                           
-                          </li>
-                      </ul>
-                      
+                      <div class="table-responsive">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Name</th>
+                                <td class="gap">{{ object.user.username|capfirst }}</td>
+                            </tr>
+                            <tr>
+                                <th>School Type</th>
+                                <td class="gap">{{ object.type_of_school }}</td>
+                            </tr>
+                            <tr>
+                                <th>School Name</th>
+                                <td class="gap">
+                                 
+                                    {% for name in object.school_name.all %}
+                                    {{ name }}
+                                    {% empty %}
+                                    No school_name found.
+                                    {% endfor %}
+                                </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Country</th>
+                                <td class="gap">{{ object.country }}</td>
+                            </tr>
+                            <tr>
+                                <th>City</th>
+                                <td class="gap">{{ object.city }}</td>
+                            </tr>
+                            <tr>
+                                <th>State</th>
+                                <td class="gap">{{ object.state }}</td>
+                            </tr>
+                            <tr>
+                                <th>Graduated</th>
+                                <td class="gap">{{ object.graduated }}</td>
+                            </tr>
+                            <tr>
+                                <th>Graduation Date</th>
+                                <td class="gap">{{ object.graduation_date|date }}</td>
+                            </tr>
+                            <tr>
+                                <th>Degree Type</th>
+                                <td class="gap">{{ object.degree_type }}</td>
+                            </tr>
+                            <tr>
+                                <th>Created</th>
+                                <td class="gap">{{ object.created|date }}</td>
+                            </tr>
+                        </table>
+                    </div>
                     
                 </div>
                    
