@@ -71,8 +71,21 @@ class ProfilePreview(LoginRequiredMixin, View):
     def get(self, request):
         # Get the user's profile
         profiles = Profile.objects.filter(user=request.user).first()
+        video_introduction = VideoResume.objects.filter(user=request.user).first()
+        # Background_Check states
+        background= Background_Check.objects.filter(user=request.user).first()
+        # SkillSetTestResult result
+        skillSetTestResult= SkillSetTestResult.objects.filter(user=request.user).first()
+        # EmployeePreferences desired_positions, skills
+        # Experience job_title,
+        # CertificationLicense
+        # Education
+        # Background_Check , states
         context = {
-            'paymentPref': profiles,
+            'profiles': profiles,
+            'video_introduction':video_introduction,
+            'background':background,
+            'skillSetTestResult':skillSetTestResult,
         }
         return render(request, self.template_name, context)
     

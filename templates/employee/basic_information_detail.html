@@ -13,60 +13,64 @@
                 </div>
                  <!-- Card Body -->
                 <div class="card-body">
-                    <ul class="list-unstyled list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            User : 
-                          <span class="">{{ object.user|capfirst }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Email : 
-                          <span class="">{{ object.email }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Address : 
-                          <span class="">{{ object.address }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Apartment :
-                          <span class="">{{ object.apartment}}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            City :
-                            <span class="">{{ object.city }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            State :
-                            <span class="">{{ object.state }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Zip Code : 
-                            <span class="">{{ object.zip_code }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Cell Phone :
-                            <span class="">{{ object.cell_phone|format_phone_number  }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Home Phone :
-                            <span class="">{{ object.home_phone|format_phone_number  }}</span>
-                        </li>
-                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Work_phone :
-                            <span class="">{{ object.work_phone }}</span>
-                        </li>
-                         
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Emergency contact number :                           
-                             <span class="">{{ object.emergency_contact_number|format_phone_number }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            emergency contact name :                           
-                             <span class="">{{ object.emergency_contact_name}}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                           
-                        </li>
-                    </ul> 
+                  
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ object.user.username|capfirst }}</td>
+                            </tr>
+                            
+                            <tr>
+                                <th>User</th>
+                                <td>{{ object.user|capfirst }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ object.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>{{ object.address }}</td>
+                            </tr>
+                            <tr>
+                                <th>Apartment</th>
+                                <td>{{ object.apartment}}</td>
+                            </tr>
+                            <tr>
+                                <th>City</th>
+                                <td>{{ object.city }}</td>
+                            </tr>
+                            <tr>
+                                <th>State</th>
+                                <td>{{ object.state }}</td>
+                            </tr>
+                            <tr>
+                                <th>Zip Code</th>
+                                <td>{{ object.zip_code }}</td>
+                            </tr>
+                            <tr>
+                                <th>Cell Phone</th>
+                                <td>{{ object.cell_phone|format_phone_number }}</td>
+                            </tr>
+                            <tr>
+                                <th>Home Phone</th>
+                                <td>{{ object.home_phone|format_phone_number }}</td>
+                            </tr>
+                            <tr>
+                                <th>Work Phone</th>
+                                <td>{{ object.work_phone }}</td>
+                            </tr>
+                            <tr>
+                                <th>Emergency Contact Number</th>
+                                <td>{{ object.emergency_contact_number|format_phone_number }}</td>
+                            </tr>
+                            <tr>
+                                <th>Emergency Contact Name</th>
+                                <td>{{ object.emergency_contact_name }}</td>
+                            </tr>
+                        </table>
+                    </div>
                     
                 </div>  
             </div>

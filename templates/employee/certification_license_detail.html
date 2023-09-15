@@ -17,23 +17,28 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <ul class="list-unstyled list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Education: 
-                          <span class="">{{ certification_license.education}}</span>
-                        </li>
-                       
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Document Name : 
-                          <span class=""><a href="{{ certification_license.certification_file.url }}">{{ certification_license.document_name}}</a></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Created :
-                          <span class="">{{ certification_license.created|date }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center"></li>
-                      </ul>
-                      
+                      <div class="table-responsive">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ object.user.username|capfirst }}</td>
+                            </tr>
+                           
+                            <tr>
+                                <th>Education</th>
+                                <td>{{ certification_license.education}}</td>
+                            </tr>
+                            <tr>
+                                <th>Document Name</th>
+                                <td><a href="{{ certification_license.certification_file.url }}">{{ certification_license.document_name}}</a></td>
+                            </tr>
+                            <tr>
+                                <th>Created</th>
+                                <td>{{ certification_license.created|date }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
                     
                 </div>
                    
