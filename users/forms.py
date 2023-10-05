@@ -11,12 +11,12 @@ from django.contrib.auth.models import Group
 
 
 BIRTH_YEAR_CHOICES = range(1915, datetime.now().year)
-
+USER_TYPE = [('employee', 'employee'),('employer', 'employer'),]
 class SignupForm(forms.Form):
    
     first_name = forms.CharField(max_length=50, required=False)
     last_name = forms.CharField(max_length=50, required=False)
-    user_type = forms.ChoiceField(choices=CustomUser.USER_TYPE_CHOICES)
+    user_type = forms.ChoiceField(choices=USER_TYPE)
 
     # Other form fields...
 
@@ -48,8 +48,10 @@ class CustomUserChangeForm(UserChangeForm):
             'first_name': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
             'dob': DateInput(attrs={'type': 'date','style': 'width: 100%; font-size:13px;'}), 
-           
             'avatar': forms.ClearableFileInput(attrs={'class': 'form-control form-control-sm'}),
+        }
+        labels = {
+            'avatar': 'Profile Image'
         }
         
         """class Meta:

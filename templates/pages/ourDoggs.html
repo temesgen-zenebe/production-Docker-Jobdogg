@@ -2,149 +2,607 @@
 {% load static %}
 {% block title %}Our Doggs{% endblock %}
 {% block main %}
-<style>
-    .testimonial-slider {
-        background: linear-gradient(#e06a00,#123f8b), url();
-        padding: 2em 2em 3em;
-      }
-      .testimonial-title {
-        color: #fff;
-      }
-      .testimonial-title h2 {
-        padding-left: 0.2em;
-      }
-      .card {
-        margin: 0 0.5em;
-        box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
-        border: none;
-        height: 100%;
-      }
-      .carousel-control-prev,
-      .carousel-control-next {
-        background-color: #fff;
-        width: 3em;
-        height: 3em;
-        border-radius: 50%;
-        top: 60%;
-        transform: translateY(-50%);
-      }
-      
-      @media (min-width: 576px) {
-        .carousel-item {
-          margin-right: 0;
-          flex: 0 0 50%;
-          display: block;
+<div class="container-fields my-1">
+  <style>
+      .testimonial-slider {
+          {% comment %} background: linear-gradient(#e06a00,#123f8b), url(); {% endcomment %}
+          background: linear-gradient(#123f8b,#45464905), url();
+          padding: 2em 2em 3em;
         }
-        .carousel-inner {
-          display: flex;
+        .testimonial-title {
+          color: #fff;
         }
-      }
-      @media (min-width: 768px) {
-        .carousel-inner {
-          padding: 1em;
+        .testimonial-title h2 {
+          padding-left: 0.2em;
+        }
+        .card {
+          margin: 0 0.5em;
+          box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+          border: none;
+          height: 100%;
+        }
+        .card-f{
+          background: linear-gradient(#123f8b,#45464905), url();
         }
         .carousel-control-prev,
         .carousel-control-next {
-          opacity: 1;
-          position: absolute;
-          left: 1em;
-          top: 90%;
+          background-color: #fff;
+          width: 3em;
+          height: 3em;
+          border-radius: 50%;
+          top: 60%;
           transform: translateY(-50%);
         }
-        .carousel-control-next {
-          left: 5em;
+        
+        @media (min-width: 576px) {
+          .carousel-item {
+            margin-right: 0;
+            flex: 0 0 50%;
+            display: block;
+          }
+          .carousel-inner {
+            display: flex;
+          }
         }
-      }
-</style>
- <div class="py-5">
-    <div class="testimonial-slider">
-        <div id="carouselExampleControls" class="carousel carousel-dark" data-bs-ride="carousel">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="testimonial-title">
-                  
-                  <h4 class="fw-bold">Welcome to the Dogg Pound!!!</h4>
+        @media (min-width: 768px) {
+          .carousel-inner {
+            padding: 1em;
+          }
+          .carousel-control-prev,
+          .carousel-control-next {
+            opacity: 1;
+            position: absolute;
+            left: 1em;
+            top: 90%;
+            transform: translateY(-50%);
+          }
+          .carousel-control-next {
+            left: 5em;
+          }
+        }
+  </style>
+    <!--seaction-->
+<div class="container-fields ">
+  <div class="py-5">
+      <div class="testimonial-slider">
+          <div id="carouselExampleControls" class="carousel carousel-dark" data-bs-ride="carousel">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="testimonial-title">
+                    
+                    <h4 class="fw-bold">Welcome to the Dogg Pound!!!</h4>
+                   
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-              <div class="col-md-8">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <div class="card">
-                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-1-scaled.jpg" class="d-block w-100" alt="..."> </div>
-                      <div class="card-body">
-                        <h5 class="card-title">Card title 1</h5>
-                        <i class="bi bi-star-fill text-warning pe-1"></i>
-                        <i class="bi bi-star-fill text-warning pe-1"></i>
-                        <i class="bi bi-star-fill text-warning pe-1"></i>
-                        <i class="bi bi-star-fill text-warning pe-1"></i>
-                        <i class="bi bi-star-fill text-warning pe-1"></i>
-                        <p class="card-text">Some quick example text to build on the card title and make up
-                          the bulk of the
-                          card's content.</p>
+                <div class="col-md-8">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <div class="card  shadow ">
+                        <div class="card-body box-wrapper m-0 p-0">
+                        <div class="box-dua" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-3-scaled.jpg');">
+                            <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                              <h6 class="mb-0">Someone Famous</h6>
+                              <a href="#" class="fs-6">@SameoneFamous69</a>
+                              <p>Teacher at <strong>Awy College</strong></p>
+                            </div>
+                        </div>
+                        <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-3-scaled.jpg');"> 
+                            <div class="box-skill p-3 g-0">
+                              <h5 class="mt-3">SKILL</h5>
+                              <div class="row">
+                              <div class="col-5 pb-0 mb-0">
+                                  <p>HTML</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>CSS</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>JS</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>PHOTOSHOP</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>ILLUSTRATOR</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                  </div>
+                              </div>
+                              </div>
+                            
+                            </div>
+                        </div>
+                        </div>
+                        <div class="card-footer" >
+                      
+                            <ul class="social-icons gap-2 mb-0 small-text">
+                            <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success px-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                            <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                            <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                            <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                            <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                            </ul>
+                            <hr>
+                            <div class="d-flex justify-content-between mb-1">
+              
+                              <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-2" href="#">View</a></span>
+                              <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-2" href="#">Add</a></span>
+                              <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                            </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="card">
-                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-2-scaled.jpg" class="d-block w-100" alt="..."> </div>
-                      <div class="card-body">
-                        <h5 class="card-title">Card title 2</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up
-                          the bulk of the
-                          card's content.</p>
+                    <div class="carousel-item">
+                      <div class="card shadow ">
+                        <div class="card-body box-wrapper m-0 p-0">
+                        <div class="box-dua" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot--scaled.jpg');">
+                              <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                              <h4 class="mb-0">Someone Famous</h4>
+                              <a href="#" class="fs-6">@SameoneFamous69</a>
+                              <p>Teacher at <strong>Awy College</strong></p>
+                              </div>
+                        </div>
+                        <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-2-scaled.jpg');">
+                            <div class="box-skill p-3 g-0">
+                              <h4 class="mt-3">SKILL</h4>
+                              <div class="row">
+                              <div class="col-5 pb-0 mb-0">
+                                  <p>HTML</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>CSS</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>JS</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>PHOTOSHOP</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>ILLUSTRATOR</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                  </div>
+                              </div>
+                              </div>
+                        
+                            </div>
+                        </div>
+                        </div>
+                        <div class="card-footer" >
+                      
+                            <ul class="social-icons clearfix   mb-0 small-text  ">
+                              <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success p-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                              <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary p-1">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                              <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning p-1">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                              <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info p-1"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                              <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info p-2">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                            </ul>
+                            <hr>
+                            <div class="d-flex justify-content-between mb-1">
+              
+                              <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-2" href="#">View</a></span>
+                              <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-2" href="#">Add</a></span>
+                              <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                            </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="card">
-                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-3-scaled.jpg" class="d-block w-100" alt="..."> </div>
-                      <div class="card-body">
-                        <h5 class="card-title">Card title 3</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up
-                          the bulk of the
-                          card's content.</p>
+                    <div class="carousel-item">
+                      <div class="card  shadow ">
+                        <div class="card-body box-wrapper m-0 p-0">
+                        <div class="box-dua" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-1-scaled.jpg');">
+                            
+                            <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                              <h6 class="mb-0">Someone Famous</h6>
+                              <p>Teacher at <strong>Awy College</strong></p>
+                            </div>
+                        </div>
+                        <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-1-scaled.jpg');">
+                            <div class="box-skill p-3 g-0">
+                              <h4 class="mt-3">SKILL</h4>
+                              <div class="row">
+                              <div class="col-5 pb-0 mb-0">
+                                  <p>HTML</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>CSS</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>JS</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>PHOTOSHOP</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="row">
+                              <div class="col-5">
+                                  <p>ILLUSTRATOR</p>
+                              </div>
+                              <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                  </div>
+                              </div>
+                              </div>
+                            
+                            </div>
+                        </div>
+                        </div>
+                        <div class="card-footer" >
+                      
+                        <ul class="social-icons gap-2 mb-0 small-text">
+                            <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success px-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                            <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                            <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                            <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                            <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                        </ul>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-1">
+              
+                          <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-2" href="#">View</a></span>
+                          <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-2" href="#">Add</a></span>
+                          <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                        </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="card">
-                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-4-scaled.jpg" class="d-block w-100" alt="..."> </div>
-                      <div class="card-body">
-                        <h5 class="card-title">Card title 4</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up
-                          the bulk of the
-                          card's content.</p>
+                    <div class="carousel-item">
+                      <div class="card shadow ">
+                        <div class="card-body box-wrapper m-0 p-0">
+                          <div class="box-dua" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-6-scaled.jpg');">
+                          
+                              <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                              <h6 class="mb-0">Someone Famous</h6>
+                              <a href="#" class="fs-6">@SameoneFamous69</a>
+                              <p>Teacher at <strong>Awy College</strong></p>
+                              </div>
+                          </div>
+                          <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-6-scaled.jpg');">
+                              <div class="box-skill p-3 g-0">
+                              <h4 class="mt-3">SKILL</h4>
+                              <div class="row">
+                                <div class="col-5 pb-0 mb-0">
+                                    <p>HTML</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>CSS</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>JS</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>PHOTOSHOP</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>ILLUSTRATOR</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              
+                              </div>
+                          </div>
+                        </div>
+                        <div class="card-footer" >
+                        
+                          <ul class="social-icons gap-2 mb-0 small-text">
+                          <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success px-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                          <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                          <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                          <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                          <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                          </ul>
+                          <hr>
+                          <div class="d-flex justify-content-between mb-1">
+                            <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-1" href="#">View</a></span>
+                            <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-1" href="#">Add</a></span>
+                            <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="card">
-                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-5-scaled.jpg" class="d-block w-100" alt="..."> </div>
-                      <div class="card-body">
-                        <h5 class="card-title">Card title 5</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up
-                          the bulk of the
-                          card's content.</p>
+                    <div class="carousel-item">
+                      <div class="card shadow ">
+                        <div class="card-body box-wrapper m-0 p-0">
+                          <div class="box-dua">
+                            <video autoplay loop muted playsinline>
+                                <source src="your-youtube-link" type="video/youtube">
+                                <source src="{% static 'crousirVideo/candidate.mp4' %}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                                <h6 class="mb-0">Someone Famous</h6>
+                                <a href="#" class="fs-6">@SameoneFamous69</a>
+                                <p>Teacher at <strong>Awy College</strong></p>
+                            </div>
+                        </div>                        
+                          <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-6-scaled.jpg');">
+                              <div class="box-skill p-3 g-0">
+                              <h4 class="mt-3">SKILL</h4>
+                              <div class="row">
+                                <div class="col-5 pb-0 mb-0">
+                                    <p>HTML</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>CSS</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>JS</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>PHOTOSHOP</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>ILLUSTRATOR</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              
+                              </div>
+                          </div>
+                        </div>
+                        <div class="card-footer card-f" >
+                        
+                          <ul class="d-flex justify-content-between social-icons gap-2 mb-0 small-text">
+                          <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success px-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                          <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                          <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                          <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                          <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                          </ul>
+                          <hr>
+                          <div class="d-flex justify-content-between gap-1">
+                            <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-1" href="#">View</a></span>
+                            <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-1" href="#">Add</a></span>
+                            <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="card">
-                      <div class="img-wrapper"><img src="https://codingyaar.com/wp-content/uploads/headshot-6-scaled.jpg" class="d-block w-100" alt="..."> </div>
-                      <div class="card-body">
-                        <h5 class="card-title">Card title 6</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up
-                          the bulk of the
-                          card's content.</p>
+                    <div class="carousel-item">
+                      <div class="card shadow ">
+                        <div class="card-body box-wrapper m-0 p-0">
+                          <div class="box-dua" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-6-scaled.jpg');">
+                          
+                              <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                              <h6 class="mb-0">Someone Famous</h6>
+                              <a href="#" class="fs-6">@SameoneFamous69</a>
+                              <p>Teacher at <strong>Awy College</strong></p>
+                              </div>
+                          </div>
+                          <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-6-scaled.jpg');">
+                              <div class="box-skill p-3 g-0">
+                              <h4 class="mt-3">SKILL</h4>
+                              <div class="row">
+                                <div class="col-5 pb-0 mb-0">
+                                    <p>HTML</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>CSS</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>JS</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>PHOTOSHOP</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-5">
+                                    <p>ILLUSTRATOR</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                    </div>
+                                </div>
+                              </div>
+                              
+                              </div>
+                          </div>
+                        </div>
+                        <div class="card-footer" >
+                        
+                          <ul class="social-icons gap-2 mb-0 small-text">
+                          <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success px-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                          <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                          <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                          <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                          <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                          </ul>
+                          <hr>
+                          <div class="d-flex justify-content-between mb-1">
+                            <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-1" href="#">View</a></span>
+                            <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-1" href="#">Add</a></span>
+                            <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -153,13 +611,569 @@
             </div>
           </div>
         </div>
-      </div>
       
-      <p class="mt-2 text-center text-secondary">* Refresh on changing size</p>
-      
-      <p class="mt-2 text-center">Get a step-by-step written explanation here: <a href="https://codingyaar.com/bootstrap-5-testimonial-slider" target="_blank">Bootstrap 5 Testimonial Carousel Slider</a> </p>
-      
-      <p class="mt-2 text-center">Get a step-by-step video explanation here: <a href="https://youtu.be/caNQ-1RTef4" target="_blank">Bootstrap 5 Testimonial Carousel Slider</a> </p>
- </div>
+  </div>
+</div>
+  <div class="container" id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                
+                <!-- ALL CANDIDATE-->
+                <div class="py-3">
+                    <style>
+                    * {
+                      margin: 0;
+                      padding: 0;
+                    }
+                    a {
+                      text-decoration: none;
+                      color: #222;
+                    }
+                    
+                    img {
+                      /*   width: auto;
+                      height: 100%; */
+                      object-fit: fill;
+                    }
+                    
+                    ul {
+                      padding: 0;
+                      list-style: none;
+                    }
+                    
+                    .box-wrapper {
+                      position: relative;
+                      width: 100%;
+                      height: 300px;
+                      overflow: hidden;
+                      transition: 0.5s;
+                    }
+                    
+                    .box-wrapper:hover .box-satu {
+                      transform: translate(0px, -300px);
+                      transition: 0.5s 0.2s ease-in-out;
+                    }
+                    
+                    .box-wrapper:hover .box-dua {
+                      transform: translate(0px, -300px);
+                      transition: 0.5s ease-in-out;
+                    }
+                    
+                    .box-wrapper:hover .box-tiga {
+                      transform: translate(0px, -300px);
+                      transition: 0.5s 0.2s ease-in-out;
+                    }
+                    
+                    .box-wrapper:hover .box-empat {
+                      transform: translate(0px, -300px);
+                      transition: 0.5s ease-in-out;
+                    }
+                    
+                    .box-wrapper:hover .box-lima {
+                      transform: translate(0px, -300px);
+                      transition: 0.5s 0.2s ease-in-out;
+                    }
+                    
+                    .box-wrapper:hover .box-enam {
+                      transform: translate(0px, -300px);
+                      transition: 0.5s ease-in-out;
+                    }
+                    .box-dua {
+                      width: 100%;
+                      height: 300px;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      background-size: cover;
+                      transform: translate(0px, 0px);
+                      transition: 0.5s 0.2s ease-in-out;
+                    }
+                    
+                    .box-nama {
+                      width: 100%;
+                      background: linear-gradient(#123f8b), url();
+                      color: #faf9f7;
+                    }
+                    
+                    .box-skill {
+                      width: 90%;
+                      height: 90%;
+                      border-radius: 5px;
+                      background-color: rgba(27, 27, 27, 0.7);
+                      color: #faf9f7;
+                    }
+                    
+                    .footer-social-icons {
+                      width: 100%;
+                      display: block;
+                      margin: 0 auto;
+                    }
+                    .social-icon {
+                      color: #fff;  
+                    }
+                    ul.social-icons {
+                      margin-top: 10px;
+                    }
+                    .social-icons li {
+                      vertical-align: top;
+                      display: inline;
+                      height: 50px;
+                    }
+                    .social-icons a {
+                      color: #fff;
+                      text-decoration: none;
+                    }
+                    .fa-facebook {
+                      padding: 10px 14px;
+                      -o-transition: 0.5s;
+                      -ms-transition: 0.5s;
+                      -moz-transition: 0.5s;
+                      -webkit-transition: 0.5s;
+                      transition: 0.5s;
+                      background-color: #322f30;
+                    }
+                    .fa-facebook:hover {
+                      background-color: #3d5b99;
+                    }
+                    .fa-twitter {
+                      padding: 10px 12px;
+                      -o-transition: 0.5s;
+                      -ms-transition: 0.5s;
+                      -moz-transition: 0.5s;
+                      -webkit-transition: 0.5s;
+                      transition: 0.5s;
+                      background-color: #322f30;
+                    }
+                    .fa-twitter:hover {
+                      background-color: #00aced;
+                    }
+                    
+                    .fa-linkedin {
+                      padding: 10px 14px;
+                      -o-transition: 0.5s;
+                      -ms-transition: 0.5s;
+                      -moz-transition: 0.5s;
+                      -webkit-transition: 0.5s;
+                      transition: 0.5s;
+                      background-color: #322f30;
+                    }
+                    .fa-linkedin:hover {
+                      background-color: #0073a4;
+                    }
+                    .fa-github {
+                      padding: 10px 14px;
+                      -o-transition: 0.5s;
+                      -ms-transition: 0.5s;
+                      -moz-transition: 0.5s;
+                      -webkit-transition: 0.5s;
+                      transition: 0.5s;
+                      background-color: #322f30;
+                    }
+                    .fa-github:hover {
+                      background-color: #5a32a3;
+                    }
+                    .small-text{
+                      font-size: 12px;
+                    }
+                    
+                    
+                    </style>   
+                    <div class="container-fields">
+                      
+                      <div class="row g-1">
+                        <div class="col-lg-3 col-md-6 col-sm-6 ">
+                            <div class="card shadow ">
+                              <div class="card-body box-wrapper m-0 p-0">
+                              <div class="box-dua" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-2-scaled.jpg');">
+                                    <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                                    <h4 class="mb-0">Someone Famous</h4>
+                                    <a href="#" class="fs-6">@SameoneFamous69</a>
+                                    <p>Teacher at <strong>Awy College</strong></p>
+                                    </div>
+                              </div>
+                              <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-2-scaled.jpg');">
+                                  <div class="box-skill p-3 g-0">
+                                    <h4 class="mt-3">SKILL</h4>
+                                    <div class="row">
+                                    <div class="col-5 pb-0 mb-0">
+                                        <p>HTML</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>CSS</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>JS</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>PHOTOSHOP</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>ILLUSTRATOR</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                              
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="card-footer" >
+                            
+                                  <ul class="social-icons clearfix   mb-0 small-text  ">
+                                    <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success p-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                                    <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary p-1">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                                    <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning p-1">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                                    <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info p-1"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                                    <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info p-2">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                                  </ul>
+                                  <hr>
+                                  <div class="d-flex justify-content-between mb-1">
+                    
+                                    <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-2" href="#">View</a></span>
+                                    <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-2" href="#">Add</a></span>
+                                    <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 ">
+                            <div class="card  shadow ">
+                              <div class="card-body box-wrapper m-0 p-0">
+                              <div class="box-dua" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-3-scaled.jpg');">
+                                  <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                                    <h6 class="mb-0">Someone Famous</h6>
+                                    <a href="#" class="fs-6">@SameoneFamous69</a>
+                                    <p>Teacher at <strong>Awy College</strong></p>
+                                  </div>
+                              </div>
+                              <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-3-scaled.jpg');"> 
+                                  <div class="box-skill p-3 g-0">
+                                    <h5 class="mt-3">SKILL</h5>
+                                    <div class="row">
+                                    <div class="col-5 pb-0 mb-0">
+                                        <p>HTML</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>CSS</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>JS</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>PHOTOSHOP</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>ILLUSTRATOR</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                  
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="card-footer" >
+                            
+                                  <ul class="social-icons gap-2 mb-0 small-text">
+                                  <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success px-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                                  <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                                  <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                                  <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                                  <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                                  </ul>
+                                  <hr>
+                                  <div class="d-flex justify-content-between mb-1">
+                    
+                                    <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-2" href="#">View</a></span>
+                                    <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-2" href="#">Add</a></span>
+                                    <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 ">
+                            <div class="card  shadow ">
+                              <div class="card-body box-wrapper m-0 p-0">
+                              <div class="box-dua" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-1-scaled.jpg');">
+                                  
+                                  <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                                    <h6 class="mb-0">Someone Famous</h6>
+                                    <p>Teacher at <strong>Awy College</strong></p>
+                                  </div>
+                              </div>
+                              <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-1-scaled.jpg');">
+                                  <div class="box-skill p-3 g-0">
+                                    <h4 class="mt-3">SKILL</h4>
+                                    <div class="row">
+                                    <div class="col-5 pb-0 mb-0">
+                                        <p>HTML</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>CSS</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>JS</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>PHOTOSHOP</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-5">
+                                        <p>ILLUSTRATOR</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                  
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="card-footer" >
+                            
+                              <ul class="social-icons gap-2 mb-0 small-text">
+                                  <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success px-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                                  <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                                  <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                                  <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                                  <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                              </ul>
+                              <hr>
+                              <div class="d-flex justify-content-between mb-1">
+                    
+                                <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-2" href="#">View</a></span>
+                                <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-2" href="#">Add</a></span>
+                                <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                              </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 ">
+                            <div class="card shadow ">
+                              <div class="card-body box-wrapper m-0 p-0">
+                                <div class="box-dua" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-6-scaled.jpg');">
+                                
+                                    <div class="box-nama position-absolute bottom-0 start-0 px-3 pt-2 pb-0">
+                                    <h6 class="mb-0">Someone Famous</h6>
+                                    <a href="#" class="fs-6">@SameoneFamous69</a>
+                                    <p>Teacher at <strong>Awy College</strong></p>
+                                    </div>
+                                </div>
+                                <div class="box-dua d-flex justify-content-center align-items-center" style="background-image: url('https://codingyaar.com/wp-content/uploads/headshot-6-scaled.jpg');">
+                                    <div class="box-skill p-3 g-0">
+                                    <h4 class="mt-3">SKILL</h4>
+                                    <div class="row">
+                                      <div class="col-5 pb-0 mb-0">
+                                          <p>HTML</p>
+                                      </div>
+                                      <div class="col-7">
+                                          <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-label="Default striped example" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"> 95%</div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-5">
+                                          <p>CSS</p>
+                                      </div>
+                                      <div class="col-7">
+                                          <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-label="Default striped example" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-5">
+                                          <p>JS</p>
+                                      </div>
+                                      <div class="col-7">
+                                          <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-5">
+                                          <p>PHOTOSHOP</p>
+                                      </div>
+                                      <div class="col-7">
+                                          <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-label="Default striped example" style="width: 80%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-5">
+                                          <p>ILLUSTRATOR</p>
+                                      </div>
+                                      <div class="col-7">
+                                          <div class="progress">
+                                          <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-label="Default striped example" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="card-footer" >
+                              
+                                <ul class="social-icons gap-2 mb-0 small-text">
+                                <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-success px-1">Background-check-clear<i class="bi bi-shield-check fs-5"></i></span></a></li>
+                                <li><a href="" class="social-icon"><span class="badge rounded-pill text-bg-primary">Skill test 98%<i class="bi bi-award fs-5"></i></span></a></li>
+                                <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-warning">Ratting 5 <i class="bi bi-stars fs-5"></i></i></span></a></li>
+                                <li><a href="" class="social-icon"> <span class="badge rounded-pill text-bg-info"> 5 year expriance <i class="bi bi-reception-4 fs-6"></i></a></li>
+                                <li><a href="" class="social-icon">  <span class="badge rounded-pill text-bg-info">more <i class="bi bi-info-circle-fill fs-6"></i></span></a></li>
+                                </ul>
+                                <hr>
+                                <div class="d-flex justify-content-between mb-1">
+                                  <span class="float-start btn btn-sm btn-outline-light"><a class="text-decoration-none px-1" href="#">View</a></span>
+                                  <span class="float-center btn btn-sm btn-outline-light p-1"><a class="text-decoration-none px-1" href="#">Add</a></span>
+                                  <span class="float-end btn btn-sm btn-light p-1"><i class="far fa-heart text-danger" style="cursor: pointer"></i></span>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                </div>
+                
+                  <!-- ALL CANDIDATE End -->
+            </div>
+            <!-- End of Main Content -->
+
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary">Log out</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

@@ -11,71 +11,77 @@
 {% block title %}Home{% endblock %}
 {% block main %}
 
-<div class="mt-5 mb-3 mx-1">
-    {% if messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+<div class="mt-5 mb-2 ">    
+        <section class="py-2 container-fields d-none d-sm-block">
+            <div class="row py-lg-5 " style="background-image: url('/static/images/banner-new.jpg'); height: 100vh; width: 100%; ">
+            <div class="col-sm-6 col-lg-6 col-md-12 mx-auto" >
+            </div>
+            <div class="col-sm-6 col-lg-6 col-md-12 mx-auto px-5 ">
+                <p><h5  class="banner-title px-5 text-white"><span class="un-span fs-3">UN</span><span>VEILING THE </span><span class="un-span fs-1">UN</span>STAFFING</span></h5></p>
+                
+                <p class="lead text-body-secondary px-5 text-white fs-6">
+                    We're redefining how people work and get hired and how employers recruit and 
+                    hire staff around the world. Contingent workforce made simply, empowering both
+                    the employer and job seeker with transparency and visibility to achieve a 90% 
+                    faster hire armed with all the tools necessary to hire the right fit and get the 
+                    right job. 
+                </p>
+                {% if not user.is_authenticated %}
+                    <div class="gap-2 d-sm-flex justify-content-sm-center py-2">
+                        <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
+                    </div>
+                {% endif %}
+            </div>
             
-                <ul class="messages">
-                    {% for message in messages %}
-                    <div class="m-3 fontColor-orang" id="submitSuccessMessage">
-                        <div class="text-center fontColor-orang mb-3">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-                            <a class="btn-booster-orang text-decoration-none" href="{% url 'account_signup' %}">Signup</a>
-                        </div>
-                    </div>
-                        
-                    {% endfor %}
-                </ul>
+            </div>
+        </section>
+        
+        <section class="py-2 container-fields d-black d-sm-none">
+            <div class="position-relative ">
+                <img src="{% static 'images/banner-new.jpg' %}" width="100%" height="60%" class="img-fluid" alt="banner">
             
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-     {% endif %}
-        <!-- Masthead-->
-        <header>
-            <section class="masthead" >
-                <div class="container">
-                <div class="row gap-2">
-                    
-                    <div class="col-lg-8 offset-lg-0 ">
-                        <div class="text-light py-5">
-                            <h4>“ Elevating Hiring Experiences through Video Introduction ”</h4>
-                            <p>
-                                Jobdogg tackles resume overload for employers who face unqualified, 
-                                untested & unvetted candidates and lack of identity & visibility for job seekers.
-                                Employers now have access to already vetted candidates with video Introduction while 
-                                jobseekers have real identity and visibility and are not just words on a resume.
-                            </p>
-                        </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="row py-lg-5 d-black d-sm-none" style="background-color: #000000; color: #ffff">
+            
+            <div class="col-sm-12 col-lg-6 col-md-12 mx-auto py-4">
+                <p><h5  class="banner-title px-5 "><span class="un-span fs-1">UN</span><span>VEILING  THE  </span><span class="un-span">UN</span>STAFFING</span></h5></p>
+                
+                <p class="lead text-body-secondary text-white px-5  fs-6">
+                    We're redefining how people work and get hired and how employers recruit and 
+                    hire staff around the world. Contingent workforce made simply, empowering both
+                    the employer and job seeker with transparency and visibility to achieve a 90% 
+                    faster hire armed with all the tools necessary to hire the right fit and get the 
+                    right job. 
+                </p>
+                {% if not user.is_authenticated %}
+                    <div class="mx-auto px-5">
+                        <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
                     </div>
-                    <div class="col-lg-4 offset-lg-1 ">  
-                    </div>
-                </div>
-                </div>
-            </section>
-        </header>
-          <!-- Page heading-->
-          
+                {% endif %}
+            </div>
+            
+            </div>
+        </section>
+       
         <section>
             
             <div class="card border-0">
-            <img class="d-block mx-auto m-2" src="{% static 'images/pngwing.com.png' %}" alt="" width="100" height="100">
+            {% comment %} <img class="d-block mx-auto m-2" src="{% static 'images/pngwing.com.png' %}" alt="" width="100" height="100"> {% endcomment %}
             <div class="card-body text-center">
-                <h4 class="card-title fontColor-orang">STAFFING MADE SIMPLY</h4>
-                <p class="lead card-text">Redefining how people work and get hired.</p>
-                <small>Business focus Technology-fueled innovation Delivery excellence</small>
-                {% if not user.is_authenticated %}
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center py-2">
-                    <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
-                </div>
-                {% endif %}
+                <h3 class="card-title fontColor-orang text-bolder">STAFFING MADE SIMPLY</h3>
+                <h6 class="lead card-text">Redefining how people work and get hired.</h6>
+                <p>Business focus Technology-fueled innovation Delivery excellence</p>
+                
             </div>
             </div>
         </section>
        
         <!--Future.-->
         <section>
-            <div class="container px-3 py-5 my-2" id="featured-3">
+            <div class="container-fields px-5 py-5 my-2 mx-1 " id="featured-3" >
                 <h3 class="pb-2 border-bottom">Features</h3>
                 <div class="row g-4 py-3 row-cols-1 row-cols-lg-3">
                 <div class="feature col">
@@ -180,7 +186,7 @@
                 </div>
                 <div class="row g-0 my-5">
                     <h3 class="fontColor-orang text-center pb-3">JOBS ON DEMAND</h3>
-                    <div class="col-lg-6 order-lg-2 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('/static/images/pngwing.com (9).png')">
+                    <div class="col-lg-6 order-lg-2 px-3 py-2 text-white showcase-img image-shadow" style="background-image: url('/static/images/jobdoggpng.com (4).png')">
                         {% if not user.is_authenticated %}
                             <div class="d-grid gap-2 d-md-flex justify-content-sm-center py-3 text-center">
                                 <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
@@ -206,9 +212,38 @@
                         
                     </div>
                 </div>
-                <div class="row g-0">
-                    <div class="col-lg-6 text-white showcase-img image-shadow" style="background-image: url('/static/images/pngwing.com66.png')"></div>
-                    <div class="col-lg-6 my-auto showcase-text shadow">
+             
+            </div>
+        </section>
+        {% comment %} Multiple Job Offers {% endcomment %}
+        <section>
+            <div class="container-fields  mx-2 my-3 py-3 px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class=" py-3 px-5">
+                            <img class="img-fluid rounded" width="100%" height="100%" src="{% static 'images/pngwing.com (55).png'%}" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text shadow">
+                        <div class="p-5">
+                            <h3 class="fontColor-orang">Multiple Job Offers</h3>
+                            <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly platform that simplifies job searching and application processes. Get ready to receive multiple job offers and stay updated with personalized job alerts.</p>
+                            <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly platform that simplifies job searching and application processes. Get ready to receive multiple job offers and stay updated with personalized job alerts.</p>
+                            {% if not user.is_authenticated %}
+                                <div class="d-grid gap-2 d-md-flex justify-content-sm-center py-3 text-center">
+                                    <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% comment %} User-friendly Interface {% endcomment %}
+        <section>
+            <div class="container-fields  mx-2 my-3 py-3 px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6 my-auto showcase-text shadow p-3 ">
                         <h3 class="fontColor-orang">User-friendly Interface</h3>
                         <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly interface that simplifies the job search and application process. Receive multiple job offers and stay up-to-date with personalized job alerts. Thank Jobdogg.com for your job search success!</p>
                         {% if not user.is_authenticated %}
@@ -217,17 +252,10 @@
                             </div>
                         {% endif %}
                     </div>
-                </div>
-                <div class="row g-0">
-                    <div class="col-lg-6 order-lg-2 text-white showcase-img image-shadow" style="background-image: url('/static/images/pngwing.com (33).png'); "></div>
-                    <div class="col-lg-6 order-lg-1 my-auto showcase-text shadow">
-                        <h3 class="fontColor-orang">Multiple Job Offers</h3>
-                        <p class="lead mb-0">Jobdogg.com aims to help you land your dream job with our user-friendly platform that simplifies job searching and application processes. Get ready to receive multiple job offers and stay updated with personalized job alerts.</p>
-                        {% if not user.is_authenticated %}
-                            <div class="d-grid gap-2 d-md-flex justify-content-sm-center py-3 text-center">
-                                <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>
-                            </div>
-                        {% endif %}
+                    <div class="col-lg-6">
+                        <div class=" py-3 px-5">
+                            <img class="img-fluid rounded" width="100%" height="100%" src="{% static '/images/pngwing.com66.png'%}" alt="...">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -371,103 +399,203 @@
         </section>
         
         <!--HIRE IN MINUTES 3-jobdogg --> 
-        <section>    
-            <div class="container mt-4">
-                <h4 class="py-2 text-center fontColor-orang">HIRE IN MINUTES </h4>
-                <h6 class="mb-4 text-center fontColor-orang">Step by Step Process:</h6>
-                <div class="row ">
-                    <div class="col-md-6 bg-light">
-                        <ul class="list-group gap-2  ">
-                            <li class="list-group-item ">
-                                <div class="d-flex fontColor-orang "><h3 class=""><i class="bi bi-1-square-fill mx-1"></i></h3><h6> THE PERKS </h6></div>
-                                <ul class="list-group shadow">
-                                    <li class="list-group-item ">Payroll Options</li>
-                                    <li class="list-group-item ">Ride Sharing</li>
-                                </ul>
-                            </li>
-                            <li class="list-group-item ">
-                                <div class="d-flex pb-3 fontColor-orang "><h3 class=""><i class="bi bi-2-square-fill mx-1"></i></h3><h6> LIVE INTERVIEWS </h6></div>
-                                <ul class="list-group shadow">
-                                    <li class="list-group-item ">Schedule Anytime</li>
-                                    <li class="list-group-item ">On-line live interviews</li>
-                                </ul>
-                            </li>
-                            <li class="list-group-item ">
-                                <div class="d-flex pb-3 fontColor-orang"><h3 class=""><i class="bi bi-3-square-fill mx-1"></i></h3><h6> STAR RATED </h6></div>
-                                <ul class="list-group shadow">
-                                    <li class="list-group-item ">Employer Rated</li>
-                                    <li class="list-group-item ">Peer Rated</li>
-                                    <li class="list-group-item ">Community Rated</li>
-                                </ul>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex pb-3 fontColor-orang"><h3 class=""><i class="bi bi-4-square-fill mx-1"></i></h3><h6> VIDEO RESUME </h6></div>
-                                <ul class="list-group shadow">
-                                    <li class="list-group-item ">Unscripted</li>
-                                    <li class="list-group-item ">Transparent</li>
-                                    <li class="list-group-item ">360° View</li>
-                                    <li class="list-group-item ">Real Identity/Visibilty</li>
-                                </ul>
-                            </li>
-                        </ul>
+      
+        <section _ngcontent-c4="" class="fill-your-staff-assistant">
+            <div _ngcontent-c4="" class="container-fluid">
+                <div _ngcontent-c4="" class="row">
+                    <div _ngcontent-c4="" class="col-lg-12">
+                        <h2 _ngcontent-c4="" class="title text-center">HIRE IN MINUTES</h2>
                     </div>
-                    <div class="col-md-6 bg-light ">
-                        <ul class="list-group gap-2">
-                        <li class="list-group-item ">
-                                <div class="d-flex pb-3 fontColor-orang"><h3 class=""><i class="bi bi-5-square-fill mx-1"></i></h3><h6> SKILL-SET TESTED</h6></div>
-                                <ul class="list-group shadow">
-                                    <li class="list-group-item ">3000+ Skill Assessments</li>
-                                    <li class="list-group-item ">7000+ Skill-Sets</li>
-                                    <li class="list-group-item "> Build Your Own and Create for specific needs</li>
-                                </ul>
-                        </li>
-                        <li class="list-group-item ">
-                            <div class="d-flex pb-3 fontColor-orang "><h3 class=""><i class="bi bi-6-square-fill mx-1"></i></h3><h6> BUSINESS ANALYTICS</h6></div>
-                            <ul class="list-group shadow">
-                                <li class="list-group-item ">Run/Print Reports</li>
-                                <li class="list-group-item ">HR Legal/Compliance</li>
-                                <li class="list-group-item ">Calculate</li>
-                                <li class="list-group-item ">Timecards</li>
-        
-                            </ul>
-                        </li>
-                        <li class="list-group-item ">
-                            <div class="d-flex pb-3 fontColor-orang"><h3 class=""><i class="bi bi-7-square-fill mx-1"></i></h3><h6> COMPLETED BACKGOUNDS</h6></div>
-                            <ul class="list-group shadow">
-                                <li class="list-group-item ">7 Year history</li>
-                                <li class="list-group-item ">Education</li>
-                                <li class="list-group-item ">Certifications</li>
-                                <li class="list-group-item ">Employment</li>
-                                <li class="list-group-item ">References</li>
-                                <li class="list-group-item ">E-Verified</li>
-                            </ul>
-                        </li>
+                </div>
+                <div _ngcontent-c4="" class="row">
+                    <div _ngcontent-c4="" class="col-lg-12 ">
                         
-                        </ul>
+                        <div _ngcontent-c4="" class="stage-wrap">
+                            <div _ngcontent-c4="" class="wrap">
+                                <div _ngcontent-c4="" class="stages rights one">
+                                    <div _ngcontent-c4="" class="icon"></div>
+                                    <span _ngcontent-c4="" class="stairs"></span>
+                                    <span _ngcontent-c4="" class="branch"></span>
+                                    <div _ngcontent-c4="" class="contents">
+                                        
+                                        <h4 _ngcontent-c4="" class="title">Completed Backgounds</h4>
+                                        <p _ngcontent-c4="">7 Year history</p>
+                                        <p _ngcontent-c4="">Education</p>
+                                        <p _ngcontent-c4="">Certifications</p>
+                                        <p _ngcontent-c4="">Employment</p>
+                                        <p _ngcontent-c4="">References</p>
+                                        <p _ngcontent-c4="">E-Verified</p>
+                                    </div>
+                                </div>
+                                <div _ngcontent-c4="" class="mobile contents">
+                                    
+                                    <h4 _ngcontent-c4="" class="title">Completed Backgounds</h4>
+                                    <p _ngcontent-c4="">7 Year history</p>
+                                    <p _ngcontent-c4="">Education</p>
+                                    <p _ngcontent-c4="">Certifications</p>
+                                    <p _ngcontent-c4="">Employment</p>
+                                    <p _ngcontent-c4="">References</p>
+                                    <p _ngcontent-c4="">E-Verified</p>
+                                </div>
+                            </div>
+        
+                            <div _ngcontent-c4="" class="wrap">
+        
+                                <div _ngcontent-c4="" class="stages left two">
+                                    <span _ngcontent-c4="" class="branch"></span>
+                                    <div _ngcontent-c4="" class="icon"></div>
+                                    <span _ngcontent-c4="" class="stairs"></span>
+                                    <div _ngcontent-c4="" class="contents">
+                                        
+                                        <h4 _ngcontent-c4="" class="title">Business Analytics</h4>
+                                        <p _ngcontent-c4="">Run/Print Reports</p>
+                                        <p _ngcontent-c4="">HR Legal/Compliance </p>
+                                        <p _ngcontent-c4="">Timecards </p>
+                                        <p _ngcontent-c4="">Calculate </p>
+                                    </div>
+                                </div>
+                                <div _ngcontent-c4="" class="mobile contents">
+                                    
+                                    <h4 _ngcontent-c4="" class="title">Business Analytics</h4>
+                                    <p _ngcontent-c4="">Run/Print Reports</p>
+                                    <p _ngcontent-c4="">HR Legal/Compliance </p>
+                                    <p _ngcontent-c4="">Timecards </p>
+                                    <p _ngcontent-c4="">Calculate </p>
+                                </div>
+                            </div>
+        
+                            <div _ngcontent-c4="" class="wrap">
+        
+                                <div _ngcontent-c4="" class="stages rights three">
+                                    <span _ngcontent-c4="" class="branch"></span>
+                                    <div _ngcontent-c4="" class="icon"></div>
+                                    <span _ngcontent-c4="" class="stairs"></span>
+                                    <div _ngcontent-c4="" class="contents">
+                                        
+                                        <h4 _ngcontent-c4="" class="title">Skill-Set Tested</h4>
+                                        <p _ngcontent-c4="">3000+ Skill Assessments</p>
+                                        <p _ngcontent-c4="">7000+ Skill-Sets</p>
+                                        <p _ngcontent-c4="">Build Your Own and Create for specific needs</p>
+                                    </div>
+                                </div>
+                                <div _ngcontent-c4="" class="mobile contents">
+                                    
+                                    <h4 _ngcontent-c4="" class="title">Skill-Set Tested</h4>
+                                    <p _ngcontent-c4="">3000+ Skill Assessments</p>
+                                    <p _ngcontent-c4="">7000+ Skill-Sets</p>
+                                    <p _ngcontent-c4="">Build Your Own and Create for specific needs</p>
+                                </div>
+                            </div>
+        
+                            <div _ngcontent-c4="" class="wrap">
+        
+                                <div _ngcontent-c4="" class="stages left four">
+                                    <span _ngcontent-c4="" class="branch"></span>
+                                    <div _ngcontent-c4="" class="icon"></div>
+                                    <span _ngcontent-c4="" class="stairs"></span>
+                                    <div _ngcontent-c4="" class="contents">
+                                        
+                                        <h4 _ngcontent-c4="" class="title">Video Resume</h4>
+                                        <p _ngcontent-c4="">Unscripted</p>
+                                        <p _ngcontent-c4="">Transparent </p>
+                                        <p _ngcontent-c4="">360° View</p>
+                                        <p _ngcontent-c4="">Real Identity/Visibilty</p>
+                                    </div>
+                                </div>
+                                <div _ngcontent-c4="" class="mobile contents">
+                                    
+                                    <h4 _ngcontent-c4="" class="title">Video Resume</h4>
+                                    <p _ngcontent-c4="">Unscripted</p>
+                                    <p _ngcontent-c4="">Transparent </p>
+                                    <p _ngcontent-c4="">360° View</p>
+                                    <p _ngcontent-c4="">Real Identity/Visibilty</p>
+                                </div>
+                            </div>
+        
+                            <div _ngcontent-c4="" class="wrap">
+        
+                                <div _ngcontent-c4="" class="stages rights five">
+                                    <span _ngcontent-c4="" class="branch"></span>
+                                    <div _ngcontent-c4="" class="icon"></div>
+                                    <span _ngcontent-c4="" class="stairs"></span>
+                                    <div _ngcontent-c4="" class="contents">
+                                        
+                                        <h4 _ngcontent-c4="" class="title">Star Rated</h4>
+                                        <p _ngcontent-c4="">Employer Rated </p>
+                                        <p _ngcontent-c4="">Peer Rated</p>
+                                        <p _ngcontent-c4="">Community Rated </p>
+        
+                                    </div>
+                                </div>
+                                <div _ngcontent-c4="" class="mobile contents">
+                                    
+                                    <h4 _ngcontent-c4="" class="title">Star Rated</h4>
+                                    <p _ngcontent-c4="">Employer Rated </p>
+                                    <p _ngcontent-c4="">Peer Rated</p>
+                                    <p _ngcontent-c4="">Community Rated </p>
+        
+                                </div>
+                            </div>
+        
+                            <div _ngcontent-c4="" class="wrap">
+        
+                                <div _ngcontent-c4="" class="stages left six">
+                                    <span _ngcontent-c4="" class="branch"></span>
+                                    <div _ngcontent-c4="" class="icon"></div>
+                                    <span _ngcontent-c4="" class="stairs"></span>
+                                    <div _ngcontent-c4="" class="contents">
+                                        
+                                        <h4 _ngcontent-c4="" class="title">Live Interviews</h4>
+                                        <p _ngcontent-c4=""> Schedule Anytime</p>
+                                        <p _ngcontent-c4="">On-line live interviews</p>
+        
+                                    </div>
+                                </div>
+                                <div _ngcontent-c4="" class="mobile contents">
+                                    
+                                    <h4 _ngcontent-c4="" class="title">Live Interviews</h4>
+                                    <p _ngcontent-c4=""> Schedule Anytime</p>
+                                    <p _ngcontent-c4="">On-line live interviews</p>
+        
+                                </div>
+                            </div>
+        
+                            <div _ngcontent-c4="" class="wrap">
+        
+                                <div _ngcontent-c4="" class="stages rights seven">
+                                    <span _ngcontent-c4="" class="branch"></span>
+                                    <div _ngcontent-c4="" class="icon"></div>
+                                    <span _ngcontent-c4="" class="stairs"></span>
+                                    <div _ngcontent-c4="" class="contents">
+                                        
+                                        <h4 _ngcontent-c4="" class="title">The Perks</h4>
+                                        <p _ngcontent-c4="">Payroll Options</p>
+                                        <p _ngcontent-c4="">Ride Sharing</p>
+                                    </div>
+                                </div>
+                                <div _ngcontent-c4="" class="mobile contents">
+                                    
+                                    <h4 _ngcontent-c4="" class="title">The Perks</h4>
+                                    <p _ngcontent-c4="">Payroll Options</p>
+                                    <p _ngcontent-c4="">Ride Sharing</p>
+                                </div>
+                            </div>
+        
+        
+        
+                        </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </section>
-
         <!--logo-hero-->
         <hr>
-        <section>
-            <div class="position-relative ">
-                <img src="{% static 'images/banner-new2.png' %}" width="100%" height="60%" class="img-fluid" alt="banner">
-               <!--<div class="px-auto text-center" >
-                    <h4 class="text-body-emphasis fontColor-orang py-1">What you wating for ?</h4>
-                    <p class="lead fontColor-blue pb-2">
-                        Get connected to our Sales Team for hourly, daily and salaried assignments.
-                    </p>
-                    </div>-->
-            </div>
-        </section>
-        <hr>
+       
         <section id="scroll">
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" width="70%" height="70%" src="{% static 'images/3-jobdogg.png'%}" alt="..."></div>
+                        <div class="p-5"><img class="img-fluid rounded-circle" width="70%" height="70%" src="{% static 'images/SalesTeam2.png'%}" alt="..."></div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
@@ -485,7 +613,7 @@
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6">
                         <div class=" py-3 px-5">
-                            <img class="img-fluid rounded-circle" width="70%" height="70%" src="{% static 'images/4-jobdogg.png'%}" alt="...">
+                            <img class="img-fluid rounded-circle" width="70%" height="70%" src="{% static 'images/SalesTeam.png'%}" alt="...">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -515,44 +643,7 @@
               </div>
         </section>
         
-        <!--<section class="mb-5">
-            <div class="container my-5">
-                <div class="m-auto" style="width: 400px; height:100px;">
-                    <h3 class="fontColor-orang text-center py-4">FEATURED CLIENTS</h3>
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{% static 'images/els.png'%}" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{% static 'images/captial-ontap-logo.png'%}" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{% static 'images/Christian_Academy.png'%}" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item active">
-                                <img src="{% static 'images/job-corps.png'%}" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{% static 'images/Lyft_icon.png'%}" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{% static 'images/png-transparent-uber.png'%}" class="d-block w-100" alt="...">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-           </div>
-        </section>-->
-        <!--carousel Code -->
+     
         <hr class="fontColor-orang">
         <section> 
             <div class="album py-3 bg-light">
@@ -595,6 +686,25 @@
             </div>
         </section>
          <hr>
+        {% comment %} {% if messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <div class="m-3 fontColor-orang" id="submitSuccessMessage">
+                            <div class="text-center fontColor-orang mb-3">
+                                <div class="fw-bolder">Form submission successful!</div>
+                                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                                <a class="btn-booster-orang text-decoration-none" href="{% url 'account_signup' %}">Signup</a>
+                            </div>
+                        </div>
+                            
+                        {% endfor %}
+                    </ul>
+                
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %} {% endcomment %}
         <!-- Call to Action-->
         <section class="text-white my-2 mx-auto" id="signup">
            <div class="container">
@@ -602,9 +712,9 @@
                     <div class="col-xl-10 fontColor-blue">
                         <h5 class="mb-4 fontColor-blue">{% if not user.is_authenticated %}
                             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center py-2">
-                                Ready to get started? or <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a> 
+                                Ready to get started?  <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a> 
                             </div>
-                            {% endif %}subscribe  for our newslette</h5>
+                            {% endif %} or subscribe  for our newslette</h5>
                             <form method="POST" action="{% url 'pages:homepage' %}" class="form-subscribe" id="contactFormFooter">
                                     {% csrf_token %} 
                                 <div class="row">
@@ -625,7 +735,7 @@
             </div> 
         </section>
 
-        <section class="call-to-action-this text-white text-start my-2 " >
+        {% comment %} <section class="call-to-action-this text-white text-start my-2 " >
             <div class="container position-relative">
                 <div class="row justify-content-between">
                     <div class="col-lg-12">
@@ -633,54 +743,7 @@
                     </div>               
                 </div>
             </div>
-        </section>
-        <!--social midea-->
-        <section>
-            <div class="container text-center ">
-                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-1">
-                <div class="col">
-                    <a href="#" class="text-decoration-none">
-                        <div class="p-3 border-0 bg-wight p-auto d-flex gap-1"> 
-                        <h4 class=" fontColor-blue"><i class="bi bi-linkedin fontColor-blue"></i></h4>
-                        <h6 class="fontColor-blue text-bolder">Jobdogg</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="#" class="text-decoration-none">
-                        <div class="p-3 border-0 bg-wight p-auto d-flex gap-1">
-                        <h4 class="d-flex gap-1 fontColor-blue"><i class="bi bi-instagram fontColor-blue"></i></h4>
-                        <h6 class="fontColor-blue text-bolder">Jobdogg</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="#" class="text-decoration-none">
-                        <div class="p-3 border-0 bg-wight p-auto d-flex gap-1">
-                            <h4 class="d-flex gap-1 fontColor-blue"><i class="bi bi-facebook fontColor-blue"></i></h4>
-                            <h6 class="fontColor-blue text-bolder">Jobdogg</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="#" class="text-decoration-none">
-                        <div class="p-3 border-0 bg-wight p-auto d-flex gap-1">
-                            <h4 class="d-flex gap-1 fontColor-blue"><i class="bi bi-tiktok fontColor-blue"></i></h4>
-                            <h6 class="fontColor-blue text-bolder">Jobdogg</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="#" class="text-decoration-none">
-                        <div class="p-3 border-0 bg-wight p-auto d-flex gap-1">
-                            <h4 class="d-flex gap-1 fontColor-blue"><i class="bi bi-twitter fontColor-blue"></i></h4>
-                            <h6 class="fontColor-blue text-bolder">Jobdogg</h6>
-                        </div>
-                    </a>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </section>
+        </section> {% endcomment %}
+      
 </div>
 {% endblock %}

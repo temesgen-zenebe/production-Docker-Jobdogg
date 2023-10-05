@@ -10,108 +10,81 @@
 
 <!-- Include Bootstrap CSS and JavaScript -->
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
- integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <!-- Include Font Awesome -->
 <script src="https://kit.fontawesome.com/e4ab79068e.js" crossorigin="anonymous" ></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+{% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> {% endcomment %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <!-- Include your custom CSS files -->
 <link rel="stylesheet" href="{% static 'css/sb-admin-2.min.css' %}">
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <link rel="stylesheet" href="{% static 'css/account.css' %}">
 <link rel="stylesheet" href="{% static 'css/slider.css' %}">
+
 {% block javascript %}{% endblock %}
 {% block stylesheet %}{% endblock %}
 <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
-<title>{% block title %}{% endblock %} | jobDoogg</title>
+<title>{% block title %}{% endblock %} | jobdogg</title>
 <!-- Add your other <link> tags and metadata as needed -->
-
-
-{% comment %} <!-- ADD FONT AWESOME FROM https://fontawesome.com/ -->
-<script src="https://kit.fontawesome.com/e4ab79068e.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/bootstrap-icons.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- ADD BOOTSTRAP CSS FROM https://getbootstrap.com/ -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdlivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
- <!-- Include the jQuery library -->
-
-<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/5.2.0/css/bootstrap.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css'>
-<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-<!-- Font Awesome CSS -->
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
-<link rel="stylesheet" href="{% static 'css/account.css' %}">
-<link rel="stylesheet" href="{% static 'css/slider.css' %}">
-{% block javascript %}{% endblock %}
-{% block stylesheet %}{% endblock %}
-
-<link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
-<title>{% block title %}{% endblock %} | jobDoogg</title> {% endcomment %}
 </head>
 <body>
 <header>
-  <nav class="fixed-top navbar  navbar-expand-lg  navbar-dark navHeader " aria-label="Dark offcanvas navbar">
-    <div class="container-fluid">
-     <a class="navbar-brand px-2" href="{% url 'pages:homepage' %}">
-        <img src="{% static 'images/job-dogg-logo-white-transparent.png' %}" alt="Logo" class="img-fluid" width="120" height="30"/>
-      </a>
-      <!-- <div class="jobdogg-logo"><a href=""><h1></h1></a></div>-->
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark"aria-controls="offcanvasNavbarDark">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-   
-      <div class="offcanvas offcanvas-end text-bg-dark1" tabindex="-1" id="offcanvasNavbarDark" aria-labelledby="offcanvasNavbarDarkLabel">
-        <div class="offcanvas-header">
-          <h6 class="offcanvas-title" id="offcanvasNavbarDarkLabel">
-            <a class="nav-link " href="#" >
-              Jobdogg
-            </a>
-          </h6>
-          <button
-            type="button"
-            class="btn-close btn-close-white"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
+    <nav class="fixed-top navbar navbar-expand-lg "  style="background-color: #000000; " >
+      <div class="container-fluid mx-2 px-2">
+        <div class="px-2 py-2 mb-2 mb-md-0" style="color: #F0953C;">
+        
+          <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none px-3" style="color: #F0953C; border-color: #f0953c; border-1">
+            <img src="{% static 'images/logo12.png' %}" alt="Logo" class="img-fluid" width="105" height="30"/>
+          </a>
         </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-5">
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="color: #F0953C;">
+          <span class="fs-3" style="color: #F0953C;"><i class="bi bi-list"></i></span>
+        </button> 
+
+        <div class="collapse navbar-collapse px-5" id="navbarNav">
+          <ul class="navbar-nav main-nav justify-content-end flex-grow-1 pe-5">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'pages:homepage' %}">Home</a>
+              <a class="nav-link active " aria-current="page" href="{% url 'pages:homepage' %}">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link " aria-current="page" href="{% url 'pages:blogPage' %}">Blog</a>
             </li>
-            {% if user.is_authenticated and user|is_employer %}
+            
+            {% if not user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'pages:employerHomePage' %}">GetStaff</a>
+              <a class="nav-link" href="{% url 'pages:gurDoggsView' %}">Our Doggs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'pages:gurDoggsView' %}">OurDoggs</a>
+              <a class="nav-link" href="{% url 'account_login' %}">Get Staff</a>
             </li>
-           
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_login' %}">Get Work</a>
+            </li>
+            {% else %}
+              {% if user.is_authenticated and user|is_employer %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'pages:employerHomePage' %}">GetStaff</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'pages:gurDoggsView' %}">Our Doggs</a>
+              </li>
+              {% endif %}
+              {% if user.is_authenticated and user|is_employee %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'pages:employeeHomePage' %}">Get Work</a>
+              </li>
+              {% endif %}
+          
             {% endif %}
-            {% if user.is_authenticated and user|is_employee %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'pages:employeeHomePage' %}">Get Work</a>
-            </li>
-            {% endif %}
+            
+          </ul>
+          <ul class="navbar-nav main-nav justify-content-end flex-grow-1 pe-5">
+            
+            
             {% if not user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account_login' %}">Login</a>
@@ -121,67 +94,146 @@
             </li>
 
             {% else %}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ user.username }} |
-                {% if user.avatar and not form.avatar.errors %}
-                  <img src="{{ user.avatar.url }}" alt="Avatar" width="30" height="30" class="rounded-circle"/>
-                {% else %}
-                  <i class="bi bi-person-circle"  width="30" height="30" class="rounded-circle"></i>
-                {% endif %} 
-              </a>
-              <ul class="dropdown-menu">
-                {% if user.is_authenticated and user|is_employee %}
-                <li ><a class="dropdown-item" href="{% url 'employee:dashboard_information_employee' %}">Dashboard</a></li>
-                <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                <li><a class="dropdown-item" href="{% url 'employee:profile_building_progress' %}">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Messages</a></li>
-                <li><a class="dropdown-item" href="#">Viewed</a></li>
-                {% endif %}
-                <!--employer-->
-                {% if user.is_authenticated and user|is_employer %}
-                <li><a class="dropdown-item" href="{% url 'employer:dashboard_information_employer' %}">Dashboard</a></li>
-                <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                <li><a class="dropdown-item" href="{% url 'employer:company-profile-list' %}">Profile</a></li>
-                <li><a class="dropdown-item" href="{% url 'employer:job_requisition_list' %}">PostJob</a></li>
-                <li><a class="dropdown-item" href="#">Get emplyee</a></li>
-                <li><a class="dropdown-item" href="#">InCartCandidate</a></li>
-                <li><a class="dropdown-item" href="#">Calculate</a></li>
-                <li><a class="dropdown-item" href="#">Payment</a></li>
-                <li><a class="dropdown-item" href="#">Timecard</a></li>
-                <li><a class="dropdown-item" href="#">Viewed</a></li>
-                <li><a class="dropdown-item" href="#">Messages</a></li>
-                {% endif %}
-              
-                {% if user.is_authenticated and user|is_admin %}
-                <li><a class="dropdown-item" href="{% url 'supperAdmin:dashboard_information_supperAdmin' %}">Admin Dashboard</a></li>
-                <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                <li><a class="dropdown-item" href="">Manage Policy</a></li>
-                <li><a class="dropdown-item" href="/admin/">Manage Database </a></li>
-                {% endif %}
-                <li>
-                  <hr class="dropdown-divider" />
+            
+              <li class="nav-item mt-2 px-2"> Hello |</li>
+              <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                    <span class="px-2 d-none d-lg-inline ">{{ user.last_name }}</span>
+                    {% if user.avatar and not form.avatar.errors %}
+                    <img class="img-profile rounded" src="{{ user.avatar.url }}"  width="25" height="25">
+                    {% else %}
+                    <i class="bi bi-person-circle"  width="25" height="25" class="rounded-circle"></i>
+                    {% endif %} 
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                    {% if user.is_authenticated and user|is_employee %}
+                    <li ><a class="dropdown-item" href="{% url 'employee:dashboard_information_employee' %}">Dashboard</a></li> 
+                    <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
+                    <li><a class="dropdown-item" href="{% url 'employer:profile_building_progress_controller' %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Messages</a></li>
+                    <li><a class="dropdown-item" href="#">Viewed</a></li>
+                    {% endif %}
+                    <!--employer-->
+                    {% if user.is_authenticated and user|is_employer %}
+                    <li><a class="dropdown-item" href="{% url 'employer:dashboard_information_employer' %}">Dashboard</a></li>
+                    <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
+                    <li><a class="dropdown-item" href="{% url 'employer:company-profile-list' %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'employer:job_requisition_list' %}">PostJob</a></li>
+                    <li><a class="dropdown-item" href="#">Get emplyee</a></li>
+                    <li><a class="dropdown-item" href="#">InCartCandidate</a></li>
+                    <li><a class="dropdown-item" href="#">Calculate</a></li>
+                    <li><a class="dropdown-item" href="#">Payment</a></li>
+                    <li><a class="dropdown-item" href="#">Timecard</a></li>
+                    <li><a class="dropdown-item" href="#">Viewed</a></li>
+                    <li><a class="dropdown-item" href="#">Messages</a></li>
+                    {% endif %}
+                  
+                    {% if user.is_authenticated and user|is_admin %}
+                    <li><a class="dropdown-item" href="{% url 'supperAdmin:dashboard_information_supperAdmin' %}">Admin Dashboard</a></li>
+                    <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
+                    <li><a class="dropdown-item" href="">Manage Policy</a></li>
+                    <li><a class="dropdown-item" href="/admin/">Manage Database </a></li>
+                    {% endif %}
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                      <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm dropdown-item">Log out</button>
+                      </form>
+                    </li>
+                  </ul>
                 </li>
-                <li>
-                  <form method="post" action="{% url 'account_logout' %}">
-                    {% csrf_token %}
-                    <button class="btn dropdown-item">Log out</button>
-                  </form>
-                </li>
-              </ul>
-            </li>
             {% endif %}
           </ul>
         </div>
-        
       </div>
-    </div>
-  </nav>
- 
+    </nav> 
+   
+    {% comment %} <nav class="navbar navbar-expand-lg  fixed-top " style="background-color: #333333;">
+      <div class="container-fluid my-2">
+        
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none px-3" style="color: #F0953C; border-color: #f0953c; border-1">
+          <img src="{% static 'images/logo12.png' %}" alt="Logo" class="img-fluid" width="110" height="32"/>
+        </a>
+      
+        <button
+          class="navbar-toggler mx-5"
+          style="color: #f0953c"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="" style="color: #f0953c"
+            ><i class="bi bi-list fs-3"></i
+          ></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul
+            class="
+              navbar-nav
+              main-nav
+              justify-content-end
+              flex-grow-1
+              px-3
+              pe-5
+            "
+          >
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                style="color: #f0953c"
+                href="#"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: #f0953c" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: #f0953c">Disabled</a>
+            </li>
+          </ul>
+          <ul
+            class="
+              navbar-nav
+              main-nav
+              justify-content-end
+              flex-grow-1
+              px-3
+              pe-5
+            "
+          >
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                style="color: #f0953c"
+                href="#"
+                >Login</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: #f0953c" href="#">signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color: #f0953c">Dashbord</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>  {% endcomment %}
+    
 </header>
-<main class="my-5 px-1 bg-jobdogg py-1">
-    <!--
-  {% if messages %}
+<main class="my-4 bg-jobdogg py-1">
+  
+  {% comment %} {% if messages %}
     <ul>
       {% for message in messages %}
       <div class="alert message{{ message.tags }} alert-dismissible" role="alert">
@@ -193,8 +245,8 @@
         </div>
       {% endfor %}
     </ul>
-  {% endif %}-->
-  {% block main %}<h2>Welcome!</h2>{% endblock %}
+  {% endif %} {% endcomment %}
+  {% block main %}{% endblock %}
 </main>
 
 <footer class="py-2 py-md-2 mt-1 navFooter m-auto" style="width:100%" >
@@ -202,13 +254,18 @@
     <div class="row">
       <div class="col-lg-3 mb-3">
         <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="{% url 'pages:homepage' %}" aria-label="Bootstrap">
-          <img src="{% static 'images/job-dogg-logo-white-transparent.png' %}" alt="Logo" class="d-block me-1" width="130" height="50"/>
+          <img src="{% static 'images/footer-logo.png' %}" alt="Logo" class="d-block px-3" />
            <span class="fs-6 textFooter2">| JobDogg.com</span>
         </a>
         <ul class="list-unstyled small textFooter2 px-4">
           <li class="mb-2 small textFooter2">A Local & Global Employment Marketplace.</li>
           <li class="mb-2"><a class="textFooter4" href="https://goo.gl/maps/2FdiTcPHeiz8UgRv6"><i class="bi bi-geo-alt-fill px-1"></i>300 S 4th St, Las Vegas, NV 89101</a></li>
+          <li class="mb-2 small textFooter2">Get connected to our Sales Team</li>
+          <li class="mb-2 small textFooter2">for hourly, daily and salaried assignments.</li>
+          <li class="mb-2 small textFooter2">Need Staff Now?</li>
           <li class="mb-2"><a class="textFooter4" href="mailto:employeractivation@jobdogg.com"><i class="bi bi-envelope-at-fill px-1"></i>employeractivation@jobdogg.com</a></li>
+          <li class="mb-2 small textFooter2">Need Work Now?</li>
+          <li class="mb-2"><a class="textFooter4" href="mailto:employeeactivation@jobdogg.com"><i class="bi bi-envelope-at-fill px-1"></i>employeeactivation@jobdogg.com</a></li>
           <li class="mb-2"><a class="textFooter4" href="tel:702-415-3726"> <i class="bi bi-headset px-1"></i> 702-415-3726</a></li>
           
         </ul>
@@ -259,6 +316,54 @@
     <hr>
     
   </div>
+  <section>
+    <div class="container text-center ">
+        <div class="row row-cols-2 row-cols-lg-5 ">
+        <div class="col">
+            <a href="#" class="text-decoration-none">
+                <div class="p-3 border-0 bg-wight d-flex "> 
+                <h4 class="fontColor-blue"><i class="bi bi-linkedin text-light"></i></h4>
+              
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="text-decoration-none">
+                <div class="p-3 border-0 bg-wight d-flex ">
+                <h4 class="fontColor-blue"><i class="bi bi-instagram text-light"></i></h4>
+                
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="text-decoration-none">
+                <div class="p-3 border-0 bg-wight d-flex ">
+                    <h4 class="fontColor-blue"><i class="bi bi-facebook text-light"></i></h4>
+                    
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="text-decoration-none">
+                <div class="p-3 border-0 bg-wight d-flex ">
+                    <h4 class="fontColor-blue"><i class="bi bi-tiktok text-light"></i></h4>
+                 
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#" class="text-decoration-none">
+                <div class="p-3 border-0 bg-wight  d-flex ">
+                    <h4 class="fontColor-blue"><i class="bi bi-twitter text-light"></i></h4>
+                    
+                </div>
+            </a>
+            </div>
+        </div>
+        </div>
+    </div>
+  </section>
+  <hr>
   <div class="d-flex flex-column flex-sm-row justify-content-center px-2 ">
     <div class="text-center textFooter5 mr-2"><small>Copyright &copy; {% now 'Y' %}, JobDogg.com All Right Reserved.</small></div>
     <div class="text-center textFooter5 mr-2 "><small><a href="/" class=" px-1 textFooter2 ">Terms&Conditions</a></small>|<small><a href="/" class="text-white-50 px-1">Privacy Policy </a></small></div>
@@ -267,19 +372,13 @@
 
 <!-- Include Owl Carousel -->
 {% comment %} <script src="path/to/owl.carousel.min.js"></script> {% endcomment %}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
-integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
-integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" 
-integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+crossorigin="anonymous"></script>
+
 <!-- Include jQuery (choose one source) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Include Bootstrap JavaScript (make sure Popper.js is loaded before Bootstrap) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
-<!-- Include Popper.js -->
 <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 <!-- Include other custom scripts -->
 <script src="{% static 'js/vendor/jquery-easing/jquery.easing.min.js' %}"></script>

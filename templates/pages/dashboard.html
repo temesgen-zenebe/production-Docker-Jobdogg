@@ -23,7 +23,7 @@
 {% endblock %} {% endcomment %}
 
 {% block main %}
-<div class="mt-4 py-2" >
+<div class="my-5 mt-4 py-2" >
     {% if user.is_authenticated and user|is_admin %}
         {% block admin %}{% endblock admin %}
     {% endif %}
