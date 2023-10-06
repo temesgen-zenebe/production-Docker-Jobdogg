@@ -9,7 +9,7 @@ import stripe
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Debug mode
-DEBUG = True
+DEBUG = False
 
 # Allowed Hosts
 ALLOWED_HOSTS = [
@@ -64,6 +64,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -178,16 +179,16 @@ USE_I18N = True
 USE_TZ = True
 # # Local Static File Settings
 
-# STATIC_URL = 'static/'
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-# Static and Media File Settings
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/'),
-]
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Add the following line at the end of the settings.py file
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ALLOWED_VIDEO_EXTENSIONS = ['.mp4', '.mpg', '.avi', '.mov', '.mkv', '.wmv', '.ogv', '.webm', '.flv']
 MAX_VIDEO_DURATION = 60  # 1 minutes in seconds
@@ -404,6 +405,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # # Static files (CSS, JavaScript, Images)
 # # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# STATIC_URL = 'static/'
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# Static and Media File Settings
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static/'),
+# ]
+# ...
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # STATIC_URL = 'static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')

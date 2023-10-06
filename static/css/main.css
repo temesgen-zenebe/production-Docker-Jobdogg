@@ -35,7 +35,7 @@ a{
   color: #fff;
   padding-top: 60px;
   padding-bottom: 20px;
-  background: url(/static/images/footer-bg.453940f….png) center bottom no-repeat #212739;
+  background: url(/static/images/footer-bg.png) center bottom no-repeat #3c3c3d;
 }
 
 #navbarNav a{
@@ -178,7 +178,7 @@ header.masthead1 {
 section.signup{
     position: relative;
     background-color: #303031;
-    background: url(../assets/img/bg-masthead.jpg) no-repeat center center;
+    background: url() no-repeat center center;
     background-size: cover;
     padding-top: 3rem;
     padding-bottom: 1rem;
@@ -186,7 +186,7 @@ section.signup{
 .image-shadow{
   position: relative;
   background-color: #bbb8b6;
-  background: url(../assets/img/bg-masthead.jpg) no-repeat center center;
+  background: url() no-repeat center center;
   background-size: cover;
   margin: 10px auto;
  
