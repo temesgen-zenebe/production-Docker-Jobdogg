@@ -9,7 +9,7 @@ import stripe
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Debug mode
-DEBUG = False
+DEBUG = True
 
 # Allowed Hosts
 ALLOWED_HOSTS = [

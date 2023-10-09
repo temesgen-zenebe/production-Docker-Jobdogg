@@ -13,7 +13,7 @@
 
 <div class="mt-5 mb-2 ">    
         <section class="py-2 container-fields d-none d-sm-block">
-            <div class="row py-lg-5 " style="background-image: url('/static/images/banner-new.jpg'); height: 100vh; width: 100%; ">
+            <div class="row py-lg-5 " style="background-image: url('{% static 'images/banner-new.jpg' %}'); height: 100vh; width: 100%; ">
             <div class="col-sm-6 col-lg-6 col-md-12 mx-auto" >
             </div>
             <div class="col-sm-6 col-lg-6 col-md-12 mx-auto px-5 ">
@@ -35,7 +35,7 @@
             
             </div>
         </section>
-        
+
         <section class="py-2 container-fields d-black d-sm-none">
             <div class="position-relative ">
                 <img src="{% static 'images/banner-new.jpg' %}" width="100%" height="60%" class="img-fluid" alt="banner">
@@ -159,7 +159,7 @@
             <div class="container-fluid p-0">
                 <div class="row g-0 mb-2">
                     <h3 class="fontColor-blue text-center py-4">HIRE ON DEMAND</h3>
-                    <div class="col-lg-6 order-lg-1 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('/static/images/emplyeerLogo.jpg')">
+                    <div class="col-lg-6 order-lg-1 px-1 py-1 text-white showcase-img image-shadow" style="background-image: url('{% static 'images/emplyeerLogo.jpg' %}');">
                         {% if not user.is_authenticated %}
                             <div class="d-grid gap-2 d-md-flex justify-content-sm-center py-2 text-center">
                                 <a href="{% url 'account_login' %}" class="btn-booster-white text-decoration-none">Go Start</a>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="row g-0 my-5">
                     <h3 class="fontColor-orang text-center pb-3">JOBS ON DEMAND</h3>
-                    <div class="col-lg-6 order-lg-2 px-3 py-2 text-white showcase-img image-shadow" style="background-image: url('/static/images/jobdoggpng.com (4).png')">
+                    <div class="col-lg-6 order-lg-2 px-3 py-2 text-white showcase-img image-shadow"  style="background-image: url('{% static 'images/jobdoggpng.com (4).png' %}');">
                         {% if not user.is_authenticated %}
                             <div class="d-grid gap-2 d-md-flex justify-content-sm-center py-3 text-center">
                                 <a href="{% url 'account_login' %}" class="btn-booster-orang text-decoration-none">Go Start</a>

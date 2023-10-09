@@ -249,29 +249,30 @@
   {% block main %}{% endblock %}
 </main>
 
-<footer class="py-2 py-md-2 mt-1 navFooter m-auto" style="width:100%" >
-  <div class="py-4 py-md-5 px-3 px-md-3">
+<footer class="py-2 py-md-2 mt-1 navFooter m-auto" style="background: url('{% static 'images/footer-bg.png' %}') center bottom no-repeat #29292b;" >
+  <div class="py-2 py-md-5 px-3 px-md-3">  
     <div class="row">
-      <div class="col-lg-3 mb-3">
+      <div class="col-lg-3 mb-2">
         <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" 
           href="{% url 'pages:homepage' %}" aria-label="Bootstrap">
           <img src="{% static 'images/footer-logo.png' %}" alt="Logo" class="d-block px-3" />
            <span class="fs-6 textFooter2">| JobDogg.com</span>
         </a>
-        <ul class="list-unstyled small textFooter2 px-4">
-          <li class="mb-2  textFooter2">A Local & Global Employment Marketplace.</li>
-          <li class="mb-2"><a class="textFooter4" href="https://goo.gl/maps/2FdiTcPHeiz8UgRv6"><i class="bi bi-geo-alt-fill px-1"></i>300 S 4th St, Las Vegas, NV 89101</a></li>
+        <ul class="list-unstyled small textFooter2 px-2">
+          
+          <li class="mb-2  textFooter2">International Innovation Center @Vegas,</li>
+          <li class="mb-2"><a class="textFooter4" href="https://goo.gl/maps/2FdiTcPHeiz8UgRv6"><i class="bi bi-geo-alt-fill px-1"></i> 300 S 4th St #180, Las Vegas, NV 89101</a></li>
           <li class="mb-2  textFooter2">Get connected to our Sales Team</li>
           <li class="mb-2  textFooter2">for hourly, daily and salaried assignments.</li>
           <li class="mb-2  textFooter2">Need Staff Now?</li>
           <li class="mb-2"><a class="textFooter4" href="mailto:employeractivation@jobdogg.com"><i class="bi bi-envelope-at-fill px-1"></i>employeractivation@jobdogg.com</a></li>
           <li class="mb-2  textFooter2">Need Work Now?</li>
           <li class="mb-2"><a class="textFooter4" href="mailto:employeeactivation@jobdogg.com"><i class="bi bi-envelope-at-fill px-1"></i>employeeactivation@jobdogg.com</a></li>
-          <li class="mb-2"><a class="textFooter4" href="tel:702-415-3726"> <i class="bi bi-headset px-1"></i> 702-415-3726</a></li>
+          <li class="mb-1"><a class="textFooter4" href="tel:702-415-3726"> <i class="bi bi-headset px-1"></i>(702) 205-8399</a></li>
           
         </ul>
       </div>
-      <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+      <div class="col-6 col-lg-2 offset-lg-1 mb-2">
         <h6 class="textFooter2">JobDogg</h6>
         <ul class="list-unstyled px-3">
           <li class="mb-2"><a class="textFooter4" href="{% url 'pages:homepage' %}">Home</a></li>
@@ -282,7 +283,7 @@
           <li class="mb-2"><a class="textFooter4" href="#">Executive Team</a></li>
         </ul>
       </div>
-      <div class="col-6 col-lg-2  mb-3">
+      <div class="col-6 col-lg-2  mb-2">
         <h6 class="textFooter2">Dog Pound</h6>
         <ul class="list-unstyled">
           <li class="mb-2"><a class="textFooter4" href="{% url 'pages:getStaffView' %}">Get Staff</a></li>
@@ -291,7 +292,7 @@
           
         </ul>
       </div>
-      <div class="col-6 col-lg-2  mb-3">
+      <div class="col-6 col-lg-2  mb-2">
         <h6 class="textFooter2">For Employee</h6>
         <ul class="list-unstyled px-3">
           <li class="mb-2"><a class="textFooter4" href="/">Signup</a></li>
@@ -303,7 +304,7 @@
           <li class="mb-2"><a class="textFooter4" href="/">FAQ</a></li>
         </ul>
       </div>
-      <div class="col-6 col-lg-2  mb-3">
+      <div class="col-6 col-lg-2  mb-2">
         <h6 class="textFooter2">For Employer</h6>
         <ul class="list-unstyled px-3">
           <li class="mb-2"><a class="textFooter4" href="/">How it woks</a></li>
@@ -312,58 +313,34 @@
           <li class="mb-2"><a class="textFooter4" href="#">Terms & Policy</a></li>
           <li class="mb-2"><a class="textFooter4" href="#">FAQ</a></li>
         </ul>
+
       </div>
-    </div>
-    <hr>
-    
+      <div class="col-6 col-lg-1 ">
+        <ul class="social-media-container">
+          <li class="social-media blog">
+            <i class="bi bi-facebook text-light"></i>
+            <a href="https://www.facebook.com/Jobdogg-111013073941981" target="_blank">Facebook Follow me</a>
+          </li>
+          <li class="social-media pinterest">
+            <i class="bi bi-twitter text-primary"></i>
+            <a href="https://twitter.com/job_dogg" target="_blank" class="text-primary">Twitter Follow me </a>
+          </li>
+          <li class="social-media linkedin">
+            <i class="fab fa-linkedin-in"></i>
+            <a href="https://www.linkedin.com/company/jobdogg-com/" target="_blank">Linkedin  Connect on</a>
+          </li>
+          <li class="social-media instagram">
+            <i class="fab fa-instagram"></i>
+            <a href="https://instagram.com/jobdogg_?igshid=sti2vv1kjwd6" target="_blank">Instagram Follow me</a>
+          </li>
+          {% comment %} <li class="social-media github">
+            <i class="bi bi-tiktok text-light"></i>
+            <a href="https://github.com/liloo2040" target="_blank">tiktok Follow me</a>
+          </li> {% endcomment %}
+        </ul>
+      </div>
+    </div> 
   </div>
-  <section>
-    <div class="container text-center ">
-        <div class="row row-cols-2 row-cols-lg-5 ">
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="p-3 border-0 bg-wight d-flex "> 
-                <h4 class="fontColor-blue"><i class="bi bi-linkedin text-light"></i></h4>
-              
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="p-3 border-0 bg-wight d-flex ">
-                <h4 class="fontColor-blue"><i class="bi bi-instagram text-light"></i></h4>
-                
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="p-3 border-0 bg-wight d-flex ">
-                    <h4 class="fontColor-blue"><i class="bi bi-facebook text-light"></i></h4>
-                    
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="p-3 border-0 bg-wight d-flex ">
-                    <h4 class="fontColor-blue"><i class="bi bi-tiktok text-light"></i></h4>
-                 
-                </div>
-            </a>
-        </div>
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="p-3 border-0 bg-wight  d-flex ">
-                    <h4 class="fontColor-blue"><i class="bi bi-twitter text-light"></i></h4>
-                    
-                </div>
-            </a>
-            </div>
-        </div>
-        </div>
-    </div>
-  </section>
   <hr>
   <div class="d-flex flex-column flex-sm-row justify-content-center px-2 ">
     <div class="text-center textFooter5 mr-2"><small>Copyright &copy; {% now 'Y' %}, JobDogg.com All Right Reserved.</small></div>
