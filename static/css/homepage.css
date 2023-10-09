@@ -10859,7 +10859,7 @@ textarea.form-control-lg {
 .call-to-action {
   position: relative;
   background-color: #343a40;
-  background: url("") no-repeat center center;
+  /*background: url("") no-repeat center center;*/
   background-size: cover;
   padding-top: 7rem;
   padding-bottom: 7rem;
