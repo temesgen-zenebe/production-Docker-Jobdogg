@@ -187,29 +187,22 @@ section.signup{
 .image-shadow{
   position: relative;
   background-color: #bbb8b6;
-  background: url() no-repeat center center;
   background-size: cover;
-  margin: 10px auto;
- 
-}
-.call-to-action-this {
-  position: relative;
-  background-color: #e3e7eb;
-  background: url(/static/images/map1.png) no-repeat center center;
   background-size: cover;
   padding-top: 3rem;
   padding-bottom: 3rem;
-}
-.signup {
-  position: relative;
   height: 40vh;
   width: 100%;
+}
+
+.signup {
+  position: relative;
   border-radius: 2px;
   background-color: #061e36;
-  background: linear-gradient(#e06a00, #123f8b), url(/static/images/pngwing78.png);
+  /* background: linear-gradient(#e06a00, #123f8b), url(/static/images/pngwing78.png); */
   background-size: cover;
   background-position: center;
-}
+} 
 
 .signup-content {
   position: absolute;
@@ -230,18 +223,8 @@ section.signup{
 #featured-3{
   background-color: #f8edbefb;
 }
-.masthead {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    border-radius: 5px;
-    background-color: #f8f9fa;
-    background: url(/static/images/banner-new.jpg);
-    background-size: cover;
-    background-position: center;
-    margin: 5 auto;
-}
-.masthead_employer{
+
+/* .masthead_employer{
     position: relative;
     height: 60vh;
     width: 100%;
@@ -251,14 +234,13 @@ section.signup{
     background-size: cover;
     background-position: center;
     margin: 10 auto;
-}
+} */
 .training {
   position: relative;
   height: 36vh;
   width: 100%;
   border-radius: 5px;
-  background-color: #f8f9fa;
-  background: linear-gradient(#e06a00, rgba(0, 0, 0, 0.849)), url(/static/images/training.png);
+  background-color: #f8f9fa ;
   background-size: cover;
   background-position: center;
   margin: 15 auto;
@@ -299,8 +281,7 @@ section.signup{
 }
 
 section.on-demand{
-    background-image: url(/static/images/fill-needs.jpg);
-    min-height: 650px;
+    min-height: 400px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -431,24 +412,24 @@ section.on-demand{
 /**/
 /* @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css");
 @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap'); */
-body{
+/* body{
 	/* background: linear-gradient(to bottom, #7bb4c4, #008399) no-repeat; */
-	background-size: cover;
+	/* background-size: cover;
 	background-attachment: fixed;
 	max-height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
-	/* font-family: 'Nunito', sans-serif; */
-}
-h1{
+	align-items: center; */
+	/* font-family: 'Nunito', sans-serif; 
+} */
+/* h1{
 	color: #fff;
 	text-shadow: 4px 4px 10px #008399;
 	text-align: center;
 	text-transform: uppercase;
 	font-size: 25px;
-}
+} */
 .social-media{
 	align-items: center;
 	display: flex;
@@ -476,7 +457,7 @@ h1{
 	list-style-type: none;
 	padding: 0;
 	position: fixed;
-	left: calc(100% - 60px);
+	left: calc(100% - 35px);
 	transform: translateY(-50%);
 	min-width: 250px;
 }
