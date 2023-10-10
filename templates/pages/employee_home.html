@@ -27,12 +27,12 @@
   </ul>
   <div class="tab-content" id="pills-tabContent">
     <!--why jobdogg?-->
-    <div class="tab-pane fade show active" id="pills-HowTtWoks" role="tabpanel" aria-labelledby="pills-HowTtWoks-tab" tabindex="0">
-        <section class="text-center">
+    <div class="tab-pane fade show active " id="pills-HowTtWoks" role="tabpanel" aria-labelledby="pills-HowTtWoks-tab" tabindex="0" >
+        <section class="text-center" style="background: linear-gradient(#3f4d5a, rgba(22, 22, 22, 0.014)),  url('{% static 'images/fill-needs.jpg'%}') no-repeat ;">
             <div class="row py-lg-5 mb-5">
-              <div class="col-lg-7 col-md-7 mx-auto py-3">
+              <div class="col-lg-6 col-md-6 mx-auto py-3 ">
                 <h4 class="fw-light pb-2">Welcome to the Jobdogg Employee Portal</h4>
-                <p class="text-muted s3-font">
+                <p class="fs-white s3-font px-5">
                     Explore your potential with Jobdogg's empowering features: 'Real Identity & Visibility,'
                     diverse job assignments, flexible work via Everywhere Jobs app, and endless opportunities
                     from temporary to permanent positions, all with easy pay. Jobdogg is always free, 
@@ -47,7 +47,7 @@
             <hr class="fontColor-orang mx-3 ">
         </section>
 
-        <section class="on-demand mb-5">
+        {% comment %} <section class="on-demand mb-5">
             <div class="container mx-2">
                 <div class="row ">
                     <div class="col-lg-12">
@@ -108,7 +108,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> {% endcomment %}
         
         <section class="testimonials text-center bg-light my-5 pb-4">
             <div class="container mb-5 ">
@@ -335,20 +335,22 @@
         <!--JOBS ON DEMAND-->
         <section> 
           <div class="container py-5">
-            <div class="row g-0 my-5">
+            <div class="row g- my-5">
             <h3 class="fontColor-orang text-center pb-3">JOBS ON DEMAND</h3>
-            <div class="col-lg-6 order-lg-2 px-1 py-1 text-white image-shadow"  style="background-image: url('{% static 'images/pcom7.png'%}');">
-                
-            </div>
             <div class="col-lg-6 order-lg-1 px-1 py-1">
+              <ul class="list-group list-group-flush s2-font">
+                <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Real Identity &amp; Visibility.</li>
+                <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Job Assignments not just Job Matches.</li>
+                <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Work Anytime, Anywhere, Anyplace.</li>
+                <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Everywhere Jobs – Mobile Application.</li>
+                <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Work How, When &amp; Where you want to Work.</li>
+                <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Diversity &amp; Inclusion.</li>
+                <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Opportunities For All Skill-Sets,Every Industry,Every Environment.</li>
+              </ul>
+            </div>
+            <div class="col-lg-6 order-lg-1  py-1">
                 <ul class="list-group list-group-flush s2-font">
-                  <li class="list-group-item "><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Real Identity &amp; Visibility.</li>
-                  <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Job Assignments not just Job Matches.</li>
-                  <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Work Anytime, Anywhere, Anyplace.</li>
-                  <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Everywhere Jobs – Mobile Application.</li>
-                  <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Work How, When &amp; Where you want to Work.</li>
-                  <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Diversity &amp; Inclusion.</li>
-                  <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Opportunities For All Skill-Sets,Every Industry,Every Environment.</li>
+                  
                   <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Disabled &amp; 2nd Chance.</li>
                   <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Temporary,Temp-Perm,Permanent,Internships.</li>
                   <li class="list-group-item"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Convenient - Fast and Easy Pay Options.</li>
@@ -369,9 +371,9 @@
             <div class="container">
                 
                 <div class="card mb-3 m-auto shadow">
-                    <div class="accordion-button">
+                    {% comment %} <div class="accordion-button">
                       <img src="{% static 'images/jobdoggpng.com (10).png' %}" width="80%" height="300" class="card-img-top" alt="...">
-                    </div>
+                    </div> {% endcomment %}
                     <div class="card-body mx-3">
                         <div class="row">
                           <div class="col-12">
@@ -571,14 +573,231 @@
     </div>
     <!--Job Search-->
     <div class=" tab-pane fade " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-    job search 
+        
+      <header data-bs-theme="dark">
+      
+        <div class="navbar navbar-light bg-light shadow-sm">
+          <div class="container text-dark px-5">
+              <!-- Topbar Search -->
+              <form class="d-md-inline-block ">
+              <div class="input-group">
+                  <input type="text" class="form-control bg-light border-1 small" placeholder="Search..."
+                      aria-label="Search" aria-describedby="basic-addon2">
+                  <div class="btn-group gap-2">
+                      <button class="btn btn-jobdogg" type="button">
+                          <i class="fas fa-search fa-sm"></i>
+                      </button>
+                      <button class="btn collapsed btn-jobdogg" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="bi bi-sliders"></i>
+                      </button>
+                      <button type="button" class="btn btn-jobdogg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-sort-down-alt"></i>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item active" href="#" aria-current="page">Active</a></li>
+                        <li><a class="dropdown-item" href="#">new</a></li>
+                        <li><a class="dropdown-item" href="#">past 7 days</a></li>
+                        <li><a class="dropdown-item" href="#">las 15 days</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Asanding</a></li>
+                        <li><a class="dropdown-item" href="#">Disanding</a></li>
+                      </ul>
+                  </div>
+              </div>
+              </form>
+            
+          </div>
+        
+        </div>
+        <div class="container text-bg-dark collapse" id="navbarHeader" style="">
+          <div class="">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4>Filter BY</h4>
+                <p class="text-body-dark">catagory</p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4>Filter BY</h4>
+                <ul class="list-unstyled">
+                  <li><a href="#" class="text-dark">Salery</a></li>
+                  <li><a href="#" class="text-dark">lacation</a></li>
+                  <li><a href="#" class="text-dark">remote</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <div class="album py-5 bg-body-tertiary">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="my-5">
+            <nav aria-label="Page navigation example ">
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                  <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          </div>
+        
+        </div>
+      
+      </main>
     </div>
     
     <!--Trainings-->
     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
         <main>
 
-            <section class="py-3 text-center  training" style="background: linear-gradient(#495868, rgba(0, 0, 0, 0.849)), url('{% static 'images/training.png'%}');">
+            <section class="py-3 text-center  training" style="background: linear-gradient(#495868, rgba(0, 0, 0, 0.849)), url('{% static 'images/fill-needs.jpg'%}');">
               <div class="row py-lg-3">
                 <div class="col-lg-8 col-md-8 mx-auto py-3 px-3">
                   <h5 class="fw-light">Empower yourself</h5>
