@@ -10,7 +10,7 @@ body
   /*color: #858796;*/
   text-align: left;
   background-color: #fff;      
-        
+ 
 }
 a{ 
     text-decoration: none;
@@ -20,9 +20,9 @@ a{
   width: 100px;
   height: 50px;
   margin-top: 10px;
-  background: url(/static/images/jobdogg_logo.png) no-repeat left top;
+  background: url(/static/images/jobdogg_logo.png) no-repeat left top; 
   background-size: 89%;
-} */
+}  */
 .bg-jobdogg{
   background-color: #fff; /*company color*/ 
  
@@ -168,7 +168,7 @@ li.textFooter3{
 header.masthead1 {
     position: absolute;
     background-color: #123f8b;
-    background: url(/static/images/pngwing78.png) no-repeat center center;
+    /* background: url(/static/images/pngwing78.png) no-repeat center center; */
     background-size: cover;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -479,3 +479,6 @@ section.on-demand{
 .social-media.github{
 	background-color: #333;
 }
+
+
+

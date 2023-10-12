@@ -10,7 +10,7 @@ body
   /*color: #858796;*/
   text-align: left;
   background-color: #fff;      
- 
+ /* background: linear-gradient(#0a0a0afb, #598ee980), url('{% static 'images/footer-bg.png' %}') center bottom no-repeat #29292b; */
 }
 a{ 
     text-decoration: none;
@@ -137,7 +137,10 @@ li.textFooter3{
   color: #d4cddf;
   font-size: 12px;
 }
-
+.search-btn{
+  background: #e06a00;
+  color: #fff;
+}
 .fontColor{
   color: #faf8f7;
 }

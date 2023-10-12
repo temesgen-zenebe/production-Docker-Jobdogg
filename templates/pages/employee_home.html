@@ -178,7 +178,6 @@
         <section>    
             <div class="container mt-4">
                 <h4 class="py-2 text-center fontColor-orang">HIRE IN MINUTES </h4>
-                <h6 class="mb-4 text-center fontColor-orang">Step by Step Process:</h6>
                 <div class="continer ">
                     <div class="accordion" id="accordionExample">
                     <div class="row ">
@@ -576,53 +575,45 @@
         
       <header data-bs-theme="dark">
       
-        <div class="navbar navbar-light bg-light shadow-sm">
-          <div class="container text-dark px-5">
-              <!-- Topbar Search -->
-              <form class="d-md-inline-block ">
-              <div class="input-group">
-                  <input type="text" class="form-control bg-light border-1 small" placeholder="Search..."
-                      aria-label="Search" aria-describedby="basic-addon2">
-                  <div class="btn-group gap-2">
-                      <button class="btn btn-jobdogg" type="button">
-                          <i class="fas fa-search fa-sm"></i>
-                      </button>
-                      <button class="btn collapsed btn-jobdogg" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-sliders"></i>
-                      </button>
-                      <button type="button" class="btn btn-jobdogg dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-sort-down-alt"></i>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item active" href="#" aria-current="page">Active</a></li>
-                        <li><a class="dropdown-item" href="#">new</a></li>
-                        <li><a class="dropdown-item" href="#">past 7 days</a></li>
-                        <li><a class="dropdown-item" href="#">las 15 days</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Asanding</a></li>
-                        <li><a class="dropdown-item" href="#">Disanding</a></li>
-                      </ul>
-                  </div>
+        <div class="container bg-dark shadow-sm py-2">
+          <div class=" text-dark px-2">
+            <div class="d-flex justify-content-between gap-5">
+              <div class="input-group gap-1">
+                  <input type="text" class="form-control" placeholder="Job search..." aria-label="Recipient's username with two button addons">
+                  <button class="btn btn-jobdogg" type="button"><i class="bi bi-search"></i></button>
+                  <button data-bs-toggle="modal" data-bs-target="#ApplyFilterstaticBackdrop" class="btn btn-jobdogg " type="button"><i class="bi bi-sliders"></i></button>
+                  
               </div>
-              </form>
-            
+              <div class="">
+           
+              <button class="btn btn-jobdogg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-sort-down"></i></button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">new</a></li>
+                    <li><a class="dropdown-item" href="#">last 7 days.</a></li>
+                    <li><a class="dropdown-item" href="#">last 15 days.</a></li>
+                    <li><a class="dropdown-item" href="#">last 30 days.</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">asanding</a></li>
+                    <li><a class="dropdown-item" href="#">disanding</a></li>
+                  </ul>
           </div>
-        
+            
+            </div>   
+          </div>
         </div>
-        <div class="container text-bg-dark collapse" id="navbarHeader" style="">
-          <div class="">
-            <div class="row">
-              <div class="col-sm-8 col-md-7 py-4">
-                <h4>Filter BY</h4>
-                <p class="text-body-dark">catagory</p>
+        <!-- Apply Filter -->
+        <div class="modal fade" id="ApplyFilterstaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ApplyFilterstaticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-md modal-dialog-scrollable ">
+            <div class="modal-content">
+              <div class="modal-header bg-dark">
+                <h2 class="modal-title fs-5 text-light" id="ApplyFilterstaticBackdropLabel">Set Filtering Keys </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="col-sm-4 offset-md-1 py-4">
-                <h4>Filter BY</h4>
-                <ul class="list-unstyled">
-                  <li><a href="#" class="text-dark">Salery</a></li>
-                  <li><a href="#" class="text-dark">lacation</a></li>
-                  <li><a href="#" class="text-dark">remote</a></li>
-                </ul>
+              <div class="modal-body ">
+              it gos her
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-jobdogg">Apply Filter</button>
               </div>
             </div>
           </div>

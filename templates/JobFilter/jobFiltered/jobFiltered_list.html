@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 {% block title %}Apply Filters List{% endblock %}
 {% block dashboard_employee %}
-<div class="container">
+<div class="container" style="max-width: 80rem;">
 
   <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -27,7 +27,7 @@
                   <div class="row mb-4 pt-3 mx-1 gap-2" >
                     <div class="col-xl-12 col-lg-12">
                       <div class="card">
-                        <div class="d-flex card-header pb-2  mb-3font-weight-bold text-gray-800">
+                        <div class="d-flex card-header mb-3font-weight-bold text-gray-800">
                           <form method="get" action="{% url 'JobFilter:filtered-job-list' %}" class="form-inline mr-auto ml-md-3 my-2 my-md-0 mw-200 navbar-search">
                             <div class="input-group">
                               
@@ -36,11 +36,12 @@
                                     <button class="btn btn-sm btn-outline-Jobdogg" type="submit">
                                         <i class="fas fa-search fa-sm" aria-hidden="true"></i>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-outline-Jobdogg" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Advance Filter</button>
-                                </div>
+                                    <button type="button" class="btn btn-sm btn-outline-Jobdogg" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="bi bi-sliders"></i></button>
+                                    <a class="btn btn-sm btn-outline-Jobdogg" href="{% url 'JobFilter:filtered-job-list' %}">All</a>
+                                  </div>
                             </div>
                           </form>
-                          <a class="btn btn-sm btn-outline-Jobdogg" href="{% url 'JobFilter:filtered-job-list' %}">All</a>
+                         
                         </div>
                        
                       </div>
@@ -117,7 +118,7 @@
       </div>
   </div>
   <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-      <div class="my-3 p-2 bg-body rounded shadow border-left-JobdoggOrnge ">
+      <div class="my-3 mx-2 p-2 bg-body rounded shadow border-left-JobdoggOrnge ">
           <div class="d-flex justify-content-between border-bottom gap-3">
           <p class="m-2 p-2 font-weight-bold text-gray-600">Applayed History and status</p>
           <p class="m-2 p-2 font-weight-bold text-gray-600">Status</p>

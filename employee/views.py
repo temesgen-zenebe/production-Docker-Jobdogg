@@ -1526,6 +1526,9 @@ class VideoResumeListView(LoginRequiredMixin, ListView):
     template_name = 'employee/videoResume/video_resume_list.html'
     context_object_name = 'video_resumes'
     
+    def get_queryset(self):
+        return VideoResume.objects.filter(user=self.request.user)
+    
 class VideoResumeDetailView(LoginRequiredMixin, DetailView):
     model = VideoResume
     template_name = 'employee/videoResume/video_resume_detail.html'
@@ -1571,6 +1574,9 @@ class BackgroundCheckListView(LoginRequiredMixin,ListView):
     model = Background_Check
     template_name = 'employee/backgroundCheck/background_check_list.html'
     context_object_name = 'backgroundChecked'
+    
+    def get_queryset(self):
+        return Background_Check.objects.filter(user=self.request.user)
     
 class BackgroundCheckCreateView(LoginRequiredMixin, CreateView):
     model = Background_Check
@@ -1619,6 +1625,9 @@ class CheckByEmailListView(LoginRequiredMixin, ListView):
     model = CheckByEmail
     template_name = 'employee/PaymentPreferences/checkByEmail/check_by_email_list.html'
     context_object_name = 'checks'
+    
+    def get_queryset(self):
+        return CheckByEmail.objects.filter(user=self.request.user)
 
 class CheckByEmailDetailView(LoginRequiredMixin, DetailView):
     model = CheckByEmail
@@ -1671,6 +1680,9 @@ class EWalletListView(LoginRequiredMixin, ListView):
     template_name = 'employee/PaymentPreferences/eWallet/e_wallet_list.html'
     context_object_name = 'e_wallets'
     paginate_by = 10
+    
+    def get_queryset(self):
+        return EWallet.objects.filter(user=self.request.user)
 
 class EWalletDetailView(LoginRequiredMixin, DetailView):
     model = EWallet
@@ -1728,6 +1740,9 @@ class CardListView(LoginRequiredMixin, ListView):
     template_name = 'employee/PaymentPreferences/Card/card_list.html'
     context_object_name = 'cards'
     paginate_by = 10
+    
+    def get_queryset(self):
+        return Card.objects.filter(user=self.request.user)
 
 class CardDetailView(LoginRequiredMixin, DetailView):
     model = Card
@@ -1781,6 +1796,9 @@ class BankAccountListView(LoginRequiredMixin, ListView):
     template_name = 'employee/PaymentPreferences/bankAccount/bankAccount_list.html'
     context_object_name = 'bankAccounts'
     paginate_by = 10
+    
+    def get_queryset(self):
+        return BankAccount.objects.filter(user=self.request.user)
 
 class BankAccountDetailView(LoginRequiredMixin, DetailView):
     model = BankAccount
@@ -1834,6 +1852,9 @@ class RidePreferenceListView(LoginRequiredMixin, ListView):
     template_name = 'employee/ridePreference/ridePreference_list.html'
     context_object_name = 'ridePreference'
     paginate_by = 10
+    
+    def get_queryset(self):
+        return RidePreference.objects.filter(user=self.request.user)
 
 class RidePreferenceDetailView(LoginRequiredMixin, DetailView):
     model = RidePreference
@@ -1884,6 +1905,9 @@ class TaxDocumentSettingListView(LoginRequiredMixin, ListView):
     template_name = 'employee/TaxDocumentSetting/tax_document_setting_list.html'
     context_object_name = 'tax_document_settings'
     paginate_by = 10
+    
+    def get_queryset(self):
+        return TaxDocumentSetting.objects.filter(user=self.request.user)
 
 class TaxDocumentSettingDetailView(LoginRequiredMixin, DetailView):
     model = TaxDocumentSetting
