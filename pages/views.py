@@ -41,8 +41,11 @@ class AboutUsView(TemplateView):
         return super().get(request, args, kwargs)
     
 class ContactUsView(TemplateView):
-    template_name = 'pages/contact_us.html'
- 
+    template_name = 'pages/contact_us.html'  
+    
+class ExecutiveTeam(TemplateView):
+    template_name = 'pages/executive_team.html'
+
 class BlogView(TemplateView):
     template_name = 'pages/blog.html'
     

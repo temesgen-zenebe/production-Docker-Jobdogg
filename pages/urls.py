@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import SubscriberListView, SubscriberCreateView, SubscriberUpdateView, SubscriberDeleteView
-from .views import (AboutUsView, HomePageView ,ContactUsView, BlogView, OurDoggsView, GetStaffView, GetWorkView)
+from .views import (AboutUsView, HomePageView ,ContactUsView, ExecutiveTeam, BlogView, OurDoggsView, GetStaffView, GetWorkView)
 from . import views
 
 app_name = 'pages' 
@@ -14,6 +14,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('about-us/', AboutUsView.as_view(), name='about-us'),
     path('contact-us/', ContactUsView.as_view(), name='contact-us'),
+    path('executive-team/', ExecutiveTeam.as_view(), name='executive-team'),
     path('blog/', BlogView.as_view(), name='blogPage'),
     path('Our-Dogs/', OurDoggsView.as_view(), name='gurDoggsView'),
     path('get-Staff/', GetStaffView.as_view(), name='getStaffView'),
