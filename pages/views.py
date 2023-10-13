@@ -46,6 +46,11 @@ class ContactUsView(TemplateView):
 class ExecutiveTeam(TemplateView):
     template_name = 'pages/executive_team.html'
 
+class HowItWoksForEmployee(TemplateView):
+    template_name = 'pages/HowItWoks-ForEmployee.html'
+class HowItWoksForEmployer(TemplateView):
+    template_name = 'pages/HowItWoks-ForEmployer.html'   
+    
 class BlogView(TemplateView):
     template_name = 'pages/blog.html'
     

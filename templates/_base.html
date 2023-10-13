@@ -56,7 +56,7 @@
             
             {% if not user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'pages:gurDoggsView' %}">Our Doggs</a>
+              <a class="nav-link" href="{% url 'pages:ourDoggsView' %}">Our Doggs</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'account_login' %}">Get Staff</a>
@@ -70,7 +70,7 @@
                 <a class="nav-link" href="{% url 'pages:employerHomePage' %}">GetStaff</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'pages:gurDoggsView' %}">Our Doggs</a>
+                <a class="nav-link" href="{% url 'pages:ourDoggsView' %}">Our Doggs</a>
               </li>
               {% endif %}
               {% if user.is_authenticated and user|is_employee %}
@@ -208,28 +208,62 @@
       <div class="col-6 col-lg-2  mb-2">
         <h6 class="textFooter2">Dog Pound</h6>
         <ul class="list-unstyled">
-          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:getStaffView' %}">Get Staff</a></li>
-          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:getWorkView' %}">Get work</a></li>
-          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:gurDoggsView' %}">Our Doggs</a></li>
-          
+          {% if not user.is_authenticated %}
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Get Staff</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Get work</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'pages:ourDoggsView' %}">Our Doggs</a></li>
+          {% else %}
+            {% if user.is_authenticated and user|is_employer %}
+            <li class="mb-2"><a class="textFooter4" href="{% url 'pages:employerHomePage' %}">GetStaff</a></li>
+            <li class="mb-2"><a class="textFooter4" href="{% url 'pages:ourDoggsView' %}">Our Doggs</a></li>
+            {% endif %}
+            {% if user.is_authenticated and user|is_employee %}
+            <li class="mb-2"><a class="textFooter4" href="{% url 'pages:employeeHomePage' %}">Get Work</a></li>
+            <li class="mb-2"><a class="textFooter4" href="{% url 'pages:ourDoggsView' %}">Our Doggs</a></li>
+            {% endif %}
+          {% endif %}
         </ul>
       </div>
+      {% if user.is_authenticated and user|is_employee %}
       <div class="col-6 col-lg-2  mb-2">
         <h6 class="textFooter2">For Employee</h6>
         <ul class="list-unstyled px-3">
-          <li class="mb-2"><a class="textFooter4" href="/">Signup</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/">How it woks</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/">Search Job</a></li>
+          {% if not user.is_authenticated %}
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Signup</a></li>
+          {% endif %}
+          <li class="mb-2"><a class="textFooter4" href="{% url "pages:HowItWoks-ForEmployee" %}">How it woks</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Search Job</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">employers</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">testimonial</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">Terms & Conditions</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">FAQ</a></li>
+
+        </ul>
+      </div>
+      {% else %}
+      {% if not user.is_authenticated %}
+      <div class="col-6 col-lg-2  mb-2">
+        <h6 class="textFooter2">For Employee</h6>
+        <ul class="list-unstyled px-3">
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Signup</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url "pages:HowItWoks-ForEmployee" %}">How it woks</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Search Job</a></li>
           <li class="mb-2"><a class="textFooter4" href="/">employers</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">testimonial</a></li>
           <li class="mb-2"><a class="textFooter4" href="/">Terms & Conditions</a></li>
           <li class="mb-2"><a class="textFooter4" href="/">FAQ</a></li>
         </ul>
       </div>
+      {% endif %}
+      {% endif %}
+      {% if user.is_authenticated and user|is_employer %}
       <div class="col-6 col-lg-2  mb-2">
         <h6 class="textFooter2">For Employer</h6>
         <ul class="list-unstyled px-3">
-          <li class="mb-2"><a class="textFooter4" href="/">How it woks</a></li>
+          {% if not user.is_authenticated %}
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Signup</a></li>
+          {% endif %}
+          <li class="mb-2"><a class="textFooter4" href="{% url "pages:HowItWoks-ForEmployer" %}">How it woks</a></li>
           <li class="mb-2"><a class="textFooter4" href="#">pricing</a></li>
           <li class="mb-2"><a class="textFooter4" href="#">Testimonial</a></li>
           <li class="mb-2"><a class="textFooter4" href="#">Terms & Policy</a></li>
@@ -237,6 +271,22 @@
         </ul>
 
       </div>
+      {% else %}
+      {% if not user.is_authenticated %}
+      <div class="col-6 col-lg-2  mb-2">
+        <h6 class="textFooter2">For Employer</h6>
+        <ul class="list-unstyled px-3">
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Signup</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url "pages:HowItWoks-ForEmployer" %}">How it woks</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">pricing</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">Testimonial</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">Terms & Policy</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">FAQ</a></li>
+        </ul>
+
+      </div>
+      {% endif %}
+      {% endif %}
       <div class="col-6 col-lg-1 ">
         <ul class="social-media-container">
           <li class="social-media blog">
