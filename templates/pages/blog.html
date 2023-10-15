@@ -1,172 +1,322 @@
-{% extends "_base.html" %}
-{% block title %}Blog {% endblock %}
-{% block main %}
-<div class="my-3 py-3" >
-  
-   <!-- About Section -->
-   <section  class="py-3 container">
+{% extends "_base.html" %} {% block title %}Blog {% endblock %} {% block main %}
+<div class="my-4 py-4">
+  <!-- About Section -->
+  <section class="py-3 container">
     <div class="mt-3">
-        <div class="row">
-              <!-- Side widgets-->
-            <div class="col-lg-3">
-              <div class="position-sticky" style="top: 2rem;">
-                <!-- Categories widget-->
-                <div class="my-3 p-3 bg-body rounded shadow-sm">
-                    <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
-                    <div class="d-flex text-muted pt-3">
-                      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" 
-                      width="32" height="32" xmlns="http://www.w3.org/2000/svg" 
-                      role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" 
-                      focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                
-                      <p class="pb-3 mb-0 small lh-sm border-bottom">
-                        <small class="text-body-secondary">Jun 15, 2023</small>
-                        <strong class="d-block text-gray-dark">@username</strong>
-                        Some representative placeholder content, with some information about this user. 
-                      </p>
+      <div class="row">
+        <!-- Side widgets-->
+        <div class="col-lg-9">
+          <!-- Post content-->
+          <article>
+            <!-- Post header-->
+            <header class="mb-4">
+              <!-- Post title-->
+              <h3 class="fw-bolder mb-1">Welcome to Blog Post!</h3>
+              <!-- Post meta content-->
+              <div class="text-muted fst-italic mb-2">
+                Posted on January 1, 2023 by Start Bootstrap
+              </div>
+              <!-- Post categories-->
+              <a
+                class="badge bg-secondary text-decoration-none link-light"
+                href="#!"
+                >Web Design</a
+              >
+              <a
+                class="badge bg-secondary text-decoration-none link-light"
+                href="#!"
+                >Freebies</a
+              >
+            </header>
+            <!-- Preview image figure-->
+            <figure class="mb-4">
+              <img
+                class="img-fluid rounded"
+                src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
+                alt="..."
+              />
+            </figure>
+            <!-- Post content-->
+            <section class="mb-5">
+              <p class="fs-6 mb-4">
+                Science is an enterprise that should be cherished as an activity
+                of the free human mind. Because it transforms who we are, how we
+                live, and it gives us an understanding of our place in the
+                universe.
+              </p>
+              <p class="fs-6 mb-4">
+                The universe is large and old, and the ingredients for life as
+                we know it are everywhere, so there's no reason to think that
+                Earth would be unique in that regard. Whether of not the life
+                became intelligent is a different question, and we'll see if we
+                find that.
+              </p>
+              <p class="fs-6 mb-4">
+                If you get asteroids about a kilometer in size, those are large
+                enough and carry enough energy into our system to disrupt
+                transportation, communication, the food chains, and that can be
+                a really bad day on Earth.
+              </p>
+              <h4 class="fw-bolder mb-4 mt-5">
+                I have odd cosmic thoughts every day
+              </h4>
+              <p class="fs-6 mb-4">
+                For me, the most fascinating interface is Twitter. I have odd
+                cosmic thoughts every day and I realized I could hold them to
+                myself or share them with people who might be interested.
+              </p>
+              <p class="fs-6 mb-4">
+                Venus has a runaway greenhouse effect. I kind of want to know
+                what happened there because we're twirling knobs here on Earth
+                without knowing the consequences of it. Mars once had running
+                water. It's bone dry today. Something bad happened there as
+                well.
+              </p>
+            </section>
+          </article>
+          <!-- Comments section-->
+          <section class="mb-5">
+            <div class="card bg-light">
+              <div class="card-body">
+                <!-- Comment form-->
+                <form class="mb-4">
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    placeholder="Join the discussion and leave a comment!"
+                  ></textarea>
+                </form>
+                <!-- Comment with nested comments-->
+                <div class="d-flex mb-4">
+                  <!-- Parent comment-->
+                  <div class="flex-shrink-0">
+                    <img
+                      class="rounded-circle"
+                      src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="ms-3">
+                    <div class="fw-bold">Commenter Name</div>
+                    If you're going to lead a space frontier, it has to be
+                    government; it'll never be private enterprise. Because the
+                    space frontier is dangerous, and it's expensive, and it has
+                    unquantified risks.
+                    <!-- Child comment 1-->
+                    <div class="d-flex mt-4">
+                      <div class="flex-shrink-0">
+                        <img
+                          class="rounded-circle"
+                          src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                          alt="..."
+                        />
+                      </div>
+                      <div class="ms-3">
+                        <div class="fw-bold">Commenter Name</div>
+                        And under those conditions, you cannot establish a
+                        capital-market evaluation of that enterprise. You can't
+                        get investors.
+                      </div>
                     </div>
-                    <div class="d-flex text-muted pt-3">
-                      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
-                
-                      <p class="pb-3 mb-0 small lh-sm border-bottom">
-                        <strong class="d-block text-gray-dark">@username</strong>
-                        <small class="text-body-secondary">Jun 17, 2023</small>
-                        Some more representative placeholder content, related to this other user. 
-                      </p>
-                      
+                    <!-- Child comment 2-->
+                    <div class="d-flex mt-4">
+                      <div class="flex-shrink-0">
+                        <img
+                          class="rounded-circle"
+                          src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                          alt="..."
+                        />
+                      </div>
+                      <div class="ms-3">
+                        <div class="fw-bold">Commenter Name</div>
+                        When you put money directly to a problem, it makes a
+                        good headline.
+                      </div>
                     </div>
-                    <div class="d-flex text-muted pt-3">
-                      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
-                
-                      <p class="pb-3 mb-0 small lh-sm border-bottom">
-                        <strong class="d-block text-gray-dark">@username</strong>
-                        <small class="text-body-secondary">Jun 17, 2023</small>
-                        This user also gets some representative placeholder content.
-                      </p>
-                    </div>
-                    <small class="d-block text-end mt-3">
-                      <a href="#">All updates</a>
-                    </small>
+                  </div>
                 </div>
-                <!-- Post Suggestions-->
-                <div class="my-3 p-3 bg-body rounded shadow-sm">
-                    <h6 class="border-bottom pb-2 mb-0">Suggestions</h6>
-                    <div class="d-flex text-muted pt-3">
-                      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                
-                      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                       
-                        <div class="d-flex justify-content-between">
-                          <strong class="text-gray-dark">Full Name</strong>
-                          <a href="#">Follow</a>
-                        </div>
-                        <span class="d-block">@username</span>
-                        <small class="text-body-secondary">January 15, 2023</small>
-                      </div>
-                    </div>
-                    <div class="d-flex text-muted pt-3">
-                      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                
-                      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                        <div class="d-flex justify-content-between">
-                          <strong class="text-gray-dark">Full Name</strong>
-                          <a href="#">Follow</a>
-                        </div>
-                        <span class="d-block">@username</span>
-                      </div>
-                    </div>
-                    <div class="d-flex text-muted pt-3">
-                      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                
-                      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                        <div class="d-flex justify-content-between">
-                          <strong class="text-gray-dark">Full Name</strong>
-                          <a href="#">Follow</a>
-                        </div>
-                        <span class="d-block">@username</span>
-                        <small class="text-body-secondary">January 15, 2023</small>
-                      </div>
-                    </div>
-                    <small class="d-block text-end mt-3">
-                      <a href="#">All suggestions</a>
-                    </small>
+                <!-- Single comment-->
+                <div class="d-flex">
+                  <div class="flex-shrink-0">
+                    <img
+                      class="rounded-circle"
+                      src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="ms-3">
+                    <div class="fw-bold">Commenter Name</div>
+                    When I look at the universe and all the ways the universe
+                    wants to kill us, I find it hard to reconcile that with
+                    statements of beneficence.
+                  </div>
                 </div>
+              </div>
             </div>
-            
-            </div>
-            <div class="col-lg-9" >
-                   <!-- Post content-->
-                   <article>
-                    <!-- Post header-->
-                    <header class="mb-4">
-                        <!-- Post title-->
-                        <h3 class="fw-bolder mb-1">Welcome to Blog Post!</h3>
-                        <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2">Posted on January 1, 2023 by Start Bootstrap</div>
-                        <!-- Post categories-->
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
-                    </header>
-                    <!-- Preview image figure-->
-                    <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..."></figure>
-                    <!-- Post content-->
-                    <section class="mb-5">
-                        <p class="fs-6 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe.</p>
-                        <p class="fs-6 mb-4">The universe is large and old, and the ingredients for life as we know it are everywhere, so there's no reason to think that Earth would be unique in that regard. Whether of not the life became intelligent is a different question, and we'll see if we find that.</p>
-                        <p class="fs-6 mb-4">If you get asteroids about a kilometer in size, those are large enough and carry enough energy into our system to disrupt transportation, communication, the food chains, and that can be a really bad day on Earth.</p>
-                        <h4 class="fw-bolder mb-4 mt-5">I have odd cosmic thoughts every day</h4>
-                        <p class="fs-6 mb-4">For me, the most fascinating interface is Twitter. I have odd cosmic thoughts every day and I realized I could hold them to myself or share them with people who might be interested.</p>
-                        <p class="fs-6 mb-4">Venus has a runaway greenhouse effect. I kind of want to know what happened there because we're twirling knobs here on Earth without knowing the consequences of it. Mars once had running water. It's bone dry today. Something bad happened there as well.</p>
-                    </section>
-                   </article>
-                   <!-- Comments section-->
-                   <section class="mb-5">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <!-- Comment form-->
-                            <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                            <!-- Comment with nested comments-->
-                            <div class="d-flex mb-4">
-                                <!-- Parent comment-->
-                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                    <!-- Child comment 1-->
-                                    <div class="d-flex mt-4">
-                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
-                                        <div class="ms-3">
-                                            <div class="fw-bold">Commenter Name</div>
-                                            And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                        </div>
-                                    </div>
-                                    <!-- Child comment 2-->
-                                    <div class="d-flex mt-4">
-                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
-                                        <div class="ms-3">
-                                            <div class="fw-bold">Commenter Name</div>
-                                            When you put money directly to a problem, it makes a good headline.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single comment-->
-                            <div class="d-flex">
-                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   </section>
-            </div>
-          
+          </section>
         </div>
-    </div>
+        <div class="col-lg-3">
+          <div class="position-sticky" style="top: 2rem">
+            <!-- Categories widget-->
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+              <h6 class="border-bottom pb-2 mb-0">Recent updates</h6>
+              <div class="d-flex text-muted pt-3">
+                <svg
+                  class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+                  width="32"
+                  height="32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: 32x32"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#007bff"></rect>
+                  <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+                </svg>
 
-   </Section>
-   
+                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                  <small class="text-body-secondary">Jun 15, 2023</small>
+                  <strong class="d-block text-gray-dark">@username</strong>
+                  Some representative placeholder content, with some information
+                  about this user.
+                </p>
+              </div>
+              <div class="d-flex text-muted pt-3">
+                <svg
+                  class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+                  width="32"
+                  height="32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: 32x32"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#e83e8c"></rect>
+                  <text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text>
+                </svg>
+
+                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                  <strong class="d-block text-gray-dark">@username</strong>
+                  <small class="text-body-secondary">Jun 17, 2023</small>
+                  Some more representative placeholder content, related to this
+                  other user.
+                </p>
+              </div>
+              <div class="d-flex text-muted pt-3">
+                <svg
+                  class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+                  width="32"
+                  height="32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: 32x32"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#6f42c1"></rect>
+                  <text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text>
+                </svg>
+
+                <p class="pb-3 mb-0 small lh-sm border-bottom">
+                  <strong class="d-block text-gray-dark">@username</strong>
+                  <small class="text-body-secondary">Jun 17, 2023</small>
+                  This user also gets some representative placeholder content.
+                </p>
+              </div>
+              <small class="d-block text-end mt-3">
+                <a href="#">All updates</a>
+              </small>
+            </div>
+            <!-- Post Suggestions-->
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+              <h6 class="border-bottom pb-2 mb-0">Suggestions</h6>
+              <div class="d-flex text-muted pt-3">
+                <svg
+                  class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+                  width="32"
+                  height="32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: 32x32"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#007bff"></rect>
+                  <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+                </svg>
+
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                  <div class="d-flex justify-content-between">
+                    <strong class="text-gray-dark">Full Name</strong>
+                    <a href="#">Follow</a>
+                  </div>
+                  <span class="d-block">@username</span>
+                  <small class="text-body-secondary">January 15, 2023</small>
+                </div>
+              </div>
+              <div class="d-flex text-muted pt-3">
+                <svg
+                  class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+                  width="32"
+                  height="32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: 32x32"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#007bff"></rect>
+                  <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+                </svg>
+
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                  <div class="d-flex justify-content-between">
+                    <strong class="text-gray-dark">Full Name</strong>
+                    <a href="#">Follow</a>
+                  </div>
+                  <span class="d-block">@username</span>
+                </div>
+              </div>
+              <div class="d-flex text-muted pt-3">
+                <svg
+                  class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+                  width="32"
+                  height="32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Placeholder: 32x32"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#007bff"></rect>
+                  <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+                </svg>
+
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                  <div class="d-flex justify-content-between">
+                    <strong class="text-gray-dark">Full Name</strong>
+                    <a href="#">Follow</a>
+                  </div>
+                  <span class="d-block">@username</span>
+                  <small class="text-body-secondary">January 15, 2023</small>
+                </div>
+              </div>
+              <small class="d-block text-end mt-3">
+                <a href="#">All suggestions</a>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 {% endblock %}

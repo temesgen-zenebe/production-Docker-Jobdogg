@@ -32,7 +32,7 @@
 <body>
 <header>
     <nav class="fixed-top navbar navbar-expand-lg "  style="background-color: #000000;">
-      <div class="container-fluid mx-2 px-2">
+      <div class="container-fluid mx-1 px-1">
         <div class="px-2 py-2 mb-2 mb-md-0" style="color: #F0953C;">
         
           <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none px-3" style="color: #F0953C; border-color: #f0953c; border-1">
@@ -212,9 +212,15 @@
           <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Get Staff</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Get work</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url 'pages:ourDoggsView' %}">Our Doggs</a></li>
+          
           {% else %}
+            {% if user.is_authenticated and user|is_admin %}
+            <li class="mb-2"><a class="textFooter4" href="{% url 'pages:employerHomePage' %}">Get Staff</a></li>
+            <li class="mb-2"><a class="textFooter4" href="{% url 'pages:employeeHomePage' %}">Get Work</a></li>
+            <li class="mb-2"><a class="textFooter4" href="{% url 'pages:ourDoggsView' %}">Our Doggs</a></li>
+            {% endif %}
             {% if user.is_authenticated and user|is_employer %}
-            <li class="mb-2"><a class="textFooter4" href="{% url 'pages:employerHomePage' %}">GetStaff</a></li>
+            <li class="mb-2"><a class="textFooter4" href="{% url 'pages:employerHomePage' %}">Get Staff</a></li>
             <li class="mb-2"><a class="textFooter4" href="{% url 'pages:ourDoggsView' %}">Our Doggs</a></li>
             {% endif %}
             {% if user.is_authenticated and user|is_employee %}
@@ -255,6 +261,22 @@
         </ul>
       </div>
       {% endif %}
+      {% if user.is_authenticated and user|is_admin %}
+      <div class="col-6 col-lg-2  mb-2">
+        <h6 class="textFooter2">For Employee</h6>
+        <ul class="list-unstyled px-3">
+          {% if not user.is_authenticated %}
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Signup</a></li>
+          {% endif %}
+          <li class="mb-2"><a class="textFooter4" href="{% url "pages:HowItWoks-ForEmployee" %}">How it woks</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Search Job</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">employers</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">testimonial</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">Terms & Conditions</a></li>
+          <li class="mb-2"><a class="textFooter4" href="/">FAQ</a></li>
+        </ul>
+      </div>
+      {% endif %}
       {% endif %}
       {% if user.is_authenticated and user|is_employer %}
       <div class="col-6 col-lg-2  mb-2">
@@ -286,6 +308,22 @@
 
       </div>
       {% endif %}
+      {% if user.is_authenticated and user|is_admin %}
+      <div class="col-6 col-lg-2  mb-2">
+        <h6 class="textFooter2">For Employer</h6>
+        <ul class="list-unstyled px-3">
+          {% if not user.is_authenticated %}
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Signup</a></li>
+          {% endif %}
+          <li class="mb-2"><a class="textFooter4" href="{% url "pages:HowItWoks-ForEmployer" %}">How it woks</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">pricing</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">Testimonial</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">Terms & Policy</a></li>
+          <li class="mb-2"><a class="textFooter4" href="#">FAQ</a></li>
+        </ul>
+
+      </div>
+      {% endif %}
       {% endif %}
       <div class="col-6 col-lg-1 ">
         <ul class="social-media-container">
@@ -305,10 +343,10 @@
             <i class="fab fa-instagram"></i>
             <a href="https://instagram.com/jobdogg_?igshid=sti2vv1kjwd6" target="_blank">Instagram Follow me</a>
           </li>
-          {% comment %} <li class="social-media github">
-            <i class="bi bi-tiktok text-light"></i>
-            <a href="https://github.com/liloo2040" target="_blank">tiktok Follow me</a>
-          </li> {% endcomment %}
+          <li class="social-media github">
+            <i class="bi bi-tiktok text-light"></i> 
+            <a href="https://www.tiktok.com/@jobdogg" target="_blank">tiktok Follow me</a>
+          </li> 
         </ul>
       </div>
     </div> 

@@ -5,29 +5,33 @@
  <!-- Contact Section -->
  <div class="container my-5">
    
-    <div class="row ">
+    <div class="row">
         <div class="col-sm-12 mb-3 mb-sm-0">
           <div class="card border-0 my-4 ">
             <div class="py-3 border-bottom text-bolder text-center text-bolder"><h5>OUR LEADERSHIP</h5></div>
             <div class="card-body">
               <div class="d-flex flex-column  justify-content-center shadow ">
-                <div class="list-group gap-2">
+                <div class="list-group gap-4">
                   <div class="list-group-item list-group-item-action d-flex gap-4 py-3 bg-dark-deep text-light" aria-current="true">
-                    <img src="{% static "images/Stacey_Elaine.jpg" %}" alt="twbs" width="130" height="200" class="flex-shrink-0">
+                    
+                    <div class="justify-content-between  pb-2">
+                        <div ><img src="{% static "images/Stacey_Elaine.jpg" %}" alt="twbs" width="130" height="200" class="flex-shrink-0"></div>
+                        <div class="mt-2 shadow">
+                            <p class="d-block">
+                                <a href="#" class=""><img src="{% static 'images/insta.png' %}"  width="20px" height="20px" alt="Instagram Icon" class="mx-auto"></a>
+                                <a href="#" class="bg-primary"><i class="bi bi-facebook text-light m-1"  width="1em" height="1em"></i></a>
+                                <a href="#" class="bg-primary"><i class="bi bi-linkedin text-light m-1"  width="1em" height="1em"></i></a>
+                            </p>
+                        </div>
+                    </div>
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
-                            <div class="d-flex justify-content-between pb-2">
+                            <div class="pb-2">
                                 <div>
                                     <h5 class="mb-1 textFooter2"> Stacey Elaine Sharpe</h5>
                                     <h6 class="mb-1 text-warning"> Founder & CEO</h6>
                                 </div>
-                                <div class="">
-                                    <p class="d-block ">
-                                        <a href="#" class="bg-warning"><i class="bi bi-instagram text-light m-1"  width="1em" height="1em"></i></a>
-                                        <a href="#" class="bg-primary"><i class="bi bi-facebook text-light m-1"  width="1em" height="1em"></i></a>
-                                        <a href="#" class="bg-primary"><i class="bi bi-linkedin text-light m-1"  width="1em" height="1em"></i></a>
-                                    </p>
-                                </div>
+                                
                             </div>
                             <p class="mb-0 opacity-75 border-top py-2">
                             Founder and CEO of Jobdogg.com, Stacey has been in the staffing industry for over 17 years as a top producer 
@@ -41,7 +45,7 @@
                     
                     </div>
                   </div>
-                  <div class="list-group-item list-group-item-action d-flex gap-4 py-3 bg-dark-deep text-light" aria-current="true">
+                  {% comment %} <div class="list-group-item list-group-item-action d-flex gap-4 py-3 bg-dark-deep text-light" aria-current="true">
                     <img src="{% static "images/BLAKE_MOORE.jpg" %}" alt="twbs" width="130" height="200" class="flex-shrink-0">
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
@@ -52,7 +56,7 @@
                                 </div>
                                 <div class="">
                                     <p class="d-block ">
-                                        <a href="#" class="bg-warning"><i class="bi bi-instagram text-light m-1"  width="1em" height="1em"></i></a>
+                                        <a href="#" class=""><img src="{% static 'images/insta.png' %}"  width="20px" height="20px" alt="Instagram Icon" class="mx-auto"></a>
                                         <a href="#" class="bg-primary"><i class="bi bi-facebook text-light m-1"  width="1em" height="1em"></i></a>
                                         <a href="#" class="bg-primary"><i class="bi bi-linkedin text-light m-1"  width="1em" height="1em"></i></a>
                                     </p>
@@ -66,9 +70,19 @@
                         </div>
                     
                     </div>
-                  </div>
+                  </div> {% endcomment %}
                   <div class="list-group-item list-group-item-action d-flex gap-4 py-3 bg-dark-deep text-light" aria-current="true">
-                    <img src="{% static "images/Hari.jpg" %}" alt="twbs" width="130" height="200" class="flex-shrink-0">
+                   
+                    <div class="justify-content-between pb-2">
+                        <div><img src="{% static "images/Hari.jpg" %}" alt="twbs" width="130" height="200" class="flex-shrink-0"></div>
+                        <div class="pt-2">
+                            <p class="d-block ">
+                                <a href="#" class=""><img src="{% static 'images/insta.png' %}"  width="20px" height="20px" alt="Instagram Icon" class="mx-auto"></a>
+                                <a href="#" class="bg-primary"><i class="bi bi-facebook text-light m-1"  width="1em" height="1em"></i></a>
+                                <a href="#" class="bg-primary"><i class="bi bi-linkedin text-light m-1"  width="1em" height="1em"></i></a>
+                            </p>
+                        </div>
+                    </div>
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between pb-2">
@@ -76,13 +90,7 @@
                                     <h5 class="mb-1 textFooter2">KP Hari</h5>
                                     <h6 class="mb-1 text-warning">COO & Chairman Of The Board</h6>
                                 </div>
-                                <div class="">
-                                    <p class="d-block ">
-                                        <a href="#" class="bg-warning"><i class="bi bi-instagram text-light m-1"  width="1em" height="1em"></i></a>
-                                        <a href="#" class="bg-primary"><i class="bi bi-facebook text-light m-1"  width="1em" height="1em"></i></a>
-                                        <a href="#" class="bg-primary"><i class="bi bi-linkedin text-light m-1"  width="1em" height="1em"></i></a>
-                                    </p>
-                                </div>
+                                
                             </div>
                             <p class="mb-0 opacity-75 border-top py-2">
                                 KP Hari is the COO and Chairman of Jobdogg’s Board. KP is responsible for global operations, company growth and associate & customer satisfaction. With more than 25 years of IT experience, 
@@ -99,20 +107,23 @@
                     </div>
                   </div>
                   <div class="list-group-item list-group-item-action d-flex gap-4 py-3 bg-dark-deep text-light" aria-current="true">
-                    <img src="{% static "images/Frederick.jpg" %}" alt="twbs" width="130" height="200" class="flex-shrink-0">
+                   
+                    <div class="justify-content-between pb-2">
+                        <div> <img src="{% static "images/Frederick.jpg" %}" alt="twbs" width="130" height="200" class="flex-shrink-0"></div>
+                        <div class="pt-2">
+                            <p class="d-block ">
+                                <a href="#" class=""><img src="{% static 'images/insta.png' %}"  width="20px" height="20px" alt="Instagram Icon" class="mx-auto"></a>
+                                <a href="#" class="bg-primary"><i class="bi bi-facebook text-light m-1"  width="1em" height="1em"></i></a>
+                                <a href="#" class="bg-primary"><i class="bi bi-linkedin text-light m-1"  width="1em" height="1em"></i></a>
+                            </p>
+                        </div>
+                    </div>
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between pb-2">
                                 <div>
                                     <h5 class="mb-1 textFooter2">Frederick Church</h5>
                                     <h6 class="mb-1 text-warning">VP Of Operations</h6>
-                                </div>
-                                <div class="">
-                                    <p class="d-block ">
-                                        <a href="#" class="bg-warning"><i class="bi bi-instagram text-light m-1"  width="1em" height="1em"></i></a>
-                                        <a href="#" class="bg-primary"><i class="bi bi-facebook text-light m-1"  width="1em" height="1em"></i></a>
-                                        <a href="#" class="bg-primary"><i class="bi bi-linkedin text-light m-1"  width="1em" height="1em"></i></a>
-                                    </p>
                                 </div>
                             </div>
                             <p class="mb-0 opacity-75 border-top py-2">
@@ -125,20 +136,24 @@
                     </div>
                   </div>
                   <div class="list-group-item list-group-item-action d-flex gap-4 py-3 bg-dark-deep text-light" aria-current="true">
-                    <img src="{% static "images/GregGlover.jpg" %}" alt="twbs" width="130" height="200" class="flex-shrink-0">
+                    
+                    <div class="justify-content-between pb-2">
+                        <img src="{% static "images/GregGlover.jpg" %}" alt="twbs" width="130" height="200" class="flex-shrink-0">
+                        <div class="pt-2">
+                            <p class="d-block ">
+                                <a href="#" class=""><img src="{% static 'images/insta.png' %}"  width="20px" height="20px" alt="Instagram Icon" class="mx-auto"></a>
+                                <a href="#" class="bg-primary"><i class="bi bi-facebook text-light m-1"  width="1em" height="1em"></i></a>
+                                <a href="#" class="bg-primary"><i class="bi bi-linkedin text-light m-1"  width="1em" height="1em"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                    
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div>
                             <div class="d-flex justify-content-between pb-2">
                                 <div>
                                     <h5 class="mb-1 textFooter2"> Greg Glover</h5>
                                     <h6 class="mb-1 text-warning">Chief Information Officer</h6>
-                                </div>
-                                <div class="">
-                                    <p class="d-block ">
-                                        <a href="#" class="bg-warning"><i class="bi bi-instagram text-light m-1"  width="1em" height="1em"></i></a>
-                                        <a href="#" class="bg-primary"><i class="bi bi-facebook text-light m-1"  width="1em" height="1em"></i></a>
-                                        <a href="#" class="bg-primary"><i class="bi bi-linkedin text-light m-1"  width="1em" height="1em"></i></a>
-                                    </p>
                                 </div>
                             </div>
                             <p class="mb-0 opacity-75 border-top py-2">

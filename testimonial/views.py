@@ -8,12 +8,12 @@ from .models import Testimonial
 
 
 
-class TestimonialListView(LoginRequiredMixin, ListView):
+class TestimonialListView(ListView):
     model = Testimonial
     template_name = 'testimonial/testimonial_list.html'
     context_object_name = 'testimonials'
     
-class TestimonialDetailView(LoginRequiredMixin, DetailView):
+class TestimonialDetailView(DetailView):
     model = Testimonial
     template_name = 'testimonial/testimonial_detail.html'
     context_object_name = 'testimonialDetailView'

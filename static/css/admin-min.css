@@ -169,6 +169,7 @@
     .border-left-DarkOliveGreen {border-left: .25rem solid #556B2F!important}
     .border-left-CornflowerBlue {border-left: .25rem solid #6495ED!important}
     .border-left-JobdoggOrnge {border-left: .25rem solid #e06a00!important}
+    .border-left-virtical {border-left: .10rem solid #e06a00!important}
     /*---------------------------------------------------------*/
     .border-bottom-Eminence {border-bottom: .25rem solid #6C3082!important}
     .border-bottom-Indigo {border-bottom: .25rem solid #e74a3b!important}
@@ -186,6 +187,7 @@
     .border-bottom-CornflowerBlue {border-bottom: .25rem solid #6495ED!important}
     /*---------------------------------------------------------*/
     .border-left-primary{border-left:.25rem solid #4e73df!important}
+    .border-left-virtical-primary{border-left:.10rem solid #4e73df!important}
     .border-bottom-primary{border-bottom:.25rem solid #4e73df!important} 
     .border-left-Eminence{border-left:.25rem solid #6C3082!important}
     .border-bottom-Eminence{border-bottom:.25rem solid #6C3082!important} 
