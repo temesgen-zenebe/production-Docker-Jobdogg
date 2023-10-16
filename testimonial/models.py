@@ -3,13 +3,14 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-
+from common.utils.chooseConstant import (TARGET_AUDIENCE, )
 class Testimonial(models.Model):
     title = models.CharField(max_length=255 ,blank=True, null=True)
     image = models.ImageField(upload_to="logo_image/%Y/%m/%d" ,blank=True, null=True)
     video_url = models.URLField(blank=True, null=True)
     description = models.TextField(max_length=500,blank=True, null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    target_audience = models.CharField(max_length=50, choices=TARGET_AUDIENCE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     view_count = models.PositiveIntegerField(default=0)

@@ -294,7 +294,7 @@ section.on-demand{
 
 /*side menu*/
 .text-bg-dark1 {
-  color: #fff !important;
+  color: #080808 !important;
   background-color: #05050504 !important;
   opacity: 1;
 }
@@ -485,3 +485,56 @@ section.on-demand{
 
 
 
+/*FAQ*/
+.bgFaq{
+  background-color: #080808;
+  color: #ffff;
+}
+.accordion1 {
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+.accordion1-item {
+  background-color: #fff;
+  color: #111;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+}
+.accordion1-item-header {
+  padding: 0.5rem 3rem 0.5rem 1rem;
+  min-height: 3.5rem;
+  line-height: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+.accordion1-item-header::after {
+  content: "\002B";
+  font-size: 2rem;
+  position: absolute;
+  right: 1rem;
+}
+.accordion1-item-header.active::after {
+  content: "\2212";
+}
+.accordion1-item-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.accordion1-item-body-content {
+  padding: 1rem;
+  line-height: 1.5rem;
+  border-top: 1px solid;
+  border-image: linear-gradient(to right, transparent, #34495e, transparent) 1;
+}
+
+@media (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+}

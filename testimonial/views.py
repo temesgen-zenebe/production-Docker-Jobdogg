@@ -30,7 +30,7 @@ class TestimonialDetailView(DetailView):
 class TestimonialCreateView(LoginRequiredMixin, CreateView):
     model = Testimonial
     template_name = 'testimonial/testimonial_form.html'
-    fields = ['title', 'image', 'video_url', 'description']
+    fields = ['title', 'image', 'video_url', 'description','target_audience']
     success_url = reverse_lazy('testimonial:testimonial_list')
     extra_context = {'is_create': True}
     
@@ -41,7 +41,7 @@ class TestimonialCreateView(LoginRequiredMixin, CreateView):
 class TestimonialUpdateView(LoginRequiredMixin, UpdateView):
     model = Testimonial
     template_name = 'testimonial/testimonial_form.html'
-    fields = ['title', 'image', 'video_url', 'description']
+    fields = ['title', 'image', 'video_url', 'description','target_audience']
     success_url = reverse_lazy('testimonial:testimonial_list')
     extra_context = {'is_create': False}
 

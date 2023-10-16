@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from .models import Subscriber
 from .forms import SubscribeForm
+import logging
 
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
@@ -50,7 +51,16 @@ class HowItWoksForEmployee(TemplateView):
     template_name = 'pages/HowItWoks-ForEmployee.html'
 class HowItWoksForEmployer(TemplateView):
     template_name = 'pages/HowItWoks-ForEmployer.html'   
+
+class EmployeeFAQ(TemplateView):
+    template_name = 'pages/employee_FAQ.html' 
+
+class EmployerFAQ(TemplateView):
+    template_name = 'pages/employer_FAQ.html'
     
+class TermsAndPolicy(TemplateView):
+    template_name = 'pages/termsAndPolicy.html'
+   
 class BlogView(TemplateView):
     template_name = 'pages/blog.html'
     
@@ -106,7 +116,7 @@ def admin_home(request):
 
 #     # Default fallback if no matching role is found
 #     return redirect('pages:employeeHomePage')  # You can set the default to any page you prefer
-import logging
+
 
 def redirect_to_homepage(request):
     if request.user.is_authenticated:

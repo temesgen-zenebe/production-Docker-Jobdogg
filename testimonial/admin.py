@@ -10,6 +10,7 @@ class TestimonialAdmin(admin.ModelAdmin):
         'video_url', 
         'description',
         'author',
+        'target_audience',
         'created_at', 
         'updated_at', 
         'view_count',

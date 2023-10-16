@@ -291,3 +291,5 @@ TIME_CARD_STATUS =[
     ('panging','panging'),
     ('complete','complete'),
 ]
+
+TARGET_AUDIENCE  = (('employee', 'employee'),('employer', 'employer'),)
