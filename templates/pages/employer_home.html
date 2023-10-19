@@ -1,746 +1,635 @@
 {% extends 'pages/dashboard.html' %}
 {% load static %}
 {% block title %}Get Staff{% endblock %}
-{% block getWorkView %}
-<div class="mt-5 mb-3 mx-1">
-  <div class="container">
-                <section >
-                    <div class="tab-content" id="nav-tabContent">
-                      <div class="px-4 py-5 my-4 text-center">
-                        <h3 class="fw-bold">Welcome to the Jobdogg Employer Portal</h3>
-                        <div class="col-lg-6 mx-auto p-2">
-                         <p class="lead mb-4">Discover 'The Right Fit' for Your Team! Our 360˚ view of candidates ensures 98% Faster hires. 
-                           Monitor Staffing Trends with Built-in Analytics. Mobile App Available Anywhere. Hire Smart, Save Big!.</p>
-                          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                           <button type="button" class="btn btn-sm btn-outline-Jobdogg btn-lg px-5">Get Start</button>
-                          </div>
-                         </div>
-                        </div> 
-                        <hr class="fontColor-orang">
-                    </div>  
-                </section>  
-               
-                <section>
-                    <div class="container col-xxl-8 px-4 py-4">
-                     <div class="row flex-lg-row-reverse align-items-center g-4 py-4">
-                       <div class="col-10 col-sm-8 col-lg-6">
-                         <img src="{% static 'images/pcom8.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-                       </div>
-                       <div class="col-lg-6">
-                         <h1 class="display-6 fw-bold lh-1 mb-3">We are Different. why?</h1>
-                         <h6 class="fw-bold lh-1 mb-3"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Find the "Right Fit" at a Lower Cost.</h6>
-                         <h6 class="fw-bold lh-1 mb-3"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Experience the Power of Smart Hiring.</h6>
-                         <p class="lead s3-font">Jobdogg: "Unlock Your Hiring Potential! Embrace the Future of Recruitment with 98% Faster Hires. 
-                             Discover Vetted Candidates with Diverse Skill-Sets.
-                             Effortlessly Evaluate Candidates with Unscripted Video Resumes. Hire On Your Terms,
-                             Anytime, Anywhere. </p>
-                         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                           <button href type="button" class="btn btn-sm btn-outline-Jobdogg btn-lg px-5">Join Now </button>
-                         </div>
-                       </div>
-                     </div>
-                     <hr class="fontColor-orang">
-                    </div>
-                </section>
+{% block getStaffView %}
+<div class="container-fields mt-3 mb-3 mx-1">
+  <ul class="nav nav-underline justify-content-center" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active text-secondary" id="home-tab" data-bs-toggle="tab" data-bs-target="#home_employer" type="button" role="tab" aria-controls="home" aria-selected="true">
+        <i class="bi bi-question-octagon px-1 fontColor-orang"></i> Why Jobdogg </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link text-secondary" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile_employer" type="button" role="tab" aria-controls="profile" aria-selected="false">
+        <i class="bi bi-binoculars px-1 fontColor-orang"></i>Get Staff</button>
+    </li>
+  
+  </ul>
+  
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="home_employer" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+      <!--why jobdogg ?-->
+      <div class="mt-2">
+        <section class="text-center" style="background: linear-gradient(#172736, rgba(8, 8, 8, 0.699)),  url('{% static 'images/pcom1.png'%}') no-repeat ;">
+          <div class="row py-lg-5 mb-5">
+            <div class="col-lg-6 col-md-6 mx-auto py-3 ">
+              <h3 class="fw-bold">Welcome to the Jobdogg Employer Portal</h3>
+              <p class="lead mb-4">Discover 'The Right Fit' for Your Team! Our 360˚ view of candidates ensures 98% Faster hires. 
+                Monitor Staffing Trends with Built-in Analytics. Mobile App Available Anywhere. Hire Smart, Save Big!.</p>
+              <p>
+                <a href="{% url 'employer:profile_building_progress_controller' %}" class="btn btn-sm btn-outline-Jobdogg my-3">Start Profiling</a>
+              </p>
+            </div>
             
-                <section>
-                    <div class="pt-5 text-center container">
-                      <div class="row py-lg-3">
-                       <div class="col-lg-10 col-md-10 mx-auto">
-                         <h4 class="fw-bold lh-1 py-4">When you become a member, you'll ultimately benefit from the following list</h4>
-                          <a href="#" type="button" class="btn btn-sm btn-outline-Jobdogg btn-lg px-5">Get Start</a>
-                        </div>
-                       </div>
-                    </div>
-                    <div class="album py-3 bg-light">
-                     <div class="container">
-              
-                      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-                      <div class="col">
-                            <div class="card shadow-lg">
-                                <img src="{% static 'images/pcom3.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">      
-                              <div class="card-body">
-                                <p class="card-text">Unscripted Video Resumes.</p>
-                               
-                              </div>
-                            </div>
-                      </div>
-                      <div class="col">
-                        <div class="card shadow-lg">
-                          <img src="{% static 'images/jobdoggpng.com (3).png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                          <div class="card-body">
-                            <p class="card-text">Schedule live on-line interviews.</p>
-                           
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="card shadow-lg">
-                          <img src="{% static 'images/pcom14.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                          <div class="card-body">
-                            <p class="card-text">Staffing Cost Calculater </p>
-                           
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="card shadow-lg">
-                          <img src="{% static 'images/pcom6.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                          <div class="card-body">
-                            <p class="card-text">Job Postings Are Always FREE.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="card shadow-lg">
-                            <img src="{% static 'images/pcom22.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="100%" height="100" preserveAspectRatio="xMidYMid slice" focusable="false">
-                          <div class="card-body">
-                            <p class="card-text">Built in timecard, HR and legal compliance.</p>
-                           
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="card shadow-lg">
-                          <img src="{% static 'images/jobdoggpng.com (4).png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                          <div class="card-body">
-                            <p class="card-text">Track Staffing Levels built-in Analytics Tool.</p>
-                            
-                          </div>
-                        </div>  
-                      </div>
-                      <div class="col">
-                        <div class="card shadow-lg">
-                            <img src="{% static 'images/multiple_job.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                          <div class="card-body">
-                            <p class="card-text">Hire How, When & Where you need Candidates.</p>
-                           
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="card shadow-lg">
-                            <img src="{% static 'images/pcom13.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                          <div class="card-body">
-                            <p class="card-text">Discover Vetted Candidates with Diverse Skill-Sets.</p>
-                           
-                          </div>
-                        </div>
-                      </div>
-                      </div>
-                     </div>
-                    </div>
-                </section>
-                    
-                <section class="testimonials py-5 text-center bg-light ">
-                    <div class="container">
-                        <h3 class="fw-bolder lh-1 mx-5 py-5 text-center fontColor-orang">
-                            <i class="bi bi-quote display-4"></i> What people are saying...</h3>
-                        
-                        <div class="row ">
-                            <div class="col-lg-4">
-                                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                    <img class="img-fluid rounded-circle mb-3" src="{% static 'images/testimonials-1.jpg' %}" width="200px" height="200px" alt="testimonials1">
-                                    <h5>Margaret E.</h5>
-                                    <i class="bi bi-chat-right-heart fs-3 px-2 fontColor-orang "></i>
-                                    <span class="font-weight-light mb-0 s2-font text-start">"This is fantastic! Jobdogg.com is an exceptional platform that streamlined my job search. Thanks so much guys!"
-                                        <a class="fontColor-orang" href="/testimonialList"><i class="bi bi-box-arrow-in-up-right "></i></a>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                    <img class="img-fluid rounded-circle mb-3" src="{% static 'images/testimonials-2.jpg' %}" width="200px" height="200px" alt="testimonials2">
-                                    <h5>Fred S.</h5>
-                                    <i class="bi bi-chat-right-heart fs-3 px-2 fontColor-orang "></i>
-                                    <small class="font-weight-light mb-0  s2-font text-start">"I landed my dream job within weeks of signing up. 
-                                         I highly recommend Jobdogg.com to job seekers."
-                                         <a class="fontColor-orang" href="/testimonialList"><i class="bi bi-box-arrow-in-up-right "></i></a>
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                    <img class="img-fluid rounded-circle mb-3" src="{% static 'images/testimonials-3.jpg' %}" width="200px" height="200px" alt="testimonials3">
-                                    <h5>Sarah W.</h5>
-                                    <i class="bi bi-chat-right-heart fs-3 px-2 fontColor-orang "></i>
-                                    <small class="font-weight-light mb-0  s2-font text-start">
-                                        "The website's user-friendly interface and personalized job recommendations 
-                                        made it easy to find the right fit.Thanks so much for making these freeliy available to us!"
-                                        <a class="fontColor-orang" href="/testimonialList"><i class="bi bi-box-arrow-in-up-right "></i></a>
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="fontColor-orang">
-                    </div>
-                </section>
-                
-                <section class="bg-light py-5 border-bottom">
-                    <div class="container px-5 my-5">
-                     <div class="text-center mb-5">
-                         <h2 class="fw-bolder">Pay as you grow</h2>
-                         <p class="lead mb-0">With our no hassle pricing plans</p>
-                     </div>
-                     <div class="row gx-5 justify-content-center">
-                         <!-- Pricing card free-->
-                         <div class="col-lg-6 col-xl-4 ">
-                             <div class="card mb-5 mb-xl-0 shadow">
-                                 <div class="card-body p-5">
-                                     <div class="small text-uppercase fw-bold text-muted">Free</div>
-                                     <div class="mb-3">
-                                         <span class="display-4 fw-bold">$0</span>
-                                         <span class="text-muted">/ mo.</span>
-                                     </div>
-                                     <ul class="list-unstyled mb-4">
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             <strong>1 users</strong>
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             5GB storage
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Unlimited public projects
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Community access
-                                         </li>
-                                         <li class="mb-2 text-muted">
-                                             <i class="bi bi-x"></i>
-                                             Unlimited private projects
-                                         </li>
-                                         <li class="mb-2 text-muted">
-                                             <i class="bi bi-x"></i>
-                                             Dedicated support
-                                         </li>
-                                         <li class="mb-2 text-muted">
-                                             <i class="bi bi-x"></i>
-                                             Free linked domain
-                                         </li>
-                                         <li class="text-muted">
-                                             <i class="bi bi-x"></i>
-                                             Monthly status reports
-                                         </li>
-                                     </ul>
-                                     <div class="d-grid"><a class="btn btn-outline-info" href="#!">Choose plan</a></div>
-                                 </div>
-                             </div>
-                         </div>
-                         <!-- Pricing card pro-->
-                         <div class="col-lg-6 col-xl-4">
-                             <div class="card mb-5 mb-xl-0 shadow">
-                                 <div class="card-body p-5">
-                                     <div class="small text-uppercase fw-bold">
-                                         <i class="bi bi-star-fill text-warning"></i>
-                                         Pro
-                                     </div>
-                                     <div class="mb-3">
-                                         <span class="display-4 fw-bold">$9</span>
-                                         <span class="text-muted">/ mo.</span>
-                                     </div>
-                                     <ul class="list-unstyled mb-4">
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             <strong>5 users</strong>
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             5GB storage
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Unlimited public projects
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Community access
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Unlimited private projects
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Dedicated support
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Free linked domain
-                                         </li>
-                                         <li class="text-muted">
-                                             <i class="bi bi-x"></i>
-                                             Monthly status reports
-                                         </li>
-                                     </ul>
-                                     <div class="d-grid"><a class="btn btn-outline-Jobdogg" href="#!">Choose plan</a></div>
-                                 </div>
-                             </div>
-                         </div>
-                         <!-- Pricing card enterprise-->
-                         <div class="col-lg-6 col-xl-4">
-                             <div class="card shadow">
-                                 <div class="card-body p-5">
-                                     <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
-                                     <div class="mb-3">
-                                         <span class="display-4 fw-bold">$49</span>
-                                         <span class="text-muted">/ mo.</span>
-                                     </div>
-                                     <ul class="list-unstyled mb-4">
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             <strong>Unlimited users</strong>
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             5GB storage
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Unlimited public projects
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Community access
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Unlimited private projects
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Dedicated support
-                                         </li>
-                                         <li class="mb-2">
-                                             <i class="bi bi-check text-primary"></i>
-                                             <strong>Unlimited</strong>
-                                             linked domains
-                                         </li>
-                                         <li class="text-muted">
-                                             <i class="bi bi-check text-primary"></i>
-                                             Monthly status reports
-                                         </li>
-                                     </ul>
-                                     <div class="d-grid"><a class="btn btn-outline-primary" href="#!">Choose plan</a></div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                    </div>
-                </section>
-
-                <section>
-                    {% comment %} <div class="container py-5 ">
-                       <div class="text-center mb-5">
-                            <h2 class="fw-bolder">FAQ</h2>
-                            <p class="lead mb-0">Hopping your question will ansewer by now</p>
-                        </div>
-                      <div class="accordion accordion-flush shadow" id="accordionFlushExample">
-                        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 ">
-                            <div class="col">
-                              <div class="accordion-item">
-                                <small class="accordion-header" id="flush-headingOne">
-                                  <button class="accordion-button collapsed px-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    <p>What is the advantage of having a 360˚ degree view of each candidate in the hiring process?</p>
-                                  </button>
-                                </small>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
-                                  <div class="accordion-body">With a 360˚ degree view, you gain comprehensive insights into a candidate's skills, experiences, and personality, leading to more informed hiring decisions..</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwo">
-                                  <button class="accordion-button collapsed px-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                    How does the diverse pool of already vetted candidates benefit our hiring process?
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">A diverse pool of candidates provides a wider range of perspectives and skills, fostering innovation and helping you find the best fit for your team.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThree">
-                                  <button class="accordion-button collapsed px-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                    Accordion Item #3
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOnea">
-                                  <button class="accordion-button collapsed px-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOnea" aria-expanded="false" aria-controls="flush-collapseOnea">
-                                    Accordion Item #1
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseOnea" class="accordion-collapse collapse" aria-labelledby="flush-headingOnea" data-bs-parent="#accordionFlushExample" style="">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwoB">
-                                  <button class="accordion-button collapsed px-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwoB" aria-expanded="false" aria-controls="flush-collapseTwoB">
-                                    Accordion Item #2
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseTwoB" class="accordion-collapse collapse" aria-labelledby="flush-headingTwoB" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThreeB">
-                                  <button class="accordion-button collapsed px-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThreeB" aria-expanded="false" aria-controls="flush-collapseThreeB">
-                                    Accordion Item #3
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseThreeB" class="accordion-collapse collapse" aria-labelledby="flush-headingThreeB" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne88">
-                                  <button class="accordion-button collapsed px-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne88" aria-expanded="false" aria-controls="flush-collapseOne88">
-                                    Accordion Item #1
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseOne88" class="accordion-collapse collapse" aria-labelledby="flush-headingOne88" data-bs-parent="#accordionFlushExample" style="">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwo99">
-                                  <button class="accordion-button collapsed px-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo99" aria-expanded="false" aria-controls="flush-collapseTwo99">
-                                    Accordion Item #2
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseTwo99" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo99" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThreeThree">
-                                  <button class="accordion-button collapsed px-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThreeThree" aria-expanded="false" aria-controls="flush-collapseThreeThree">
-                                    Accordion Item #3
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseThreeThree" class="accordion-collapse collapse px-3 fw-bold" aria-labelledby="flush-headingThreeThree" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThreeT">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThreeT" aria-expanded="false" aria-controls="flush-collapseThreeT">
-                                    Accordion Item #3
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseThreeT" class="accordion-collapse collapse" aria-labelledby="flush-headingThreeT" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col">
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne1">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1" aria-expanded="false" aria-controls="flush-collapseOne1">
-                                    Accordion Item #1
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseOne1" class="accordion-collapse collapse" aria-labelledby="flush-headingOne1" data-bs-parent="#accordionFlushExample" style="">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwo2">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo2" aria-expanded="false" aria-controls="flush-collapseTwo2">
-                                    Accordion Item #2
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseTwo2" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo2" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThree3">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree3" aria-expanded="false" aria-controls="flush-collapseThree3">
-                                    Accordion Item #3
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseThree3" class="accordion-collapse collapse" aria-labelledby="flush-headingThree3" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne111">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne111" aria-expanded="false" aria-controls="flush-collapseOne111">
-                                    Accordion Item #1
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseOne111" class="accordion-collapse collapse" aria-labelledby="flush-headingOne111" data-bs-parent="#accordionFlushExample" style="">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwo222">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo222" aria-expanded="false" aria-controls="flush-collapseTwo222">
-                                    Accordion Item #2
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseTwo222" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo222" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThree333">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree333" aria-expanded="false" aria-controls="flush-collapseThree333">
-                                    Accordion Item #3
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseThree333" class="accordion-collapse collapse" aria-labelledby="flush-headingThree333" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne1444">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1444" aria-expanded="false" aria-controls="flush-collapseOne1444">
-                                    Accordion Item #1
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseOne1444" class="accordion-collapse collapse" aria-labelledby="flush-headingOne1444" data-bs-parent="#accordionFlushExample" style="">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwo2555">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo2555" aria-expanded="false" aria-controls="flush-collapseTwo2555">
-                                    Accordion Item #2
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseTwo2555" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo2555" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThree399">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree399" aria-expanded="false" aria-controls="flush-collapseThree399">
-                                    Accordion Item #3
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseThree399" class="accordion-collapse collapse" aria-labelledby="flush-headingThree399" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                </div>
-                              </div>
-                              <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThree3">
-                                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree3" aria-expanded="false" aria-controls="flush-collapseThree3">
-                                    Accordion Item #3
-                                  </button>
-                                </h2>
-                                <div id="flush-collapseThree3" class="accordion-collapse collapse" aria-labelledby="flush-headingThree3" data-bs-parent="#accordionFlushExample">
-                                  <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>  {% endcomment %}
-                    <div class="container my-2 py-2">
-                      <div class="text-center mb-5">
-                        <h3 class="fw-bolder">FAQ</h3>
-                        <p class="lead mb-0">Hopping your question will ansewer by now</p>
-                        <div class="my-3 mx-5 border-bottom border-warning"></div>  
-                      </div>
-                      <div class="accordion1">
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  Why should I register my company with Jobdogg?
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      So that you can have full access to Jobdoggs’ already vetted candidates with a preview of their video resume along with options to conduct live on-line interviews. And……to provide you with all the tools necessary to hire, maintain and track your staffing trends and stay abreast of your hiring history and costs.
-                                  </div>
-                              </div>
-                          </div>
-                      
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  What type of candidates are registered with Jobdogg?
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      Jobdogg is an Equal Opportunity Employer, offering candidates with every type of skill-sets, background, race, gender, nationality, languages, religions and beliefs. From Entry level to C-Level and beyond. You can hire Temporary, Temp-Perm, Permanent, Seasonal and Interns if you like, you choose your adoption method. Whomever you are looking for, and whatever you are looking for in an employee, we probably got them, and if we don’t, we’ll hunt them down for you.
-                                  </div>
-                              </div>
-                          </div>
-                      
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  How are you different from Staffing Agencies?
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      Jobdogg simply cut out the “middlemen”, to save you time, money and ensure you get the right talent! Chasing your tail to receive the same resumes from multiple staffing agencies, only to review them and try to make the right choice and the costs of onboarding, tracking and maintaining your staffing levels, we buried those bones. You hire and interview on your command and Jobdogg will do the rest.
-                                  </div>
-                              </div>
-                          </div>
-                      
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  How are you different from Job Boards and Resume Posting Websites?
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      Jobdogg offers candidates that are not just words on a resume, invisible in the “pack” or just “stayin” on the porch. Each candidate gives you a video presentation, skill-set tested and background checked, with NO additional cost to you. This gives you a 90% faster hire with a 360o view of who they really are. Not to mention, JOB POSTINGS……are Always FREE!
-                                  </div>
-                              </div>
-                          </div>
-                      
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  How are your candidates Vetted/Background Checked?
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      Jobdogg works with a third-party vendor to provide a complete background check on each registered candidate. The background check includes felony and misdemeanor search, sex offender search, terrorist watch, Employment History and Education history to include, Degrees, Licenses and Certifications. Jobdoggs’ background check search is based on the candidates SS#, previous known names, aliases/aka’s, and last known addresses (City, State & Country) lived in in the past 7 years. Jobdogg also provides Drug Screenings upon the request of the Employer.
-                                  </div>
-                              </div>
-                          </div>
-                      
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  How do you Skill-Set Test your candidates?
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      Jobdogg has over 1000+ skill-sets and job titles, which are updated regularly with all new skills that come to market. Each candidate builds their profile based on their job titles, skill-sets and work experiences, and are tested on their top selected skill strengths. The Employer also has the option to request the candidate test further in any skill-set they desire.
-                                  </div>
-                              </div>
-                          </div>
-                      
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  What about Personality tests, does Jobdogg do those? (COMING SOON)
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      For now, Jobdoggs’ Video feature will give you a brief look at their personality as you view their unscripted video presentation.
-                                  </div>
-                              </div>
-                          </div>
-                      
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  How are Jobdoggs’ Candidates rated?
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      Each candidate is given a 1 -5 Star Rating based on the number of assignments they have completed, attendance, punctuality, work ethic, knowledge in skill-sets, and most importantly after each assignment completed, every Employer receives a rate card to give details on the candidates performance and any and all other comments they wish to share. To dig for more bones, if a candidate is working with another jobdogg candidate on an assignment, they each receive a rate card to rate Peer to Peer working relationships.
-                                  </div>
-                              </div>
-                          </div>
-                      
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  Why do I need to do a company Video? (Option)
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      It’s an option, but If you want your company to stand out in the “pack” and show off your companys’ tricks, instincts and treats, this is a good way to snatch and catch the attention.
-                                  </div>
-                              </div>
-                          </div>
-                      
-                          <div class="accordion1-item border-left-virtical">
-                              <div class="accordion1-item-header">
-                                  How does the Job Requisition Work?
-                              </div>
-                              <div class="accordion1-item-body">
-                                  <div class="accordion1-item-body-content">
-                                      This is like a Job Posting. With new Tricks! You input your requirements of the candidate you desire to hire, choose your option: Save = will save your job for later, Post = will post your job under Find Bones for candidates to view and apply, Alert = will pop-up Jobdoggs’ proprietary candidate carousel for your selection to hire immediately, message, favorite or set-up a live on-line interview, and lastly, All = will do all of the above functions. ……….And you can always Edit, Archive or Delete!
-                                  </div>
-                              </div>
-                          </div>
-
-                          <div class="accordion1-item border-left-virtical">
-                            <div class="accordion1-item-header">
-                            If have more questions ?
-                            </div>
-                            <div class="accordion1-item-body">
-                                <div class="accordion1-item-body-content">
-                                  <ul class="list-unstyled px-2 ">
-                
-                                    <li class="mb-2 ">Get connected to our support Team</li>
-                                    <li class="mb-2  ">sand your quation by using the link?</li>
-                                    <li class="mb-2"><a class="" href="mailto:employeractivation@jobdogg.com"><i class="bi bi-envelope-at-fill px-1"></i>employeractivation@jobdogg.com</a></li>
-                                    <li class="mb-1">or call to : <a class="" href="tel:702-415-3726"> <i class="bi bi-headset px-1"></i>(702) 205-8399</a></li>
-                                    
-                                  </ul>
-                                </div>
-                            </div>
-                          </div>
-                      </div>
-                      
+          </div>
+          <hr class="fontColor-orang mx-3 ">
+      </section>
+        {% comment %} <section >
+            <div class="tab-content" id="nav-tabContent">
+              <div class="px-4 py-5 my-4 text-center">
+                <h3 class="fw-bold">Welcome to the Jobdogg Employer Portal</h3>
+                <div class="col-lg-6 mx-auto p-2">
+                 <p class="lead mb-4">Discover 'The Right Fit' for Your Team! Our 360˚ view of candidates ensures 98% Faster hires. 
+                   Monitor Staffing Trends with Built-in Analytics. Mobile App Available Anywhere. Hire Smart, Save Big!.</p>
+                  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                   <button type="button" class="btn btn-sm btn-outline-Jobdogg btn-lg px-5">Get Start</button>
                   </div>
-                </section>
-
-                <section class="bg-light py-5">
-                    <div class="container px-5 my-5 px-5">
-                      <div class="text-center mb-5">
-                        <h2 class="fw-bolder">Get in touch</h2>
-                        <p class="lead mb-0">We'd love to hear from you</p>
+                 </div>
+                </div> 
+                <hr class="fontColor-orang">
+            </div>  
+        </section>   {% endcomment %}
+       
+        <section>
+            <div class="container col-xxl-8 px-4 py-4">
+             <div class="row flex-lg-row-reverse align-items-center g-4 py-4">
+               <div class="col-10 col-sm-8 col-lg-6">
+                 <img src="{% static 'images/pcom8.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+               </div>
+               <div class="col-lg-6">
+                 <h1 class="display-6 fw-bold lh-1 mb-3">We are Different. why?</h1>
+                 <h6 class="fw-bold lh-1 mb-3"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Find the "Right Fit" at a Lower Cost.</h6>
+                 <h6 class="fw-bold lh-1 mb-3"><i class="bi bi-check2-circle px-2 fontColor-orang icon-font"></i>Experience the Power of Smart Hiring.</h6>
+                 <p class="lead s3-font">Jobdogg: "Unlock Your Hiring Potential! Embrace the Future of Recruitment with 98% Faster Hires. 
+                     Discover Vetted Candidates with Diverse Skill-Sets.
+                     Effortlessly Evaluate Candidates with Unscripted Video Resumes. Hire On Your Terms,
+                     Anytime, Anywhere. </p>
+                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                   <button href type="button" class="btn btn-sm btn-outline-Jobdogg btn-lg px-5">Join Now </button>
+                 </div>
+               </div>
+             </div>
+             <hr class="fontColor-orang">
+            </div>
+        </section>
+    
+        <section>
+            <div class="pt-5 text-center container">
+              <div class="row py-lg-3">
+               <div class="col-lg-10 col-md-10 mx-auto">
+                 <h4 class="fw-bold lh-1 py-4">When you become a member, you'll ultimately benefit from the following list</h4>
+                  <a href="#" type="button" class="btn btn-sm btn-outline-Jobdogg btn-lg px-5">Get Start</a>
+                </div>
+               </div>
+            </div>
+            <div class="album py-3 bg-light">
+             <div class="container">
+      
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+              <div class="col">
+                    <div class="card shadow-lg">
+                        <img src="{% static 'images/pcom3.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">      
+                      <div class="card-body">
+                        <p class="card-text">Unscripted Video Resumes.</p>
+                       
                       </div>
-                      <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-6">
-                            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <!-- Name input-->
-                                <div class="form-floating mb-3">
-                                    <input class="form-control is-invalid" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" data-sb-can-submit="no">
-                                    <label for="name">Full name</label>
-                                    <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                                </div>
-                                <!-- Email address input-->
-                                <div class="form-floating mb-3">
-                                    <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" data-sb-can-submit="no">
-                                    <label for="email">Email address</label>
-                                    <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                                </div>
-                                <!-- Phone number input-->
-                                <div class="form-floating mb-3">
-                                    <input class="form-control is-invalid" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" data-sb-can-submit="no">
-                                    <label for="phone">Phone number</label>
-                                    <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-                                </div>
-                                <!-- Message input-->
-                                <div class="form-floating mb-3">
-                                    <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required" data-sb-can-submit="no"></textarea>
-                                    <label for="message">Message</label>
-                                    <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-                                </div>
-                                
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Form submission successful!</div>
-                                        To activate this form, sign up at
-                                        <br>
-                                        <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                    </div>
-                                </div>
-                               
-                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                                <!-- Submit Button-->
-                                <div class="d-grid"><button class="btn btn-outline-info btn-lg " id="submitButton" type="submit">Submit</button></div>
-                            </form>
-                        </div>
-                     </div>
                     </div>
-                </section>
+              </div>
+              <div class="col">
+                <div class="card shadow-lg">
+                  <img src="{% static 'images/jobdoggpng.com (3).png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <div class="card-body">
+                    <p class="card-text">Schedule live on-line interviews.</p>
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-lg">
+                  <img src="{% static 'images/pcom14.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <div class="card-body">
+                    <p class="card-text">Staffing Cost Calculater </p>
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-lg">
+                  <img src="{% static 'images/pcom6.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <div class="card-body">
+                    <p class="card-text">Job Postings Are Always FREE.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-lg">
+                    <img src="{% static 'images/pcom22.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="100%" height="100" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <div class="card-body">
+                    <p class="card-text">Built in timecard, HR and legal compliance.</p>
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-lg">
+                  <img src="{% static 'images/jobdoggpng.com (4).png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <div class="card-body">
+                    <p class="card-text">Track Staffing Levels built-in Analytics Tool.</p>
+                    
+                  </div>
+                </div>  
+              </div>
+              <div class="col">
+                <div class="card shadow-lg">
+                    <img src="{% static 'images/multiple_job.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <div class="card-body">
+                    <p class="card-text">Hire How, When & Where you need Candidates.</p>
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-lg">
+                    <img src="{% static 'images/pcom13.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"width="100%" height="100" loading="lazy" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <div class="card-body">
+                    <p class="card-text">Discover Vetted Candidates with Diverse Skill-Sets.</p>
+                   
+                  </div>
+                </div>
+              </div>
+              </div>
+             </div>
+            </div>
+        </section>
+            
+        <section class="testimonials py-5 text-center bg-light ">
+            <div class="container">
+                <h3 class="fw-bolder lh-1 mx-5 py-5 text-center fontColor-orang">
+                    <i class="bi bi-quote display-4"></i> What people are saying...</h3>
+                
+                <div class="row ">
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="{% static 'images/testimonials-1.jpg' %}" width="200px" height="200px" alt="testimonials1">
+                            <h5>Margaret E.</h5>
+                            <i class="bi bi-chat-right-heart fs-3 px-2 fontColor-orang "></i>
+                            <span class="font-weight-light mb-0 s2-font text-start">"This is fantastic! Jobdogg.com is an exceptional platform that streamlined my job search. Thanks so much guys!"
+                                <a class="fontColor-orang" href="/testimonialList"><i class="bi bi-box-arrow-in-up-right "></i></a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="{% static 'images/testimonials-2.jpg' %}" width="200px" height="200px" alt="testimonials2">
+                            <h5>Fred S.</h5>
+                            <i class="bi bi-chat-right-heart fs-3 px-2 fontColor-orang "></i>
+                            <small class="font-weight-light mb-0  s2-font text-start">"I landed my dream job within weeks of signing up. 
+                                 I highly recommend Jobdogg.com to job seekers."
+                                 <a class="fontColor-orang" href="/testimonialList"><i class="bi bi-box-arrow-in-up-right "></i></a>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="{% static 'images/testimonials-3.jpg' %}" width="200px" height="200px" alt="testimonials3">
+                            <h5>Sarah W.</h5>
+                            <i class="bi bi-chat-right-heart fs-3 px-2 fontColor-orang "></i>
+                            <small class="font-weight-light mb-0  s2-font text-start">
+                                "The website's user-friendly interface and personalized job recommendations 
+                                made it easy to find the right fit.Thanks so much for making these freeliy available to us!"
+                                <a class="fontColor-orang" href="/testimonialList"><i class="bi bi-box-arrow-in-up-right "></i></a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <hr class="fontColor-orang">
+            </div>
+        </section>
+        
+        <section class="bg-light py-5 border-bottom">
+            <div class="container px-5 my-5">
+             <div class="text-center mb-5">
+                 <h2 class="fw-bolder">Pay as you grow</h2>
+                 <p class="lead mb-0">With our no hassle pricing plans</p>
+             </div>
+             <div class="row gx-5 justify-content-center">
+                 <!-- Pricing card free-->
+                 <div class="col-lg-6 col-xl-4 ">
+                     <div class="card mb-5 mb-xl-0 shadow">
+                         <div class="card-body p-5">
+                             <div class="small text-uppercase fw-bold text-muted">Free</div>
+                             <div class="mb-3">
+                                 <span class="display-4 fw-bold">$0</span>
+                                 <span class="text-muted">/ mo.</span>
+                             </div>
+                             <ul class="list-unstyled mb-4">
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     <strong>1 users</strong>
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     5GB storage
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Unlimited public projects
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Community access
+                                 </li>
+                                 <li class="mb-2 text-muted">
+                                     <i class="bi bi-x"></i>
+                                     Unlimited private projects
+                                 </li>
+                                 <li class="mb-2 text-muted">
+                                     <i class="bi bi-x"></i>
+                                     Dedicated support
+                                 </li>
+                                 <li class="mb-2 text-muted">
+                                     <i class="bi bi-x"></i>
+                                     Free linked domain
+                                 </li>
+                                 <li class="text-muted">
+                                     <i class="bi bi-x"></i>
+                                     Monthly status reports
+                                 </li>
+                             </ul>
+                             <div class="d-grid"><a class="btn btn-outline-info" href="#!">Choose plan</a></div>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- Pricing card pro-->
+                 <div class="col-lg-6 col-xl-4">
+                     <div class="card mb-5 mb-xl-0 shadow">
+                         <div class="card-body p-5">
+                             <div class="small text-uppercase fw-bold">
+                                 <i class="bi bi-star-fill text-warning"></i>
+                                 Pro
+                             </div>
+                             <div class="mb-3">
+                                 <span class="display-4 fw-bold">$9</span>
+                                 <span class="text-muted">/ mo.</span>
+                             </div>
+                             <ul class="list-unstyled mb-4">
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     <strong>5 users</strong>
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     5GB storage
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Unlimited public projects
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Community access
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Unlimited private projects
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Dedicated support
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Free linked domain
+                                 </li>
+                                 <li class="text-muted">
+                                     <i class="bi bi-x"></i>
+                                     Monthly status reports
+                                 </li>
+                             </ul>
+                             <div class="d-grid"><a class="btn btn-outline-Jobdogg" href="#!">Choose plan</a></div>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- Pricing card enterprise-->
+                 <div class="col-lg-6 col-xl-4">
+                     <div class="card shadow">
+                         <div class="card-body p-5">
+                             <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
+                             <div class="mb-3">
+                                 <span class="display-4 fw-bold">$49</span>
+                                 <span class="text-muted">/ mo.</span>
+                             </div>
+                             <ul class="list-unstyled mb-4">
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     <strong>Unlimited users</strong>
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     5GB storage
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Unlimited public projects
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Community access
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Unlimited private projects
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Dedicated support
+                                 </li>
+                                 <li class="mb-2">
+                                     <i class="bi bi-check text-primary"></i>
+                                     <strong>Unlimited</strong>
+                                     linked domains
+                                 </li>
+                                 <li class="text-muted">
+                                     <i class="bi bi-check text-primary"></i>
+                                     Monthly status reports
+                                 </li>
+                             </ul>
+                             <div class="d-grid"><a class="btn btn-outline-primary" href="#!">Choose plan</a></div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+            </div>
+        </section>
 
+        <section class="bg-light py-5">
+            <div class="container px-5 my-5 px-5">
+              <div class="text-center mb-5">
+                <h2 class="fw-bolder">Get in touch</h2>
+                <p class="lead mb-0">We'd love to hear from you</p>
+              </div>
+              <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <!-- Name input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control is-invalid" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" data-sb-can-submit="no">
+                            <label for="name">Full name</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                        </div>
+                        <!-- Email address input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" data-sb-can-submit="no">
+                            <label for="email">Email address</label>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control is-invalid" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" data-sb-can-submit="no">
+                            <label for="phone">Phone number</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        </div>
+                        <!-- Message input-->
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required" data-sb-can-submit="no"></textarea>
+                            <label for="message">Message</label>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                        </div>
+                        
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3">
+                                <div class="fw-bolder">Form submission successful!</div>
+                                To activate this form, sign up at
+                                <br>
+                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                            </div>
+                        </div>
+                       
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                        <!-- Submit Button-->
+                        <div class="d-grid"><button class="btn btn-outline-info btn-lg " id="submitButton" type="submit">Submit</button></div>
+                    </form>
+                </div>
+             </div>
+            </div>
+        </section>
+
+      </div>
+    </div>
+    <div class="tab-pane" id="profile_employer" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+      <!--staff searching-->
+      <header data-bs-theme="dark">
+        <div class="container bg-dark shadow-sm py-3 my-3">
+          <div class=" text-dark px-2">
+            <div class="d-flex justify-content-between gap-5">
+              <div class="input-group gap-1">
+                  <input type="text" class="form-control" placeholder="staff search..." aria-label="Recipient's username with two button addons">
+                  <button class="btn btn-jobdogg" type="button"><i class="bi bi-search"></i></button>
+                  <button data-bs-toggle="modal" data-bs-target="#ApplyFilterstaticBackdropEmployer" class="btn btn-jobdogg " type="button"><i class="bi bi-sliders"></i></button>  
+              </div>
+              <div class="">
+           
+              <button class="btn btn-jobdogg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-sort-down"></i></button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">new</a></li>
+                    <li><a class="dropdown-item" href="#">last 7 days.</a></li>
+                    <li><a class="dropdown-item" href="#">last 15 days.</a></li>
+                    <li><a class="dropdown-item" href="#">last 30 days.</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">asanding</a></li>
+                    <li><a class="dropdown-item" href="#">disanding</a></li>
+                  </ul>
+          </div>
+            
+            </div>   
+          </div>
+        </div>
+        <!-- Apply Filter -->
+        <div class="modal fade" id="ApplyFilterstaticBackdropEmployer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ApplyFilterstaticBackdropEmployerLabel" aria-hidden="true">
+          <div class="modal-dialog  modal-md modal-dialog-scrollable ">
+            <div class="modal-content ">
+              <div class="modal-header bg-warning">
+                <h2 class="modal-title fs-5 " id="ApplyFilterstaticBackdropEmployerLabel">Set Filtering Keys </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body ">
+              it gos her
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-jobdogg">Apply Filter</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <div class="album py-5 bg-body-tertiary">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                  <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      </div>
+                      <small class="text-body-secondary">9 mins</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="my-5">
+            <nav aria-label="Page navigation example ">
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                  <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          </div>
+        
+        </div>
+      
+      </main>
+    </div>
+   
   </div>
+          
 </div>
 {% endblock %}
 

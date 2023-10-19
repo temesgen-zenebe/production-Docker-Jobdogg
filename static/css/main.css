@@ -511,6 +511,7 @@ section.on-demand{
   align-items: center;
   position: relative;
   cursor: pointer;
+
 }
 .accordion1-item-header::after {
   content: "\002B";

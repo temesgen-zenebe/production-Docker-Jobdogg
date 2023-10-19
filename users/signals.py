@@ -16,13 +16,14 @@ def update_user_type(sender, instance, created, **kwargs):
             employee_group, _ = Group.objects.get_or_create(name='employee')
             employee_group.user_set.add(instance)
         
-        elif user_type == 'employer':
+        if user_type == 'employer':
             employer_group, _ = Group.objects.get_or_create(name='employer')
             employer_group.user_set.add(instance)
             
-        elif user_type == 'admin':
+        if user_type == 'admin':
             admin_group, _ = Group.objects.get_or_create(name='admin')
             admin_group.user_set.add(instance)
+            
         else:
             pass
 
