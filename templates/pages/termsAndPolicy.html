@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}Company Terms and Policy{% endblock %}
+{% block main %}
+<div class="container my-5 py-4">
+    <h4 class="text-center pt-2">Company Terms and Policy</h4>
+    <div class="my-3 mx-5 border-bottom border-warning"></div>
+    <div class="accordion1">
+        {% if policiesEmployee %}
+            {% for policies  in policiesEmployee %}
+                <div class="accordion1-item border-left-virtical">
+                    <div class="accordion1-item-header">
+                        {{policies.title}}
+                    </div>
+                    <div class="accordion1-item-body">
+                        <div class="accordion1-item-body-content overflow-auto">
+                            {{policies.description|safe}}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if policiesEmployer %}
+            {% for policies  in policiesEmployer %}
+                <div class="accordion1-item border-left-virtical">
+                    <div class="accordion1-item-header">
+                        {{policies.title}}
+                    </div>
+                    <div class="accordion1-item-body">
+                        <div class="accordion1-item-body-content overflow-auto">
+                            {{policies.description|safe}}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+</div>
+{% endblock %}

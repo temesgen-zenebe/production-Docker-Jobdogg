@@ -2,6 +2,8 @@ from django.views.generic import TemplateView,ListView, CreateView, UpdateView, 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import render,redirect
+from employee.models import Policies
+from employer.models import EmployerPoliciesAndTerms
 from users.templatetags.user_tags import is_admin, is_employee, is_employer
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
@@ -61,6 +63,15 @@ class EmployerFAQ(TemplateView):
 class TermsAndPolicy(TemplateView):
     template_name = 'pages/termsAndPolicy.html'
    
+    def get(self, request):
+        policiesEmployee = Policies.objects.all()
+        policiesEmployer = EmployerPoliciesAndTerms.objects.all()
+        context={ 'policiesEmployer':policiesEmployer, 'policiesEmployee':policiesEmployee}
+        return render(request, self.template_name, context)
+    
+    def post(self, request):
+        pass
+   
 class BlogView(TemplateView):
     template_name = 'pages/blog.html'
     
@@ -101,7 +112,7 @@ def employer_home(request):
 @login_required
 def admin_home(request):
     # Your code for admin homepage view
-    return render(request, 'pages/admin_home.html')
+    return render(request, 'pages/supperAdmin_dashboard.html')
 
 
 # def redirect_to_homepage(request):

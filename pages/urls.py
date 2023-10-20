@@ -8,7 +8,7 @@ app_name = 'pages'
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='homepage'),
-    path('pages/', views.redirect_to_homepage, name='redirect_to_homepage'),  # This is the correct URL pattern
+    path('pages/', views.redirect_to_homepage, name='redirect_to_homepage'),  
     path('pages/employee/', views.employee_home, name='employeeHomePage'),
     path('pages/employer/', views.employer_home, name='employerHomePage'),
     path('pages/admin/', views.admin_home, name='adminHomePage'),

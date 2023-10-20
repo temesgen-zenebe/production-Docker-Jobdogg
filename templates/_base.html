@@ -159,88 +159,7 @@
                   
                 </li>
               {% endif %}
-                {% if user.is_authenticated and user|is_admin %}
-                  <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                        employee CMR
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                      
-                      <li ><a class="dropdown-item" href="{% url 'employee:dashboard_information_employee' %}">Dashboard</a></li> 
-                      <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                      <li><a class="dropdown-item" href="{% url 'employer:profile_building_progress_controller' %}">Profile</a></li>
-                      <li><a class="dropdown-item" href="#">Messages</a></li>
-                      <li><a class="dropdown-item" href="#">Viewed</a></li>
-                     
-                    </ul>
-                    {% if user.is_authenticated and user|is_employer %}
-                    <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                      
-                      <li ><a class="dropdown-item" href="{% url 'employee:dashboard_information_employee' %}">Dashboard</a></li> 
-                      <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                      <li><a class="dropdown-item" href="{% url 'employer:profile_building_progress_controller' %}">Profile</a></li>
-                      <li><a class="dropdown-item" href="#">Messages</a></li>
-                      <li><a class="dropdown-item" href="#">Viewed</a></li>
-                     
-                      <!--employer-->
-                      {% if user.is_authenticated and user|is_employer %}
-                      <li><a class="dropdown-item" href="{% url 'employer:dashboard_information_employer' %}">Dashboard</a></li>
-                      <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                      <li><a class="dropdown-item" href="{% url 'employer:company-profile-list' %}">Profile</a></li>
-                      <li><a class="dropdown-item" href="{% url 'employer:job_requisition_list' %}">PostJob</a></li>
-                      <li><a class="dropdown-item" href="#">Get emplyee</a></li>
-                      <li><a class="dropdown-item" href="#">InCartCandidate</a></li>
-                      <li><a class="dropdown-item" href="#">Calculate</a></li>
-                      <li><a class="dropdown-item" href="#">Payment</a></li>
-                      <li><a class="dropdown-item" href="#">Timecard</a></li>
-                      <li><a class="dropdown-item" href="#">Viewed</a></li>
-                      <li><a class="dropdown-item" href="#">Messages</a></li>
-                      {% endif %}
-                    
-                      {% if user.is_authenticated and user|is_admin %}
-                      <li><a class="dropdown-item" href="{% url 'supperAdmin:dashboard_information_supperAdmin' %}">Admin Dashboard</a></li>
-                      <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                      <li><a class="dropdown-item" href="">Manage Policy</a></li>
-                      <li><a class="dropdown-item" href="/admin/">Manage Database </a></li>
-                      {% endif %}
-                      <li>
-                        <hr class="dropdown-divider" />
-                      </li>
-                      <li>
-                        <form method="post" action="{% url 'account_logout' %}">
-                          {% csrf_token %}
-                          <button type="submit" class="btn btn-sm dropdown-item">Log out</button>
-                        </form>
-                      </li>
-                    </ul>
-                  </li>
-                {% endif %}
-                {% if user.is_authenticated and user|is_admin %}
-                  <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
-                        Employer CMR
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                      <li><a class="dropdown-item" href="{% url 'employer:profile_building_progress_controller' %}">Profile building</a></li>
-                      <li><a class="dropdown-item" href="{% url 'employer:dashboard_information_employer' %}">Dashboard</a></li>
-                      <li><a class="dropdown-item" href="{% url 'my-account' %}">Account</a></li>
-                      <li><a class="dropdown-item" href="{% url 'employer:company-profile-list' %}">company Profile</a></li>
-                      <li><a class="dropdown-item" href="{% url 'employer:job_requisition_list' %}">PostJob</a></li>
-                      <li><a class="dropdown-item" href="#">Get emplyee</a></li>
-                      <li><a class="dropdown-item" href="#">InCartCandidate</a></li>
-                      <li><a class="dropdown-item" href="#">Calculate</a></li>
-                      <li><a class="dropdown-item" href="#">Payment</a></li>
-                      <li><a class="dropdown-item" href="#">Timecard</a></li>
-                      <li><a class="dropdown-item" href="#">Viewed</a></li>
-                      <li><a class="dropdown-item" href="#">Messages</a></li>
-                    
-                    </ul>
-                    
-                  </li>
-                {% endif %}
-            {% endif %}
+               
           </ul>
         </div>
       </div>
@@ -307,7 +226,7 @@
           <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Get Staff</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Get work</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url 'pages:ourDoggsView' %}">Our Doggs</a></li>
-          
+          <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">Testimonial</a></li>
           {% else %}
             {% if user.is_authenticated and user|is_admin %}
             <li class="mb-2"><a class="textFooter4" href="{% url 'pages:employerHomePage' %}">Get Staff</a></li>
@@ -334,7 +253,6 @@
           {% endif %}
           <li class="mb-2"><a class="textFooter4" href="{% url "pages:HowItWoks-ForEmployee" %}">How it woks</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Search Job</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/">employers</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">testimonial</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url "pages:employeeFAQ" %}">FAQ</a></li>
 
@@ -348,8 +266,7 @@
           <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Signup</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url "pages:HowItWoks-ForEmployee" %}">How it woks</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Search Job</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/">employers</a></li>
-          <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">testimonial</a></li>
+          {% comment %} <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">Testimonial</a></li> {% endcomment %}
           <li class="mb-2"><a class="textFooter4" href="{% url "pages:employeeFAQ" %}">FAQ</a></li>
         </ul>
       </div>
@@ -363,8 +280,7 @@
           {% endif %}
           <li class="mb-2"><a class="textFooter4" href="{% url "pages:HowItWoks-ForEmployee" %}">How it woks</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url 'account_login' %}">Search Job</a></li>
-          <li class="mb-2"><a class="textFooter4" href="/">employers</a></li>
-          <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">testimonial</a></li>
+          <li class="mb-2"><a class="textFooter4" href="{% url 'testimonial:testimonial_list' %}">Testimonial</a></li>
           <li class="mb-2"><a class="textFooter4" href="{% url "pages:employeeFAQ" %}">FAQ</a></li>
         </ul>
       </div>
